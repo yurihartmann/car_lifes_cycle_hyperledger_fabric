@@ -1,0 +1,6 @@
+tasks:
+  - name: Configure enviroment
+    init: |
+      sudo curl -Lf https://github.com/hyperledger-labs/fablo/releases/download/1.1.0/fablo.sh -o /usr/local/bin/fablo && sudo chmod +x /usr/local/bin/fablo
+    command: |
+      echo "=============== Pronto ==============="
