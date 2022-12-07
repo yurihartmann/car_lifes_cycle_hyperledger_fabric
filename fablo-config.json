@@ -8,7 +8,7 @@
       "loglevel": "debug"
     },
     "tools": {
-      "explorer": false
+      "explorer": true
     }
   },
   "orgs": [
@@ -29,8 +29,7 @@
         }
       ],
       "tools": {
-        "fabloRest": true,
-        "explorer": true
+        "fabloRest": true
       }
     },
     {
@@ -84,5 +83,13 @@
       ]
     }
   ],
-  "chaincodes": []
+  "chaincodes": [
+    {
+      "name": "chaincode1",
+      "version": "0.0.1",
+      "lang": "node",
+      "channel": "car-lifes-cicle-channel",
+      "directory": "./chaincode-kv-node"
+    }
+  ]
 }
