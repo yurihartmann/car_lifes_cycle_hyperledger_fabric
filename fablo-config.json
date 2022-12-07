@@ -53,6 +53,17 @@
         "db": "LevelDb"
       },
       "tools": {}
+    },
+    {
+      "organization": {
+        "name": "seguradoraA",
+        "domain": "seguradora-a.car-lifes-cicle.com"
+      },
+      "peer": {
+        "instances": 2,
+        "db": "LevelDb"
+      },
+      "tools": {}
     }
   ],
   "channels": [
