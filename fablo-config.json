@@ -96,11 +96,18 @@
   ],
   "chaincodes": [
     {
-      "name": "chaincode2",
-      "version": "0.0.4",
+      "name": "kv",
+      "version": "0.0.1",
       "lang": "node",
       "channel": "car-lifes-cicle-channel",
       "directory": "./chaincodes/chaincode-kv-node"
+    },
+    {
+      "name": "projts",
+      "version": "0.0.1",
+      "lang": "node",
+      "channel": "car-lifes-cicle-channel",
+      "directory": "./chaincodes/proj-ts"
     }
   ]
 }
