@@ -1,6 +1,6 @@
 {
     "name": "fabcar",
-    "version": "1.0.0",
+    "version": "0.0.5",
     "description": "FabCar contract implemented in TypeScript",
     "main": "dist/index.js",
     "typings": "dist/index.d.ts",
@@ -12,7 +12,7 @@
         "lint": "tslint -c tslint.json 'src/**/*.ts'",
         "pretest": "npm run lint",
         "test": "nyc mocha -r ts-node/register src/**/*.spec.ts",
-        "start": "fabric-chaincode-node start",
+        "start": "fabric-chaincode-node start --peer.address \"127.0.0.1:8041\" --chaincode-id-name \"chaincode1:0.0.1\" --tls.enabled false",
         "build": "tsc",
         "build:watch": "tsc -w",
         "prepublishOnly": "npm run build"

@@ -1,6 +1,6 @@
 {
   "name": "chaincode-kv-node",
-  "version": "0.2.0",
+  "version": "0.0.2",
   "main": "index.js",
   "engines": {
     "node": ">=8",
@@ -8,7 +8,7 @@
   },
   "scripts": {
     "start": "fabric-chaincode-node start",
-    "start:dev": "fabric-chaincode-node start --peer.address \"127.0.0.1:8541\" --chaincode-id-name \"chaincode1:0.0.1\" --tls.enabled false",
+    "start:dev": "fabric-chaincode-node start --peer.address \"127.0.0.1:8082\" --chaincode-id-name \"chaincode1:0.0.2\" --tls.enabled false",
     "start:watch": "nodemon --exec \"npm run start:dev\"",
     "build": "echo \"No need to build the chaincode\"",
     "lint": "eslint . --fix --ext .js",
