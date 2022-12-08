@@ -100,7 +100,7 @@
       "version": "0.0.1",
       "lang": "node",
       "channel": "car-lifes-cicle-channel",
-      "directory": "./chaincode-kv-node"
+      "directory": "./chaincodes/chaincode-kv-node"
     }
   ]
 }
