@@ -103,11 +103,11 @@
       "directory": "./chaincodes/chaincode-kv-node"
     },
     {
-      "name": "projts",
+      "name": "alo",
       "version": "0.0.1",
       "lang": "node",
       "channel": "car-lifes-cicle-channel",
-      "directory": "./chaincodes/proj-ts"
+      "directory": "./chaincodes/chaincode-typescript"
     }
   ]
 }
