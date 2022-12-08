@@ -68,6 +68,18 @@ export class AssetTransferContract extends Contract {
         }
     }
 
+    @Transaction(false)
+    public async getDetails(ctx: Context): Promise<object> {
+        const details = {
+            "stub.getCreator": ctx.stub.getCreator(),
+            "stub.getMspID": ctx.stub.getMspID(),
+            "clientIdentity.getId": ctx.clientIdentity.getID(),
+            "clientIdentity.getMSPID": ctx.clientIdentity.getMSPID(),
+        };
+
+        return details;
+    }
+
     // CreateAsset issues a new asset to the world state with given details.
     @Transaction()
     public async CreateAsset(ctx: Context, id: string, color: string, size: number, owner: string, appraisedValue: number): Promise<object> {

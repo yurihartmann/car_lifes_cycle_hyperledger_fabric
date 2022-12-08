@@ -41,7 +41,9 @@
         "instances": 2,
         "db": "LevelDb"
       },
-      "tools": {}
+      "tools": {
+        "fabloRest": true
+      }
     },
     {
       "organization": {
@@ -52,7 +54,9 @@
         "instances": 2,
         "db": "LevelDb"
       },
-      "tools": {}
+      "tools": {
+        "fabloRest": true
+      }
     },
     {
       "organization": {
@@ -63,7 +67,9 @@
         "instances": 2,
         "db": "LevelDb"
       },
-      "tools": {}
+      "tools": {
+        "fabloRest": true
+      }
     }
   ],
   "channels": [
