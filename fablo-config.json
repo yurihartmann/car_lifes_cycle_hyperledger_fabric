@@ -96,13 +96,6 @@
   ],
   "chaincodes": [
     {
-      "name": "kv",
-      "version": "0.0.1",
-      "lang": "node",
-      "channel": "car-lifes-cicle-channel",
-      "directory": "./chaincodes/chaincode-kv-node"
-    },
-    {
       "name": "alo",
       "version": "0.0.1",
       "lang": "node",
