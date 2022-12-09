@@ -2,12 +2,12 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 // Deterministic JSON.stringify()
-import {Context, Contract, Info, Returns, Transaction} from 'fabric-contract-api';
+import { Context, Contract, Info, Returns, Transaction } from 'fabric-contract-api';
 import stringify from 'json-stringify-deterministic';
 import sortKeysRecursive from 'sort-keys-recursive';
-import {Asset} from './asset';
+import { Asset } from './asset';
 
-@Info({title: 'AssetTransfer', description: 'Smart contract for trading assets'})
+@Info({ title: 'AssetTransfer', description: 'Smart contract for trading assets' })
 export class AssetTransferContract extends Contract {
 
     @Transaction()
@@ -89,11 +89,11 @@ export class AssetTransferContract extends Contract {
         }
 
         const asset = {
-            ID: id,
-            Color: color,
-            Size: size,
-            Owner: owner,
-            AppraisedValue: appraisedValue,
+            id: id,
+            color: color,
+            size: size,
+            owner: owner,
+            appraisedValue: appraisedValue,
         };
         // we insert data in alphabetic order using 'json-stringify-deterministic' and 'sort-keys-recursive'
         await ctx.stub.putState(id, Buffer.from(stringify(sortKeysRecursive(asset))));
