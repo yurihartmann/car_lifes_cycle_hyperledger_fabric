@@ -68,8 +68,8 @@ export class AssetTransferContract extends Contract {
         }
     }
 
-    @Transaction(false)
-    public async getDetails(ctx: Context): Promise<object> {
+    @Transaction()
+    public async getDetails(ctx: Context): Promise<string> {
         const details = {
             "stub.getCreator": ctx.stub.getCreator(),
             "stub.getMspID": ctx.stub.getMspID(),
@@ -77,7 +77,7 @@ export class AssetTransferContract extends Contract {
             "clientIdentity.getMSPID": ctx.clientIdentity.getMSPID(),
         };
 
-        return details;
+        return JSON.stringify(details);
     }
 
     // CreateAsset issues a new asset to the world state with given details.

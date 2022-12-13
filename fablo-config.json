@@ -107,6 +107,13 @@
       "lang": "node",
       "channel": "car-lifes-cicle-channel",
       "directory": "./chaincodes/chaincode-typescript"
+    },
+    {
+      "name": "car",
+      "version": "0.0.1",
+      "lang": "node",
+      "channel": "car-lifes-cicle-channel",
+      "directory": "./chaincodes/car-chaincode"
     }
   ]
 }
