@@ -1,0 +1,8 @@
+PeerOrgs:
+  - Name: mecanicaA
+    Domain: mecanica-a.car-lifes-cicle.com
+    Specs:
+    Template:
+      Count: 2
+    Users:
+      Count: 1

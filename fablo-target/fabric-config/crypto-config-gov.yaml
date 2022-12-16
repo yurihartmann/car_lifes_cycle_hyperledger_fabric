@@ -1,0 +1,11 @@
+PeerOrgs:
+  - Name: Gov
+    Domain: gov.car-lifes-cicle.com
+    Specs:
+      - Hostname: orderer0.group1
+      - Hostname: orderer1.group1
+      - Hostname: orderer2.group1
+    Template:
+      Count: 2
+    Users:
+      Count: 1

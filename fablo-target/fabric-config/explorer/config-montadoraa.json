@@ -1,0 +1,9 @@
+{
+  "network-configs": {
+    "network-montadoraa": {
+      "name": "Network of montadoraA",
+      "profile": "/opt/explorer/app/platform/fabric/connection-profile/connection-profile-montadoraa.json"
+    }
+  },
+  "license": "Apache-2.0"
+}
