@@ -25,7 +25,8 @@
         "fabric-contract-api": "^2.4.0",
         "fabric-shim": "^2.4.0",
         "json-stringify-deterministic": "^1.0.1",
-        "sort-keys-recursive": "^2.1.2"
+        "sort-keys-recursive": "^2.1.2",
+        "uuid": "8.3"
     },
     "devDependencies": {
         "@types/chai": "^4.1.7",
@@ -33,6 +34,7 @@
         "@types/node": "^10.12.10",
         "@types/sinon": "^5.0.7",
         "@types/sinon-chai": "^3.2.1",
+        "@types/uuid": "^9.0.0",
         "chai": "^4.2.0",
         "mocha": "^10.0.0",
         "nyc": "^14.1.1",
