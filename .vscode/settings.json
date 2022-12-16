@@ -3,5 +3,9 @@
         "carlifescicle",
         "lifes",
         "cicle"
-    ]
+    ],
+    "material-icon-theme.folders.associations": {
+        "customFolderName": "chaincodes",
+        "sample": "node"
+    }
 }
