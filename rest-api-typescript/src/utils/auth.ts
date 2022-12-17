@@ -17,7 +17,7 @@ export const fabricAPIKeyStrategy: HeaderAPIKeyStrategy =
       for (var orgKey in organizations) {
         if (orgKey == apikey) {
           logger.debug('User set to %s', orgKey);
-          done(null, orgKey);
+          done(null, organizations[orgKey].MSPID);
         }
       }
 

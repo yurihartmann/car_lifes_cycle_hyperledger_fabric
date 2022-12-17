@@ -14,12 +14,11 @@ FROM node:14-alpine3.14
 ENV NODE_ENV production
 WORKDIR /app
 
-COPY --from=build /usr/bin/dumb-init /usr/bin/dumb-init
 COPY --chown=node:node --from=build /app .
 
 EXPOSE 3000  
 
 USER node
 
-ENTRYPOINT [ "dumb-init", "--", "npm", "run"]
+ENTRYPOINT [ "npm", "run"]
 CMD ["start"]

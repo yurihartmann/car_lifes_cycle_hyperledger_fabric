@@ -1,14 +1,18 @@
-import env from '../../env.json';
-import { readFileSync } from 'fs';
+import * as dotenv from 'env-var';
+
+const env = JSON.parse(dotenv.get('JSON_CONFIG').required().asString());
 
 export const portServer = env.port;
+export const channelName = env.channelName;
+export const chaincodeName = env.chaincodeName;
 
 interface Organizations {
     [key: string]: OrganizationConfigs
 }
 
 interface OrganizationConfigs {
-    CONNECTION_PROFILE: string,
+    CONNECTION_PROFILE: Record<string, unknown>,
+    MSPID: string,
     CERTIFICATE: string,
     PRIVATE_KEY: string,
 }
@@ -18,13 +22,11 @@ export const organizations: Organizations = {}
 
 for (var i in env.peers) {
     const peer = env.peers[i]
-    const connection = readFileSync(peer.CONNECTION_PROFILE, 'utf-8');
-    const certificate = readFileSync(peer.CERTIFICATE, 'utf-8');
-    const privateKey = readFileSync(peer.PRIVATE_KEY, 'utf-8');
 
     organizations[peer.APIKEY] = {
-        CONNECTION_PROFILE: JSON.parse(connection),
-        CERTIFICATE: certificate,
-        PRIVATE_KEY: privateKey
+        CONNECTION_PROFILE: JSON.parse(peer.CONNECTION_PROFILE),
+        MSPID: peer.MSPID,
+        CERTIFICATE: peer.CERTIFICATE,
+        PRIVATE_KEY: peer.PRIVATE_KEY
     }
 }

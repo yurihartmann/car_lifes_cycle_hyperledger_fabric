@@ -8,7 +8,8 @@ import passport from 'passport';
 import pinoMiddleware from 'pino-http';
 import { logger } from './logger';
 import cors from 'cors';
-import { fabricAPIKeyStrategy } from './auth'
+import { authenticateApiKey, fabricAPIKeyStrategy } from './auth'
+import { carRouter } from '../routes/car.router';
 
 const { BAD_REQUEST, INTERNAL_SERVER_ERROR, NOT_FOUND } = StatusCodes;
 
@@ -50,6 +51,14 @@ export const createServer = async (): Promise<Application> => {
     // app.use('/api/assets', authenticateApiKey, assetsRouter);
     // app.use('/api/jobs', authenticateApiKey, jobsRouter);
     // app.use('/api/transactions', authenticateApiKey, transactionsRouter);
+    app.use('/api/car', authenticateApiKey, carRouter);
+
+    app.get('/ready', (_req, res: Response) =>
+        res.status(StatusCodes.OK).json({
+            status: getReasonPhrase(StatusCodes.OK),
+            timestamp: new Date().toISOString(),
+        })
+    );
 
     // For everything else
     app.use((_req, res) =>

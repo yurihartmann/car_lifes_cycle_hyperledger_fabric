@@ -1,0 +1,23 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Debug",
+            "type": "node",
+            "request": "launch",
+            "runtimeVersion": "12.13.0",
+            "args": [
+                "-r",
+                "ts-node/register",
+                "src/index.ts"
+            ],
+            "cwd": "${workspaceFolder}/rest-api-typescript",
+            "protocol": "inspector",
+            "sourceMaps": true,
+            "outFiles": [
+                ".ts-node/**"
+            ],
+            "outputCapture": "dict",
+        }
+    ]
+}
