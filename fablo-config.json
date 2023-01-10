@@ -5,7 +5,7 @@
     "tls": false,
     "peerDevMode": false,
     "monitoring": {
-      "loglevel": "debug"
+      "loglevel": "info"
     },
     "tools": {
       "explorer": true
@@ -23,8 +23,8 @@
       },
       "orderers": [
         {
-          "groupName": "group1",
-          "type": "solo",
+          "groupName": "orderers-group",
+          "type": "raft",
           "instances": 3
         }
       ],
@@ -66,15 +66,12 @@
       "peer": {
         "instances": 2,
         "db": "LevelDb"
-      },
-      "tools": {
-        "fabloRest": true
       }
     }
   ],
   "channels": [
     {
-      "name": "car-lifes-cicle-channel",
+      "name": "car-lifes-cicle-channel-car",
       "orgs": [
         {
           "name": "Gov",
@@ -92,6 +89,25 @@
         },
         {
           "name": "mecanicaA",
+          "peers": [
+            "peer0",
+            "peer1"
+          ]
+        },
+        {
+          "name": "seguradoraA",
+          "peers": [
+            "peer0",
+            "peer1"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "car-lifes-cicle-channel-person",
+      "orgs": [
+        {
+          "name": "Gov",
           "peers": [
             "peer0",
             "peer1"

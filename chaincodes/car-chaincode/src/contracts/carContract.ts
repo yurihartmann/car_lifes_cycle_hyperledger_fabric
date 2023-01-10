@@ -3,7 +3,7 @@ import { Iterators } from 'fabric-shim';
 import stringify from 'json-stringify-deterministic';
 import sortKeysRecursive from 'sort-keys-recursive';
 import { v4 as uuid } from 'uuid';
-import { Car } from './car';
+import { Car } from '../models/car';
 
 @Info({ title: 'Car', description: 'Smart contract for car' })
 export class CarContract extends Contract {
@@ -15,7 +15,7 @@ export class CarContract extends Contract {
                 id: '8faf4111-723c-40c1-aa5f-070ad40edfaa',
                 brand: 'Ford',
                 model: 'Focus',
-                owner: 'Jose',
+                owner: "Yuri",
                 color: 'blue',
                 appraisedValue: 15000
             },
@@ -40,12 +40,15 @@ export class CarContract extends Contract {
         for (const car of cars) {
             await ctx.stub.putState(car.id, Buffer.from(stringify(sortKeysRecursive(car))));
         }
+
+        // ctx.stub.invokeChaincode("personContract", [], ctx.stub.getChannelID())
     }
 
     @Transaction(false)
     public async getDetails(ctx: Context): Promise<string> {
         const details = {
             "stub.getMspID": ctx.stub.getMspID(),
+            "ctx.stub.getChannelID": ctx.stub.getChannelID()
         };
 
         return JSON.stringify(details);
