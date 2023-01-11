@@ -1,0 +1,241 @@
+################################################################################
+#   SECTION: Capabilities
+################################################################################
+Capabilities:
+    Channel: &ChannelCapabilities
+        V2_0: true
+    Orderer: &OrdererCapabilities
+        V2_0: true
+    Application: &ApplicationCapabilities
+        V2_0: true
+
+################################################################################
+#   CHANNEL Defaults
+################################################################################
+Channel: &ChannelDefaults
+    Policies:
+        Readers:
+            Type: ImplicitMeta
+            Rule: "ANY Readers"
+        Writers:
+            Type: ImplicitMeta
+            Rule: "ANY Writers"
+        Admins:
+            Type: ImplicitMeta
+            Rule: "MAJORITY Admins"
+    Capabilities:
+        <<: *ChannelCapabilities
+
+################################################################################
+#   Section: Organizations
+################################################################################
+Organizations:
+    - &Gov
+      Name: GovMSP
+      ID: GovMSP
+      MSPDir: crypto-config/peerOrganizations/gov.car-lifes-cicle.com/msp
+
+      Policies:
+          Readers:
+              Type: Signature
+              Rule: "OR('GovMSP.member')"
+          Writers:
+              Type: Signature
+              Rule: "OR('GovMSP.member')"
+          Admins:
+              Type: Signature
+              Rule: "OR('GovMSP.admin')"
+          Endorsement:
+              Type: Signature
+              Rule: "OR('GovMSP.member')"
+
+      AnchorPeers:
+          - Host: peer0.gov.car-lifes-cicle.com
+            Port: 7021
+
+          - Host: peer1.gov.car-lifes-cicle.com
+            Port: 7022
+
+    - &montadoraA
+      Name: montadoraAMSP
+      ID: montadoraAMSP
+      MSPDir: crypto-config/peerOrganizations/montadora-a.car-lifes-cicle.com/msp
+
+      Policies:
+          Readers:
+              Type: Signature
+              Rule: "OR('montadoraAMSP.member')"
+          Writers:
+              Type: Signature
+              Rule: "OR('montadoraAMSP.member')"
+          Admins:
+              Type: Signature
+              Rule: "OR('montadoraAMSP.admin')"
+          Endorsement:
+              Type: Signature
+              Rule: "OR('montadoraAMSP.member')"
+
+      AnchorPeers:
+          - Host: peer0.montadora-a.car-lifes-cicle.com
+            Port: 7041
+
+          - Host: peer1.montadora-a.car-lifes-cicle.com
+            Port: 7042
+
+    - &mecanicaA
+      Name: mecanicaAMSP
+      ID: mecanicaAMSP
+      MSPDir: crypto-config/peerOrganizations/mecanica-a.car-lifes-cicle.com/msp
+
+      Policies:
+          Readers:
+              Type: Signature
+              Rule: "OR('mecanicaAMSP.member')"
+          Writers:
+              Type: Signature
+              Rule: "OR('mecanicaAMSP.member')"
+          Admins:
+              Type: Signature
+              Rule: "OR('mecanicaAMSP.admin')"
+          Endorsement:
+              Type: Signature
+              Rule: "OR('mecanicaAMSP.member')"
+
+      AnchorPeers:
+          - Host: peer0.mecanica-a.car-lifes-cicle.com
+            Port: 7061
+
+          - Host: peer1.mecanica-a.car-lifes-cicle.com
+            Port: 7062
+
+    - &seguradoraA
+      Name: seguradoraAMSP
+      ID: seguradoraAMSP
+      MSPDir: crypto-config/peerOrganizations/seguradora-a.car-lifes-cicle.com/msp
+
+      Policies:
+          Readers:
+              Type: Signature
+              Rule: "OR('seguradoraAMSP.member')"
+          Writers:
+              Type: Signature
+              Rule: "OR('seguradoraAMSP.member')"
+          Admins:
+              Type: Signature
+              Rule: "OR('seguradoraAMSP.admin')"
+          Endorsement:
+              Type: Signature
+              Rule: "OR('seguradoraAMSP.member')"
+
+      AnchorPeers:
+          - Host: peer0.seguradora-a.car-lifes-cicle.com
+            Port: 7081
+
+          - Host: peer1.seguradora-a.car-lifes-cicle.com
+            Port: 7082
+
+################################################################################
+#   SECTION: Application
+################################################################################
+Application: &ApplicationDefaults
+    Organizations:
+    # Policies defines the set of policies at this level of the config tree
+    # For Application policies, their canonical path is
+    #   /Channel/Application/<PolicyName>
+    Policies:
+        Readers:
+            Type: ImplicitMeta
+            Rule: "ANY Readers"
+        Writers:
+            Type: ImplicitMeta
+            Rule: "ANY Writers"
+        Admins:
+            Type: ImplicitMeta
+            Rule: "MAJORITY Admins"
+        Endorsement:
+            Type: ImplicitMeta
+            Rule: "ANY Writers"
+    Capabilities:
+        <<: *ApplicationCapabilities
+
+################################################################################
+#   SECTION: Orderer
+################################################################################
+Orderer: &Orderers-groupDefaults
+    OrdererType: solo
+    Addresses:
+        - orderer0.orderers-group.gov.car-lifes-cicle.com:7030
+    BatchTimeout: 2s
+    BatchSize:
+        MaxMessageCount: 10
+        AbsoluteMaxBytes: 99 MB
+        PreferredMaxBytes: 512 KB
+    Organizations:
+    # Policies defines the set of policies at this level of the config tree
+    # For Orderer policies, their canonical path is
+    #   /Channel/Orderer/<PolicyName>
+    Policies:
+        Readers:
+            Type: ImplicitMeta
+            Rule: "ANY Readers"
+        Writers:
+            Type: ImplicitMeta
+            Rule: "ANY Writers"
+        Admins:
+            Type: ImplicitMeta
+            Rule: "MAJORITY Admins"
+        # BlockValidation specifies what signatures must be included in the block
+        # from the orderer for the peer to validate it.
+        BlockValidation:
+            Type: ImplicitMeta
+            Rule: "ANY Writers"
+    Capabilities:
+        <<: *OrdererCapabilities
+
+################################################################################
+#   Profile
+################################################################################
+# https://github:com/hyperledger/fabric/blob/master/sampleconfig/configtx.yaml
+
+Profiles:
+    # Profile used to create Genesis block for group orderers-group #
+    Orderers-groupGenesis:
+        <<: *ChannelDefaults
+        Orderer:
+            <<: *Orderers-groupDefaults
+            Organizations:
+                - *Gov
+            Capabilities:
+                <<: *OrdererCapabilities
+        Consortiums:
+            SampleConsortium:
+                Organizations:
+                    - *Gov
+                    - *montadoraA
+                    - *mecanicaA
+                    - *seguradoraA
+
+    # Profile used to create channeltx for car-lifes-cicle-channel #
+    CarLifesCicleChannel:
+        <<: *ChannelDefaults
+        Orderer:
+            <<: *Orderers-groupDefaults
+            Organizations:
+                - *Gov
+            Capabilities:
+                <<: *ApplicationCapabilities
+        Consortium: SampleConsortium
+        Consortiums:
+            SampleConsortium:
+                Organizations:
+                    - *Gov
+                    - *montadoraA
+                    - *mecanicaA
+                    - *seguradoraA
+        Application:
+            <<: *ApplicationDefaults
+            Organizations:
+                - *Gov
+                - *montadoraA
+                - *mecanicaA
+                - *seguradoraA

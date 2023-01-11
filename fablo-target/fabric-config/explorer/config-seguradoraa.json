@@ -1,0 +1,9 @@
+{
+  "network-configs": {
+    "network-seguradoraa": {
+      "name": "Network of seguradoraA",
+      "profile": "/opt/explorer/app/platform/fabric/connection-profile/connection-profile-seguradoraa.json"
+    }
+  },
+  "license": "Apache-2.0"
+}

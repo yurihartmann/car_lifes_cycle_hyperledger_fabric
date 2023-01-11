@@ -1,5 +1,4 @@
 import { Object, Property } from 'fabric-contract-api';
-import { Person } from './person';
 
 @Object()
 export class Car {

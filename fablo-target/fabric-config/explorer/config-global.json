@@ -1,0 +1,21 @@
+{
+  "network-configs": {
+    "network-gov": {
+      "name": "Network of Gov",
+      "profile": "/opt/explorer/app/platform/fabric/connection-profile/connection-profile-gov.json"
+    },
+    "network-montadoraa": {
+      "name": "Network of montadoraA",
+      "profile": "/opt/explorer/app/platform/fabric/connection-profile/connection-profile-montadoraa.json"
+    },
+    "network-mecanicaa": {
+      "name": "Network of mecanicaA",
+      "profile": "/opt/explorer/app/platform/fabric/connection-profile/connection-profile-mecanicaa.json"
+    },
+    "network-seguradoraa": {
+      "name": "Network of seguradoraA",
+      "profile": "/opt/explorer/app/platform/fabric/connection-profile/connection-profile-seguradoraa.json"
+    }
+  },
+  "license": "Apache-2.0"
+}

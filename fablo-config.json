@@ -3,10 +3,7 @@
   "global": {
     "fabricVersion": "2.3.0",
     "tls": false,
-    "peerDevMode": false,
-    "monitoring": {
-      "loglevel": "info"
-    },
+    "peerDevMode": true,
     "tools": {
       "explorer": true
     }
@@ -24,8 +21,8 @@
       "orderers": [
         {
           "groupName": "orderers-group",
-          "type": "raft",
-          "instances": 3
+          "type": "solo",
+          "instances": 1
         }
       ],
       "tools": {
@@ -71,7 +68,7 @@
   ],
   "channels": [
     {
-      "name": "car-lifes-cicle-channel-car",
+      "name": "car-lifes-cicle-channel",
       "orgs": [
         {
           "name": "Gov",
@@ -96,18 +93,6 @@
         },
         {
           "name": "seguradoraA",
-          "peers": [
-            "peer0",
-            "peer1"
-          ]
-        }
-      ]
-    },
-    {
-      "name": "car-lifes-cicle-channel-person",
-      "orgs": [
-        {
-          "name": "Gov",
           "peers": [
             "peer0",
             "peer1"

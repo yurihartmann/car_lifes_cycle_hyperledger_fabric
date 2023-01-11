@@ -1,0 +1,9 @@
+{
+  "network-configs": {
+    "network-gov": {
+      "name": "Network of Gov",
+      "profile": "/opt/explorer/app/platform/fabric/connection-profile/connection-profile-gov.json"
+    }
+  },
+  "license": "Apache-2.0"
+}
