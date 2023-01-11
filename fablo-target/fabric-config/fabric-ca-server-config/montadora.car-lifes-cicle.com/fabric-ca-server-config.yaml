@@ -240,7 +240,7 @@ ldap:
 # which are always stored in lower case.
 #############################################################################
 affiliations:
-  montadoraa:
+  montadora:
 
 #############################################################################
 #  Signing section

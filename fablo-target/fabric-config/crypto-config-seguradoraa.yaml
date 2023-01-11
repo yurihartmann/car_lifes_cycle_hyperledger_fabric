@@ -1,8 +1,0 @@
-PeerOrgs:
-  - Name: seguradoraA
-    Domain: seguradora-a.car-lifes-cicle.com
-    Specs:
-    Template:
-      Count: 2
-    Users:
-      Count: 1

@@ -30,109 +30,57 @@ Channel: &ChannelDefaults
 #   Section: Organizations
 ################################################################################
 Organizations:
-    - &Gov
-      Name: GovMSP
-      ID: GovMSP
-      MSPDir: crypto-config/peerOrganizations/gov.car-lifes-cicle.com/msp
+    - &detran
+      Name: detranMSP
+      ID: detranMSP
+      MSPDir: crypto-config/peerOrganizations/detran.car-lifes-cicle.com/msp
 
       Policies:
           Readers:
               Type: Signature
-              Rule: "OR('GovMSP.member')"
+              Rule: "OR('detranMSP.member')"
           Writers:
               Type: Signature
-              Rule: "OR('GovMSP.member')"
+              Rule: "OR('detranMSP.member')"
           Admins:
               Type: Signature
-              Rule: "OR('GovMSP.admin')"
+              Rule: "OR('detranMSP.admin')"
           Endorsement:
               Type: Signature
-              Rule: "OR('GovMSP.member')"
+              Rule: "OR('detranMSP.member')"
 
       AnchorPeers:
-          - Host: peer0.gov.car-lifes-cicle.com
+          - Host: peer0.detran.car-lifes-cicle.com
             Port: 7021
 
-          - Host: peer1.gov.car-lifes-cicle.com
+          - Host: peer1.detran.car-lifes-cicle.com
             Port: 7022
 
-    - &montadoraA
-      Name: montadoraAMSP
-      ID: montadoraAMSP
-      MSPDir: crypto-config/peerOrganizations/montadora-a.car-lifes-cicle.com/msp
+    - &montadora
+      Name: montadoraMSP
+      ID: montadoraMSP
+      MSPDir: crypto-config/peerOrganizations/montadora.car-lifes-cicle.com/msp
 
       Policies:
           Readers:
               Type: Signature
-              Rule: "OR('montadoraAMSP.member')"
+              Rule: "OR('montadoraMSP.member')"
           Writers:
               Type: Signature
-              Rule: "OR('montadoraAMSP.member')"
+              Rule: "OR('montadoraMSP.member')"
           Admins:
               Type: Signature
-              Rule: "OR('montadoraAMSP.admin')"
+              Rule: "OR('montadoraMSP.admin')"
           Endorsement:
               Type: Signature
-              Rule: "OR('montadoraAMSP.member')"
+              Rule: "OR('montadoraMSP.member')"
 
       AnchorPeers:
-          - Host: peer0.montadora-a.car-lifes-cicle.com
+          - Host: peer0.montadora.car-lifes-cicle.com
             Port: 7041
 
-          - Host: peer1.montadora-a.car-lifes-cicle.com
+          - Host: peer1.montadora.car-lifes-cicle.com
             Port: 7042
-
-    - &mecanicaA
-      Name: mecanicaAMSP
-      ID: mecanicaAMSP
-      MSPDir: crypto-config/peerOrganizations/mecanica-a.car-lifes-cicle.com/msp
-
-      Policies:
-          Readers:
-              Type: Signature
-              Rule: "OR('mecanicaAMSP.member')"
-          Writers:
-              Type: Signature
-              Rule: "OR('mecanicaAMSP.member')"
-          Admins:
-              Type: Signature
-              Rule: "OR('mecanicaAMSP.admin')"
-          Endorsement:
-              Type: Signature
-              Rule: "OR('mecanicaAMSP.member')"
-
-      AnchorPeers:
-          - Host: peer0.mecanica-a.car-lifes-cicle.com
-            Port: 7061
-
-          - Host: peer1.mecanica-a.car-lifes-cicle.com
-            Port: 7062
-
-    - &seguradoraA
-      Name: seguradoraAMSP
-      ID: seguradoraAMSP
-      MSPDir: crypto-config/peerOrganizations/seguradora-a.car-lifes-cicle.com/msp
-
-      Policies:
-          Readers:
-              Type: Signature
-              Rule: "OR('seguradoraAMSP.member')"
-          Writers:
-              Type: Signature
-              Rule: "OR('seguradoraAMSP.member')"
-          Admins:
-              Type: Signature
-              Rule: "OR('seguradoraAMSP.admin')"
-          Endorsement:
-              Type: Signature
-              Rule: "OR('seguradoraAMSP.member')"
-
-      AnchorPeers:
-          - Host: peer0.seguradora-a.car-lifes-cicle.com
-            Port: 7081
-
-          - Host: peer1.seguradora-a.car-lifes-cicle.com
-            Port: 7082
 
 ################################################################################
 #   SECTION: Application
@@ -154,7 +102,7 @@ Application: &ApplicationDefaults
             Rule: "MAJORITY Admins"
         Endorsement:
             Type: ImplicitMeta
-            Rule: "ANY Writers"
+            Rule: "MAJORITY Endorsement"
     Capabilities:
         <<: *ApplicationCapabilities
 
@@ -164,7 +112,7 @@ Application: &ApplicationDefaults
 Orderer: &Orderers-groupDefaults
     OrdererType: solo
     Addresses:
-        - orderer0.orderers-group.gov.car-lifes-cicle.com:7030
+        - orderer0.orderers-group.detran.car-lifes-cicle.com:7030
     BatchTimeout: 2s
     BatchSize:
         MaxMessageCount: 10
@@ -204,38 +152,51 @@ Profiles:
         Orderer:
             <<: *Orderers-groupDefaults
             Organizations:
-                - *Gov
+                - *detran
             Capabilities:
                 <<: *OrdererCapabilities
         Consortiums:
             SampleConsortium:
                 Organizations:
-                    - *Gov
-                    - *montadoraA
-                    - *mecanicaA
-                    - *seguradoraA
+                    - *detran
+                    - *montadora
 
-    # Profile used to create channeltx for car-lifes-cicle-channel #
-    CarLifesCicleChannel:
+    # Profile used to create channeltx for car-channel #
+    CarChannel:
         <<: *ChannelDefaults
         Orderer:
             <<: *Orderers-groupDefaults
             Organizations:
-                - *Gov
+                - *detran
             Capabilities:
                 <<: *ApplicationCapabilities
         Consortium: SampleConsortium
         Consortiums:
             SampleConsortium:
                 Organizations:
-                    - *Gov
-                    - *montadoraA
-                    - *mecanicaA
-                    - *seguradoraA
+                    - *detran
+                    - *montadora
         Application:
             <<: *ApplicationDefaults
             Organizations:
-                - *Gov
-                - *montadoraA
-                - *mecanicaA
-                - *seguradoraA
+                - *detran
+                - *montadora
+
+    # Profile used to create channeltx for person-channel #
+    PersonChannel:
+        <<: *ChannelDefaults
+        Orderer:
+            <<: *Orderers-groupDefaults
+            Organizations:
+                - *detran
+            Capabilities:
+                <<: *ApplicationCapabilities
+        Consortium: SampleConsortium
+        Consortiums:
+            SampleConsortium:
+                Organizations:
+                    - *detran
+        Application:
+            <<: *ApplicationDefaults
+            Organizations:
+                - *detran

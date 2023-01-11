@@ -2,24 +2,18 @@
 
 __getOrdererAndPeerNodes() {
   echo "
-      orderer0.orderers-group.gov.car-lifes-cicle.com
-      peer0.gov.car-lifes-cicle.com
-      peer1.gov.car-lifes-cicle.com
-      peer0.montadora-a.car-lifes-cicle.com
-      peer1.montadora-a.car-lifes-cicle.com
-      peer0.mecanica-a.car-lifes-cicle.com
-      peer1.mecanica-a.car-lifes-cicle.com
-      peer0.seguradora-a.car-lifes-cicle.com
-      peer1.seguradora-a.car-lifes-cicle.com
+      orderer0.orderers-group.detran.car-lifes-cicle.com
+      peer0.detran.car-lifes-cicle.com
+      peer1.detran.car-lifes-cicle.com
+      peer0.montadora.car-lifes-cicle.com
+      peer1.montadora.car-lifes-cicle.com
   "
 }
 
 __getCASQLiteNodes() {
   echo "
-      ca.gov.car-lifes-cicle.com
-      ca.montadora-a.car-lifes-cicle.com
-      ca.mecanica-a.car-lifes-cicle.com
-      ca.seguradora-a.car-lifes-cicle.com
+      ca.detran.car-lifes-cicle.com
+      ca.montadora.car-lifes-cicle.com
   "
 }
 

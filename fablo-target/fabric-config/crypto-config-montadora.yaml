@@ -1,6 +1,6 @@
 PeerOrgs:
-  - Name: montadoraA
-    Domain: montadora-a.car-lifes-cicle.com
+  - Name: montadora
+    Domain: montadora.car-lifes-cicle.com
     Specs:
     Template:
       Count: 2

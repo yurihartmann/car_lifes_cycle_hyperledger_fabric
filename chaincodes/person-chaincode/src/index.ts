@@ -2,8 +2,8 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import { CarContract } from './contracts/carContract';
+import { PersonContract } from './personContract';
 
-export { CarContract } from './contracts/carContract';
+export { PersonContract } from './personContract';
 
-export const contracts: any[] = [CarContract];
+export const contracts: any[] = [PersonContract];

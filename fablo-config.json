@@ -3,7 +3,7 @@
   "global": {
     "fabricVersion": "2.3.0",
     "tls": false,
-    "peerDevMode": true,
+    "peerDevMode": false,
     "tools": {
       "explorer": true
     }
@@ -11,8 +11,8 @@
   "orgs": [
     {
       "organization": {
-        "name": "Gov",
-        "domain": "gov.car-lifes-cicle.com"
+        "name": "detran",
+        "domain": "detran.car-lifes-cicle.com"
       },
       "peer": {
         "instances": 2,
@@ -31,8 +31,8 @@
     },
     {
       "organization": {
-        "name": "montadoraA",
-        "domain": "montadora-a.car-lifes-cicle.com"
+        "name": "montadora",
+        "domain": "montadora.car-lifes-cicle.com"
       },
       "peer": {
         "instances": 2,
@@ -40,59 +40,34 @@
       },
       "tools": {
         "fabloRest": true
-      }
-    },
-    {
-      "organization": {
-        "name": "mecanicaA",
-        "domain": "mecanica-a.car-lifes-cicle.com"
-      },
-      "peer": {
-        "instances": 2,
-        "db": "LevelDb"
-      },
-      "tools": {
-        "fabloRest": true
-      }
-    },
-    {
-      "organization": {
-        "name": "seguradoraA",
-        "domain": "seguradora-a.car-lifes-cicle.com"
-      },
-      "peer": {
-        "instances": 2,
-        "db": "LevelDb"
       }
     }
   ],
   "channels": [
     {
-      "name": "car-lifes-cicle-channel",
+      "name": "car-channel",
       "orgs": [
         {
-          "name": "Gov",
+          "name": "detran",
           "peers": [
             "peer0",
             "peer1"
           ]
         },
         {
-          "name": "montadoraA",
+          "name": "montadora",
           "peers": [
             "peer0",
             "peer1"
           ]
-        },
+        }
+      ]
+    },
+    {
+      "name": "person-channel",
+      "orgs": [
         {
-          "name": "mecanicaA",
-          "peers": [
-            "peer0",
-            "peer1"
-          ]
-        },
-        {
-          "name": "seguradoraA",
+          "name": "detran",
           "peers": [
             "peer0",
             "peer1"
@@ -103,18 +78,18 @@
   ],
   "chaincodes": [
     {
-      "name": "alo",
-      "version": "0.0.1",
-      "lang": "node",
-      "channel": "car-lifes-cicle-channel",
-      "directory": "./chaincodes/chaincode-typescript"
-    },
-    {
       "name": "car",
       "version": "0.0.1",
       "lang": "node",
-      "channel": "car-lifes-cicle-channel",
+      "channel": "car-channel",
       "directory": "./chaincodes/car-chaincode"
+    },
+    {
+      "name": "person",
+      "version": "0.0.1",
+      "lang": "node",
+      "channel": "person-channel",
+      "directory": "./chaincodes/person-chaincode"
     }
   ]
 }

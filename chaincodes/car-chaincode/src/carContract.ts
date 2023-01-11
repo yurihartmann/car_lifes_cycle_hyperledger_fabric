@@ -3,7 +3,8 @@ import { Iterators } from 'fabric-shim';
 import stringify from 'json-stringify-deterministic';
 import sortKeysRecursive from 'sort-keys-recursive';
 import { v4 as uuid } from 'uuid';
-import { Car } from '../models/car';
+import { Car } from './car';
+import { buildListByIterator } from './utils';
 
 @Info({ title: 'Car', description: 'Smart contract for car' })
 export class CarContract extends Contract {
@@ -15,7 +16,7 @@ export class CarContract extends Contract {
                 id: '8faf4111-723c-40c1-aa5f-070ad40edfaa',
                 brand: 'Ford',
                 model: 'Focus',
-                owner: "Yuri",
+                owner_cpf: "123.123.123-12",
                 color: 'blue',
                 appraisedValue: 15000
             },
@@ -23,7 +24,7 @@ export class CarContract extends Contract {
                 id: 'c747dc9e-e736-40b2-83bc-6ecd2f6356e9',
                 brand: 'Honda',
                 model: 'Civic',
-                owner: 'Yuri',
+                owner_cpf: "123.123.123-12",
                 color: 'white',
                 appraisedValue: 25000
             },
@@ -31,7 +32,7 @@ export class CarContract extends Contract {
                 id: '3039d00b-943e-43e3-8322-bb1d165b6e82',
                 brand: 'Toyota',
                 model: 'Corola',
-                owner: 'Maria',
+                owner_cpf: "123.123.123-12",
                 color: 'black',
                 appraisedValue: 28000
             }
@@ -40,33 +41,15 @@ export class CarContract extends Contract {
         for (const car of cars) {
             await ctx.stub.putState(car.id, Buffer.from(stringify(sortKeysRecursive(car))));
         }
-
-        // ctx.stub.invokeChaincode("personContract", [], ctx.stub.getChannelID())
-    }
-
-    @Transaction(false)
-    public async getDetails(ctx: Context): Promise<string> {
-        const details = {
-            "stub.getMspID": ctx.stub.getMspID(),
-            "ctx.stub.getChannelID": ctx.stub.getChannelID()
-        };
-
-        return JSON.stringify(details);
     }
 
     @Transaction()
-    public async CreateCar(ctx: Context, brand: string, model: string, owner: string, color: string, appraisedValue: number): Promise<string> {
-        // const exists = await this.CarExists(ctx, id);
-
-        // if (exists) {
-        //     throw new Error(`The car ${id} already exists`);
-        // }
-
+    public async CreateCar(ctx: Context, brand: string, model: string, owner_cpf: string, color: string, appraisedValue: number): Promise<string> {
         const car: Car = {
             id: uuid(),
             brand: brand,
             model: model,
-            owner: owner,
+            owner_cpf: owner_cpf,
             color: color,
             appraisedValue: appraisedValue,
         };
@@ -85,7 +68,7 @@ export class CarContract extends Contract {
     }
 
     @Transaction()
-    public async UpdateCar(ctx: Context, id: string, brand: string, model: string, owner: string, color: string, appraisedValue: number): Promise<string> {
+    public async UpdateCar(ctx: Context, id: string, brand: string, model: string, owner_cpf: string, color: string, appraisedValue: number): Promise<string> {
         const exists = await this.CarExists(ctx, id);
         if (!exists) {
             throw new Error(`The car ${id} does not exist`);
@@ -95,7 +78,7 @@ export class CarContract extends Contract {
             id: id,
             brand: brand,
             model: model,
-            owner: owner,
+            owner_cpf: owner_cpf,
             color: color,
             appraisedValue: appraisedValue,
         };
@@ -123,11 +106,11 @@ export class CarContract extends Contract {
     }
 
     @Transaction()
-    public async TransferAsset(ctx: Context, id: string, newOwner: string): Promise<string> {
+    public async TransferAsset(ctx: Context, id: string, new_owner_cpf: string): Promise<string> {
         const carString = await this.ReadCar(ctx, id);
         const car: Car = JSON.parse(carString);
 
-        car.owner = newOwner;
+        car.owner_cpf = new_owner_cpf;
 
         await ctx.stub.putState(id, Buffer.from(stringify(sortKeysRecursive(car))));
 
@@ -137,47 +120,51 @@ export class CarContract extends Contract {
     @Transaction(false)
     @Returns('string')
     public async GetAllAssets(ctx: Context): Promise<string> {
-        const allResults = [];
-        const iterator = await ctx.stub.getStateByRange('', '');
-        let result = await iterator.next();
+        // const allResults = [];
+        // const iterator = await ctx.stub.getStateByRange('', '');
+        // let result = await iterator.next();
 
-        while (!result.done) {
-            const strValue = Buffer.from(result.value.value.toString()).toString('utf8');
-            let record;
-            try {
-                record = JSON.parse(strValue);
-            } catch (err) {
-                console.log(err);
-                record = strValue;
-            }
-            allResults.push(record);
-            result = await iterator.next();
-        }
-        return JSON.stringify(allResults);
+        // while (!result.done) {
+        //     const strValue = Buffer.from(result.value.value.toString()).toString('utf8');
+        //     let record;
+        //     try {
+        //         record = JSON.parse(strValue);
+        //     } catch (err) {
+        //         console.log(err);
+        //         record = strValue;
+        //     }
+        //     allResults.push(record);
+        //     result = await iterator.next();
+        // }
+        // return JSON.stringify(allResults);
+
+        const iterator = await ctx.stub.getStateByRange('', '');
+        return JSON.stringify(await buildListByIterator(iterator));
     }
 
     @Transaction(false)
     @Returns('string')
     public async GetCarsPaginated(ctx: Context, size: number, bookmark: string): Promise<string> {
-        const allResults = [];
-        const pagination = await ctx.stub.getStateByRangeWithPagination('', '', size, bookmark);
-        let result = await pagination.iterator.next();
+        // const allResults = [];
+        // const pagination = await ctx.stub.getStateByRangeWithPagination('', '', size, bookmark);
+        // let result = await pagination.iterator.next();
 
-        while (!result.done) {
-            const strValue = Buffer.from(result.value.value.toString()).toString('utf8');
-            let record;
-            try {
-                record = JSON.parse(strValue);
-            } catch (err) {
-                console.log(err);
-                record = strValue;
-            }
-            allResults.push(record);
-            result = await pagination.iterator.next();
-        }
-        pagination.metadata.fetchedRecordsCount
+        // while (!result.done) {
+        //     const strValue = Buffer.from(result.value.value.toString()).toString('utf8');
+        //     let record;
+        //     try {
+        //         record = JSON.parse(strValue);
+        //     } catch (err) {
+        //         console.log(err);
+        //         record = strValue;
+        //     }
+        //     allResults.push(record);
+        //     result = await pagination.iterator.next();
+        // }
+        const pagination = await ctx.stub.getStateByRangeWithPagination('', '', size, bookmark);
+        
         return JSON.stringify({
-            data: allResults,
+            data: await buildListByIterator(pagination.iterator),
             metadata: {
                 bookmark: pagination.metadata.bookmark,
                 fetchedRecordsCount: pagination.metadata.fetchedRecordsCount
@@ -185,30 +172,10 @@ export class CarContract extends Contract {
         });
     }
 
-    private async buildListByIterator(iterator: Iterators.HistoryQueryIterator | Iterators.StateQueryIterator): Promise<Object[]> {
-        const allResults = [];
-        let result = await iterator.next();
-
-        while (!result.done) {
-            const strValue = Buffer.from(result.value.value.toString()).toString('utf8');
-            let record;
-            try {
-                record = JSON.parse(strValue);
-            } catch (err) {
-                console.log(err);
-                record = strValue;
-            }
-            allResults.push(record);
-            result = await iterator.next();
-        }
-
-        return allResults;
-    }
-
     @Transaction(false)
     @Returns('string')
     public async HistoryByCar(ctx: Context, id: string): Promise<string> {
         const historyCar = await ctx.stub.getHistoryForKey(id);
-        return JSON.stringify(await this.buildListByIterator(historyCar));
+        return JSON.stringify(await buildListByIterator(historyCar));
     }
 }

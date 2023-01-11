@@ -1,0 +1,45 @@
+{
+  "name": "fablo-test-network-detran",
+  "description": "Connection profile for detran in Fablo network",
+  "version": "1.0.0",
+  "client": {
+    "organization": "detran"
+  },
+  "organizations": {
+    "detran": {
+      "mspid": "detranMSP",
+      "peers": [
+        "peer0.detran.car-lifes-cicle.com",
+        "peer1.detran.car-lifes-cicle.com",
+        "peer0.montadora.car-lifes-cicle.com",
+        "peer1.montadora.car-lifes-cicle.com"
+      ],
+      "certificateAuthorities": [
+        "ca.detran.car-lifes-cicle.com"
+      ]
+    }
+  },
+  "peers": {
+    "peer0.detran.car-lifes-cicle.com": {
+      "url": "grpc://localhost:7021"
+    },
+    "peer1.detran.car-lifes-cicle.com": {
+      "url": "grpc://localhost:7022"
+    },
+    "peer0.montadora.car-lifes-cicle.com": {
+      "url": "grpc://localhost:7041"
+    },
+    "peer1.montadora.car-lifes-cicle.com": {
+      "url": "grpc://localhost:7042"
+    }
+  },
+  "certificateAuthorities": {
+    "ca.detran.car-lifes-cicle.com": {
+      "url": "http://localhost:7020",
+      "caName": "ca.detran.car-lifes-cicle.com",
+      "httpOptions": {
+        "verify": false
+      }
+    }
+  }
+}

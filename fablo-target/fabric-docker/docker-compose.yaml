@@ -5,70 +5,70 @@ networks:
 
 services:
 
-  ca.gov.car-lifes-cicle.com:
-    container_name: ca.gov.car-lifes-cicle.com
+  ca.detran.car-lifes-cicle.com:
+    container_name: ca.detran.car-lifes-cicle.com
     image: hyperledger/fabric-ca:${FABRIC_CA_VERSION}
     environment:
       - FABRIC_CA_HOME=/etc/hyperledger/fabric-ca-server
-      - FABRIC_CA_SERVER_CA_NAME=ca.gov.car-lifes-cicle.com
-      - FABRIC_CA_SERVER_CA_CERTFILE=/etc/hyperledger/fabric-ca-server/crypto/ca.gov.car-lifes-cicle.com-cert.pem
+      - FABRIC_CA_SERVER_CA_NAME=ca.detran.car-lifes-cicle.com
+      - FABRIC_CA_SERVER_CA_CERTFILE=/etc/hyperledger/fabric-ca-server/crypto/ca.detran.car-lifes-cicle.com-cert.pem
       - FABRIC_CA_SERVER_CA_KEYFILE=/etc/hyperledger/fabric-ca-server/crypto/priv-key.pem
       - FABRIC_LOGGING_SPEC=${LOGGING_LEVEL}
     ports:
       - 7020:7054
     working_dir: /etc/hyperledger/fabric-ca-server
-    command: sh -c 'fabric-ca-server start -b ${GOV_CA_ADMIN_NAME}:${GOV_CA_ADMIN_PASSWORD} -d'
+    command: sh -c 'fabric-ca-server start -b ${DETRAN_CA_ADMIN_NAME}:${DETRAN_CA_ADMIN_PASSWORD} -d'
     volumes:
-      - ../fabric-config/crypto-config/peerOrganizations/gov.car-lifes-cicle.com/ca/:/etc/hyperledger/fabric-ca-server/crypto
-      - ../fabric-config/fabric-ca-server-config/gov.car-lifes-cicle.com/fabric-ca-server-config.yaml:/etc/hyperledger/fabric-ca-server/fabric-ca-server-config.yaml
+      - ../fabric-config/crypto-config/peerOrganizations/detran.car-lifes-cicle.com/ca/:/etc/hyperledger/fabric-ca-server/crypto
+      - ../fabric-config/fabric-ca-server-config/detran.car-lifes-cicle.com/fabric-ca-server-config.yaml:/etc/hyperledger/fabric-ca-server/fabric-ca-server-config.yaml
     networks:
       - basic
 
-  cli.gov.car-lifes-cicle.com:
-    container_name: cli.gov.car-lifes-cicle.com
+  cli.detran.car-lifes-cicle.com:
+    container_name: cli.detran.car-lifes-cicle.com
     image: hyperledger/fabric-tools:${FABRIC_VERSION}
     tty: true
     environment:
       - GOPATH=/opt/gopath
       - CORE_VM_ENDPOINT=unix:///host/var/run/docker.sock
       - FABRIC_LOGGING_SPEC=${LOGGING_LEVEL}
-      - CORE_PEER_ID=cli.gov.car-lifes-cicle.com
+      - CORE_PEER_ID=cli.detran.car-lifes-cicle.com
       - CORE_CHAINCODE_KEEPALIVE=10
       #
-      - CORE_PEER_LOCALMSPID=GovMSP
-      - CORE_PEER_MSPCONFIGPATH=/var/hyperledger/cli/crypto/users/Admin@gov.car-lifes-cicle.com/msp
-      - CORE_PEER_ADDRESS=peer0.gov.car-lifes-cicle.com:7021
+      - CORE_PEER_LOCALMSPID=detranMSP
+      - CORE_PEER_MSPCONFIGPATH=/var/hyperledger/cli/crypto/users/Admin@detran.car-lifes-cicle.com/msp
+      - CORE_PEER_ADDRESS=peer0.detran.car-lifes-cicle.com:7021
     working_dir: /var/hyperledger/cli/
     command: /bin/bash
     volumes:
       - /var/run/docker.sock:/host/var/run/docker.sock
       - ../fabric-docker/scripts/cli:/var/hyperledger/cli/scripts/
       - ../fabric-config/config:/var/hyperledger/cli/config/ # genesis.block and channel.tx's
-      - ../fabric-config/crypto-config/peerOrganizations/gov.car-lifes-cicle.com:/var/hyperledger/cli/crypto/
+      - ../fabric-config/crypto-config/peerOrganizations/detran.car-lifes-cicle.com:/var/hyperledger/cli/crypto/
       - ../fabric-config/chaincode-packages:/var/hyperledger/cli/chaincode-packages/
-      - "$CHAINCODES_BASE_DIR/./chaincodes/chaincode-typescript/:/var/hyperledger/cli/alo/"
       - "$CHAINCODES_BASE_DIR/./chaincodes/car-chaincode/:/var/hyperledger/cli/car/"
+      - "$CHAINCODES_BASE_DIR/./chaincodes/person-chaincode/:/var/hyperledger/cli/person/"
     networks:
       - basic
 
-  fablo-rest.gov.car-lifes-cicle.com:
-    container_name: fablo-rest.gov.car-lifes-cicle.com
+  fablo-rest.detran.car-lifes-cicle.com:
+    container_name: fablo-rest.detran.car-lifes-cicle.com
     image: softwaremill/fablo-rest:${FABLO_REST_VERSION}
     environment:
       - PORT=8000
-      - MSP_ID=GovMSP
-      - FABRIC_CA_URL=http://ca.gov.car-lifes-cicle.com:7054
-      - FABRIC_CA_NAME=ca.gov.car-lifes-cicle.com
+      - MSP_ID=detranMSP
+      - FABRIC_CA_URL=http://ca.detran.car-lifes-cicle.com:7054
+      - FABRIC_CA_NAME=ca.detran.car-lifes-cicle.com
       - AS_LOCALHOST=false
-      - DISCOVERY_URLS=grpc://peer0.gov.car-lifes-cicle.com:7021,grpc://peer1.gov.car-lifes-cicle.com:7022,grpc://peer0.montadora-a.car-lifes-cicle.com:7041,grpc://peer1.montadora-a.car-lifes-cicle.com:7042,grpc://peer0.mecanica-a.car-lifes-cicle.com:7061,grpc://peer1.mecanica-a.car-lifes-cicle.com:7062,grpc://peer0.seguradora-a.car-lifes-cicle.com:7081,grpc://peer1.seguradora-a.car-lifes-cicle.com:7082
+      - DISCOVERY_URLS=grpc://peer0.detran.car-lifes-cicle.com:7021,grpc://peer1.detran.car-lifes-cicle.com:7022,grpc://peer0.montadora.car-lifes-cicle.com:7041,grpc://peer1.montadora.car-lifes-cicle.com:7042
       - HFC_LOGGING={"error":"console","warn":"console","info":"console"}
     ports:
       - 8800:8000
     networks:
       - basic
 
-  orderer0.orderers-group.gov.car-lifes-cicle.com:
-    container_name: orderer0.orderers-group.gov.car-lifes-cicle.com
+  orderer0.orderers-group.detran.car-lifes-cicle.com:
+    container_name: orderer0.orderers-group.detran.car-lifes-cicle.com
     image: hyperledger/fabric-orderer:${FABRIC_VERSION}
     environment:
       - FABRIC_LOGGING_SPEC=${LOGGING_LEVEL}
@@ -76,7 +76,7 @@ services:
       - ORDERER_GENERAL_LISTENPORT=7030
       - ORDERER_GENERAL_GENESISMETHOD=file
       - ORDERER_GENERAL_BOOTSTRAPFILE=/var/hyperledger/config/Orderers-groupGenesis.block
-      - ORDERER_GENERAL_LOCALMSPID=GovMSP
+      - ORDERER_GENERAL_LOCALMSPID=detranMSP
       - ORDERER_GENERAL_LOCALMSPDIR=/var/hyperledger/orderer/msp
       - GODEBUG=netdns=go
     working_dir: /var/hyperledger/orderer
@@ -86,23 +86,23 @@ services:
       - 8030:9440
     volumes:
       - ../fabric-config/config/:/var/hyperledger/config
-      - ../fabric-config/crypto-config/peerOrganizations/gov.car-lifes-cicle.com/peers/orderer0.orderers-group.gov.car-lifes-cicle.com/msp/:/var/hyperledger/orderer/msp
-      - ../fabric-config/crypto-config/peerOrganizations/gov.car-lifes-cicle.com/peers/orderer0.orderers-group.gov.car-lifes-cicle.com/tls/:/var/hyperledger/orderer/tls
+      - ../fabric-config/crypto-config/peerOrganizations/detran.car-lifes-cicle.com/peers/orderer0.orderers-group.detran.car-lifes-cicle.com/msp/:/var/hyperledger/orderer/msp
+      - ../fabric-config/crypto-config/peerOrganizations/detran.car-lifes-cicle.com/peers/orderer0.orderers-group.detran.car-lifes-cicle.com/tls/:/var/hyperledger/orderer/tls
     networks:
       - basic
 
-  peer0.gov.car-lifes-cicle.com:
-    container_name: peer0.gov.car-lifes-cicle.com
+  peer0.detran.car-lifes-cicle.com:
+    container_name: peer0.detran.car-lifes-cicle.com
     image: hyperledger/fabric-peer:${FABRIC_VERSION}
     environment:
-      - CORE_PEER_LOCALMSPID=GovMSP
-      - CORE_PEER_ID=peer0.gov.car-lifes-cicle.com
-      - CORE_PEER_ADDRESS=peer0.gov.car-lifes-cicle.com:7021
-      - CORE_PEER_LISTENADDRESS=peer0.gov.car-lifes-cicle.com:7021
-      - CORE_PEER_GOSSIP_ENDPOINT=peer0.gov.car-lifes-cicle.com:7021
-      - CORE_PEER_GOSSIP_EXTERNALENDPOINT=peer0.gov.car-lifes-cicle.com:7021
-      - CORE_PEER_GOSSIP_BOOTSTRAP="peer0.gov.car-lifes-cicle.com:7021 peer1.gov.car-lifes-cicle.com:7022"
-      - CORE_PEER_CHAINCODELISTENADDRESS=peer0.gov.car-lifes-cicle.com:7050
+      - CORE_PEER_LOCALMSPID=detranMSP
+      - CORE_PEER_ID=peer0.detran.car-lifes-cicle.com
+      - CORE_PEER_ADDRESS=peer0.detran.car-lifes-cicle.com:7021
+      - CORE_PEER_LISTENADDRESS=peer0.detran.car-lifes-cicle.com:7021
+      - CORE_PEER_GOSSIP_ENDPOINT=peer0.detran.car-lifes-cicle.com:7021
+      - CORE_PEER_GOSSIP_EXTERNALENDPOINT=peer0.detran.car-lifes-cicle.com:7021
+      - CORE_PEER_GOSSIP_BOOTSTRAP="peer0.detran.car-lifes-cicle.com:7021 peer1.detran.car-lifes-cicle.com:7022"
+      - CORE_PEER_CHAINCODELISTENADDRESS=peer0.detran.car-lifes-cicle.com:7050
       - CORE_PEER_MSPCONFIGPATH=/etc/hyperledger/fabric/peer/msp
       - CORE_CHAINCODE_BUILDER=hyperledger/fabric-ccenv:${FABRIC_CCENV_VERSION}
       - CORE_CHAINCODE_GOLANG_RUNTIME=hyperledger/fabric-baseos:${FABRIC_BASEOS_VERSION}
@@ -112,7 +112,7 @@ services:
       - CORE_CHAINCODE_LOGGING_SHIM=${LOGGING_LEVEL}
       - FABRIC_LOGGING_SPEC=${LOGGING_LEVEL}
       # metrics
-      - CORE_OPERATIONS_LISTENADDRESS=peer0.gov.car-lifes-cicle.com:9440
+      - CORE_OPERATIONS_LISTENADDRESS=peer0.detran.car-lifes-cicle.com:9440
       - CORE_METRICS_PROVIDER=prometheus
       #
       - CORE_VM_DOCKER_HOSTCONFIG_NETWORKMODE=${COMPOSE_PROJECT_NAME}_basic
@@ -120,32 +120,31 @@ services:
       - CORE_VM_ENDPOINT=unix:///host/var/run/docker.sock
       - GODEBUG=netdns=go
     working_dir: /etc/hyperledger/fabric/peer/
-    command: peer node start --peer-chaincodedev=true
+    command: peer node start
     ports:
       - 8021:9440
       - 7021:7021
-      - 8521:7050
     volumes:
       - /var/run/docker.sock:/host/var/run/docker.sock
-      - ../fabric-config/crypto-config/peerOrganizations/gov.car-lifes-cicle.com/peers/peer0.gov.car-lifes-cicle.com/msp:/etc/hyperledger/fabric/peer/msp
-      - ../fabric-config/crypto-config/peerOrganizations/gov.car-lifes-cicle.com/peers/peer0.gov.car-lifes-cicle.com/tls:/etc/hyperledger/fabric/peer/tls
-      - ../fabric-config/crypto-config/peerOrganizations/gov.car-lifes-cicle.com/users:/etc/hyperledger/fabric/peer/msp/users
+      - ../fabric-config/crypto-config/peerOrganizations/detran.car-lifes-cicle.com/peers/peer0.detran.car-lifes-cicle.com/msp:/etc/hyperledger/fabric/peer/msp
+      - ../fabric-config/crypto-config/peerOrganizations/detran.car-lifes-cicle.com/peers/peer0.detran.car-lifes-cicle.com/tls:/etc/hyperledger/fabric/peer/tls
+      - ../fabric-config/crypto-config/peerOrganizations/detran.car-lifes-cicle.com/users:/etc/hyperledger/fabric/peer/msp/users
       - ../fabric-config/config:/etc/hyperledger/fabric/config
     networks:
       - basic
 
-  peer1.gov.car-lifes-cicle.com:
-    container_name: peer1.gov.car-lifes-cicle.com
+  peer1.detran.car-lifes-cicle.com:
+    container_name: peer1.detran.car-lifes-cicle.com
     image: hyperledger/fabric-peer:${FABRIC_VERSION}
     environment:
-      - CORE_PEER_LOCALMSPID=GovMSP
-      - CORE_PEER_ID=peer1.gov.car-lifes-cicle.com
-      - CORE_PEER_ADDRESS=peer1.gov.car-lifes-cicle.com:7022
-      - CORE_PEER_LISTENADDRESS=peer1.gov.car-lifes-cicle.com:7022
-      - CORE_PEER_GOSSIP_ENDPOINT=peer1.gov.car-lifes-cicle.com:7022
-      - CORE_PEER_GOSSIP_EXTERNALENDPOINT=peer1.gov.car-lifes-cicle.com:7022
-      - CORE_PEER_GOSSIP_BOOTSTRAP="peer0.gov.car-lifes-cicle.com:7021 peer1.gov.car-lifes-cicle.com:7022"
-      - CORE_PEER_CHAINCODELISTENADDRESS=peer1.gov.car-lifes-cicle.com:7050
+      - CORE_PEER_LOCALMSPID=detranMSP
+      - CORE_PEER_ID=peer1.detran.car-lifes-cicle.com
+      - CORE_PEER_ADDRESS=peer1.detran.car-lifes-cicle.com:7022
+      - CORE_PEER_LISTENADDRESS=peer1.detran.car-lifes-cicle.com:7022
+      - CORE_PEER_GOSSIP_ENDPOINT=peer1.detran.car-lifes-cicle.com:7022
+      - CORE_PEER_GOSSIP_EXTERNALENDPOINT=peer1.detran.car-lifes-cicle.com:7022
+      - CORE_PEER_GOSSIP_BOOTSTRAP="peer0.detran.car-lifes-cicle.com:7021 peer1.detran.car-lifes-cicle.com:7022"
+      - CORE_PEER_CHAINCODELISTENADDRESS=peer1.detran.car-lifes-cicle.com:7050
       - CORE_PEER_MSPCONFIGPATH=/etc/hyperledger/fabric/peer/msp
       - CORE_CHAINCODE_BUILDER=hyperledger/fabric-ccenv:${FABRIC_CCENV_VERSION}
       - CORE_CHAINCODE_GOLANG_RUNTIME=hyperledger/fabric-baseos:${FABRIC_BASEOS_VERSION}
@@ -155,7 +154,7 @@ services:
       - CORE_CHAINCODE_LOGGING_SHIM=${LOGGING_LEVEL}
       - FABRIC_LOGGING_SPEC=${LOGGING_LEVEL}
       # metrics
-      - CORE_OPERATIONS_LISTENADDRESS=peer1.gov.car-lifes-cicle.com:9440
+      - CORE_OPERATIONS_LISTENADDRESS=peer1.detran.car-lifes-cicle.com:9440
       - CORE_METRICS_PROVIDER=prometheus
       #
       - CORE_VM_DOCKER_HOSTCONFIG_NETWORKMODE=${COMPOSE_PROJECT_NAME}_basic
@@ -163,94 +162,93 @@ services:
       - CORE_VM_ENDPOINT=unix:///host/var/run/docker.sock
       - GODEBUG=netdns=go
     working_dir: /etc/hyperledger/fabric/peer/
-    command: peer node start --peer-chaincodedev=true
+    command: peer node start
     ports:
       - 8022:9440
       - 7022:7022
-      - 8522:7050
     volumes:
       - /var/run/docker.sock:/host/var/run/docker.sock
-      - ../fabric-config/crypto-config/peerOrganizations/gov.car-lifes-cicle.com/peers/peer1.gov.car-lifes-cicle.com/msp:/etc/hyperledger/fabric/peer/msp
-      - ../fabric-config/crypto-config/peerOrganizations/gov.car-lifes-cicle.com/peers/peer1.gov.car-lifes-cicle.com/tls:/etc/hyperledger/fabric/peer/tls
-      - ../fabric-config/crypto-config/peerOrganizations/gov.car-lifes-cicle.com/users:/etc/hyperledger/fabric/peer/msp/users
+      - ../fabric-config/crypto-config/peerOrganizations/detran.car-lifes-cicle.com/peers/peer1.detran.car-lifes-cicle.com/msp:/etc/hyperledger/fabric/peer/msp
+      - ../fabric-config/crypto-config/peerOrganizations/detran.car-lifes-cicle.com/peers/peer1.detran.car-lifes-cicle.com/tls:/etc/hyperledger/fabric/peer/tls
+      - ../fabric-config/crypto-config/peerOrganizations/detran.car-lifes-cicle.com/users:/etc/hyperledger/fabric/peer/msp/users
       - ../fabric-config/config:/etc/hyperledger/fabric/config
     networks:
       - basic
 
-  ca.montadora-a.car-lifes-cicle.com:
-    container_name: ca.montadora-a.car-lifes-cicle.com
+  ca.montadora.car-lifes-cicle.com:
+    container_name: ca.montadora.car-lifes-cicle.com
     image: hyperledger/fabric-ca:${FABRIC_CA_VERSION}
     environment:
       - FABRIC_CA_HOME=/etc/hyperledger/fabric-ca-server
-      - FABRIC_CA_SERVER_CA_NAME=ca.montadora-a.car-lifes-cicle.com
-      - FABRIC_CA_SERVER_CA_CERTFILE=/etc/hyperledger/fabric-ca-server/crypto/ca.montadora-a.car-lifes-cicle.com-cert.pem
+      - FABRIC_CA_SERVER_CA_NAME=ca.montadora.car-lifes-cicle.com
+      - FABRIC_CA_SERVER_CA_CERTFILE=/etc/hyperledger/fabric-ca-server/crypto/ca.montadora.car-lifes-cicle.com-cert.pem
       - FABRIC_CA_SERVER_CA_KEYFILE=/etc/hyperledger/fabric-ca-server/crypto/priv-key.pem
       - FABRIC_LOGGING_SPEC=${LOGGING_LEVEL}
     ports:
       - 7040:7054
     working_dir: /etc/hyperledger/fabric-ca-server
-    command: sh -c 'fabric-ca-server start -b ${MONTADORAA_CA_ADMIN_NAME}:${MONTADORAA_CA_ADMIN_PASSWORD} -d'
+    command: sh -c 'fabric-ca-server start -b ${MONTADORA_CA_ADMIN_NAME}:${MONTADORA_CA_ADMIN_PASSWORD} -d'
     volumes:
-      - ../fabric-config/crypto-config/peerOrganizations/montadora-a.car-lifes-cicle.com/ca/:/etc/hyperledger/fabric-ca-server/crypto
-      - ../fabric-config/fabric-ca-server-config/montadora-a.car-lifes-cicle.com/fabric-ca-server-config.yaml:/etc/hyperledger/fabric-ca-server/fabric-ca-server-config.yaml
+      - ../fabric-config/crypto-config/peerOrganizations/montadora.car-lifes-cicle.com/ca/:/etc/hyperledger/fabric-ca-server/crypto
+      - ../fabric-config/fabric-ca-server-config/montadora.car-lifes-cicle.com/fabric-ca-server-config.yaml:/etc/hyperledger/fabric-ca-server/fabric-ca-server-config.yaml
     networks:
       - basic
 
-  cli.montadora-a.car-lifes-cicle.com:
-    container_name: cli.montadora-a.car-lifes-cicle.com
+  cli.montadora.car-lifes-cicle.com:
+    container_name: cli.montadora.car-lifes-cicle.com
     image: hyperledger/fabric-tools:${FABRIC_VERSION}
     tty: true
     environment:
       - GOPATH=/opt/gopath
       - CORE_VM_ENDPOINT=unix:///host/var/run/docker.sock
       - FABRIC_LOGGING_SPEC=${LOGGING_LEVEL}
-      - CORE_PEER_ID=cli.montadora-a.car-lifes-cicle.com
+      - CORE_PEER_ID=cli.montadora.car-lifes-cicle.com
       - CORE_CHAINCODE_KEEPALIVE=10
       #
-      - CORE_PEER_LOCALMSPID=montadoraAMSP
-      - CORE_PEER_MSPCONFIGPATH=/var/hyperledger/cli/crypto/users/Admin@montadora-a.car-lifes-cicle.com/msp
-      - CORE_PEER_ADDRESS=peer0.montadora-a.car-lifes-cicle.com:7041
+      - CORE_PEER_LOCALMSPID=montadoraMSP
+      - CORE_PEER_MSPCONFIGPATH=/var/hyperledger/cli/crypto/users/Admin@montadora.car-lifes-cicle.com/msp
+      - CORE_PEER_ADDRESS=peer0.montadora.car-lifes-cicle.com:7041
     working_dir: /var/hyperledger/cli/
     command: /bin/bash
     volumes:
       - /var/run/docker.sock:/host/var/run/docker.sock
       - ../fabric-docker/scripts/cli:/var/hyperledger/cli/scripts/
       - ../fabric-config/config:/var/hyperledger/cli/config/ # genesis.block and channel.tx's
-      - ../fabric-config/crypto-config/peerOrganizations/montadora-a.car-lifes-cicle.com:/var/hyperledger/cli/crypto/
+      - ../fabric-config/crypto-config/peerOrganizations/montadora.car-lifes-cicle.com:/var/hyperledger/cli/crypto/
       - ../fabric-config/chaincode-packages:/var/hyperledger/cli/chaincode-packages/
-      - "$CHAINCODES_BASE_DIR/./chaincodes/chaincode-typescript/:/var/hyperledger/cli/alo/"
       - "$CHAINCODES_BASE_DIR/./chaincodes/car-chaincode/:/var/hyperledger/cli/car/"
+      - "$CHAINCODES_BASE_DIR/./chaincodes/person-chaincode/:/var/hyperledger/cli/person/"
     networks:
       - basic
 
-  fablo-rest.montadora-a.car-lifes-cicle.com:
-    container_name: fablo-rest.montadora-a.car-lifes-cicle.com
+  fablo-rest.montadora.car-lifes-cicle.com:
+    container_name: fablo-rest.montadora.car-lifes-cicle.com
     image: softwaremill/fablo-rest:${FABLO_REST_VERSION}
     environment:
       - PORT=8000
-      - MSP_ID=montadoraAMSP
-      - FABRIC_CA_URL=http://ca.montadora-a.car-lifes-cicle.com:7054
-      - FABRIC_CA_NAME=ca.montadora-a.car-lifes-cicle.com
+      - MSP_ID=montadoraMSP
+      - FABRIC_CA_URL=http://ca.montadora.car-lifes-cicle.com:7054
+      - FABRIC_CA_NAME=ca.montadora.car-lifes-cicle.com
       - AS_LOCALHOST=false
-      - DISCOVERY_URLS=grpc://peer0.gov.car-lifes-cicle.com:7021,grpc://peer1.gov.car-lifes-cicle.com:7022,grpc://peer0.montadora-a.car-lifes-cicle.com:7041,grpc://peer1.montadora-a.car-lifes-cicle.com:7042,grpc://peer0.mecanica-a.car-lifes-cicle.com:7061,grpc://peer1.mecanica-a.car-lifes-cicle.com:7062,grpc://peer0.seguradora-a.car-lifes-cicle.com:7081,grpc://peer1.seguradora-a.car-lifes-cicle.com:7082
+      - DISCOVERY_URLS=grpc://peer0.detran.car-lifes-cicle.com:7021,grpc://peer1.detran.car-lifes-cicle.com:7022,grpc://peer0.montadora.car-lifes-cicle.com:7041,grpc://peer1.montadora.car-lifes-cicle.com:7042
       - HFC_LOGGING={"error":"console","warn":"console","info":"console"}
     ports:
       - 8801:8000
     networks:
       - basic
 
-  peer0.montadora-a.car-lifes-cicle.com:
-    container_name: peer0.montadora-a.car-lifes-cicle.com
+  peer0.montadora.car-lifes-cicle.com:
+    container_name: peer0.montadora.car-lifes-cicle.com
     image: hyperledger/fabric-peer:${FABRIC_VERSION}
     environment:
-      - CORE_PEER_LOCALMSPID=montadoraAMSP
-      - CORE_PEER_ID=peer0.montadora-a.car-lifes-cicle.com
-      - CORE_PEER_ADDRESS=peer0.montadora-a.car-lifes-cicle.com:7041
-      - CORE_PEER_LISTENADDRESS=peer0.montadora-a.car-lifes-cicle.com:7041
-      - CORE_PEER_GOSSIP_ENDPOINT=peer0.montadora-a.car-lifes-cicle.com:7041
-      - CORE_PEER_GOSSIP_EXTERNALENDPOINT=peer0.montadora-a.car-lifes-cicle.com:7041
-      - CORE_PEER_GOSSIP_BOOTSTRAP="peer0.montadora-a.car-lifes-cicle.com:7041 peer1.montadora-a.car-lifes-cicle.com:7042"
-      - CORE_PEER_CHAINCODELISTENADDRESS=peer0.montadora-a.car-lifes-cicle.com:7050
+      - CORE_PEER_LOCALMSPID=montadoraMSP
+      - CORE_PEER_ID=peer0.montadora.car-lifes-cicle.com
+      - CORE_PEER_ADDRESS=peer0.montadora.car-lifes-cicle.com:7041
+      - CORE_PEER_LISTENADDRESS=peer0.montadora.car-lifes-cicle.com:7041
+      - CORE_PEER_GOSSIP_ENDPOINT=peer0.montadora.car-lifes-cicle.com:7041
+      - CORE_PEER_GOSSIP_EXTERNALENDPOINT=peer0.montadora.car-lifes-cicle.com:7041
+      - CORE_PEER_GOSSIP_BOOTSTRAP="peer0.montadora.car-lifes-cicle.com:7041 peer1.montadora.car-lifes-cicle.com:7042"
+      - CORE_PEER_CHAINCODELISTENADDRESS=peer0.montadora.car-lifes-cicle.com:7050
       - CORE_PEER_MSPCONFIGPATH=/etc/hyperledger/fabric/peer/msp
       - CORE_CHAINCODE_BUILDER=hyperledger/fabric-ccenv:${FABRIC_CCENV_VERSION}
       - CORE_CHAINCODE_GOLANG_RUNTIME=hyperledger/fabric-baseos:${FABRIC_BASEOS_VERSION}
@@ -260,7 +258,7 @@ services:
       - CORE_CHAINCODE_LOGGING_SHIM=${LOGGING_LEVEL}
       - FABRIC_LOGGING_SPEC=${LOGGING_LEVEL}
       # metrics
-      - CORE_OPERATIONS_LISTENADDRESS=peer0.montadora-a.car-lifes-cicle.com:9440
+      - CORE_OPERATIONS_LISTENADDRESS=peer0.montadora.car-lifes-cicle.com:9440
       - CORE_METRICS_PROVIDER=prometheus
       #
       - CORE_VM_DOCKER_HOSTCONFIG_NETWORKMODE=${COMPOSE_PROJECT_NAME}_basic
@@ -268,32 +266,31 @@ services:
       - CORE_VM_ENDPOINT=unix:///host/var/run/docker.sock
       - GODEBUG=netdns=go
     working_dir: /etc/hyperledger/fabric/peer/
-    command: peer node start --peer-chaincodedev=true
+    command: peer node start
     ports:
       - 8041:9440
       - 7041:7041
-      - 8541:7050
     volumes:
       - /var/run/docker.sock:/host/var/run/docker.sock
-      - ../fabric-config/crypto-config/peerOrganizations/montadora-a.car-lifes-cicle.com/peers/peer0.montadora-a.car-lifes-cicle.com/msp:/etc/hyperledger/fabric/peer/msp
-      - ../fabric-config/crypto-config/peerOrganizations/montadora-a.car-lifes-cicle.com/peers/peer0.montadora-a.car-lifes-cicle.com/tls:/etc/hyperledger/fabric/peer/tls
-      - ../fabric-config/crypto-config/peerOrganizations/montadora-a.car-lifes-cicle.com/users:/etc/hyperledger/fabric/peer/msp/users
+      - ../fabric-config/crypto-config/peerOrganizations/montadora.car-lifes-cicle.com/peers/peer0.montadora.car-lifes-cicle.com/msp:/etc/hyperledger/fabric/peer/msp
+      - ../fabric-config/crypto-config/peerOrganizations/montadora.car-lifes-cicle.com/peers/peer0.montadora.car-lifes-cicle.com/tls:/etc/hyperledger/fabric/peer/tls
+      - ../fabric-config/crypto-config/peerOrganizations/montadora.car-lifes-cicle.com/users:/etc/hyperledger/fabric/peer/msp/users
       - ../fabric-config/config:/etc/hyperledger/fabric/config
     networks:
       - basic
 
-  peer1.montadora-a.car-lifes-cicle.com:
-    container_name: peer1.montadora-a.car-lifes-cicle.com
+  peer1.montadora.car-lifes-cicle.com:
+    container_name: peer1.montadora.car-lifes-cicle.com
     image: hyperledger/fabric-peer:${FABRIC_VERSION}
     environment:
-      - CORE_PEER_LOCALMSPID=montadoraAMSP
-      - CORE_PEER_ID=peer1.montadora-a.car-lifes-cicle.com
-      - CORE_PEER_ADDRESS=peer1.montadora-a.car-lifes-cicle.com:7042
-      - CORE_PEER_LISTENADDRESS=peer1.montadora-a.car-lifes-cicle.com:7042
-      - CORE_PEER_GOSSIP_ENDPOINT=peer1.montadora-a.car-lifes-cicle.com:7042
-      - CORE_PEER_GOSSIP_EXTERNALENDPOINT=peer1.montadora-a.car-lifes-cicle.com:7042
-      - CORE_PEER_GOSSIP_BOOTSTRAP="peer0.montadora-a.car-lifes-cicle.com:7041 peer1.montadora-a.car-lifes-cicle.com:7042"
-      - CORE_PEER_CHAINCODELISTENADDRESS=peer1.montadora-a.car-lifes-cicle.com:7050
+      - CORE_PEER_LOCALMSPID=montadoraMSP
+      - CORE_PEER_ID=peer1.montadora.car-lifes-cicle.com
+      - CORE_PEER_ADDRESS=peer1.montadora.car-lifes-cicle.com:7042
+      - CORE_PEER_LISTENADDRESS=peer1.montadora.car-lifes-cicle.com:7042
+      - CORE_PEER_GOSSIP_ENDPOINT=peer1.montadora.car-lifes-cicle.com:7042
+      - CORE_PEER_GOSSIP_EXTERNALENDPOINT=peer1.montadora.car-lifes-cicle.com:7042
+      - CORE_PEER_GOSSIP_BOOTSTRAP="peer0.montadora.car-lifes-cicle.com:7041 peer1.montadora.car-lifes-cicle.com:7042"
+      - CORE_PEER_CHAINCODELISTENADDRESS=peer1.montadora.car-lifes-cicle.com:7050
       - CORE_PEER_MSPCONFIGPATH=/etc/hyperledger/fabric/peer/msp
       - CORE_CHAINCODE_BUILDER=hyperledger/fabric-ccenv:${FABRIC_CCENV_VERSION}
       - CORE_CHAINCODE_GOLANG_RUNTIME=hyperledger/fabric-baseos:${FABRIC_BASEOS_VERSION}
@@ -303,7 +300,7 @@ services:
       - CORE_CHAINCODE_LOGGING_SHIM=${LOGGING_LEVEL}
       - FABRIC_LOGGING_SPEC=${LOGGING_LEVEL}
       # metrics
-      - CORE_OPERATIONS_LISTENADDRESS=peer1.montadora-a.car-lifes-cicle.com:9440
+      - CORE_OPERATIONS_LISTENADDRESS=peer1.montadora.car-lifes-cicle.com:9440
       - CORE_METRICS_PROVIDER=prometheus
       #
       - CORE_VM_DOCKER_HOSTCONFIG_NETWORKMODE=${COMPOSE_PROJECT_NAME}_basic
@@ -311,296 +308,15 @@ services:
       - CORE_VM_ENDPOINT=unix:///host/var/run/docker.sock
       - GODEBUG=netdns=go
     working_dir: /etc/hyperledger/fabric/peer/
-    command: peer node start --peer-chaincodedev=true
+    command: peer node start
     ports:
       - 8042:9440
       - 7042:7042
-      - 8542:7050
     volumes:
       - /var/run/docker.sock:/host/var/run/docker.sock
-      - ../fabric-config/crypto-config/peerOrganizations/montadora-a.car-lifes-cicle.com/peers/peer1.montadora-a.car-lifes-cicle.com/msp:/etc/hyperledger/fabric/peer/msp
-      - ../fabric-config/crypto-config/peerOrganizations/montadora-a.car-lifes-cicle.com/peers/peer1.montadora-a.car-lifes-cicle.com/tls:/etc/hyperledger/fabric/peer/tls
-      - ../fabric-config/crypto-config/peerOrganizations/montadora-a.car-lifes-cicle.com/users:/etc/hyperledger/fabric/peer/msp/users
-      - ../fabric-config/config:/etc/hyperledger/fabric/config
-    networks:
-      - basic
-
-  ca.mecanica-a.car-lifes-cicle.com:
-    container_name: ca.mecanica-a.car-lifes-cicle.com
-    image: hyperledger/fabric-ca:${FABRIC_CA_VERSION}
-    environment:
-      - FABRIC_CA_HOME=/etc/hyperledger/fabric-ca-server
-      - FABRIC_CA_SERVER_CA_NAME=ca.mecanica-a.car-lifes-cicle.com
-      - FABRIC_CA_SERVER_CA_CERTFILE=/etc/hyperledger/fabric-ca-server/crypto/ca.mecanica-a.car-lifes-cicle.com-cert.pem
-      - FABRIC_CA_SERVER_CA_KEYFILE=/etc/hyperledger/fabric-ca-server/crypto/priv-key.pem
-      - FABRIC_LOGGING_SPEC=${LOGGING_LEVEL}
-    ports:
-      - 7060:7054
-    working_dir: /etc/hyperledger/fabric-ca-server
-    command: sh -c 'fabric-ca-server start -b ${MECANICAA_CA_ADMIN_NAME}:${MECANICAA_CA_ADMIN_PASSWORD} -d'
-    volumes:
-      - ../fabric-config/crypto-config/peerOrganizations/mecanica-a.car-lifes-cicle.com/ca/:/etc/hyperledger/fabric-ca-server/crypto
-      - ../fabric-config/fabric-ca-server-config/mecanica-a.car-lifes-cicle.com/fabric-ca-server-config.yaml:/etc/hyperledger/fabric-ca-server/fabric-ca-server-config.yaml
-    networks:
-      - basic
-
-  cli.mecanica-a.car-lifes-cicle.com:
-    container_name: cli.mecanica-a.car-lifes-cicle.com
-    image: hyperledger/fabric-tools:${FABRIC_VERSION}
-    tty: true
-    environment:
-      - GOPATH=/opt/gopath
-      - CORE_VM_ENDPOINT=unix:///host/var/run/docker.sock
-      - FABRIC_LOGGING_SPEC=${LOGGING_LEVEL}
-      - CORE_PEER_ID=cli.mecanica-a.car-lifes-cicle.com
-      - CORE_CHAINCODE_KEEPALIVE=10
-      #
-      - CORE_PEER_LOCALMSPID=mecanicaAMSP
-      - CORE_PEER_MSPCONFIGPATH=/var/hyperledger/cli/crypto/users/Admin@mecanica-a.car-lifes-cicle.com/msp
-      - CORE_PEER_ADDRESS=peer0.mecanica-a.car-lifes-cicle.com:7061
-    working_dir: /var/hyperledger/cli/
-    command: /bin/bash
-    volumes:
-      - /var/run/docker.sock:/host/var/run/docker.sock
-      - ../fabric-docker/scripts/cli:/var/hyperledger/cli/scripts/
-      - ../fabric-config/config:/var/hyperledger/cli/config/ # genesis.block and channel.tx's
-      - ../fabric-config/crypto-config/peerOrganizations/mecanica-a.car-lifes-cicle.com:/var/hyperledger/cli/crypto/
-      - ../fabric-config/chaincode-packages:/var/hyperledger/cli/chaincode-packages/
-      - "$CHAINCODES_BASE_DIR/./chaincodes/chaincode-typescript/:/var/hyperledger/cli/alo/"
-      - "$CHAINCODES_BASE_DIR/./chaincodes/car-chaincode/:/var/hyperledger/cli/car/"
-    networks:
-      - basic
-
-  fablo-rest.mecanica-a.car-lifes-cicle.com:
-    container_name: fablo-rest.mecanica-a.car-lifes-cicle.com
-    image: softwaremill/fablo-rest:${FABLO_REST_VERSION}
-    environment:
-      - PORT=8000
-      - MSP_ID=mecanicaAMSP
-      - FABRIC_CA_URL=http://ca.mecanica-a.car-lifes-cicle.com:7054
-      - FABRIC_CA_NAME=ca.mecanica-a.car-lifes-cicle.com
-      - AS_LOCALHOST=false
-      - DISCOVERY_URLS=grpc://peer0.gov.car-lifes-cicle.com:7021,grpc://peer1.gov.car-lifes-cicle.com:7022,grpc://peer0.montadora-a.car-lifes-cicle.com:7041,grpc://peer1.montadora-a.car-lifes-cicle.com:7042,grpc://peer0.mecanica-a.car-lifes-cicle.com:7061,grpc://peer1.mecanica-a.car-lifes-cicle.com:7062,grpc://peer0.seguradora-a.car-lifes-cicle.com:7081,grpc://peer1.seguradora-a.car-lifes-cicle.com:7082
-      - HFC_LOGGING={"error":"console","warn":"console","info":"console"}
-    ports:
-      - 8802:8000
-    networks:
-      - basic
-
-  peer0.mecanica-a.car-lifes-cicle.com:
-    container_name: peer0.mecanica-a.car-lifes-cicle.com
-    image: hyperledger/fabric-peer:${FABRIC_VERSION}
-    environment:
-      - CORE_PEER_LOCALMSPID=mecanicaAMSP
-      - CORE_PEER_ID=peer0.mecanica-a.car-lifes-cicle.com
-      - CORE_PEER_ADDRESS=peer0.mecanica-a.car-lifes-cicle.com:7061
-      - CORE_PEER_LISTENADDRESS=peer0.mecanica-a.car-lifes-cicle.com:7061
-      - CORE_PEER_GOSSIP_ENDPOINT=peer0.mecanica-a.car-lifes-cicle.com:7061
-      - CORE_PEER_GOSSIP_EXTERNALENDPOINT=peer0.mecanica-a.car-lifes-cicle.com:7061
-      - CORE_PEER_GOSSIP_BOOTSTRAP="peer0.mecanica-a.car-lifes-cicle.com:7061 peer1.mecanica-a.car-lifes-cicle.com:7062"
-      - CORE_PEER_CHAINCODELISTENADDRESS=peer0.mecanica-a.car-lifes-cicle.com:7050
-      - CORE_PEER_MSPCONFIGPATH=/etc/hyperledger/fabric/peer/msp
-      - CORE_CHAINCODE_BUILDER=hyperledger/fabric-ccenv:${FABRIC_CCENV_VERSION}
-      - CORE_CHAINCODE_GOLANG_RUNTIME=hyperledger/fabric-baseos:${FABRIC_BASEOS_VERSION}
-      - CORE_CHAINCODE_JAVA_RUNTIME=hyperledger/fabric-javaenv:${FABRIC_JAVAENV_VERSION}
-      #
-      - CORE_CHAINCODE_LOGGING_LEVEL=${LOGGING_LEVEL}
-      - CORE_CHAINCODE_LOGGING_SHIM=${LOGGING_LEVEL}
-      - FABRIC_LOGGING_SPEC=${LOGGING_LEVEL}
-      # metrics
-      - CORE_OPERATIONS_LISTENADDRESS=peer0.mecanica-a.car-lifes-cicle.com:9440
-      - CORE_METRICS_PROVIDER=prometheus
-      #
-      - CORE_VM_DOCKER_HOSTCONFIG_NETWORKMODE=${COMPOSE_PROJECT_NAME}_basic
-      - CORE_VM_DOCKER_ATTACHSTDOUT=true
-      - CORE_VM_ENDPOINT=unix:///host/var/run/docker.sock
-      - GODEBUG=netdns=go
-    working_dir: /etc/hyperledger/fabric/peer/
-    command: peer node start --peer-chaincodedev=true
-    ports:
-      - 8061:9440
-      - 7061:7061
-      - 8561:7050
-    volumes:
-      - /var/run/docker.sock:/host/var/run/docker.sock
-      - ../fabric-config/crypto-config/peerOrganizations/mecanica-a.car-lifes-cicle.com/peers/peer0.mecanica-a.car-lifes-cicle.com/msp:/etc/hyperledger/fabric/peer/msp
-      - ../fabric-config/crypto-config/peerOrganizations/mecanica-a.car-lifes-cicle.com/peers/peer0.mecanica-a.car-lifes-cicle.com/tls:/etc/hyperledger/fabric/peer/tls
-      - ../fabric-config/crypto-config/peerOrganizations/mecanica-a.car-lifes-cicle.com/users:/etc/hyperledger/fabric/peer/msp/users
-      - ../fabric-config/config:/etc/hyperledger/fabric/config
-    networks:
-      - basic
-
-  peer1.mecanica-a.car-lifes-cicle.com:
-    container_name: peer1.mecanica-a.car-lifes-cicle.com
-    image: hyperledger/fabric-peer:${FABRIC_VERSION}
-    environment:
-      - CORE_PEER_LOCALMSPID=mecanicaAMSP
-      - CORE_PEER_ID=peer1.mecanica-a.car-lifes-cicle.com
-      - CORE_PEER_ADDRESS=peer1.mecanica-a.car-lifes-cicle.com:7062
-      - CORE_PEER_LISTENADDRESS=peer1.mecanica-a.car-lifes-cicle.com:7062
-      - CORE_PEER_GOSSIP_ENDPOINT=peer1.mecanica-a.car-lifes-cicle.com:7062
-      - CORE_PEER_GOSSIP_EXTERNALENDPOINT=peer1.mecanica-a.car-lifes-cicle.com:7062
-      - CORE_PEER_GOSSIP_BOOTSTRAP="peer0.mecanica-a.car-lifes-cicle.com:7061 peer1.mecanica-a.car-lifes-cicle.com:7062"
-      - CORE_PEER_CHAINCODELISTENADDRESS=peer1.mecanica-a.car-lifes-cicle.com:7050
-      - CORE_PEER_MSPCONFIGPATH=/etc/hyperledger/fabric/peer/msp
-      - CORE_CHAINCODE_BUILDER=hyperledger/fabric-ccenv:${FABRIC_CCENV_VERSION}
-      - CORE_CHAINCODE_GOLANG_RUNTIME=hyperledger/fabric-baseos:${FABRIC_BASEOS_VERSION}
-      - CORE_CHAINCODE_JAVA_RUNTIME=hyperledger/fabric-javaenv:${FABRIC_JAVAENV_VERSION}
-      #
-      - CORE_CHAINCODE_LOGGING_LEVEL=${LOGGING_LEVEL}
-      - CORE_CHAINCODE_LOGGING_SHIM=${LOGGING_LEVEL}
-      - FABRIC_LOGGING_SPEC=${LOGGING_LEVEL}
-      # metrics
-      - CORE_OPERATIONS_LISTENADDRESS=peer1.mecanica-a.car-lifes-cicle.com:9440
-      - CORE_METRICS_PROVIDER=prometheus
-      #
-      - CORE_VM_DOCKER_HOSTCONFIG_NETWORKMODE=${COMPOSE_PROJECT_NAME}_basic
-      - CORE_VM_DOCKER_ATTACHSTDOUT=true
-      - CORE_VM_ENDPOINT=unix:///host/var/run/docker.sock
-      - GODEBUG=netdns=go
-    working_dir: /etc/hyperledger/fabric/peer/
-    command: peer node start --peer-chaincodedev=true
-    ports:
-      - 8062:9440
-      - 7062:7062
-      - 8562:7050
-    volumes:
-      - /var/run/docker.sock:/host/var/run/docker.sock
-      - ../fabric-config/crypto-config/peerOrganizations/mecanica-a.car-lifes-cicle.com/peers/peer1.mecanica-a.car-lifes-cicle.com/msp:/etc/hyperledger/fabric/peer/msp
-      - ../fabric-config/crypto-config/peerOrganizations/mecanica-a.car-lifes-cicle.com/peers/peer1.mecanica-a.car-lifes-cicle.com/tls:/etc/hyperledger/fabric/peer/tls
-      - ../fabric-config/crypto-config/peerOrganizations/mecanica-a.car-lifes-cicle.com/users:/etc/hyperledger/fabric/peer/msp/users
-      - ../fabric-config/config:/etc/hyperledger/fabric/config
-    networks:
-      - basic
-
-  ca.seguradora-a.car-lifes-cicle.com:
-    container_name: ca.seguradora-a.car-lifes-cicle.com
-    image: hyperledger/fabric-ca:${FABRIC_CA_VERSION}
-    environment:
-      - FABRIC_CA_HOME=/etc/hyperledger/fabric-ca-server
-      - FABRIC_CA_SERVER_CA_NAME=ca.seguradora-a.car-lifes-cicle.com
-      - FABRIC_CA_SERVER_CA_CERTFILE=/etc/hyperledger/fabric-ca-server/crypto/ca.seguradora-a.car-lifes-cicle.com-cert.pem
-      - FABRIC_CA_SERVER_CA_KEYFILE=/etc/hyperledger/fabric-ca-server/crypto/priv-key.pem
-      - FABRIC_LOGGING_SPEC=${LOGGING_LEVEL}
-    ports:
-      - 7080:7054
-    working_dir: /etc/hyperledger/fabric-ca-server
-    command: sh -c 'fabric-ca-server start -b ${SEGURADORAA_CA_ADMIN_NAME}:${SEGURADORAA_CA_ADMIN_PASSWORD} -d'
-    volumes:
-      - ../fabric-config/crypto-config/peerOrganizations/seguradora-a.car-lifes-cicle.com/ca/:/etc/hyperledger/fabric-ca-server/crypto
-      - ../fabric-config/fabric-ca-server-config/seguradora-a.car-lifes-cicle.com/fabric-ca-server-config.yaml:/etc/hyperledger/fabric-ca-server/fabric-ca-server-config.yaml
-    networks:
-      - basic
-
-  cli.seguradora-a.car-lifes-cicle.com:
-    container_name: cli.seguradora-a.car-lifes-cicle.com
-    image: hyperledger/fabric-tools:${FABRIC_VERSION}
-    tty: true
-    environment:
-      - GOPATH=/opt/gopath
-      - CORE_VM_ENDPOINT=unix:///host/var/run/docker.sock
-      - FABRIC_LOGGING_SPEC=${LOGGING_LEVEL}
-      - CORE_PEER_ID=cli.seguradora-a.car-lifes-cicle.com
-      - CORE_CHAINCODE_KEEPALIVE=10
-      #
-      - CORE_PEER_LOCALMSPID=seguradoraAMSP
-      - CORE_PEER_MSPCONFIGPATH=/var/hyperledger/cli/crypto/users/Admin@seguradora-a.car-lifes-cicle.com/msp
-      - CORE_PEER_ADDRESS=peer0.seguradora-a.car-lifes-cicle.com:7081
-    working_dir: /var/hyperledger/cli/
-    command: /bin/bash
-    volumes:
-      - /var/run/docker.sock:/host/var/run/docker.sock
-      - ../fabric-docker/scripts/cli:/var/hyperledger/cli/scripts/
-      - ../fabric-config/config:/var/hyperledger/cli/config/ # genesis.block and channel.tx's
-      - ../fabric-config/crypto-config/peerOrganizations/seguradora-a.car-lifes-cicle.com:/var/hyperledger/cli/crypto/
-      - ../fabric-config/chaincode-packages:/var/hyperledger/cli/chaincode-packages/
-      - "$CHAINCODES_BASE_DIR/./chaincodes/chaincode-typescript/:/var/hyperledger/cli/alo/"
-      - "$CHAINCODES_BASE_DIR/./chaincodes/car-chaincode/:/var/hyperledger/cli/car/"
-    networks:
-      - basic
-
-  peer0.seguradora-a.car-lifes-cicle.com:
-    container_name: peer0.seguradora-a.car-lifes-cicle.com
-    image: hyperledger/fabric-peer:${FABRIC_VERSION}
-    environment:
-      - CORE_PEER_LOCALMSPID=seguradoraAMSP
-      - CORE_PEER_ID=peer0.seguradora-a.car-lifes-cicle.com
-      - CORE_PEER_ADDRESS=peer0.seguradora-a.car-lifes-cicle.com:7081
-      - CORE_PEER_LISTENADDRESS=peer0.seguradora-a.car-lifes-cicle.com:7081
-      - CORE_PEER_GOSSIP_ENDPOINT=peer0.seguradora-a.car-lifes-cicle.com:7081
-      - CORE_PEER_GOSSIP_EXTERNALENDPOINT=peer0.seguradora-a.car-lifes-cicle.com:7081
-      - CORE_PEER_GOSSIP_BOOTSTRAP="peer0.seguradora-a.car-lifes-cicle.com:7081 peer1.seguradora-a.car-lifes-cicle.com:7082"
-      - CORE_PEER_CHAINCODELISTENADDRESS=peer0.seguradora-a.car-lifes-cicle.com:7050
-      - CORE_PEER_MSPCONFIGPATH=/etc/hyperledger/fabric/peer/msp
-      - CORE_CHAINCODE_BUILDER=hyperledger/fabric-ccenv:${FABRIC_CCENV_VERSION}
-      - CORE_CHAINCODE_GOLANG_RUNTIME=hyperledger/fabric-baseos:${FABRIC_BASEOS_VERSION}
-      - CORE_CHAINCODE_JAVA_RUNTIME=hyperledger/fabric-javaenv:${FABRIC_JAVAENV_VERSION}
-      #
-      - CORE_CHAINCODE_LOGGING_LEVEL=${LOGGING_LEVEL}
-      - CORE_CHAINCODE_LOGGING_SHIM=${LOGGING_LEVEL}
-      - FABRIC_LOGGING_SPEC=${LOGGING_LEVEL}
-      # metrics
-      - CORE_OPERATIONS_LISTENADDRESS=peer0.seguradora-a.car-lifes-cicle.com:9440
-      - CORE_METRICS_PROVIDER=prometheus
-      #
-      - CORE_VM_DOCKER_HOSTCONFIG_NETWORKMODE=${COMPOSE_PROJECT_NAME}_basic
-      - CORE_VM_DOCKER_ATTACHSTDOUT=true
-      - CORE_VM_ENDPOINT=unix:///host/var/run/docker.sock
-      - GODEBUG=netdns=go
-    working_dir: /etc/hyperledger/fabric/peer/
-    command: peer node start --peer-chaincodedev=true
-    ports:
-      - 8081:9440
-      - 7081:7081
-      - 8581:7050
-    volumes:
-      - /var/run/docker.sock:/host/var/run/docker.sock
-      - ../fabric-config/crypto-config/peerOrganizations/seguradora-a.car-lifes-cicle.com/peers/peer0.seguradora-a.car-lifes-cicle.com/msp:/etc/hyperledger/fabric/peer/msp
-      - ../fabric-config/crypto-config/peerOrganizations/seguradora-a.car-lifes-cicle.com/peers/peer0.seguradora-a.car-lifes-cicle.com/tls:/etc/hyperledger/fabric/peer/tls
-      - ../fabric-config/crypto-config/peerOrganizations/seguradora-a.car-lifes-cicle.com/users:/etc/hyperledger/fabric/peer/msp/users
-      - ../fabric-config/config:/etc/hyperledger/fabric/config
-    networks:
-      - basic
-
-  peer1.seguradora-a.car-lifes-cicle.com:
-    container_name: peer1.seguradora-a.car-lifes-cicle.com
-    image: hyperledger/fabric-peer:${FABRIC_VERSION}
-    environment:
-      - CORE_PEER_LOCALMSPID=seguradoraAMSP
-      - CORE_PEER_ID=peer1.seguradora-a.car-lifes-cicle.com
-      - CORE_PEER_ADDRESS=peer1.seguradora-a.car-lifes-cicle.com:7082
-      - CORE_PEER_LISTENADDRESS=peer1.seguradora-a.car-lifes-cicle.com:7082
-      - CORE_PEER_GOSSIP_ENDPOINT=peer1.seguradora-a.car-lifes-cicle.com:7082
-      - CORE_PEER_GOSSIP_EXTERNALENDPOINT=peer1.seguradora-a.car-lifes-cicle.com:7082
-      - CORE_PEER_GOSSIP_BOOTSTRAP="peer0.seguradora-a.car-lifes-cicle.com:7081 peer1.seguradora-a.car-lifes-cicle.com:7082"
-      - CORE_PEER_CHAINCODELISTENADDRESS=peer1.seguradora-a.car-lifes-cicle.com:7050
-      - CORE_PEER_MSPCONFIGPATH=/etc/hyperledger/fabric/peer/msp
-      - CORE_CHAINCODE_BUILDER=hyperledger/fabric-ccenv:${FABRIC_CCENV_VERSION}
-      - CORE_CHAINCODE_GOLANG_RUNTIME=hyperledger/fabric-baseos:${FABRIC_BASEOS_VERSION}
-      - CORE_CHAINCODE_JAVA_RUNTIME=hyperledger/fabric-javaenv:${FABRIC_JAVAENV_VERSION}
-      #
-      - CORE_CHAINCODE_LOGGING_LEVEL=${LOGGING_LEVEL}
-      - CORE_CHAINCODE_LOGGING_SHIM=${LOGGING_LEVEL}
-      - FABRIC_LOGGING_SPEC=${LOGGING_LEVEL}
-      # metrics
-      - CORE_OPERATIONS_LISTENADDRESS=peer1.seguradora-a.car-lifes-cicle.com:9440
-      - CORE_METRICS_PROVIDER=prometheus
-      #
-      - CORE_VM_DOCKER_HOSTCONFIG_NETWORKMODE=${COMPOSE_PROJECT_NAME}_basic
-      - CORE_VM_DOCKER_ATTACHSTDOUT=true
-      - CORE_VM_ENDPOINT=unix:///host/var/run/docker.sock
-      - GODEBUG=netdns=go
-    working_dir: /etc/hyperledger/fabric/peer/
-    command: peer node start --peer-chaincodedev=true
-    ports:
-      - 8082:9440
-      - 7082:7082
-      - 8582:7050
-    volumes:
-      - /var/run/docker.sock:/host/var/run/docker.sock
-      - ../fabric-config/crypto-config/peerOrganizations/seguradora-a.car-lifes-cicle.com/peers/peer1.seguradora-a.car-lifes-cicle.com/msp:/etc/hyperledger/fabric/peer/msp
-      - ../fabric-config/crypto-config/peerOrganizations/seguradora-a.car-lifes-cicle.com/peers/peer1.seguradora-a.car-lifes-cicle.com/tls:/etc/hyperledger/fabric/peer/tls
-      - ../fabric-config/crypto-config/peerOrganizations/seguradora-a.car-lifes-cicle.com/users:/etc/hyperledger/fabric/peer/msp/users
+      - ../fabric-config/crypto-config/peerOrganizations/montadora.car-lifes-cicle.com/peers/peer1.montadora.car-lifes-cicle.com/msp:/etc/hyperledger/fabric/peer/msp
+      - ../fabric-config/crypto-config/peerOrganizations/montadora.car-lifes-cicle.com/peers/peer1.montadora.car-lifes-cicle.com/tls:/etc/hyperledger/fabric/peer/tls
+      - ../fabric-config/crypto-config/peerOrganizations/montadora.car-lifes-cicle.com/users:/etc/hyperledger/fabric/peer/msp/users
       - ../fabric-config/config:/etc/hyperledger/fabric/config
     networks:
       - basic

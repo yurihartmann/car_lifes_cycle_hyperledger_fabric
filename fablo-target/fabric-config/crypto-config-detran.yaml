@@ -1,6 +1,6 @@
 PeerOrgs:
-  - Name: Gov
-    Domain: gov.car-lifes-cicle.com
+  - Name: detran
+    Domain: detran.car-lifes-cicle.com
     Specs:
       - Hostname: orderer0.orderers-group
     Template:

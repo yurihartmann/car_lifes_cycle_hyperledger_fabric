@@ -1,9 +1,5 @@
 {
   "network-configs": {
-    "network-detran": {
-      "name": "Network of detran",
-      "profile": "/opt/explorer/app/platform/fabric/connection-profile/connection-profile-detran.json"
-    },
     "network-montadora": {
       "name": "Network of montadora",
       "profile": "/opt/explorer/app/platform/fabric/connection-profile/connection-profile-montadora.json"
