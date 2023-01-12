@@ -1,7 +1,33 @@
 import { Contract, Transaction, Context, Returns } from "fabric-contract-api";
 import { Iterators } from "fabric-shim";
 
+
+export function AllowedOrgs(MSPIDs: string[]) {
+    return function (target: any, propertyKey: string, descriptor: PropertyDescriptor) {
+        const childFunction = descriptor.value;
+        descriptor.value = function (this: any, ...args: any[]) {
+            const MSPID = args[0].clientIdentity.getMSPID();
+
+            if (!MSPIDs.includes(MSPID)) {
+                throw new Error(`The MSPID ${MSPID} not allowed for this method`);
+            }
+
+            return childFunction.apply(this, args);
+        }
+
+        return descriptor;
+    };
+}
+
+
 export class BaseContract extends Contract {
+
+    @Transaction()
+    public async getDetails(ctx: Context): Promise<string> {
+        return JSON.stringify({
+            getMSPID: ctx.clientIdentity.getMSPID()
+        });
+    }
 
     @Transaction(false)
     public async Read(ctx: Context, key: string): Promise<string> {

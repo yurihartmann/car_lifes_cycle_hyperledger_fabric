@@ -44,6 +44,10 @@ installChannels() {
 
   printItalics "Joining 'person-channel' on  detran/peer1" "U1F638"
   docker exec -i cli.detran.car-lifes-cicle.com bash -c "source scripts/channel_fns.sh; fetchChannelAndJoin 'person-channel' 'detranMSP' 'peer1.detran.car-lifes-cicle.com:7022' 'crypto/users/Admin@detran.car-lifes-cicle.com/msp' 'orderer0.orderers-group.detran.car-lifes-cicle.com:7030';"
+  printItalics "Joining 'person-channel' on  montadora/peer0" "U1F638"
+  docker exec -i cli.montadora.car-lifes-cicle.com bash -c "source scripts/channel_fns.sh; fetchChannelAndJoin 'person-channel' 'montadoraMSP' 'peer0.montadora.car-lifes-cicle.com:7041' 'crypto/users/Admin@montadora.car-lifes-cicle.com/msp' 'orderer0.orderers-group.detran.car-lifes-cicle.com:7030';"
+  printItalics "Joining 'person-channel' on  montadora/peer1" "U1F638"
+  docker exec -i cli.montadora.car-lifes-cicle.com bash -c "source scripts/channel_fns.sh; fetchChannelAndJoin 'person-channel' 'montadoraMSP' 'peer1.montadora.car-lifes-cicle.com:7042' 'crypto/users/Admin@montadora.car-lifes-cicle.com/msp' 'orderer0.orderers-group.detran.car-lifes-cicle.com:7030';"
 }
 
 installChaincodes() {
@@ -73,8 +77,12 @@ installChaincodes() {
     chaincodeInstall "cli.detran.car-lifes-cicle.com" "peer0.detran.car-lifes-cicle.com:7021" "person" "$version" ""
     chaincodeInstall "cli.detran.car-lifes-cicle.com" "peer1.detran.car-lifes-cicle.com:7022" "person" "$version" ""
     chaincodeApprove "cli.detran.car-lifes-cicle.com" "peer0.detran.car-lifes-cicle.com:7021" "person-channel" "person" "$version" "orderer0.orderers-group.detran.car-lifes-cicle.com:7030" "" "false" "" ""
+    printHeadline "Installing 'person' for montadora" "U1F60E"
+    chaincodeInstall "cli.montadora.car-lifes-cicle.com" "peer0.montadora.car-lifes-cicle.com:7041" "person" "$version" ""
+    chaincodeInstall "cli.montadora.car-lifes-cicle.com" "peer1.montadora.car-lifes-cicle.com:7042" "person" "$version" ""
+    chaincodeApprove "cli.montadora.car-lifes-cicle.com" "peer0.montadora.car-lifes-cicle.com:7041" "person-channel" "person" "$version" "orderer0.orderers-group.detran.car-lifes-cicle.com:7030" "" "false" "" ""
     printItalics "Committing chaincode 'person' on channel 'person-channel' as 'detran'" "U1F618"
-    chaincodeCommit "cli.detran.car-lifes-cicle.com" "peer0.detran.car-lifes-cicle.com:7021" "person-channel" "person" "$version" "orderer0.orderers-group.detran.car-lifes-cicle.com:7030" "" "false" "" "peer0.detran.car-lifes-cicle.com:7021" "" ""
+    chaincodeCommit "cli.detran.car-lifes-cicle.com" "peer0.detran.car-lifes-cicle.com:7021" "person-channel" "person" "$version" "orderer0.orderers-group.detran.car-lifes-cicle.com:7030" "" "false" "" "peer0.detran.car-lifes-cicle.com:7021,peer0.montadora.car-lifes-cicle.com:7041" "" ""
   else
     echo "Warning! Skipping chaincode 'person' installation. Chaincode directory is empty."
     echo "Looked in dir: '$CHAINCODES_BASE_DIR/./chaincodes/person-chaincode'"
@@ -123,8 +131,12 @@ installChaincode() {
       chaincodeInstall "cli.detran.car-lifes-cicle.com" "peer0.detran.car-lifes-cicle.com:7021" "person" "$version" ""
       chaincodeInstall "cli.detran.car-lifes-cicle.com" "peer1.detran.car-lifes-cicle.com:7022" "person" "$version" ""
       chaincodeApprove "cli.detran.car-lifes-cicle.com" "peer0.detran.car-lifes-cicle.com:7021" "person-channel" "person" "$version" "orderer0.orderers-group.detran.car-lifes-cicle.com:7030" "" "false" "" ""
+      printHeadline "Installing 'person' for montadora" "U1F60E"
+      chaincodeInstall "cli.montadora.car-lifes-cicle.com" "peer0.montadora.car-lifes-cicle.com:7041" "person" "$version" ""
+      chaincodeInstall "cli.montadora.car-lifes-cicle.com" "peer1.montadora.car-lifes-cicle.com:7042" "person" "$version" ""
+      chaincodeApprove "cli.montadora.car-lifes-cicle.com" "peer0.montadora.car-lifes-cicle.com:7041" "person-channel" "person" "$version" "orderer0.orderers-group.detran.car-lifes-cicle.com:7030" "" "false" "" ""
       printItalics "Committing chaincode 'person' on channel 'person-channel' as 'detran'" "U1F618"
-      chaincodeCommit "cli.detran.car-lifes-cicle.com" "peer0.detran.car-lifes-cicle.com:7021" "person-channel" "person" "$version" "orderer0.orderers-group.detran.car-lifes-cicle.com:7030" "" "false" "" "peer0.detran.car-lifes-cicle.com:7021" "" ""
+      chaincodeCommit "cli.detran.car-lifes-cicle.com" "peer0.detran.car-lifes-cicle.com:7021" "person-channel" "person" "$version" "orderer0.orderers-group.detran.car-lifes-cicle.com:7030" "" "false" "" "peer0.detran.car-lifes-cicle.com:7021,peer0.montadora.car-lifes-cicle.com:7041" "" ""
 
     else
       echo "Warning! Skipping chaincode 'person' install. Chaincode directory is empty."
@@ -154,8 +166,10 @@ runDevModeChaincode() {
     local version="0.0.1"
     printHeadline "Approving 'person' for detran (dev mode)" "U1F60E"
     chaincodeApprove "cli.detran.car-lifes-cicle.com" "peer0.detran.car-lifes-cicle.com:7021" "person-channel" "person" "0.0.1" "orderer0.orderers-group.detran.car-lifes-cicle.com:7030" "" "false" "" ""
+    printHeadline "Approving 'person' for montadora (dev mode)" "U1F60E"
+    chaincodeApprove "cli.montadora.car-lifes-cicle.com" "peer0.montadora.car-lifes-cicle.com:7041" "person-channel" "person" "0.0.1" "orderer0.orderers-group.detran.car-lifes-cicle.com:7030" "" "false" "" ""
     printItalics "Committing chaincode 'person' on channel 'person-channel' as 'detran' (dev mode)" "U1F618"
-    chaincodeCommit "cli.detran.car-lifes-cicle.com" "peer0.detran.car-lifes-cicle.com:7021" "person-channel" "person" "0.0.1" "orderer0.orderers-group.detran.car-lifes-cicle.com:7030" "" "false" "" "peer0.detran.car-lifes-cicle.com:7021" "" ""
+    chaincodeCommit "cli.detran.car-lifes-cicle.com" "peer0.detran.car-lifes-cicle.com:7021" "person-channel" "person" "0.0.1" "orderer0.orderers-group.detran.car-lifes-cicle.com:7030" "" "false" "" "peer0.detran.car-lifes-cicle.com:7021,peer0.montadora.car-lifes-cicle.com:7041" "" ""
 
   fi
 }
@@ -201,8 +215,12 @@ upgradeChaincode() {
       chaincodeInstall "cli.detran.car-lifes-cicle.com" "peer0.detran.car-lifes-cicle.com:7021" "person" "$version" ""
       chaincodeInstall "cli.detran.car-lifes-cicle.com" "peer1.detran.car-lifes-cicle.com:7022" "person" "$version" ""
       chaincodeApprove "cli.detran.car-lifes-cicle.com" "peer0.detran.car-lifes-cicle.com:7021" "person-channel" "person" "$version" "orderer0.orderers-group.detran.car-lifes-cicle.com:7030" "" "false" "" ""
+      printHeadline "Installing 'person' for montadora" "U1F60E"
+      chaincodeInstall "cli.montadora.car-lifes-cicle.com" "peer0.montadora.car-lifes-cicle.com:7041" "person" "$version" ""
+      chaincodeInstall "cli.montadora.car-lifes-cicle.com" "peer1.montadora.car-lifes-cicle.com:7042" "person" "$version" ""
+      chaincodeApprove "cli.montadora.car-lifes-cicle.com" "peer0.montadora.car-lifes-cicle.com:7041" "person-channel" "person" "$version" "orderer0.orderers-group.detran.car-lifes-cicle.com:7030" "" "false" "" ""
       printItalics "Committing chaincode 'person' on channel 'person-channel' as 'detran'" "U1F618"
-      chaincodeCommit "cli.detran.car-lifes-cicle.com" "peer0.detran.car-lifes-cicle.com:7021" "person-channel" "person" "$version" "orderer0.orderers-group.detran.car-lifes-cicle.com:7030" "" "false" "" "peer0.detran.car-lifes-cicle.com:7021" "" ""
+      chaincodeCommit "cli.detran.car-lifes-cicle.com" "peer0.detran.car-lifes-cicle.com:7021" "person-channel" "person" "$version" "orderer0.orderers-group.detran.car-lifes-cicle.com:7030" "" "false" "" "peer0.detran.car-lifes-cicle.com:7021,peer0.montadora.car-lifes-cicle.com:7041" "" ""
 
     else
       echo "Warning! Skipping chaincode 'person' upgrade. Chaincode directory is empty."
@@ -216,16 +234,19 @@ notifyOrgsAboutChannels() {
   createNewChannelUpdateTx "car-channel" "detranMSP" "CarChannel" "$FABLO_NETWORK_ROOT/fabric-config" "$FABLO_NETWORK_ROOT/fabric-config/config"
   createNewChannelUpdateTx "car-channel" "montadoraMSP" "CarChannel" "$FABLO_NETWORK_ROOT/fabric-config" "$FABLO_NETWORK_ROOT/fabric-config/config"
   createNewChannelUpdateTx "person-channel" "detranMSP" "PersonChannel" "$FABLO_NETWORK_ROOT/fabric-config" "$FABLO_NETWORK_ROOT/fabric-config/config"
+  createNewChannelUpdateTx "person-channel" "montadoraMSP" "PersonChannel" "$FABLO_NETWORK_ROOT/fabric-config" "$FABLO_NETWORK_ROOT/fabric-config/config"
 
   printHeadline "Notyfing orgs about channels" "U1F4E2"
   notifyOrgAboutNewChannel "car-channel" "detranMSP" "cli.detran.car-lifes-cicle.com" "peer0.detran.car-lifes-cicle.com" "orderer0.orderers-group.detran.car-lifes-cicle.com:7030"
   notifyOrgAboutNewChannel "car-channel" "montadoraMSP" "cli.montadora.car-lifes-cicle.com" "peer0.montadora.car-lifes-cicle.com" "orderer0.orderers-group.detran.car-lifes-cicle.com:7030"
   notifyOrgAboutNewChannel "person-channel" "detranMSP" "cli.detran.car-lifes-cicle.com" "peer0.detran.car-lifes-cicle.com" "orderer0.orderers-group.detran.car-lifes-cicle.com:7030"
+  notifyOrgAboutNewChannel "person-channel" "montadoraMSP" "cli.montadora.car-lifes-cicle.com" "peer0.montadora.car-lifes-cicle.com" "orderer0.orderers-group.detran.car-lifes-cicle.com:7030"
 
   printHeadline "Deleting new channel config blocks" "U1F52A"
   deleteNewChannelUpdateTx "car-channel" "detranMSP" "cli.detran.car-lifes-cicle.com"
   deleteNewChannelUpdateTx "car-channel" "montadoraMSP" "cli.montadora.car-lifes-cicle.com"
   deleteNewChannelUpdateTx "person-channel" "detranMSP" "cli.detran.car-lifes-cicle.com"
+  deleteNewChannelUpdateTx "person-channel" "montadoraMSP" "cli.montadora.car-lifes-cicle.com"
 }
 
 printStartSuccessInfo() {
@@ -288,6 +309,22 @@ networkDown() {
     docker rm -f "$container" || echo "docker rm of $container failed. Check if all fabric dockers properly was deleted"
   done
   for image in $(docker images "dev-peer1.detran.car-lifes-cicle.com-person*" -q); do
+    echo "Removing image $image..."
+    docker rmi "$image" || echo "docker rmi of $image failed. Check if all fabric dockers properly was deleted"
+  done
+  for container in $(docker ps -a | grep "dev-peer0.montadora.car-lifes-cicle.com-person" | awk '{print $1}'); do
+    echo "Removing container $container..."
+    docker rm -f "$container" || echo "docker rm of $container failed. Check if all fabric dockers properly was deleted"
+  done
+  for image in $(docker images "dev-peer0.montadora.car-lifes-cicle.com-person*" -q); do
+    echo "Removing image $image..."
+    docker rmi "$image" || echo "docker rmi of $image failed. Check if all fabric dockers properly was deleted"
+  done
+  for container in $(docker ps -a | grep "dev-peer1.montadora.car-lifes-cicle.com-person" | awk '{print $1}'); do
+    echo "Removing container $container..."
+    docker rm -f "$container" || echo "docker rm of $container failed. Check if all fabric dockers properly was deleted"
+  done
+  for image in $(docker images "dev-peer1.montadora.car-lifes-cicle.com-person*" -q); do
     echo "Removing image $image..."
     docker rmi "$image" || echo "docker rmi of $image failed. Check if all fabric dockers properly was deleted"
   done

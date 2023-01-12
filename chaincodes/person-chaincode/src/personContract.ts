@@ -1,7 +1,7 @@
 import { Context, Info, Returns, Transaction } from 'fabric-contract-api';
 import stringify from 'json-stringify-deterministic';
 import sortKeysRecursive from 'sort-keys-recursive';
-import { BaseContract } from './baseContract';
+import { BaseContract, AllowedOrgs } from './baseContract';
 import { Person } from './person';
 
 @Info({ title: 'Person', description: 'Smart contract for person' })
@@ -30,6 +30,7 @@ export class PersonContract extends BaseContract {
     }
 
     @Transaction()
+    @AllowedOrgs(['detranMSP'])
     public async CreatePerson(ctx: Context, cpf: string, name: string, birthday: string, motherName: string): Promise<string> {
         const exists = await this.Exists(ctx, cpf);
 

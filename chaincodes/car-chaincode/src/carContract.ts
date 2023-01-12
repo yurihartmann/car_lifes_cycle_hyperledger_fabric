@@ -162,7 +162,7 @@ export class CarContract extends Contract {
         //     result = await pagination.iterator.next();
         // }
         const pagination = await ctx.stub.getStateByRangeWithPagination('', '', size, bookmark);
-        
+
         return JSON.stringify({
             data: await buildListByIterator(pagination.iterator),
             metadata: {

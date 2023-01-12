@@ -196,7 +196,9 @@ Profiles:
             SampleConsortium:
                 Organizations:
                     - *detran
+                    - *montadora
         Application:
             <<: *ApplicationDefaults
             Organizations:
                 - *detran
+                - *montadora

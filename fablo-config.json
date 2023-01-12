@@ -72,9 +72,16 @@
             "peer0",
             "peer1"
           ]
+        },
+        {
+          "name": "montadora",
+          "peers": [
+            "peer0",
+            "peer1"
+          ]
         }
       ]
-    }
+    } 
   ],
   "chaincodes": [
     {

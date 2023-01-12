@@ -135,6 +135,40 @@ channelQuery() {
 
     peerChannelFetchBlock "person-channel" "cli.detran.car-lifes-cicle.com" "${BLOCK_NAME}" "peer1.detran.car-lifes-cicle.com:7022" "$TARGET_FILE"
 
+  elif
+    [ "$1" = "getinfo" ] && [ "$2" = "person-channel" ] && [ "$3" = "montadora" ] && [ "$4" = "peer0" ]
+  then
+
+    peerChannelGetInfo "person-channel" "cli.montadora.car-lifes-cicle.com" "peer0.montadora.car-lifes-cicle.com:7041"
+
+  elif [ "$1" = "fetch" ] && [ "$2" = "config" ] && [ "$3" = "person-channel" ] && [ "$4" = "montadora" ] && [ "$5" = "peer0" ]; then
+    TARGET_FILE=${6:-"$channel-config.json"}
+
+    peerChannelFetchConfig "person-channel" "cli.montadora.car-lifes-cicle.com" "$TARGET_FILE" "peer0.montadora.car-lifes-cicle.com:7041"
+
+  elif [ "$1" = "fetch" ] && [ "$3" = "person-channel" ] && [ "$4" = "montadora" ] && [ "$5" = "peer0" ]; then
+    BLOCK_NAME=$2
+    TARGET_FILE=${6:-"$BLOCK_NAME.block"}
+
+    peerChannelFetchBlock "person-channel" "cli.montadora.car-lifes-cicle.com" "${BLOCK_NAME}" "peer0.montadora.car-lifes-cicle.com:7041" "$TARGET_FILE"
+
+  elif
+    [ "$1" = "getinfo" ] && [ "$2" = "person-channel" ] && [ "$3" = "montadora" ] && [ "$4" = "peer1" ]
+  then
+
+    peerChannelGetInfo "person-channel" "cli.montadora.car-lifes-cicle.com" "peer1.montadora.car-lifes-cicle.com:7042"
+
+  elif [ "$1" = "fetch" ] && [ "$2" = "config" ] && [ "$3" = "person-channel" ] && [ "$4" = "montadora" ] && [ "$5" = "peer1" ]; then
+    TARGET_FILE=${6:-"$channel-config.json"}
+
+    peerChannelFetchConfig "person-channel" "cli.montadora.car-lifes-cicle.com" "$TARGET_FILE" "peer1.montadora.car-lifes-cicle.com:7042"
+
+  elif [ "$1" = "fetch" ] && [ "$3" = "person-channel" ] && [ "$4" = "montadora" ] && [ "$5" = "peer1" ]; then
+    BLOCK_NAME=$2
+    TARGET_FILE=${6:-"$BLOCK_NAME.block"}
+
+    peerChannelFetchBlock "person-channel" "cli.montadora.car-lifes-cicle.com" "${BLOCK_NAME}" "peer1.montadora.car-lifes-cicle.com:7042" "$TARGET_FILE"
+
   else
 
     echo "$@"
@@ -222,6 +256,26 @@ printChannelsHelp() {
   echo ""
   echo "fablo channel fetch <newest|oldest|block-number> person-channel detran peer1 [file name]"
   echo -e "\t Fetch a block with given number and save it. Uses first peer 'peer1' of 'detran'".
+  echo ""
+
+  echo "fablo channel getinfo person-channel montadora peer0"
+  echo -e "\t Get channel info on 'peer0' of 'montadora'".
+  echo ""
+  echo "fablo channel fetch config person-channel montadora peer0 [file-name.json]"
+  echo -e "\t Download latest config block and save it. Uses first peer 'peer0' of 'montadora'".
+  echo ""
+  echo "fablo channel fetch <newest|oldest|block-number> person-channel montadora peer0 [file name]"
+  echo -e "\t Fetch a block with given number and save it. Uses first peer 'peer0' of 'montadora'".
+  echo ""
+
+  echo "fablo channel getinfo person-channel montadora peer1"
+  echo -e "\t Get channel info on 'peer1' of 'montadora'".
+  echo ""
+  echo "fablo channel fetch config person-channel montadora peer1 [file-name.json]"
+  echo -e "\t Download latest config block and save it. Uses first peer 'peer1' of 'montadora'".
+  echo ""
+  echo "fablo channel fetch <newest|oldest|block-number> person-channel montadora peer1 [file name]"
+  echo -e "\t Fetch a block with given number and save it. Uses first peer 'peer1' of 'montadora'".
   echo ""
 
 }
