@@ -3,7 +3,7 @@
 
 ### Vehicle Management System using Hyperledger Fabric
 
-<img src="docs/logos/car_logo_without_bg.png">
+<img src="docs/images/logos/car_logo_without_bg.png">
 
 ## Structure of channel and chaincode
 
