@@ -1,7 +1,5 @@
-import { Context, Info, Returns, Transaction } from 'fabric-contract-api';
-import stringify from 'json-stringify-deterministic';
-import sortKeysRecursive from 'sort-keys-recursive';
-import { BaseContract, AllowedOrgs } from './baseContract';
+import { Context, Info, Transaction } from 'fabric-contract-api';
+import { BaseContract, AllowedOrgs, BuildReturn } from './baseContract';
 import { Person } from './person';
 
 @Info({ title: 'Person', description: 'Smart contract for person' })
@@ -25,18 +23,14 @@ export class PersonContract extends BaseContract {
         ];
 
         for (const person of persons) {
-            await ctx.stub.putState(person.cpf, Buffer.from(stringify(sortKeysRecursive(person))));
+            await this.PutState(ctx, person.cpf, person)
         }
     }
 
     @Transaction()
     @AllowedOrgs(['detranMSP'])
-    public async CreatePerson(ctx: Context, cpf: string, name: string, birthday: string, motherName: string): Promise<string> {
-        const exists = await this.Exists(ctx, cpf);
-
-        if (exists) {
-            throw new Error(`The person ${cpf} already exists`);
-        }
+    @BuildReturn()
+    public async CreatePerson(ctx: Context, cpf: string, name: string, birthday: string, motherName: string): Promise<object> {
 
         const person: Person = {
             cpf: cpf,
@@ -45,26 +39,21 @@ export class PersonContract extends BaseContract {
             motherName: motherName
         };
 
-        await ctx.stub.putState(person.cpf, Buffer.from(stringify(sortKeysRecursive(person))));
-        return JSON.stringify(person);
+        await this.PutState(ctx, person.cpf, person)
+        return person;
     }
 
     @Transaction()
-    public async UpdatePerson(ctx: Context, cpf: string, name: string, birthday: string, motherName: string): Promise<string> {
-        const exists = await this.Exists(ctx, cpf);
-        if (!exists) {
-            throw new Error(`The person ${cpf} does not exist`);
-        }
+    @BuildReturn()
+    public async UpdatePerson(ctx: Context, cpf: string, name: string, birthday: string, motherName: string): Promise<object> {
+        const person = await this.GetState(ctx, cpf);
 
-        const person: Person = {
-            cpf: cpf,
-            name: name,
-            birthday: new Date(birthday),
-            motherName: motherName
-        };
+        person.name = name
+        person.birthday = new Date(birthday)
+        person.motherName = motherName
 
-        await ctx.stub.putState(cpf, Buffer.from(stringify(sortKeysRecursive(person))));
-        return JSON.stringify(person);
+        await this.PutState(ctx, person.cpf, person);
+        return person;
     }
 
 }

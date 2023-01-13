@@ -1,15 +1,13 @@
-import { Context, Contract, Info, Returns, Transaction } from 'fabric-contract-api';
-import { Iterators } from 'fabric-shim';
-import stringify from 'json-stringify-deterministic';
-import sortKeysRecursive from 'sort-keys-recursive';
-import { v4 as uuid } from 'uuid';
+import { Context, Info, Returns, Transaction } from 'fabric-contract-api';
+import { AllowedOrgs, BaseContract, BuildReturn } from './baseContract';
 import { Car } from './car';
-import { buildListByIterator } from './utils';
+
 
 @Info({ title: 'Car', description: 'Smart contract for car' })
-export class CarContract extends Contract {
+export class CarContract extends BaseContract {
 
     @Transaction()
+    @BuildReturn()
     public async InitLedger(ctx: Context): Promise<void> {
         const cars: Car[] = [
             {
@@ -39,143 +37,71 @@ export class CarContract extends Contract {
         ];
 
         for (const car of cars) {
-            await ctx.stub.putState(car.id, Buffer.from(stringify(sortKeysRecursive(car))));
+            await this.PutState(ctx, car.id, car)
         }
     }
 
     @Transaction()
-    public async CreateCar(ctx: Context, brand: string, model: string, owner_cpf: string, color: string, appraisedValue: number): Promise<string> {
-        const car: Car = {
-            id: uuid(),
-            brand: brand,
-            model: model,
-            ownerCpf: owner_cpf,
-            color: color,
-            appraisedValue: appraisedValue,
-        };
-
-        await ctx.stub.putState(car.id, Buffer.from(stringify(sortKeysRecursive(car))));
-        return JSON.stringify(car);
-    }
-
-    @Transaction(false)
-    public async ReadCar(ctx: Context, id: string): Promise<string> {
-        const carJSON = await ctx.stub.getState(id);
-        if (!carJSON || carJSON.length === 0) {
-            throw new Error(`The car ${id} does not exist`);
-        }
-        return carJSON.toString();
-    }
-
-    @Transaction()
-    public async UpdateCar(ctx: Context, id: string, brand: string, model: string, owner_cpf: string, color: string, appraisedValue: number): Promise<string> {
-        const exists = await this.CarExists(ctx, id);
-        if (!exists) {
-            throw new Error(`The car ${id} does not exist`);
-        }
-
+    @BuildReturn()
+    @AllowedOrgs(['montadoraMSP'])
+    public async CreateCar(ctx: Context, id: string, brand: string, model: string, color: string, appraisedValue: number): Promise<object> {
         const car: Car = {
             id: id,
             brand: brand,
             model: model,
-            ownerCpf: owner_cpf,
             color: color,
             appraisedValue: appraisedValue,
         };
 
-        await ctx.stub.putState(id, Buffer.from(stringify(sortKeysRecursive(car))));
-        return JSON.stringify(car);
+        await this.PutState(ctx, car.id, car)
+        return car;
     }
 
     @Transaction()
-    public async DeleteCar(ctx: Context, id: string): Promise<void> {
-        const exists = await this.CarExists(ctx, id);
+    @BuildReturn()
+    public async UpdateCar(ctx: Context, id: string, brand: string, model: string, ownerCpf: string, color: string, appraisedValue: number): Promise<object> {
+        const car: Car = await this.GetState(ctx, id);
 
-        if (!exists) {
+        if (!car) {
             throw new Error(`The car ${id} does not exist`);
         }
 
-        return ctx.stub.deleteState(id);
-    }
+        car.brand = brand
+        car.model = model
+        car.ownerCpf = ownerCpf
+        car.color = color
+        car.appraisedValue = appraisedValue
 
-    @Transaction(false)
-    @Returns('boolean')
-    public async CarExists(ctx: Context, id: string): Promise<boolean> {
-        const assetJSON = await ctx.stub.getState(id);
-        return assetJSON && assetJSON.length > 0;
+        await this.PutState(ctx, car.id, car)
+        return car;
     }
 
     @Transaction()
-    public async TransferAsset(ctx: Context, id: string, new_owner_cpf: string): Promise<string> {
-        const carString = await this.ReadCar(ctx, id);
-        const car: Car = JSON.parse(carString);
+    @BuildReturn()
+    @AllowedOrgs(['detranMSP'])
+    public async TransferCar(ctx: Context, id: string, newOwnerCpf: string): Promise<object> {
+        const car: Car = await this.GetState(ctx, id);
+        await this.checkIfExistsPerson(ctx, newOwnerCpf);
 
-        car.ownerCpf = new_owner_cpf;
+        car.ownerCpf = newOwnerCpf;
 
-        await ctx.stub.putState(id, Buffer.from(stringify(sortKeysRecursive(car))));
+        await this.PutState(ctx, car.id, car);
 
-        return JSON.stringify(car);
+        return car;
     }
 
-    @Transaction(false)
-    @Returns('string')
-    public async GetAllAssets(ctx: Context): Promise<string> {
-        // const allResults = [];
-        // const iterator = await ctx.stub.getStateByRange('', '');
-        // let result = await iterator.next();
+    private async checkIfExistsPerson(ctx: Context, cpf: string): Promise<void> {
+        const result = await ctx.stub.invokeChaincode(
+            'person',
+            [
+                "PersonContract:Read",
+                cpf
+            ],
+            "person-channel"
+        )
 
-        // while (!result.done) {
-        //     const strValue = Buffer.from(result.value.value.toString()).toString('utf8');
-        //     let record;
-        //     try {
-        //         record = JSON.parse(strValue);
-        //     } catch (err) {
-        //         console.log(err);
-        //         record = strValue;
-        //     }
-        //     allResults.push(record);
-        //     result = await iterator.next();
-        // }
-        // return JSON.stringify(allResults);
-
-        const iterator = await ctx.stub.getStateByRange('', '');
-        return JSON.stringify(await buildListByIterator(iterator));
-    }
-
-    @Transaction(false)
-    @Returns('string')
-    public async GetCarsPaginated(ctx: Context, size: number, bookmark: string): Promise<string> {
-        // const allResults = [];
-        // const pagination = await ctx.stub.getStateByRangeWithPagination('', '', size, bookmark);
-        // let result = await pagination.iterator.next();
-
-        // while (!result.done) {
-        //     const strValue = Buffer.from(result.value.value.toString()).toString('utf8');
-        //     let record;
-        //     try {
-        //         record = JSON.parse(strValue);
-        //     } catch (err) {
-        //         console.log(err);
-        //         record = strValue;
-        //     }
-        //     allResults.push(record);
-        //     result = await pagination.iterator.next();
-        // }
-        const pagination = await ctx.stub.getStateByRangeWithPagination('', '', size, bookmark);
-
-        return JSON.stringify({
-            data: await buildListByIterator(pagination.iterator),
-            metadata: {
-                bookmark: pagination.metadata.bookmark,
-                fetchedRecordsCount: pagination.metadata.fetchedRecordsCount
-            }
-        });
-    }
-
-    @Transaction(false)
-    @Returns('string')
-    public async HistoryByCar(ctx: Context, id: string): Promise<string> {
-        const historyCar = await ctx.stub.getHistoryForKey(id);
-        return JSON.stringify(await buildListByIterator(historyCar));
+        if (result.status != 200) {
+            throw new Error(result.message);
+        }
     }
 }

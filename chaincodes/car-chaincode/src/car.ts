@@ -12,7 +12,7 @@ export class Car {
     public model: string;
 
     @Property()
-    public ownerCpf: string;
+    public ownerCpf?: string;
 
     @Property()
     public color: string;
