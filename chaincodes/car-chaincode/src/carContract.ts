@@ -16,7 +16,7 @@ export class CarContract extends Contract {
                 id: '8faf4111-723c-40c1-aa5f-070ad40edfaa',
                 brand: 'Ford',
                 model: 'Focus',
-                owner_cpf: "123.123.123-12",
+                ownerCpf: "123.123.123-12",
                 color: 'blue',
                 appraisedValue: 15000
             },
@@ -24,7 +24,7 @@ export class CarContract extends Contract {
                 id: 'c747dc9e-e736-40b2-83bc-6ecd2f6356e9',
                 brand: 'Honda',
                 model: 'Civic',
-                owner_cpf: "123.123.123-12",
+                ownerCpf: "123.123.123-12",
                 color: 'white',
                 appraisedValue: 25000
             },
@@ -32,7 +32,7 @@ export class CarContract extends Contract {
                 id: '3039d00b-943e-43e3-8322-bb1d165b6e82',
                 brand: 'Toyota',
                 model: 'Corola',
-                owner_cpf: "123.123.123-12",
+                ownerCpf: "123.123.123-12",
                 color: 'black',
                 appraisedValue: 28000
             }
@@ -49,7 +49,7 @@ export class CarContract extends Contract {
             id: uuid(),
             brand: brand,
             model: model,
-            owner_cpf: owner_cpf,
+            ownerCpf: owner_cpf,
             color: color,
             appraisedValue: appraisedValue,
         };
@@ -78,7 +78,7 @@ export class CarContract extends Contract {
             id: id,
             brand: brand,
             model: model,
-            owner_cpf: owner_cpf,
+            ownerCpf: owner_cpf,
             color: color,
             appraisedValue: appraisedValue,
         };
@@ -110,7 +110,7 @@ export class CarContract extends Contract {
         const carString = await this.ReadCar(ctx, id);
         const car: Car = JSON.parse(carString);
 
-        car.owner_cpf = new_owner_cpf;
+        car.ownerCpf = new_owner_cpf;
 
         await ctx.stub.putState(id, Buffer.from(stringify(sortKeysRecursive(car))));
 

@@ -23,7 +23,7 @@ export function AllowedOrgs(MSPIDs: string[]) {
 export class BaseContract extends Contract {
 
     @Transaction()
-    public async getDetails(ctx: Context): Promise<string> {
+    public async GetDetails(ctx: Context): Promise<string> {
         return JSON.stringify({
             getMSPID: ctx.clientIdentity.getMSPID()
         });
