@@ -7,24 +7,23 @@ import {
     GatewayOptions,
     Wallets,
     Network,
-    Transaction,
     Wallet,
 } from 'fabric-network';
-import { organizations, channelName, chaincodeName } from '../configs/config';
+import { orgs, channels, chaincodes } from '../../env.json';
 
 export const createWallets = async (): Promise<Wallet> => {
     const wallet = await Wallets.newInMemoryWallet();
 
-    for (var org in organizations) {
+    for (const [k, v] of Object.entries(orgs)) {
         const identity = {
             credentials: {
-                certificate: organizations[org].CERTIFICATE,
-                privateKey: organizations[org].PRIVATE_KEY,
+                certificate: v.certificate,
+                privateKey: v.privateKey,
             },
-            mspId: organizations[org].MSPID,
+            mspId: v.msp,
             type: 'X.509',
         };
-        await wallet.put(organizations[org].MSPID, identity);
+        await wallet.put(v.msp, identity);
     }
 
     return wallet;
@@ -57,30 +56,35 @@ const createGateway = async (
     return gateway;
 };
 
-const getNetwork = async (gateway: Gateway): Promise<Network> => {
+const getNetwork = async (gateway: Gateway, channelName: string): Promise<Network> => {
     const network = await gateway.getNetwork(channelName);
     return network;
 };
 
 const getContracts = async (
-    network: Network
+    network: Network, chaincodeName: string
 ): Promise<{ contract: Contract; qsccContract: Contract }> => {
     const contract = network.getContract(chaincodeName);
     const qsccContract = network.getContract('qscc');
     return { contract, qsccContract };
 };
 
-export const configureContracts = async (app: Application, wallet: Wallet): Promise<void> => {
-
-    for (var org in organizations) {
-        const gateway = await createGateway(
-            organizations[org].CONNECTION_PROFILE,
-            organizations[org].MSPID,
-            wallet
-        );
-        const network = await getNetwork(gateway);
-        const contracts = await getContracts(network);
-
-        app.locals[organizations[org].MSPID] = contracts;
+export const getContract = async (app: Application, orgName: string, channelName: string, chaincodeName: string): Promise<Contract> => {
+    for (const [k, v] of Object.entries(orgs)) {
+        if (k == orgName) {
+            let connectionProfile = JSON.parse(v.connectionProfile);
+            let MSPID = v.msp
+            const gateway = await createGateway(
+                connectionProfile,
+                MSPID,
+                app.locals['wallet']
+            );
+            console.log('AAAA');
+            const network = await getNetwork(gateway, channelName);
+            console.log('BBBBB');
+            return await (await getContracts(network, chaincodeName)).contract;
+        }
     }
+
+    throw Error('not exists contract');
 }

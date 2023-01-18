@@ -1,7 +1,3 @@
-/*
- * SPDX-License-Identifier: Apache-2.0
- */
-
 import express, { Application, NextFunction, Request, Response } from 'express';
 import { getReasonPhrase, StatusCodes } from 'http-status-codes';
 import passport from 'passport';
@@ -9,7 +5,7 @@ import pinoMiddleware from 'pino-http';
 import { logger } from './logger';
 import cors from 'cors';
 import { authenticateApiKey, fabricAPIKeyStrategy } from './auth'
-import { carRouter } from '../routes/car.router';
+import { invokeRouter } from '../routes/invoke.router';
 
 const { BAD_REQUEST, INTERNAL_SERVER_ERROR, NOT_FOUND } = StatusCodes;
 
@@ -47,11 +43,7 @@ export const createServer = async (): Promise<Application> => {
 
     app.use(cors());
 
-    // app.use('/', healthRouter);
-    // app.use('/api/assets', authenticateApiKey, assetsRouter);
-    // app.use('/api/jobs', authenticateApiKey, jobsRouter);
-    // app.use('/api/transactions', authenticateApiKey, transactionsRouter);
-    app.use('/api/car', authenticateApiKey, carRouter);
+    app.use('/invoke/', authenticateApiKey, invokeRouter);
 
     app.get('/ready', (_req, res: Response) =>
         res.status(StatusCodes.OK).json({

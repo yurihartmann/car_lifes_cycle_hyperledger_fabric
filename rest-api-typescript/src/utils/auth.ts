@@ -3,7 +3,7 @@ import passport from 'passport';
 import { NextFunction, Request, Response } from 'express';
 import { HeaderAPIKeyStrategy } from 'passport-headerapikey';
 import { StatusCodes, getReasonPhrase } from 'http-status-codes';
-import { organizations } from '../configs/config';
+import { orgs } from '../../env.json';
 
 const { UNAUTHORIZED } = StatusCodes;
 
@@ -13,26 +13,13 @@ export const fabricAPIKeyStrategy: HeaderAPIKeyStrategy =
     false,
     function (apikey, done) {
       logger.debug({ apikey }, 'Checking X-API-Key');
-      
-      for (var orgKey in organizations) {
-        if (orgKey == apikey) {
-          logger.debug('User set to %s', orgKey);
-          done(null, organizations[orgKey].MSPID);
+
+      for (const [k, v] of Object.entries(orgs)) {
+        if (k == apikey) {
+          logger.debug(`rg set to ${k}`);
+          done(null, k);
         }
       }
-
-      // if (apikey === config.org1ApiKey) {
-      //   const user = config.mspIdOrg1;
-      //   logger.debug('User set to %s', user);
-      //   done(null, user);
-      // } else if (apikey === config.org2ApiKey) {
-      //   const user = config.mspIdOrg2;
-      //   logger.debug('User set to %s', user);
-      //   done(null, user);
-      // } else {
-      //   logger.debug({ apikey }, 'No valid X-API-Key');
-      //   return done(null, false);
-      // }
     }
   );
 

@@ -1,18 +1,18 @@
-import { portServer } from './configs/config';
-import { createWallets, configureContracts } from './fabric/wallet';
+import { port } from '../env.json';
+import { createWallets } from './fabric/wallet';
 import { createServer } from './utils/server'
 
 async function main() {
     console.log('Creating REST server');
     const app = await createServer();
 
-    const wallet = await createWallets();
-
-    await configureContracts(app, wallet);
+    app.locals['wallet'] = await createWallets();
+     
+    // await configureContracts(app, wallet);
 
     console.log('Starting REST server');
-    app.listen(portServer, () => {
-        console.log(`REST server started on port: ${portServer}`);
+    app.listen(port, () => {
+        console.log(`REST server started on port: ${port}`);
     });
 }
 
