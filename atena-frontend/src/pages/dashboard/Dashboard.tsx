@@ -1,5 +1,5 @@
+import { ToolBarDetails } from '../../shared/components';
 import { PageBaseLayout } from '../../shared/layouts';
-import { ToolBarList } from '../toolbar-list/ToolBarList';
 
 
 export const DashBoard: React.FC = () => {
@@ -7,9 +7,7 @@ export const DashBoard: React.FC = () => {
         <PageBaseLayout
             title='Dashboard'
             toolBar={(
-                <ToolBarList
-                    activeSearch
-                />
+                <ToolBarDetails />
             )}
         >
             Conteudo
