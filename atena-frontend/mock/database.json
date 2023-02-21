@@ -1,127 +1,121 @@
 {
-    "pessoas": [
-        {
-            "id": 3,
-            "nomeCompleto": "Carlos Silva",
-            "email": "carlos@gmail.com",
-            "cidadeId": 1
-        },
-        {
-            "id": 5,
-            "nomeCompleto": "Alfredo Pereira",
-            "email": "alfredo@gmail.com",
-            "cidadeId": 1
-        },
-        {
-            "id": 6,
-            "nomeCompleto": "Juca Silva",
-            "email": "Juca@gmail.com",
-            "cidadeId": 1
-        },
-        {
-            "id": 7,
-            "nomeCompleto": "Maria Silva",
-            "email": "maria@gmail.com",
-            "cidadeId": 3
-        },
-        {
-            "id": 8,
-            "cidadeId": 1,
-            "email": "carlos@gmail.com",
-            "nomeCompleto": "Carlos Silva"
-        },
-        {
-            "id": 9,
-            "cidadeId": 1,
-            "email": "pedro@gmail.com",
-            "nomeCompleto": "Pedro Silva"
-        },
-        {
-            "id": 10,
-            "cidadeId": 1,
-            "email": "alfredo@gmail.com",
-            "nomeCompleto": "Alfredo Silva"
-        },
-        {
-            "id": 11,
-            "cidadeId": 1,
-            "email": "alfredo@gmail.com",
-            "nomeCompleto": "Alfredo Silva"
-        },
-        {
-            "id": 12,
-            "cidadeId": 1,
-            "email": "Juca@gmail.com",
-            "nomeCompleto": "Juca Silva"
-        },
-        {
-            "id": 13,
-            "cidadeId": 1,
-            "email": "maria@gmail.com",
-            "nomeCompleto": "Maria Silva"
-        },
-        {
-            "id": 14,
-            "cidadeId": 1,
-            "email": "carlos@gmail.com",
-            "nomeCompleto": "Carlos Silva"
-        },
-        {
-            "id": 154,
-            "cidadeId": 1,
-            "email": "pedro@gmail.com",
-            "nomeCompleto": "Pedro Silva"
-        },
-        {
-            "id": 16,
-            "cidadeId": 1,
-            "email": "alfredo@gmail.com",
-            "nomeCompleto": "Alfredo Silva"
-        },
-        {
-            "nomeCompleto": "Ana Silva",
-            "email": "ana@gmail.com",
-            "cidadeId": "1",
-            "id": 156
-        },
-        {
-            "nomeCompleto": "Geronimo",
-            "email": "geronimo@gmail.com",
-            "cidadeId": 5,
-            "id": 157
-        }
-    ],
-    "cidades": [
-        {
-            "nome": "Porto Alegre",
-            "id": 1
-        },
-        {
-            "nome": "Novo Hamburgo",
-            "id": 2
-        },
-        {
-            "nome": "Taquara",
-            "id": 3
-        },
-        {
-            "nome": "Palmitinho",
-            "id": 4
-        },
-        {
-            "nome": "Caxias",
-            "id": 5
-        },
-        {
-            "nome": "Sapucaia do Sul",
-            "id": 6
-        },
-        {
-            "nome": "Tramandaí",
-            "id": 7
-        }
-    ],
-    "auth": {
-        "accessToken": "aaaaaaaaaa.bbbbbbbbbb.cccccccc"
+  "pessoas": [
+    {
+      "id": 5,
+      "nomeCompleto": "Alfredo Pereira",
+      "email": "alfredo@gmail.com",
+      "cidadeId": 1
+    },
+    {
+      "id": 6,
+      "nomeCompleto": "Juca Silva",
+      "email": "Juca@gmail.com",
+      "cidadeId": 1
+    },
+    {
+      "id": 7,
+      "nomeCompleto": "Maria Silva",
+      "email": "maria@gmail.com",
+      "cidadeId": 3
+    },
+    {
+      "id": 8,
+      "cidadeId": 1,
+      "email": "carlos@gmail.com",
+      "nomeCompleto": "Carlos Silva"
+    },
+    {
+      "id": 9,
+      "cidadeId": 1,
+      "email": "pedro@gmail.com",
+      "nomeCompleto": "Pedro Silva"
+    },
+    {
+      "id": 10,
+      "cidadeId": 1,
+      "email": "alfredo@gmail.com",
+      "nomeCompleto": "Alfredo Silva"
+    },
+    {
+      "id": 11,
+      "cidadeId": 1,
+      "email": "alfredo@gmail.com",
+      "nomeCompleto": "Alfredo Silva"
+    },
+    {
+      "id": 12,
+      "cidadeId": 1,
+      "email": "Juca@gmail.com",
+      "nomeCompleto": "Juca Silva"
+    },
+    {
+      "id": 13,
+      "cidadeId": 1,
+      "email": "maria@gmail.com",
+      "nomeCompleto": "Maria Silva"
+    },
+    {
+      "id": 14,
+      "cidadeId": 1,
+      "email": "carlos@gmail.com",
+      "nomeCompleto": "Carlos Silva"
+    },
+    {
+      "id": 154,
+      "cidadeId": 1,
+      "email": "pedro@gmail.com",
+      "nomeCompleto": "Pedro Silva"
+    },
+    {
+      "id": 16,
+      "cidadeId": 1,
+      "email": "alfredo@gmail.com",
+      "nomeCompleto": "Alfredo Silva"
+    },
+    {
+      "nomeCompleto": "Ana Silva",
+      "email": "ana@gmail.com",
+      "cidadeId": "1",
+      "id": 156
+    },
+    {
+      "nomeCompleto": "Geronimo",
+      "email": "geronimo@gmail.com",
+      "cidadeId": 5,
+      "id": 157
     }
+  ],
+  "cidades": [
+    {
+      "nome": "Porto Alegre",
+      "id": 1
+    },
+    {
+      "nome": "Novo Hamburgo",
+      "id": 2
+    },
+    {
+      "nome": "Taquara",
+      "id": 3
+    },
+    {
+      "nome": "Palmitinho",
+      "id": 4
+    },
+    {
+      "nome": "Caxias",
+      "id": 5
+    },
+    {
+      "nome": "Sapucaia do Sul",
+      "id": 6
+    },
+    {
+      "nome": "Tramandaí",
+      "id": 7
+    }
+  ],
+  "auth": {
+    "accessToken": "aaaaaaaaaa.bbbbbbbbbb.cccccccc"
+  }
 }
