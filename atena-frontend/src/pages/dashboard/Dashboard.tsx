@@ -1,13 +1,13 @@
 import { PageBaseLayout } from '../../shared/layouts';
-import { ToolBar } from '../toolbar/ToolBar';
+import { ToolBarList } from '../toolbar-list/ToolBarList';
 
 
 export const DashBoard: React.FC = () => {
     return (
-        <PageBaseLayout 
-            title='Dashboard' 
+        <PageBaseLayout
+            title='Dashboard'
             toolBar={(
-                <ToolBar 
+                <ToolBarList
                     activeSearch
                 />
             )}
