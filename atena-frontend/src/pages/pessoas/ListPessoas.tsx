@@ -65,6 +65,7 @@ export const ListPessoas: React.FC = () => {
                     addButtonText='Nova'
                     activeSearch={true}
                     searchText={search}
+                    onClickAddButton={() => navigate('/pessoas/add')}
                     onChangeSearchText={text => setSearchParams({
                         search: text, page: '1'
                     }, { replace: true })}
