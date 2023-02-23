@@ -1,3 +1,4 @@
+import * as yup from 'yup';
 import { Box, Grid, LinearProgress, Paper, Typography } from '@mui/material';
 import { FormHandles } from '@unform/core';
 import { Form } from '@unform/web';
@@ -13,6 +14,12 @@ interface IFormData {
     cidadeId: number;
     nomeCompleto: string;
 }
+
+const formValidationSchema: yup.Schema<IFormData> = yup.object().shape({
+    cidadeId: yup.number().required(),
+    email: yup.string().required().email(),
+    nomeCompleto: yup.string().required().min(3),
+});
 
 export const DetailPessoas: React.FC = () => {
 
@@ -49,26 +56,42 @@ export const DetailPessoas: React.FC = () => {
     }, [id]);
 
     const handleSave = (data: IFormData) => {
-        setIsLoading(true);
-        if (id === 'add') {
-            PessoasService.create(data)
-                .then(result => {
-                    setIsLoading(false);
-                    if (result instanceof Error) {
-                        alert(result.message);
-                    } else {
-                        navigate(`/pessoas/${result}`);
-                    }
+        formValidationSchema.validate(
+            data, { abortEarly: false }
+        )
+            .then((dadosValidados) => {
+                setIsLoading(true);
+                if (id === 'add') {
+                    PessoasService.create(dadosValidados)
+                        .then(result => {
+                            setIsLoading(false);
+                            if (result instanceof Error) {
+                                alert(result.message);
+                            } else {
+                                navigate(`/pessoas/${result}`);
+                            }
+                        });
+                } else {
+                    PessoasService.updateById(Number(id), { id: Number(id), ...data })
+                        .then(result => {
+                            setIsLoading(false);
+                            if (result instanceof Error) {
+                                alert(result.message);
+                            }
+                        });
+                }
+            })
+            .catch((errors: yup.ValidationError) => {
+                const validationErros: { [key: string]: string } = {};
+
+                errors.inner.forEach(error => {
+                    if (!error.path) return;
+
+                    validationErros[error.path] = error.message;
                 });
-        } else {
-            PessoasService.updateById(Number(id), { id: Number(id), ...data })
-                .then(result => {
-                    setIsLoading(false);
-                    if (result instanceof Error) {
-                        alert(result.message);
-                    }
-                });
-        }
+
+                formRef.current?.setErrors(validationErros);
+            });
     };
 
     const handleDelete = () => {

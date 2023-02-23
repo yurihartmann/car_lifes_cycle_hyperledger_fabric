@@ -20,7 +20,8 @@
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-router-dom": "^6.8.1",
-    "react-scripts": "5.0.1"
+    "react-scripts": "5.0.1",
+    "yup": "^1.0.0"
   },
   "devDependencies": {
     "@testing-library/jest-dom": "^5.16.5",

@@ -14,5 +14,5 @@ export const Environment = {
     /**
      * Url base de consultado dos dados dessa aplicação
      */
-    API_URL_BASE: 'https://3333-yurihartman-carlifescic-dhsod72ap96.ws-us87.gitpod.io'
+    API_URL_BASE: 'https://3333-yurihartman-carlifescic-jgybyejhfrh.ws-us87.gitpod.io'
 };
