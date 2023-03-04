@@ -1,4 +1,5 @@
 tasks:
   - name: Configure environment
+    before: nvm install 12 && nvm use node 12
     command: |
       make configure-all

@@ -12,8 +12,7 @@ configure-all:
 	@make configure-person-chaincodes
 
 configure-nvm:
-	@nvm install 12
-	@nvm use node 12
+	@nvm install 12 && nvm use node 12
 
 configure-fablo:
 	@sudo curl -Lf https://github.com/hyperledger-labs/fablo/releases/download/1.1.0/fablo.sh -o /usr/local/bin/fablo && sudo chmod +x /usr/local/bin/fablo
