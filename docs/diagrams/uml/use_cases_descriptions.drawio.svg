@@ -1,0 +1,574 @@
+<svg host="65bd71144e" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" width="792px" height="1652px" viewBox="-0.5 -0.5 792 1652" content="&lt;mxfile&gt;&lt;diagram id=&quot;w6BqP8uZJNuzQTmXHFcz&quot; name=&quot;Page-1&quot;&gt;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&lt;/diagram&gt;&lt;/mxfile&gt;">
+    <defs/>
+    <g>
+        <path d="M 1 31 L 1 1 L 791 1 L 791 31" fill="rgb(255, 255, 255)" stroke="rgb(0, 0, 0)" stroke-width="2" stroke-miterlimit="10" pointer-events="all"/>
+        <path d="M 1 31 L 1 1651 L 791 1651 L 791 31" fill="none" stroke="rgb(0, 0, 0)" stroke-width="2" stroke-miterlimit="10" pointer-events="none"/>
+        <path d="M 1 31 L 791 31" fill="none" stroke="rgb(0, 0, 0)" stroke-width="2" stroke-miterlimit="10" pointer-events="none"/>
+        <path d="M 1 171 L 321 171 L 791 171" fill="none" stroke="rgb(0, 0, 0)" stroke-width="2" stroke-miterlimit="10" pointer-events="none"/>
+        <path d="M 1 311 L 321 311 L 791 311" fill="none" stroke="rgb(0, 0, 0)" stroke-width="2" stroke-miterlimit="10" pointer-events="none"/>
+        <path d="M 1 491 L 321 491 L 791 491" fill="none" stroke="rgb(0, 0, 0)" stroke-width="2" stroke-miterlimit="10" pointer-events="none"/>
+        <path d="M 1 636 L 321 636 L 791 636" fill="none" stroke="rgb(0, 0, 0)" stroke-width="2" stroke-miterlimit="10" pointer-events="none"/>
+        <path d="M 1 781 L 321 781 L 791 781" fill="none" stroke="rgb(0, 0, 0)" stroke-width="2" stroke-miterlimit="10" pointer-events="none"/>
+        <path d="M 1 926 L 321 926 L 791 926" fill="none" stroke="rgb(0, 0, 0)" stroke-width="2" stroke-miterlimit="10" pointer-events="none"/>
+        <path d="M 1 1071 L 321 1071 L 791 1071" fill="none" stroke="rgb(0, 0, 0)" stroke-width="2" stroke-miterlimit="10" pointer-events="none"/>
+        <path d="M 1 1216 L 321 1216 L 791 1216" fill="none" stroke="rgb(0, 0, 0)" stroke-width="2" stroke-miterlimit="10" pointer-events="none"/>
+        <path d="M 1 1361 L 321 1361 L 791 1361" fill="none" stroke="rgb(0, 0, 0)" stroke-width="2" stroke-miterlimit="10" pointer-events="none"/>
+        <path d="M 1 1506 L 321 1506 L 791 1506" fill="none" stroke="rgb(0, 0, 0)" stroke-width="2" stroke-miterlimit="10" pointer-events="none"/>
+        <path d="M 321 31 L 321 171 L 321 311 L 321 491 L 321 636 L 321 781 L 321 926 L 321 1071 L 321 1216 L 321 1361 L 321 1506 L 321 1651" fill="none" stroke="rgb(0, 0, 0)" stroke-width="2" stroke-miterlimit="10" pointer-events="none"/>
+        <g fill="rgb(0, 0, 0)" font-family="Helvetica" font-weight="bold" pointer-events="none" text-anchor="middle" font-size="16px">
+            <text x="395.5" y="22.5">
+                Descrições casos de uso
+            </text>
+        </g>
+        <path d="M 1 31 M 321 31 M 321 171 M 1 171" fill="none" stroke="rgb(0, 0, 0)" stroke-linecap="square" stroke-miterlimit="10" pointer-events="none"/>
+        <g transform="translate(-0.5 -0.5)">
+            <switch>
+                <foreignObject pointer-events="none" width="100%" height="100%" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility" style="overflow: visible; text-align: left;">
+                    <div xmlns="http://www.w3.org/1999/xhtml" style="display: flex; align-items: unsafe center; justify-content: unsafe center; width: 318px; height: 1px; padding-top: 101px; margin-left: 2px;">
+                        <div data-drawio-colors="color: rgb(0, 0, 0); " style="box-sizing: border-box; font-size: 0px; text-align: center; max-height: 136px; overflow: hidden;">
+                            <div style="display: inline-block; font-size: 16px; font-family: Helvetica; color: rgb(0, 0, 0); line-height: 1.2; pointer-events: none; white-space: normal; overflow-wrap: normal;">
+                                <font style="font-size: 16px;">
+                                    Inserir um carro novo
+                                </font>
+                            </div>
+                        </div>
+                    </div>
+                </foreignObject>
+                <text x="161" y="106" fill="rgb(0, 0, 0)" font-family="Helvetica" font-size="16px" text-anchor="middle">
+                    Inserir um carro novo
+                </text>
+            </switch>
+        </g>
+        <path d="M 321 31 M 791 31 M 791 171 M 321 171" fill="none" stroke="rgb(0, 0, 0)" stroke-linecap="square" stroke-miterlimit="10" pointer-events="none"/>
+        <g transform="translate(-0.5 -0.5)">
+            <switch>
+                <foreignObject pointer-events="none" width="100%" height="100%" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility" style="overflow: visible; text-align: left;">
+                    <div xmlns="http://www.w3.org/1999/xhtml" style="display: flex; align-items: unsafe center; justify-content: unsafe center; width: 468px; height: 1px; padding-top: 101px; margin-left: 322px;">
+                        <div data-drawio-colors="color: rgb(0, 0, 0); " style="box-sizing: border-box; font-size: 0px; text-align: center; max-height: 136px; overflow: hidden;">
+                            <div style="display: inline-block; font-size: 16px; font-family: Helvetica; color: rgb(0, 0, 0); line-height: 1.2; pointer-events: none; white-space: normal; overflow-wrap: normal;">
+                                <font style="font-size: 16px;">
+                                    1- A montadora envia os dados de um novo carro produzido
+                                    <br style="border-color: var(--border-color); font-size: 16px;"/>
+                                    2- É executado o contrato de inserir um novo carro no canal de carros, inserindo uma nova transação
+                                </font>
+                            </div>
+                        </div>
+                    </div>
+                </foreignObject>
+                <text x="556" y="106" fill="rgb(0, 0, 0)" font-family="Helvetica" font-size="16px" text-anchor="middle">
+                    1- A montadora envia os dados de um novo carro produzido...
+                </text>
+            </switch>
+        </g>
+        <path d="M 1 171 M 321 171 M 321 311 M 1 311" fill="none" stroke="rgb(0, 0, 0)" stroke-linecap="square" stroke-miterlimit="10" pointer-events="none"/>
+        <g transform="translate(-0.5 -0.5)">
+            <switch>
+                <foreignObject pointer-events="none" width="100%" height="100%" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility" style="overflow: visible; text-align: left;">
+                    <div xmlns="http://www.w3.org/1999/xhtml" style="display: flex; align-items: unsafe center; justify-content: unsafe center; width: 318px; height: 1px; padding-top: 241px; margin-left: 2px;">
+                        <div data-drawio-colors="color: rgb(0, 0, 0); " style="box-sizing: border-box; font-size: 0px; text-align: center; max-height: 136px; overflow: hidden;">
+                            <div style="display: inline-block; font-size: 16px; font-family: Helvetica; color: rgb(0, 0, 0); line-height: 1.2; pointer-events: none; white-space: normal; overflow-wrap: normal;">
+                                <font style="font-size: 16px;">
+                                    Adquirir um carro novo para venda
+                                </font>
+                            </div>
+                        </div>
+                    </div>
+                </foreignObject>
+                <text x="161" y="246" fill="rgb(0, 0, 0)" font-family="Helvetica" font-size="16px" text-anchor="middle">
+                    Adquirir um carro novo para venda
+                </text>
+            </switch>
+        </g>
+        <path d="M 321 171 M 791 171 M 791 311 M 321 311" fill="none" stroke="rgb(0, 0, 0)" stroke-linecap="square" stroke-miterlimit="10" pointer-events="none"/>
+        <g transform="translate(-0.5 -0.5)">
+            <switch>
+                <foreignObject pointer-events="none" width="100%" height="100%" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility" style="overflow: visible; text-align: left;">
+                    <div xmlns="http://www.w3.org/1999/xhtml" style="display: flex; align-items: unsafe center; justify-content: unsafe center; width: 468px; height: 1px; padding-top: 241px; margin-left: 322px;">
+                        <div data-drawio-colors="color: rgb(0, 0, 0); " style="box-sizing: border-box; font-size: 0px; text-align: center; max-height: 136px; overflow: hidden;">
+                            <div style="display: inline-block; font-size: 16px; font-family: Helvetica; color: rgb(0, 0, 0); line-height: 1.2; pointer-events: none; white-space: normal; overflow-wrap: normal;">
+                                1- A
+                                <span style="background-color: rgb(255, 255, 255);">
+                                    Concessionária seleciona o carro que quer comprar zero da montadora
+                                    <br/>
+                                    2-
+                                </span>
+                                É executado o contrato de adquirir um novo carro no canal de carros, inserindo uma nova transação
+                                <span style="background-color: rgb(255, 255, 255);">
+                                    <br/>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </foreignObject>
+                <text x="556" y="246" fill="rgb(0, 0, 0)" font-family="Helvetica" font-size="16px" text-anchor="middle">
+                    1- A Concessionária seleciona o carro que quer comprar zero...
+                </text>
+            </switch>
+        </g>
+        <path d="M 1 311 M 321 311 M 321 491 M 1 491" fill="none" stroke="rgb(0, 0, 0)" stroke-linecap="square" stroke-miterlimit="10" pointer-events="none"/>
+        <g transform="translate(-0.5 -0.5)">
+            <switch>
+                <foreignObject pointer-events="none" width="100%" height="100%" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility" style="overflow: visible; text-align: left;">
+                    <div xmlns="http://www.w3.org/1999/xhtml" style="display: flex; align-items: unsafe center; justify-content: unsafe center; width: 318px; height: 1px; padding-top: 401px; margin-left: 2px;">
+                        <div data-drawio-colors="color: rgb(0, 0, 0); " style="box-sizing: border-box; font-size: 0px; text-align: center; max-height: 176px; overflow: hidden;">
+                            <div style="display: inline-block; font-size: 16px; font-family: Helvetica; color: rgb(0, 0, 0); line-height: 1.2; pointer-events: none; white-space: normal; overflow-wrap: normal;">
+                                Vender um carro
+                            </div>
+                        </div>
+                    </div>
+                </foreignObject>
+                <text x="161" y="406" fill="rgb(0, 0, 0)" font-family="Helvetica" font-size="16px" text-anchor="middle">
+                    Vender um carro
+                </text>
+            </switch>
+        </g>
+        <path d="M 321 311 M 791 311 M 791 491 M 321 491" fill="none" stroke="rgb(0, 0, 0)" stroke-linecap="square" stroke-miterlimit="10" pointer-events="none"/>
+        <g transform="translate(-0.5 -0.5)">
+            <switch>
+                <foreignObject pointer-events="none" width="100%" height="100%" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility" style="overflow: visible; text-align: left;">
+                    <div xmlns="http://www.w3.org/1999/xhtml" style="display: flex; align-items: unsafe center; justify-content: unsafe center; width: 468px; height: 1px; padding-top: 401px; margin-left: 322px;">
+                        <div data-drawio-colors="color: rgb(0, 0, 0); " style="box-sizing: border-box; font-size: 0px; text-align: center; max-height: 176px; overflow: hidden;">
+                            <div style="display: inline-block; font-size: 16px; font-family: Helvetica; color: rgb(0, 0, 0); line-height: 1.2; pointer-events: none; white-space: normal; overflow-wrap: normal;">
+                                1 - A
+                                <span style="border-color: var(--border-color); background-color: rgb(255, 255, 255);">
+                                    Concessionária envia os dados do comprador do carro e o carro escolido
+                                    <br/>
+                                    2- O contrato inteligente verifica se o carro não
+                                    <span style="background-color: rgb(251, 251, 251);">
+                                        possui nenhuma restrição
+                                        <br/>
+                                    </span>
+                                    3-
+                                    <span style="background-color: rgb(251, 251, 251);">
+                                        É executado o contrato de transferir um carro para uma pessoa no canal de carros, inserindo uma nova transação
+                                    </span>
+                                    <br/>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </foreignObject>
+                <text x="556" y="406" fill="rgb(0, 0, 0)" font-family="Helvetica" font-size="16px" text-anchor="middle">
+                    1 - A Concessionária envia os dados do comprador do carro e...
+                </text>
+            </switch>
+        </g>
+        <path d="M 1 491 M 321 491 M 321 636 M 1 636" fill="none" stroke="rgb(0, 0, 0)" stroke-linecap="square" stroke-miterlimit="10" pointer-events="none"/>
+        <g transform="translate(-0.5 -0.5)">
+            <switch>
+                <foreignObject pointer-events="none" width="100%" height="100%" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility" style="overflow: visible; text-align: left;">
+                    <div xmlns="http://www.w3.org/1999/xhtml" style="display: flex; align-items: unsafe center; justify-content: unsafe center; width: 318px; height: 1px; padding-top: 564px; margin-left: 2px;">
+                        <div data-drawio-colors="color: rgb(0, 0, 0); " style="box-sizing: border-box; font-size: 0px; text-align: center; max-height: 141px; overflow: hidden;">
+                            <div style="display: inline-block; font-size: 16px; font-family: Helvetica; color: rgb(0, 0, 0); line-height: 1.2; pointer-events: none; white-space: normal; overflow-wrap: normal;">
+                                Fazer licenciamento do carro
+                            </div>
+                        </div>
+                    </div>
+                </foreignObject>
+                <text x="161" y="568" fill="rgb(0, 0, 0)" font-family="Helvetica" font-size="16px" text-anchor="middle">
+                    Fazer licenciamento do carro
+                </text>
+            </switch>
+        </g>
+        <path d="M 321 491 M 791 491 M 791 636 M 321 636" fill="none" stroke="rgb(0, 0, 0)" stroke-linecap="square" stroke-miterlimit="10" pointer-events="none"/>
+        <g transform="translate(-0.5 -0.5)">
+            <switch>
+                <foreignObject pointer-events="none" width="100%" height="100%" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility" style="overflow: visible; text-align: left;">
+                    <div xmlns="http://www.w3.org/1999/xhtml" style="display: flex; align-items: unsafe center; justify-content: unsafe center; width: 468px; height: 1px; padding-top: 564px; margin-left: 322px;">
+                        <div data-drawio-colors="color: rgb(0, 0, 0); " style="box-sizing: border-box; font-size: 0px; text-align: center; max-height: 141px; overflow: hidden;">
+                            <div style="display: inline-block; font-size: 16px; font-family: Helvetica; color: rgb(0, 0, 0); line-height: 1.2; pointer-events: none; white-space: normal; overflow-wrap: normal;">
+                                1 - O Detran
+                                <span style="border-color: var(--border-color); background-color: rgb(255, 255, 255);">
+                                    envia os dados do carro para fazer o licenciamento
+                                    <br style="border-color: var(--border-color);"/>
+                                    2- O contrato inteligente verifica se o carro não
+                                    <span style="border-color: var(--border-color); background-color: rgb(251, 251, 251);">
+                                        possui nenhuma restrição
+                                        <br style="border-color: var(--border-color);"/>
+                                    </span>
+                                    3-
+                                    <span style="border-color: var(--border-color); background-color: rgb(251, 251, 251);">
+                                        É executado o contrato de gerar o licenciamento do carro no canal de carros, inserindo uma nova transação
+                                    </span>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </foreignObject>
+                <text x="556" y="568" fill="rgb(0, 0, 0)" font-family="Helvetica" font-size="16px" text-anchor="middle">
+                    1 - O Detran envia os dados do carro para fazer o licenciam...
+                </text>
+            </switch>
+        </g>
+        <path d="M 1 636 M 321 636 M 321 781 M 1 781" fill="none" stroke="rgb(0, 0, 0)" stroke-linecap="square" stroke-miterlimit="10" pointer-events="none"/>
+        <g transform="translate(-0.5 -0.5)">
+            <switch>
+                <foreignObject pointer-events="none" width="100%" height="100%" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility" style="overflow: visible; text-align: left;">
+                    <div xmlns="http://www.w3.org/1999/xhtml" style="display: flex; align-items: unsafe center; justify-content: unsafe center; width: 318px; height: 1px; padding-top: 709px; margin-left: 2px;">
+                        <div data-drawio-colors="color: rgb(0, 0, 0); " style="box-sizing: border-box; font-size: 0px; text-align: center; max-height: 141px; overflow: hidden;">
+                            <div style="display: inline-block; font-size: 16px; font-family: Helvetica; color: rgb(0, 0, 0); line-height: 1.2; pointer-events: none; white-space: normal; overflow-wrap: normal;">
+                                Adicionar restrição ao carro
+                            </div>
+                        </div>
+                    </div>
+                </foreignObject>
+                <text x="161" y="713" fill="rgb(0, 0, 0)" font-family="Helvetica" font-size="16px" text-anchor="middle">
+                    Adicionar restrição ao carro
+                </text>
+            </switch>
+        </g>
+        <path d="M 321 636 M 791 636 M 791 781 M 321 781" fill="none" stroke="rgb(0, 0, 0)" stroke-linecap="square" stroke-miterlimit="10" pointer-events="none"/>
+        <g transform="translate(-0.5 -0.5)">
+            <switch>
+                <foreignObject pointer-events="none" width="100%" height="100%" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility" style="overflow: visible; text-align: left;">
+                    <div xmlns="http://www.w3.org/1999/xhtml" style="display: flex; align-items: unsafe center; justify-content: unsafe center; width: 468px; height: 1px; padding-top: 709px; margin-left: 322px;">
+                        <div data-drawio-colors="color: rgb(0, 0, 0); " style="box-sizing: border-box; font-size: 0px; text-align: center; max-height: 141px; overflow: hidden;">
+                            <div style="display: inline-block; font-size: 16px; font-family: Helvetica; color: rgb(0, 0, 0); line-height: 1.2; pointer-events: none; white-space: normal; overflow-wrap: normal;">
+                                1 - O Detran
+                                <span style="border-color: var(--border-color); background-color: rgb(255, 255, 255);">
+                                    envia os dados do carro para inserir uma restrição
+                                    <span style="border-color: var(--border-color); background-color: rgb(251, 251, 251);">
+                                        <br style="border-color: var(--border-color);"/>
+                                    </span>
+                                    2-
+                                    <span style="border-color: var(--border-color); background-color: rgb(251, 251, 251);">
+                                        É executado o contrato de incluir uma restrição do carro no canal de restrições, inserindo uma nova transação
+                                    </span>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </foreignObject>
+                <text x="556" y="713" fill="rgb(0, 0, 0)" font-family="Helvetica" font-size="16px" text-anchor="middle">
+                    1 - O Detran envia os dados do carro para inserir uma restr...
+                </text>
+            </switch>
+        </g>
+        <path d="M 1 781 M 321 781 M 321 926 M 1 926" fill="none" stroke="rgb(0, 0, 0)" stroke-linecap="square" stroke-miterlimit="10" pointer-events="none"/>
+        <g transform="translate(-0.5 -0.5)">
+            <switch>
+                <foreignObject pointer-events="none" width="100%" height="100%" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility" style="overflow: visible; text-align: left;">
+                    <div xmlns="http://www.w3.org/1999/xhtml" style="display: flex; align-items: unsafe center; justify-content: unsafe center; width: 318px; height: 1px; padding-top: 854px; margin-left: 2px;">
+                        <div data-drawio-colors="color: rgb(0, 0, 0); " style="box-sizing: border-box; font-size: 0px; text-align: center; max-height: 141px; overflow: hidden;">
+                            <div style="display: inline-block; font-size: 16px; font-family: Helvetica; color: rgb(0, 0, 0); line-height: 1.2; pointer-events: none; white-space: normal; overflow-wrap: normal;">
+                                Remover restrição ao carro
+                            </div>
+                        </div>
+                    </div>
+                </foreignObject>
+                <text x="161" y="858" fill="rgb(0, 0, 0)" font-family="Helvetica" font-size="16px" text-anchor="middle">
+                    Remover restrição ao carro
+                </text>
+            </switch>
+        </g>
+        <path d="M 321 781 M 791 781 M 791 926 M 321 926" fill="none" stroke="rgb(0, 0, 0)" stroke-linecap="square" stroke-miterlimit="10" pointer-events="none"/>
+        <g transform="translate(-0.5 -0.5)">
+            <switch>
+                <foreignObject pointer-events="none" width="100%" height="100%" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility" style="overflow: visible; text-align: left;">
+                    <div xmlns="http://www.w3.org/1999/xhtml" style="display: flex; align-items: unsafe center; justify-content: unsafe center; width: 468px; height: 1px; padding-top: 854px; margin-left: 322px;">
+                        <div data-drawio-colors="color: rgb(0, 0, 0); " style="box-sizing: border-box; font-size: 0px; text-align: center; max-height: 141px; overflow: hidden;">
+                            <div style="display: inline-block; font-size: 16px; font-family: Helvetica; color: rgb(0, 0, 0); line-height: 1.2; pointer-events: none; white-space: normal; overflow-wrap: normal;">
+                                1 - O Detran
+                                <span style="border-color: var(--border-color); background-color: rgb(255, 255, 255);">
+                                    envia os dados do carro para remover uma restrição
+                                    <span style="border-color: var(--border-color); background-color: rgb(251, 251, 251);">
+                                        <br style="border-color: var(--border-color);"/>
+                                    </span>
+                                    2-
+                                    <span style="border-color: var(--border-color); background-color: rgb(251, 251, 251);">
+                                        É executado o contrato de incluir uma restrição do carro no canal de restrições, inserindo uma nova transação
+                                    </span>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </foreignObject>
+                <text x="556" y="858" fill="rgb(0, 0, 0)" font-family="Helvetica" font-size="16px" text-anchor="middle">
+                    1 - O Detran envia os dados do carro para remover uma restr...
+                </text>
+            </switch>
+        </g>
+        <path d="M 1 926 M 321 926 M 321 1071 M 1 1071" fill="none" stroke="rgb(0, 0, 0)" stroke-linecap="square" stroke-miterlimit="10" pointer-events="none"/>
+        <g transform="translate(-0.5 -0.5)">
+            <switch>
+                <foreignObject pointer-events="none" width="100%" height="100%" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility" style="overflow: visible; text-align: left;">
+                    <div xmlns="http://www.w3.org/1999/xhtml" style="display: flex; align-items: unsafe center; justify-content: unsafe center; width: 318px; height: 1px; padding-top: 999px; margin-left: 2px;">
+                        <div data-drawio-colors="color: rgb(0, 0, 0); " style="box-sizing: border-box; font-size: 0px; text-align: center; max-height: 141px; overflow: hidden;">
+                            <div style="display: inline-block; font-size: 16px; font-family: Helvetica; color: rgb(0, 0, 0); line-height: 1.2; pointer-events: none; white-space: normal; overflow-wrap: normal;">
+                                Trocar de carro com outra pessoa fisica
+                            </div>
+                        </div>
+                    </div>
+                </foreignObject>
+                <text x="161" y="1003" fill="rgb(0, 0, 0)" font-family="Helvetica" font-size="16px" text-anchor="middle">
+                    Trocar de carro com outra pessoa fisica
+                </text>
+            </switch>
+        </g>
+        <path d="M 321 926 M 791 926 M 791 1071 M 321 1071" fill="none" stroke="rgb(0, 0, 0)" stroke-linecap="square" stroke-miterlimit="10" pointer-events="none"/>
+        <g transform="translate(-0.5 -0.5)">
+            <switch>
+                <foreignObject pointer-events="none" width="100%" height="100%" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility" style="overflow: visible; text-align: left;">
+                    <div xmlns="http://www.w3.org/1999/xhtml" style="display: flex; align-items: unsafe center; justify-content: unsafe center; width: 468px; height: 1px; padding-top: 999px; margin-left: 322px;">
+                        <div data-drawio-colors="color: rgb(0, 0, 0); " style="box-sizing: border-box; font-size: 0px; text-align: center; max-height: 141px; overflow: hidden;">
+                            <div style="display: inline-block; font-size: 16px; font-family: Helvetica; color: rgb(0, 0, 0); line-height: 1.2; pointer-events: none; white-space: normal; overflow-wrap: normal;">
+                                1 - A pessoa fisica
+                                <span style="border-color: var(--border-color); background-color: rgb(255, 255, 255);">
+                                    envia os dados do carro e da pessoa fisica que esta vendendo
+                                    <span style="border-color: var(--border-color); background-color: rgb(251, 251, 251);">
+                                        <br style="border-color: var(--border-color);"/>
+                                    </span>
+                                    2- O contrato inteligente verifica se o carro não
+                                    <span style="border-color: var(--border-color); background-color: rgb(251, 251, 251);">
+                                        possui nenhuma restrição
+                                        <br style="border-color: var(--border-color);"/>
+                                    </span>
+                                    3-
+                                    <span style="border-color: var(--border-color); background-color: rgb(251, 251, 251);">
+                                        É executado o contrato de transferir um carro para uma pessoa no canal de carros, inserindo uma nova transação
+                                    </span>
+                                    <br/>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </foreignObject>
+                <text x="556" y="1003" fill="rgb(0, 0, 0)" font-family="Helvetica" font-size="16px" text-anchor="middle">
+                    1 - A pessoa fisica envia os dados do carro e da pessoa fis...
+                </text>
+            </switch>
+        </g>
+        <path d="M 1 1071 M 321 1071 M 321 1216 M 1 1216" fill="none" stroke="rgb(0, 0, 0)" stroke-linecap="square" stroke-miterlimit="10" pointer-events="none"/>
+        <g transform="translate(-0.5 -0.5)">
+            <switch>
+                <foreignObject pointer-events="none" width="100%" height="100%" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility" style="overflow: visible; text-align: left;">
+                    <div xmlns="http://www.w3.org/1999/xhtml" style="display: flex; align-items: unsafe center; justify-content: unsafe center; width: 318px; height: 1px; padding-top: 1144px; margin-left: 2px;">
+                        <div data-drawio-colors="color: rgb(0, 0, 0); " style="box-sizing: border-box; font-size: 0px; text-align: center; max-height: 141px; overflow: hidden;">
+                            <div style="display: inline-block; font-size: 16px; font-family: Helvetica; color: rgb(0, 0, 0); line-height: 1.2; pointer-events: none; white-space: normal; overflow-wrap: normal;">
+                                Trocar de carro em uma c
+                                <span style="border-color: var(--border-color); background-color: rgb(255, 255, 255); font-size: 16px;">
+                                    <font style="border-color: var(--border-color); font-size: 16px;">
+                                        oncessionária
+                                    </font>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </foreignObject>
+                <text x="161" y="1148" fill="rgb(0, 0, 0)" font-family="Helvetica" font-size="16px" text-anchor="middle">
+                    Trocar de carro em uma concessionária
+                </text>
+            </switch>
+        </g>
+        <path d="M 321 1071 M 791 1071 M 791 1216 M 321 1216" fill="none" stroke="rgb(0, 0, 0)" stroke-linecap="square" stroke-miterlimit="10" pointer-events="none"/>
+        <g transform="translate(-0.5 -0.5)">
+            <switch>
+                <foreignObject pointer-events="none" width="100%" height="100%" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility" style="overflow: visible; text-align: left;">
+                    <div xmlns="http://www.w3.org/1999/xhtml" style="display: flex; align-items: unsafe center; justify-content: unsafe center; width: 468px; height: 1px; padding-top: 1144px; margin-left: 322px;">
+                        <div data-drawio-colors="color: rgb(0, 0, 0); " style="box-sizing: border-box; font-size: 0px; text-align: center; max-height: 141px; overflow: hidden;">
+                            <div style="display: inline-block; font-size: 16px; font-family: Helvetica; color: rgb(0, 0, 0); line-height: 1.2; pointer-events: none; white-space: normal; overflow-wrap: normal;">
+                                1 - A pessoa fisica
+                                <span style="border-color: var(--border-color); background-color: rgb(255, 255, 255);">
+                                    envia os dados do carro e da
+                                    <span style="border-color: var(--border-color); background-color: rgb(251, 251, 251);">
+                                        c
+                                        <span style="border-color: var(--border-color); background-color: rgb(255, 255, 255);">
+                                            <font style="border-color: var(--border-color);">
+                                                oncessionária
+                                            </font>
+                                        </span>
+                                        <br style="border-color: var(--border-color);"/>
+                                    </span>
+                                    2- O contrato inteligente verifica se o carro não
+                                    <span style="border-color: var(--border-color); background-color: rgb(251, 251, 251);">
+                                        possui nenhuma restrição
+                                        <br style="border-color: var(--border-color);"/>
+                                    </span>
+                                    3-
+                                    <span style="border-color: var(--border-color); background-color: rgb(251, 251, 251);">
+                                        É executado o contrato de transferir um carro para uma c
+                                        <span style="border-color: var(--border-color); background-color: rgb(255, 255, 255);">
+                                            <font style="border-color: var(--border-color);">
+                                                oncessionária
+                                            </font>
+                                        </span>
+                                        no canal de carros, inserindo uma nova transação
+                                    </span>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </foreignObject>
+                <text x="556" y="1148" fill="rgb(0, 0, 0)" font-family="Helvetica" font-size="16px" text-anchor="middle">
+                    1 - A pessoa fisica envia os dados do carro e da concession...
+                </text>
+            </switch>
+        </g>
+        <path d="M 1 1216 M 321 1216 M 321 1361 M 1 1361" fill="none" stroke="rgb(0, 0, 0)" stroke-linecap="square" stroke-miterlimit="10" pointer-events="none"/>
+        <g transform="translate(-0.5 -0.5)">
+            <switch>
+                <foreignObject pointer-events="none" width="100%" height="100%" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility" style="overflow: visible; text-align: left;">
+                    <div xmlns="http://www.w3.org/1999/xhtml" style="display: flex; align-items: unsafe center; justify-content: unsafe center; width: 318px; height: 1px; padding-top: 1289px; margin-left: 2px;">
+                        <div data-drawio-colors="color: rgb(0, 0, 0); " style="box-sizing: border-box; font-size: 0px; text-align: center; max-height: 141px; overflow: hidden;">
+                            <div style="display: inline-block; font-size: 16px; font-family: Helvetica; color: rgb(0, 0, 0); line-height: 1.2; pointer-events: none; white-space: normal; overflow-wrap: normal;">
+                                Fazer manuteção no carro
+                            </div>
+                        </div>
+                    </div>
+                </foreignObject>
+                <text x="161" y="1293" fill="rgb(0, 0, 0)" font-family="Helvetica" font-size="16px" text-anchor="middle">
+                    Fazer manuteção no carro
+                </text>
+            </switch>
+        </g>
+        <path d="M 321 1216 M 791 1216 M 791 1361 M 321 1361" fill="none" stroke="rgb(0, 0, 0)" stroke-linecap="square" stroke-miterlimit="10" pointer-events="none"/>
+        <g transform="translate(-0.5 -0.5)">
+            <switch>
+                <foreignObject pointer-events="none" width="100%" height="100%" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility" style="overflow: visible; text-align: left;">
+                    <div xmlns="http://www.w3.org/1999/xhtml" style="display: flex; align-items: unsafe center; justify-content: unsafe center; width: 468px; height: 1px; padding-top: 1289px; margin-left: 322px;">
+                        <div data-drawio-colors="color: rgb(0, 0, 0); " style="box-sizing: border-box; font-size: 0px; text-align: center; max-height: 141px; overflow: hidden;">
+                            <div style="display: inline-block; font-size: 16px; font-family: Helvetica; color: rgb(0, 0, 0); line-height: 1.2; pointer-events: none; white-space: normal; overflow-wrap: normal;">
+                                1 - A
+                                <span style="border-color: var(--border-color); background-color: rgb(255, 255, 255);">
+                                    <span style="background-color: rgb(251, 251, 251);">
+                                        Mecânica
+                                    </span>
+                                    envia os dados da manutenção do carro
+                                    <span style="border-color: var(--border-color); background-color: rgb(251, 251, 251);">
+                                        <br style="border-color: var(--border-color);"/>
+                                    </span>
+                                    2- O contrato inteligente verifica se o carro está em circulação
+                                    <span style="border-color: var(--border-color); background-color: rgb(251, 251, 251);">
+                                        <br style="border-color: var(--border-color);"/>
+                                    </span>
+                                    3-
+                                    <span style="border-color: var(--border-color); background-color: rgb(251, 251, 251);">
+                                        É executado o contrato de adicionar manutenção no carro, no canal de carros, inserindo uma nova transação
+                                    </span>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </foreignObject>
+                <text x="556" y="1293" fill="rgb(0, 0, 0)" font-family="Helvetica" font-size="16px" text-anchor="middle">
+                    1 - A Mecânica envia os dados da manutenção do carro2- O co...
+                </text>
+            </switch>
+        </g>
+        <path d="M 1 1361 M 321 1361 M 321 1506 M 1 1506" fill="none" stroke="rgb(0, 0, 0)" stroke-linecap="square" stroke-miterlimit="10" pointer-events="none"/>
+        <g transform="translate(-0.5 -0.5)">
+            <switch>
+                <foreignObject pointer-events="none" width="100%" height="100%" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility" style="overflow: visible; text-align: left;">
+                    <div xmlns="http://www.w3.org/1999/xhtml" style="display: flex; align-items: unsafe center; justify-content: unsafe center; width: 318px; height: 1px; padding-top: 1434px; margin-left: 2px;">
+                        <div data-drawio-colors="color: rgb(0, 0, 0); " style="box-sizing: border-box; font-size: 0px; text-align: center; max-height: 141px; overflow: hidden;">
+                            <div style="display: inline-block; font-size: 16px; font-family: Helvetica; color: rgb(0, 0, 0); line-height: 1.2; pointer-events: none; white-space: normal; overflow-wrap: normal;">
+                                Indicar o financiamento para o carro
+                            </div>
+                        </div>
+                    </div>
+                </foreignObject>
+                <text x="161" y="1438" fill="rgb(0, 0, 0)" font-family="Helvetica" font-size="16px" text-anchor="middle">
+                    Indicar o financiamento para o carro
+                </text>
+            </switch>
+        </g>
+        <path d="M 321 1361 M 791 1361 M 791 1506 M 321 1506" fill="none" stroke="rgb(0, 0, 0)" stroke-linecap="square" stroke-miterlimit="10" pointer-events="none"/>
+        <g transform="translate(-0.5 -0.5)">
+            <switch>
+                <foreignObject pointer-events="none" width="100%" height="100%" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility" style="overflow: visible; text-align: left;">
+                    <div xmlns="http://www.w3.org/1999/xhtml" style="display: flex; align-items: unsafe center; justify-content: unsafe center; width: 468px; height: 1px; padding-top: 1434px; margin-left: 322px;">
+                        <div data-drawio-colors="color: rgb(0, 0, 0); " style="box-sizing: border-box; font-size: 0px; text-align: center; max-height: 141px; overflow: hidden;">
+                            <div style="display: inline-block; font-size: 16px; font-family: Helvetica; color: rgb(0, 0, 0); line-height: 1.2; pointer-events: none; white-space: normal; overflow-wrap: normal;">
+                                1 - A
+                                <span style="border-color: var(--border-color); background-color: rgb(255, 255, 255);">
+                                    <span style="background-color: rgb(251, 251, 251);">
+                                        Financiadora
+                                    </span>
+                                    envia os dados do financiamento do carro
+                                    <span style="border-color: var(--border-color); background-color: rgb(251, 251, 251);">
+                                        <br style="border-color: var(--border-color);"/>
+                                    </span>
+                                    2- O contrato inteligente verifica se o carro ja possui financiamento
+                                    <span style="border-color: var(--border-color); background-color: rgb(251, 251, 251);">
+                                        <br style="border-color: var(--border-color);"/>
+                                    </span>
+                                    3-
+                                    <span style="border-color: var(--border-color); background-color: rgb(251, 251, 251);">
+                                        É executado o contrato de adicionar
+                                        <span style="background-color: rgb(255, 255, 255);">
+                                            financiamento
+                                        </span>
+                                        no carro, no canal de carros, inserindo uma nova transação
+                                    </span>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </foreignObject>
+                <text x="556" y="1438" fill="rgb(0, 0, 0)" font-family="Helvetica" font-size="16px" text-anchor="middle">
+                    1 - A Financiadora envia os dados do financiamento do carro...
+                </text>
+            </switch>
+        </g>
+        <path d="M 1 1506 M 321 1506 M 321 1651 M 1 1651" fill="none" stroke="rgb(0, 0, 0)" stroke-linecap="square" stroke-miterlimit="10" pointer-events="none"/>
+        <g transform="translate(-0.5 -0.5)">
+            <switch>
+                <foreignObject pointer-events="none" width="100%" height="100%" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility" style="overflow: visible; text-align: left;">
+                    <div xmlns="http://www.w3.org/1999/xhtml" style="display: flex; align-items: unsafe center; justify-content: unsafe center; width: 318px; height: 1px; padding-top: 1579px; margin-left: 2px;">
+                        <div data-drawio-colors="color: rgb(0, 0, 0); " style="box-sizing: border-box; font-size: 0px; text-align: center; max-height: 141px; overflow: hidden;">
+                            <div style="display: inline-block; font-size: 16px; font-family: Helvetica; color: rgb(0, 0, 0); line-height: 1.2; pointer-events: none; white-space: normal; overflow-wrap: normal;">
+                                Liberar o carro do financiamento
+                            </div>
+                        </div>
+                    </div>
+                </foreignObject>
+                <text x="161" y="1583" fill="rgb(0, 0, 0)" font-family="Helvetica" font-size="16px" text-anchor="middle">
+                    Liberar o carro do financiamento
+                </text>
+            </switch>
+        </g>
+        <path d="M 321 1506 M 791 1506 M 791 1651 M 321 1651" fill="none" stroke="rgb(0, 0, 0)" stroke-linecap="square" stroke-miterlimit="10" pointer-events="none"/>
+        <g transform="translate(-0.5 -0.5)">
+            <switch>
+                <foreignObject pointer-events="none" width="100%" height="100%" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility" style="overflow: visible; text-align: left;">
+                    <div xmlns="http://www.w3.org/1999/xhtml" style="display: flex; align-items: unsafe center; justify-content: unsafe center; width: 468px; height: 1px; padding-top: 1579px; margin-left: 322px;">
+                        <div data-drawio-colors="color: rgb(0, 0, 0); " style="box-sizing: border-box; font-size: 0px; text-align: center; max-height: 141px; overflow: hidden;">
+                            <div style="display: inline-block; font-size: 16px; font-family: Helvetica; color: rgb(0, 0, 0); line-height: 1.2; pointer-events: none; white-space: normal; overflow-wrap: normal;">
+                                1 - A
+                                <span style="border-color: var(--border-color); background-color: rgb(255, 255, 255);">
+                                    <span style="border-color: var(--border-color); background-color: rgb(251, 251, 251);">
+                                        Financiadora
+                                    </span>
+                                    envia os dados do carro para retirar o financiamento
+                                    <span style="border-color: var(--border-color); background-color: rgb(251, 251, 251);">
+                                        <br style="border-color: var(--border-color);"/>
+                                    </span>
+                                    2-
+                                    <span style="border-color: var(--border-color); background-color: rgb(251, 251, 251);">
+                                        É executado o contrato de adicionar
+                                        <span style="border-color: var(--border-color); background-color: rgb(255, 255, 255);">
+                                            financiamento
+                                        </span>
+                                        no carro, no canal de carros, inserindo uma nova transação
+                                    </span>
+                                    <br/>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </foreignObject>
+                <text x="556" y="1583" fill="rgb(0, 0, 0)" font-family="Helvetica" font-size="16px" text-anchor="middle">
+                    1 - A Financiadora envia os dados do carro para retirar o f...
+                </text>
+            </switch>
+        </g>
+    </g>
+    <switch>
+        <g requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility"/>
+        <a transform="translate(0,-5)" xlink:href="https://www.diagrams.net/doc/faq/svg-export-text-problems" target="_blank">
+            <text text-anchor="middle" font-size="10px" x="50%" y="100%">
+                Text is not SVG - cannot display
+            </text>
+        </a>
+    </switch>
+</svg>
