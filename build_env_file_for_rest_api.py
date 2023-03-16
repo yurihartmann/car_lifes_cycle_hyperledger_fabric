@@ -15,7 +15,7 @@ for i in fablo_dict['orgs']:
 
     connectionProfile = json.load(
         open(
-            f'./fablo-target/fabric-config/connection-profiles/connection-profile-{org_name}.json',
+            f'./fablo-target/fabric-config/connection-profiles/connection-profile-{org_name.lower()}.json',
             'r'
         )
     )
