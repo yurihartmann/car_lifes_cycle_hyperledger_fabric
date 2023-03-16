@@ -79,9 +79,7 @@ export const getContract = async (app: Application, orgName: string, channelName
                 MSPID,
                 app.locals['wallet']
             );
-            console.log('AAAA');
             const network = await getNetwork(gateway, channelName);
-            console.log('BBBBB');
             return await (await getContracts(network, chaincodeName)).contract;
         }
     }

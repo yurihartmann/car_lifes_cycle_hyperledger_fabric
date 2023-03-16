@@ -27,5 +27,5 @@ export class Person {
     public alive: boolean;
 
     @Property()
-    public driverLicense?: DriverLicense;
+    public driverLicense: DriverLicense;
 }

@@ -19,13 +19,14 @@ export class PersonContract extends BaseContract {
                 },
                 alive: true
             },
-            {
-                cpf: '456.456.456-67',
-                name: "Yasmin",
-                birthday: new Date("09/08/2001"),
-                motherName: "Maria",
-                alive: true
-            }
+            // {
+            //     cpf: '456.456.456-67',
+            //     name: "Yasmin",
+            //     birthday: new Date("09/08/2001"),
+            //     motherName: "Maria",
+            //     alive: true,
+            //     driverLicense: null
+            // }
         ];
 
         for (const person of InitLedgerPersons) {
@@ -34,15 +35,21 @@ export class PersonContract extends BaseContract {
     }
 
     @Transaction()
-    @AllowedOrgs(['govMSP'])
     @BuildReturn()
     public async CreatePerson(ctx: Context, cpf: string, name: string, birthday: string, motherName: string): Promise<object> {
+        const stateJSON = await ctx.stub.getState(cpf)
+
+        if (stateJSON) {
+            throw new Error(`The person ${cpf} already existy`);
+        }
+
         const person: Person = {
             cpf: cpf,
             name: name,
             birthday: new Date(birthday),
             motherName: motherName,
-            alive: true
+            alive: true,
+            driverLicense: null
         };
 
         await this.PutState(ctx, person.cpf, person)
