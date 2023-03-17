@@ -26,9 +26,6 @@ export function BuildReturn() {
         descriptor.value = async function (this: any, ...args: any[]) {
             const returnValue = await childFunction.apply(this, args);
 
-            console.log("returnValue: ", returnValue);
-            console.log("typeof: ", typeof returnValue);
-
             if (typeof returnValue === 'object' || Array.isArray(returnValue)) {
                 return JSON.stringify(returnValue);
             }
@@ -45,6 +42,15 @@ export class BaseContract extends Contract {
 
     protected async PutState(ctx: Context, key: string, value: object): Promise<void> {
         await ctx.stub.putState(key, Buffer.from(stringify(sortKeysRecursive(value))));
+    }
+
+    protected async HasState(ctx: Context, key: string): Promise<boolean> {
+        const stateJSON = await ctx.stub.getState(key)
+        if (!stateJSON || stateJSON.length === 0) {
+            return false;
+        }
+
+        return true;
     }
 
     protected async GetState(ctx: Context, key: string): Promise<any> {

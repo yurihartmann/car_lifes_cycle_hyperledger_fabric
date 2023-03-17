@@ -5,7 +5,7 @@ import { getContract } from '../fabric/wallet';
 
 export const invokeRouter = Router();
 
-invokeRouter.get('/:channelName/:chaincodeName/:transactionName', async (req: Request, res: Response) => {
+invokeRouter.put('/:channelName/:chaincodeName/:transactionName', async (req: Request, res: Response) => {
     const orgName = req.user as string;
     const channelName = req.params.channelName
     const chaincodeName = req.params.chaincodeName
@@ -31,8 +31,7 @@ invokeRouter.get('/:channelName/:chaincodeName/:transactionName', async (req: Re
         console.log(assets);
         return res.json(assets);
     } catch (err) {
-        console.log("AAAA: ", typeof err.message);
-        return res.json({ "error": "Error in invoke" });
+        return res.json({ "error": err.message });
     }
 
 });
