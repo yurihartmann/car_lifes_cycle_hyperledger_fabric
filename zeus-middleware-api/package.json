@@ -1,14 +1,13 @@
 {
-  "name": "asset-transfer-basic",
+  "name": "zeus-middleware-api",
   "version": "1.0.0",
-  "description": "Asset Transfer Basic REST API implemented in TypeScript",
+  "description": "Middleware API to Hyperledger network",
   "main": "dist/index.js",
   "engines": {
     "node": ">=12",
     "npm": ">=5"
   },
   "dependencies": {
-    "bullmq": "^1.47.2",
     "cors": "^2.8.5",
     "dotenv": "^10.0.0",
     "env-var": "^7.0.1",
@@ -16,37 +15,24 @@
     "express-validator": "^6.12.0",
     "fabric-network": "^2.2.10",
     "helmet": "^4.6.0",
-    "http-status-codes": "^2.1.4",
-    "ioredis": "^4.27.8",
     "passport": "^0.6.0",
     "passport-headerapikey": "^1.2.2",
-    "pino": "^6.11.3",
-    "pino-http": "^5.5.0",
     "source-map-support": "^0.5.19"
   },
   "devDependencies": {
     "@types/cors": "^2.8.12",
     "@types/express": "^4.17.12",
-    "@types/ioredis": "^4.26.4",
     "@types/jest": "^27.4.1",
     "@types/node": "^15.14.7",
     "@types/passport": "^1.0.7",
-    "@types/pino": "^6.3.8",
-    "@types/pino-http": "^5.4.1",
-    "@types/supertest": "^2.0.11",
     "@typescript-eslint/eslint-plugin": "^4.28.0",
     "@typescript-eslint/parser": "^4.28.0",
     "eslint": "^7.29.0",
     "eslint-config-prettier": "^8.3.0",
     "eslint-plugin-prettier": "^3.4.0",
-    "ioredis-mock": "^5.6.0",
-    "jest": "^27.5.1",
-    "jest-mock-extended": "^2.0.2-beta2",
     "nodemon": "^2.0.20",
-    "pino-pretty": "^5.0.2",
     "prettier": "^2.3.1",
     "rimraf": "^3.0.2",
-    "supertest": "^6.1.4",
     "ts-jest": "^27.1.4",
     "ts-node": "^10.9.1",
     "typescript": "^4.3.5"
@@ -54,10 +40,8 @@
   "scripts": {
     "build": "tsc",
     "start": "node dist/src/index.js",
-    "compile": "tsc && node dist/src/index.js",
+    "run": "tsc && node dist/src/index.js",
     "dev": "JSON_CONFIG=$(cat env.json) ./node_modules/nodemon/bin/nodemon.js -e ts  --exec \"npm run compile\""
   },
-  "author": "Hyperledger",
-  "license": "Apache-2.0",
-  "private": true
+  "author": "Yuri Hartmann"
 }
