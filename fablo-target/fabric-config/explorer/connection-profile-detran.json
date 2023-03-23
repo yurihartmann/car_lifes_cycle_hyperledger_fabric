@@ -23,28 +23,21 @@
     "detran": {
       "mspid": "detranMSP",
       "adminPrivateKey": {
-        "path": "/tmp/crypto/peerOrganizations/detran.car-lifes-cicle.com/users/Admin@detran.car-lifes-cicle.com/msp/keystore/priv-key.pem"
+        "path": "/tmp/crypto/peerOrganizations/detran.car-lifes-cycle.com/users/Admin@detran.car-lifes-cycle.com/msp/keystore/priv-key.pem"
       },
       "peers": [
-        "peer0.detran.car-lifes-cicle.com",
-        "peer1.detran.car-lifes-cicle.com"
+        "peer0.detran.car-lifes-cycle.com"
       ],
       "signedCert": {
-        "path": "/tmp/crypto/peerOrganizations/detran.car-lifes-cicle.com/users/Admin@detran.car-lifes-cicle.com/msp/signcerts/Admin@detran.car-lifes-cicle.com-cert.pem"
+        "path": "/tmp/crypto/peerOrganizations/detran.car-lifes-cycle.com/users/Admin@detran.car-lifes-cycle.com/msp/signcerts/Admin@detran.car-lifes-cycle.com-cert.pem"
       }
     }
   },
   "peers": {
-    "peer0.detran.car-lifes-cicle.com": {
-      "url": "grpc://peer0.detran.car-lifes-cicle.com:7021",
+    "peer0.detran.car-lifes-cycle.com": {
+      "url": "grpc://peer0.detran.car-lifes-cycle.com:7021",
       "tlsCACerts": {
-        "path": "/tmp/crypto/peerOrganizations/detran.car-lifes-cicle.com/msp/tlscacerts/tlsca.detran.car-lifes-cicle.com-cert.pem"
-      }
-    },
-    "peer1.detran.car-lifes-cicle.com": {
-      "url": "grpc://peer1.detran.car-lifes-cicle.com:7022",
-      "tlsCACerts": {
-        "path": "/tmp/crypto/peerOrganizations/detran.car-lifes-cicle.com/msp/tlscacerts/tlsca.detran.car-lifes-cicle.com-cert.pem"
+        "path": "/tmp/crypto/peerOrganizations/detran.car-lifes-cycle.com/msp/tlscacerts/tlsca.detran.car-lifes-cycle.com-cert.pem"
       }
     }
   },

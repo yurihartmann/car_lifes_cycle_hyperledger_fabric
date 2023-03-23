@@ -1,11 +1,11 @@
-name: fablo-test-network-detran
-description: Connection profile for detran in Fablo network
+name: fablo-test-network-montadorad
+description: Connection profile for montadoraD in Fablo network
 version: 1.0.0
 client:
-  organization: detran
+  organization: montadoraD
 organizations:
-  detran:
-    mspid: detranMSP
+  montadoraD:
+    mspid: montadoraDMSP
     peers:
       - peer0.detran.car-lifes-cycle.com
       - peer0.gov.car-lifes-cicle.com
@@ -17,7 +17,7 @@ organizations:
       - peer0.mecanica-l.car-lifes-cicle.com
       - peer0.financiadora-r.car-lifes-cicle.com
     certificateAuthorities:
-      - ca.detran.car-lifes-cycle.com
+      - ca.montadora-d.car-lifes-cicle.com
 peers:
   peer0.detran.car-lifes-cycle.com:
     url: grpc://localhost:7021
@@ -38,8 +38,8 @@ peers:
   peer0.financiadora-r.car-lifes-cicle.com:
     url: grpc://localhost:7181
 certificateAuthorities:
-  ca.detran.car-lifes-cycle.com:
-    url: http://localhost:7020
-    caName: ca.detran.car-lifes-cycle.com
+  ca.montadora-d.car-lifes-cicle.com:
+    url: http://localhost:7080
+    caName: ca.montadora-d.car-lifes-cicle.com
     httpOptions:
       verify: false

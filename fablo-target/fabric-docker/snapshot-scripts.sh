@@ -2,18 +2,30 @@
 
 __getOrdererAndPeerNodes() {
   echo "
-      orderer0.orderers-group.detran.car-lifes-cicle.com
-      peer0.detran.car-lifes-cicle.com
-      peer1.detran.car-lifes-cicle.com
-      peer0.montadora.car-lifes-cicle.com
-      peer1.montadora.car-lifes-cicle.com
+      orderer0.orderers-group.detran.car-lifes-cycle.com
+      peer0.detran.car-lifes-cycle.com
+      peer0.gov.car-lifes-cicle.com
+      peer0.montadora-c.car-lifes-cicle.com
+      peer0.montadora-d.car-lifes-cicle.com
+      peer0.concessionaria-f.car-lifes-cicle.com
+      peer0.concessionaria-g.car-lifes-cicle.com
+      peer0.mecanica-k.car-lifes-cicle.com
+      peer0.mecanica-l.car-lifes-cicle.com
+      peer0.financiadora-r.car-lifes-cicle.com
   "
 }
 
 __getCASQLiteNodes() {
   echo "
-      ca.detran.car-lifes-cicle.com
-      ca.montadora.car-lifes-cicle.com
+      ca.detran.car-lifes-cycle.com
+      ca.gov.car-lifes-cicle.com
+      ca.montadora-c.car-lifes-cicle.com
+      ca.montadora-d.car-lifes-cicle.com
+      ca.concessionaria-f.car-lifes-cicle.com
+      ca.concessionaria-g.car-lifes-cicle.com
+      ca.mecanica-k.car-lifes-cicle.com
+      ca.mecanica-l.car-lifes-cicle.com
+      ca.financiadora-r.car-lifes-cicle.com
   "
 }
 

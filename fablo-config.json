@@ -12,10 +12,10 @@
     {
       "organization": {
         "name": "detran",
-        "domain": "detran.car-lifes-cicle.com"
+        "domain": "detran.car-lifes-cycle.com"
       },
       "peer": {
-        "instances": 2,
+        "instances": 1,
         "db": "LevelDb"
       },
       "orderers": [
@@ -24,22 +24,86 @@
           "type": "solo",
           "instances": 1
         }
-      ],
-      "tools": {
-        "fabloRest": true
+      ]
+    },
+    {
+      "organization": {
+        "name": "gov",
+        "domain": "gov.car-lifes-cicle.com"
+      },
+      "peer": {
+        "instances": 1,
+        "db": "LevelDb"
       }
     },
     {
       "organization": {
-        "name": "montadora",
-        "domain": "montadora.car-lifes-cicle.com"
+        "name": "montadoraC",
+        "domain": "montadora-c.car-lifes-cicle.com"
       },
       "peer": {
-        "instances": 2,
+        "instances": 1,
         "db": "LevelDb"
+      }
+    },
+    {
+      "organization": {
+        "name": "montadoraD",
+        "domain": "montadora-d.car-lifes-cicle.com"
       },
-      "tools": {
-        "fabloRest": true
+      "peer": {
+        "instances": 1,
+        "db": "LevelDb"
+      }
+    },
+    {
+      "organization": {
+        "name": "concessionariF",
+        "domain": "concessionaria-f.car-lifes-cicle.com"
+      },
+      "peer": {
+        "instances": 1,
+        "db": "LevelDb"
+      }
+    },
+    {
+      "organization": {
+        "name": "concessionariG",
+        "domain": "concessionaria-g.car-lifes-cicle.com"
+      },
+      "peer": {
+        "instances": 1,
+        "db": "LevelDb"
+      }
+    },
+    {
+      "organization": {
+        "name": "mecanicaK",
+        "domain": "mecanica-k.car-lifes-cicle.com"
+      },
+      "peer": {
+        "instances": 1,
+        "db": "LevelDb"
+      }
+    },
+    {
+      "organization": {
+        "name": "mecanicaL",
+        "domain": "mecanica-l.car-lifes-cicle.com"
+      },
+      "peer": {
+        "instances": 1,
+        "db": "LevelDb"
+      }
+    },
+    {
+      "organization": {
+        "name": "financiadoraR",
+        "domain": "financiadora-r.car-lifes-cicle.com"
+      },
+      "peer": {
+        "instances": 1,
+        "db": "LevelDb"
       }
     }
   ],
@@ -50,15 +114,49 @@
         {
           "name": "detran",
           "peers": [
-            "peer0",
-            "peer1"
+            "peer0"
           ]
         },
         {
-          "name": "montadora",
+          "name": "montadoraC",
           "peers": [
-            "peer0",
-            "peer1"
+            "peer0"
+          ]
+        },
+        {
+          "name": "montadoraD",
+          "peers": [
+            "peer0"
+          ]
+        },
+        {
+          "name": "concessionariF",
+          "peers": [
+            "peer0"
+          ]
+        },
+        {
+          "name": "concessionariG",
+          "peers": [
+            "peer0"
+          ]
+        },
+        {
+          "name": "mecanicaK",
+          "peers": [
+            "peer0"
+          ]
+        },
+        {
+          "name": "mecanicaL",
+          "peers": [
+            "peer0"
+          ]
+        },
+        {
+          "name": "financiadoraR",
+          "peers": [
+            "peer0"
           ]
         }
       ]
@@ -69,19 +167,17 @@
         {
           "name": "detran",
           "peers": [
-            "peer0",
-            "peer1"
+            "peer0"
           ]
         },
         {
-          "name": "montadora",
+          "name": "gov",
           "peers": [
-            "peer0",
-            "peer1"
+            "peer0"
           ]
         }
       ]
-    } 
+    }
   ],
   "chaincodes": [
     {

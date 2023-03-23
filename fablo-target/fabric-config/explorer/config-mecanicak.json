@@ -1,0 +1,9 @@
+{
+  "network-configs": {
+    "network-mecanicak": {
+      "name": "Network of mecanicaK",
+      "profile": "/opt/explorer/app/platform/fabric/connection-profile/connection-profile-mecanicak.json"
+    }
+  },
+  "license": "Apache-2.0"
+}

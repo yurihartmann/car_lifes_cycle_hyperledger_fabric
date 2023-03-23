@@ -19,5 +19,5 @@ Channels:
     - Chaincodes: car
 
 - person-channel:
-    - Accepted Orgs: gov
+    - Accepted Orgs: gov and detran
     - Chaincodes: person

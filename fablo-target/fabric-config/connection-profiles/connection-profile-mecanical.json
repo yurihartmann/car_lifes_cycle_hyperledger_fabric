@@ -1,13 +1,13 @@
 {
-  "name": "fablo-test-network-detran",
-  "description": "Connection profile for detran in Fablo network",
+  "name": "fablo-test-network-mecanical",
+  "description": "Connection profile for mecanicaL in Fablo network",
   "version": "1.0.0",
   "client": {
-    "organization": "detran"
+    "organization": "mecanicaL"
   },
   "organizations": {
-    "detran": {
-      "mspid": "detranMSP",
+    "mecanicaL": {
+      "mspid": "mecanicaLMSP",
       "peers": [
         "peer0.detran.car-lifes-cycle.com",
         "peer0.gov.car-lifes-cicle.com",
@@ -20,7 +20,7 @@
         "peer0.financiadora-r.car-lifes-cicle.com"
       ],
       "certificateAuthorities": [
-        "ca.detran.car-lifes-cycle.com"
+        "ca.mecanica-l.car-lifes-cicle.com"
       ]
     }
   },
@@ -54,9 +54,9 @@
     }
   },
   "certificateAuthorities": {
-    "ca.detran.car-lifes-cycle.com": {
-      "url": "http://localhost:7020",
-      "caName": "ca.detran.car-lifes-cycle.com",
+    "ca.mecanica-l.car-lifes-cicle.com": {
+      "url": "http://localhost:7160",
+      "caName": "ca.mecanica-l.car-lifes-cicle.com",
       "httpOptions": {
         "verify": false
       }

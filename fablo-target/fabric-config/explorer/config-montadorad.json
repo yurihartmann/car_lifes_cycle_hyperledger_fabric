@@ -1,0 +1,9 @@
+{
+  "network-configs": {
+    "network-montadorad": {
+      "name": "Network of montadoraD",
+      "profile": "/opt/explorer/app/platform/fabric/connection-profile/connection-profile-montadorad.json"
+    }
+  },
+  "license": "Apache-2.0"
+}

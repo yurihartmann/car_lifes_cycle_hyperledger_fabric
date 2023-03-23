@@ -1,0 +1,9 @@
+{
+  "network-configs": {
+    "network-concessionarig": {
+      "name": "Network of concessionariG",
+      "profile": "/opt/explorer/app/platform/fabric/connection-profile/connection-profile-concessionarig.json"
+    }
+  },
+  "license": "Apache-2.0"
+}

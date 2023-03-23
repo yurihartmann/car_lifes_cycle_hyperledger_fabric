@@ -1,0 +1,8 @@
+PeerOrgs:
+  - Name: financiadoraR
+    Domain: financiadora-r.car-lifes-cicle.com
+    Specs:
+    Template:
+      Count: 1
+    Users:
+      Count: 1

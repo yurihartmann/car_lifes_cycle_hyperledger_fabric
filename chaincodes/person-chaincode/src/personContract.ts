@@ -38,6 +38,7 @@ export class PersonContract extends BaseContract {
 
     @Transaction()
     @BuildReturn()
+    @AllowedOrgs(["govMSP"])
     public async CreatePerson(ctx: Context, cpf: string, name: string, birthday: string, motherName: string): Promise<object> {
         if (await this.HasState(ctx, cpf)) {
             throw new Error(`The person ${cpf} already exists`);
@@ -58,6 +59,7 @@ export class PersonContract extends BaseContract {
 
     @Transaction()
     @BuildReturn()
+    @AllowedOrgs(["govMSP"])
     public async UpdatePerson(ctx: Context, cpf: string, name: string, birthday: string, motherName: string, alive: boolean): Promise<object> {
         const person = await this.GetState(ctx, cpf);
 
@@ -72,6 +74,7 @@ export class PersonContract extends BaseContract {
 
     @Transaction()
     @BuildReturn()
+    @AllowedOrgs(["detranMSP"])
     public async UpdateDriverLicense(ctx: Context, cpf: string, cnhNumber: number, dueDate: string): Promise<object> {
         const person = await this.GetState(ctx, cpf);
 
@@ -92,6 +95,7 @@ export class PersonContract extends BaseContract {
 
     @Transaction()
     @BuildReturn()
+    @AllowedOrgs(["detranMSP"])
     public async DeleteLicense(ctx: Context, cpf: string): Promise<object> {
         const person = await this.GetState(ctx, cpf);
 

@@ -33,7 +33,7 @@ Organizations:
     - &detran
       Name: detranMSP
       ID: detranMSP
-      MSPDir: crypto-config/peerOrganizations/detran.car-lifes-cicle.com/msp
+      MSPDir: crypto-config/peerOrganizations/detran.car-lifes-cycle.com/msp
 
       Policies:
           Readers:
@@ -50,37 +50,192 @@ Organizations:
               Rule: "OR('detranMSP.member')"
 
       AnchorPeers:
-          - Host: peer0.detran.car-lifes-cicle.com
+          - Host: peer0.detran.car-lifes-cycle.com
             Port: 7021
 
-          - Host: peer1.detran.car-lifes-cicle.com
-            Port: 7022
-
-    - &montadora
-      Name: montadoraMSP
-      ID: montadoraMSP
-      MSPDir: crypto-config/peerOrganizations/montadora.car-lifes-cicle.com/msp
+    - &gov
+      Name: govMSP
+      ID: govMSP
+      MSPDir: crypto-config/peerOrganizations/gov.car-lifes-cicle.com/msp
 
       Policies:
           Readers:
               Type: Signature
-              Rule: "OR('montadoraMSP.member')"
+              Rule: "OR('govMSP.member')"
           Writers:
               Type: Signature
-              Rule: "OR('montadoraMSP.member')"
+              Rule: "OR('govMSP.member')"
           Admins:
               Type: Signature
-              Rule: "OR('montadoraMSP.admin')"
+              Rule: "OR('govMSP.admin')"
           Endorsement:
               Type: Signature
-              Rule: "OR('montadoraMSP.member')"
+              Rule: "OR('govMSP.member')"
 
       AnchorPeers:
-          - Host: peer0.montadora.car-lifes-cicle.com
+          - Host: peer0.gov.car-lifes-cicle.com
             Port: 7041
 
-          - Host: peer1.montadora.car-lifes-cicle.com
-            Port: 7042
+    - &montadoraC
+      Name: montadoraCMSP
+      ID: montadoraCMSP
+      MSPDir: crypto-config/peerOrganizations/montadora-c.car-lifes-cicle.com/msp
+
+      Policies:
+          Readers:
+              Type: Signature
+              Rule: "OR('montadoraCMSP.member')"
+          Writers:
+              Type: Signature
+              Rule: "OR('montadoraCMSP.member')"
+          Admins:
+              Type: Signature
+              Rule: "OR('montadoraCMSP.admin')"
+          Endorsement:
+              Type: Signature
+              Rule: "OR('montadoraCMSP.member')"
+
+      AnchorPeers:
+          - Host: peer0.montadora-c.car-lifes-cicle.com
+            Port: 7061
+
+    - &montadoraD
+      Name: montadoraDMSP
+      ID: montadoraDMSP
+      MSPDir: crypto-config/peerOrganizations/montadora-d.car-lifes-cicle.com/msp
+
+      Policies:
+          Readers:
+              Type: Signature
+              Rule: "OR('montadoraDMSP.member')"
+          Writers:
+              Type: Signature
+              Rule: "OR('montadoraDMSP.member')"
+          Admins:
+              Type: Signature
+              Rule: "OR('montadoraDMSP.admin')"
+          Endorsement:
+              Type: Signature
+              Rule: "OR('montadoraDMSP.member')"
+
+      AnchorPeers:
+          - Host: peer0.montadora-d.car-lifes-cicle.com
+            Port: 7081
+
+    - &concessionariF
+      Name: concessionariFMSP
+      ID: concessionariFMSP
+      MSPDir: crypto-config/peerOrganizations/concessionaria-f.car-lifes-cicle.com/msp
+
+      Policies:
+          Readers:
+              Type: Signature
+              Rule: "OR('concessionariFMSP.member')"
+          Writers:
+              Type: Signature
+              Rule: "OR('concessionariFMSP.member')"
+          Admins:
+              Type: Signature
+              Rule: "OR('concessionariFMSP.admin')"
+          Endorsement:
+              Type: Signature
+              Rule: "OR('concessionariFMSP.member')"
+
+      AnchorPeers:
+          - Host: peer0.concessionaria-f.car-lifes-cicle.com
+            Port: 7101
+
+    - &concessionariG
+      Name: concessionariGMSP
+      ID: concessionariGMSP
+      MSPDir: crypto-config/peerOrganizations/concessionaria-g.car-lifes-cicle.com/msp
+
+      Policies:
+          Readers:
+              Type: Signature
+              Rule: "OR('concessionariGMSP.member')"
+          Writers:
+              Type: Signature
+              Rule: "OR('concessionariGMSP.member')"
+          Admins:
+              Type: Signature
+              Rule: "OR('concessionariGMSP.admin')"
+          Endorsement:
+              Type: Signature
+              Rule: "OR('concessionariGMSP.member')"
+
+      AnchorPeers:
+          - Host: peer0.concessionaria-g.car-lifes-cicle.com
+            Port: 7121
+
+    - &mecanicaK
+      Name: mecanicaKMSP
+      ID: mecanicaKMSP
+      MSPDir: crypto-config/peerOrganizations/mecanica-k.car-lifes-cicle.com/msp
+
+      Policies:
+          Readers:
+              Type: Signature
+              Rule: "OR('mecanicaKMSP.member')"
+          Writers:
+              Type: Signature
+              Rule: "OR('mecanicaKMSP.member')"
+          Admins:
+              Type: Signature
+              Rule: "OR('mecanicaKMSP.admin')"
+          Endorsement:
+              Type: Signature
+              Rule: "OR('mecanicaKMSP.member')"
+
+      AnchorPeers:
+          - Host: peer0.mecanica-k.car-lifes-cicle.com
+            Port: 7141
+
+    - &mecanicaL
+      Name: mecanicaLMSP
+      ID: mecanicaLMSP
+      MSPDir: crypto-config/peerOrganizations/mecanica-l.car-lifes-cicle.com/msp
+
+      Policies:
+          Readers:
+              Type: Signature
+              Rule: "OR('mecanicaLMSP.member')"
+          Writers:
+              Type: Signature
+              Rule: "OR('mecanicaLMSP.member')"
+          Admins:
+              Type: Signature
+              Rule: "OR('mecanicaLMSP.admin')"
+          Endorsement:
+              Type: Signature
+              Rule: "OR('mecanicaLMSP.member')"
+
+      AnchorPeers:
+          - Host: peer0.mecanica-l.car-lifes-cicle.com
+            Port: 7161
+
+    - &financiadoraR
+      Name: financiadoraRMSP
+      ID: financiadoraRMSP
+      MSPDir: crypto-config/peerOrganizations/financiadora-r.car-lifes-cicle.com/msp
+
+      Policies:
+          Readers:
+              Type: Signature
+              Rule: "OR('financiadoraRMSP.member')"
+          Writers:
+              Type: Signature
+              Rule: "OR('financiadoraRMSP.member')"
+          Admins:
+              Type: Signature
+              Rule: "OR('financiadoraRMSP.admin')"
+          Endorsement:
+              Type: Signature
+              Rule: "OR('financiadoraRMSP.member')"
+
+      AnchorPeers:
+          - Host: peer0.financiadora-r.car-lifes-cicle.com
+            Port: 7181
 
 ################################################################################
 #   SECTION: Application
@@ -112,7 +267,7 @@ Application: &ApplicationDefaults
 Orderer: &Orderers-groupDefaults
     OrdererType: solo
     Addresses:
-        - orderer0.orderers-group.detran.car-lifes-cicle.com:7030
+        - orderer0.orderers-group.detran.car-lifes-cycle.com:7030
     BatchTimeout: 2s
     BatchSize:
         MaxMessageCount: 10
@@ -159,7 +314,14 @@ Profiles:
             SampleConsortium:
                 Organizations:
                     - *detran
-                    - *montadora
+                    - *gov
+                    - *montadoraC
+                    - *montadoraD
+                    - *concessionariF
+                    - *concessionariG
+                    - *mecanicaK
+                    - *mecanicaL
+                    - *financiadoraR
 
     # Profile used to create channeltx for car-channel #
     CarChannel:
@@ -175,12 +337,24 @@ Profiles:
             SampleConsortium:
                 Organizations:
                     - *detran
-                    - *montadora
+                    - *montadoraC
+                    - *montadoraD
+                    - *concessionariF
+                    - *concessionariG
+                    - *mecanicaK
+                    - *mecanicaL
+                    - *financiadoraR
         Application:
             <<: *ApplicationDefaults
             Organizations:
                 - *detran
-                - *montadora
+                - *montadoraC
+                - *montadoraD
+                - *concessionariF
+                - *concessionariG
+                - *mecanicaK
+                - *mecanicaL
+                - *financiadoraR
 
     # Profile used to create channeltx for person-channel #
     PersonChannel:
@@ -196,9 +370,9 @@ Profiles:
             SampleConsortium:
                 Organizations:
                     - *detran
-                    - *montadora
+                    - *gov
         Application:
             <<: *ApplicationDefaults
             Organizations:
                 - *detran
-                - *montadora
+                - *gov

@@ -4,9 +4,37 @@
       "name": "Network of detran",
       "profile": "/opt/explorer/app/platform/fabric/connection-profile/connection-profile-detran.json"
     },
-    "network-montadora": {
-      "name": "Network of montadora",
-      "profile": "/opt/explorer/app/platform/fabric/connection-profile/connection-profile-montadora.json"
+    "network-gov": {
+      "name": "Network of gov",
+      "profile": "/opt/explorer/app/platform/fabric/connection-profile/connection-profile-gov.json"
+    },
+    "network-montadorac": {
+      "name": "Network of montadoraC",
+      "profile": "/opt/explorer/app/platform/fabric/connection-profile/connection-profile-montadorac.json"
+    },
+    "network-montadorad": {
+      "name": "Network of montadoraD",
+      "profile": "/opt/explorer/app/platform/fabric/connection-profile/connection-profile-montadorad.json"
+    },
+    "network-concessionarif": {
+      "name": "Network of concessionariF",
+      "profile": "/opt/explorer/app/platform/fabric/connection-profile/connection-profile-concessionarif.json"
+    },
+    "network-concessionarig": {
+      "name": "Network of concessionariG",
+      "profile": "/opt/explorer/app/platform/fabric/connection-profile/connection-profile-concessionarig.json"
+    },
+    "network-mecanicak": {
+      "name": "Network of mecanicaK",
+      "profile": "/opt/explorer/app/platform/fabric/connection-profile/connection-profile-mecanicak.json"
+    },
+    "network-mecanical": {
+      "name": "Network of mecanicaL",
+      "profile": "/opt/explorer/app/platform/fabric/connection-profile/connection-profile-mecanical.json"
+    },
+    "network-financiadorar": {
+      "name": "Network of financiadoraR",
+      "profile": "/opt/explorer/app/platform/fabric/connection-profile/connection-profile-financiadorar.json"
     }
   },
   "license": "Apache-2.0"
