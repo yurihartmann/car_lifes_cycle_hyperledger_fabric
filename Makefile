@@ -23,7 +23,6 @@ configure-car-chaincodes:
 
 configure-person-chaincodes:
 	@cd chaincodes/person-chaincode
-	@nvm install 12 && nvm use node 12
 	@npm i
 	@sed -i '14d' node_modules/logform/index.d.ts
 

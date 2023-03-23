@@ -48,5 +48,5 @@ for i in fablo_dict['channels']:
 
 
 # Writing to sample.json
-with open("./rest-api-typescript/env.json", "w") as outfile:
+with open("./zeus-middleware-api/env.json", "w") as outfile:
     outfile.write(json.dumps(json_config_file, indent=4))

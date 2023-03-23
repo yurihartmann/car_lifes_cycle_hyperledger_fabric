@@ -69,7 +69,7 @@ const getContracts = async (
     return { contract, qsccContract };
 };
 
-export const getContract = async (app: Application, orgName: string, channelName: string, chaincodeName: string): Promise<Contract> => {
+export const getContract = async (wallet: Wallet, orgName: string, channelName: string, chaincodeName: string): Promise<Contract> => {
     for (const [k, v] of Object.entries(orgs)) {
         if (k == orgName) {
             let connectionProfile = JSON.parse(v.connectionProfile);
@@ -77,7 +77,7 @@ export const getContract = async (app: Application, orgName: string, channelName
             const gateway = await createGateway(
                 connectionProfile,
                 MSPID,
-                app.locals['wallet']
+                wallet
             );
             const network = await getNetwork(gateway, channelName);
             return await (await getContracts(network, chaincodeName)).contract;
