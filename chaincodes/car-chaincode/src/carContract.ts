@@ -11,33 +11,42 @@ export class CarContract extends BaseContract {
     public async InitLedger(ctx: Context): Promise<void> {
         const cars: Car[] = [
             {
-                id: '8faf4111-723c-40c1-aa5f-070ad40edfaa',
+                chassisId: '8faf4111-723c-40c1-aa5f-070ad40edfaa',
                 brand: 'Ford',
                 model: 'Focus',
                 ownerCpf: "123.123.123-12",
                 color: 'blue',
-                appraisedValue: 15000
+                year: 2012,
+                financingFlag: false,
+                maintenance: [],
+                restrictions: []
             },
             {
-                id: 'c747dc9e-e736-40b2-83bc-6ecd2f6356e9',
+                chassisId: 'c747dc9e-e736-40b2-83bc-6ecd2f6356e9',
                 brand: 'Honda',
                 model: 'Civic',
                 ownerCpf: "123.123.123-12",
                 color: 'white',
-                appraisedValue: 25000
+                year: 2012,
+                financingFlag: false,
+                maintenance: [],
+                restrictions: []
             },
             {
-                id: '3039d00b-943e-43e3-8322-bb1d165b6e82',
+                chassisId: '3039d00b-943e-43e3-8322-bb1d165b6e82',
                 brand: 'Toyota',
                 model: 'Corola',
                 ownerCpf: "123.123.123-12",
                 color: 'black',
-                appraisedValue: 28000
+                year: 2012,
+                financingFlag: false,
+                maintenance: [],
+                restrictions: []
             }
         ];
 
         for (const car of cars) {
-            await this.PutState(ctx, car.id, car)
+            await this.PutState(ctx, car.chassisId, car)
         }
     }
 
