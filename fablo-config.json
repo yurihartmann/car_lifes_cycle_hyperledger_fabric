@@ -112,6 +112,12 @@
       "name": "car-channel",
       "orgs": [
         {
+          "name": "gov",
+          "peers": [
+            "peer0"
+          ]
+        },
+        {
           "name": "detran",
           "peers": [
             "peer0"
@@ -165,13 +171,55 @@
       "name": "person-channel",
       "orgs": [
         {
+          "name": "gov",
+          "peers": [
+            "peer0"
+          ]
+        },
+        {
           "name": "detran",
           "peers": [
             "peer0"
           ]
         },
         {
-          "name": "gov",
+          "name": "montadoraC",
+          "peers": [
+            "peer0"
+          ]
+        },
+        {
+          "name": "montadoraD",
+          "peers": [
+            "peer0"
+          ]
+        },
+        {
+          "name": "concessionariF",
+          "peers": [
+            "peer0"
+          ]
+        },
+        {
+          "name": "concessionariG",
+          "peers": [
+            "peer0"
+          ]
+        },
+        {
+          "name": "mecanicaK",
+          "peers": [
+            "peer0"
+          ]
+        },
+        {
+          "name": "mecanicaL",
+          "peers": [
+            "peer0"
+          ]
+        },
+        {
+          "name": "financiadoraR",
           "peers": [
             "peer0"
           ]

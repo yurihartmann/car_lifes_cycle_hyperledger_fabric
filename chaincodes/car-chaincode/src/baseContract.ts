@@ -8,8 +8,15 @@ export function AllowedOrgs(MSPIDs: string[]) {
         const childFunction = descriptor.value;
         descriptor.value = function (this: any, ...args: any[]) {
             const MSPID = args[0].clientIdentity.getMSPID();
+            var allowed: boolean = false;
 
-            if (!MSPIDs.includes(MSPID)) {
+            MSPIDs.forEach(MspidAllowed => {
+                if (MSPID === MspidAllowed + "MSP") {
+                    allowed = true;
+                }
+            });
+
+            if (!allowed) {
                 throw new Error(`The MSPID ${MSPID} not allowed for this method`);
             }
 
@@ -86,7 +93,8 @@ export class BaseContract extends Contract {
     @BuildReturn()
     public async GetDetails(ctx: Context): Promise<object> {
         return {
-            getMSPID: ctx.clientIdentity.getMSPID()
+            getMSPID: ctx.clientIdentity.getMSPID(),
+            getID: ctx.clientIdentity.getID()
         };
     }
 

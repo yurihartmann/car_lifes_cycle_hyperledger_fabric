@@ -44,6 +44,9 @@
   "channels": {
     "car-channel": {
       "peers": {}
+    },
+    "person-channel": {
+      "peers": {}
     }
   }
 }

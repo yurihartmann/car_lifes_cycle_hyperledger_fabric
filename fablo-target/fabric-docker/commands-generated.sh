@@ -54,6 +54,8 @@ installChannels() {
   printHeadline "Creating 'car-channel' on detran/peer0" "U1F63B"
   docker exec -i cli.detran.car-lifes-cycle.com bash -c "source scripts/channel_fns.sh; createChannelAndJoin 'car-channel' 'detranMSP' 'peer0.detran.car-lifes-cycle.com:7021' 'crypto/users/Admin@detran.car-lifes-cycle.com/msp' 'orderer0.orderers-group.detran.car-lifes-cycle.com:7030';"
 
+  printItalics "Joining 'car-channel' on  gov/peer0" "U1F638"
+  docker exec -i cli.gov.car-lifes-cicle.com bash -c "source scripts/channel_fns.sh; fetchChannelAndJoin 'car-channel' 'govMSP' 'peer0.gov.car-lifes-cicle.com:7041' 'crypto/users/Admin@gov.car-lifes-cicle.com/msp' 'orderer0.orderers-group.detran.car-lifes-cycle.com:7030';"
   printItalics "Joining 'car-channel' on  montadoraC/peer0" "U1F638"
   docker exec -i cli.montadora-c.car-lifes-cicle.com bash -c "source scripts/channel_fns.sh; fetchChannelAndJoin 'car-channel' 'montadoraCMSP' 'peer0.montadora-c.car-lifes-cicle.com:7061' 'crypto/users/Admin@montadora-c.car-lifes-cicle.com/msp' 'orderer0.orderers-group.detran.car-lifes-cycle.com:7030';"
   printItalics "Joining 'car-channel' on  montadoraD/peer0" "U1F638"
@@ -73,6 +75,20 @@ installChannels() {
 
   printItalics "Joining 'person-channel' on  gov/peer0" "U1F638"
   docker exec -i cli.gov.car-lifes-cicle.com bash -c "source scripts/channel_fns.sh; fetchChannelAndJoin 'person-channel' 'govMSP' 'peer0.gov.car-lifes-cicle.com:7041' 'crypto/users/Admin@gov.car-lifes-cicle.com/msp' 'orderer0.orderers-group.detran.car-lifes-cycle.com:7030';"
+  printItalics "Joining 'person-channel' on  montadoraC/peer0" "U1F638"
+  docker exec -i cli.montadora-c.car-lifes-cicle.com bash -c "source scripts/channel_fns.sh; fetchChannelAndJoin 'person-channel' 'montadoraCMSP' 'peer0.montadora-c.car-lifes-cicle.com:7061' 'crypto/users/Admin@montadora-c.car-lifes-cicle.com/msp' 'orderer0.orderers-group.detran.car-lifes-cycle.com:7030';"
+  printItalics "Joining 'person-channel' on  montadoraD/peer0" "U1F638"
+  docker exec -i cli.montadora-d.car-lifes-cicle.com bash -c "source scripts/channel_fns.sh; fetchChannelAndJoin 'person-channel' 'montadoraDMSP' 'peer0.montadora-d.car-lifes-cicle.com:7081' 'crypto/users/Admin@montadora-d.car-lifes-cicle.com/msp' 'orderer0.orderers-group.detran.car-lifes-cycle.com:7030';"
+  printItalics "Joining 'person-channel' on  concessionariF/peer0" "U1F638"
+  docker exec -i cli.concessionaria-f.car-lifes-cicle.com bash -c "source scripts/channel_fns.sh; fetchChannelAndJoin 'person-channel' 'concessionariFMSP' 'peer0.concessionaria-f.car-lifes-cicle.com:7101' 'crypto/users/Admin@concessionaria-f.car-lifes-cicle.com/msp' 'orderer0.orderers-group.detran.car-lifes-cycle.com:7030';"
+  printItalics "Joining 'person-channel' on  concessionariG/peer0" "U1F638"
+  docker exec -i cli.concessionaria-g.car-lifes-cicle.com bash -c "source scripts/channel_fns.sh; fetchChannelAndJoin 'person-channel' 'concessionariGMSP' 'peer0.concessionaria-g.car-lifes-cicle.com:7121' 'crypto/users/Admin@concessionaria-g.car-lifes-cicle.com/msp' 'orderer0.orderers-group.detran.car-lifes-cycle.com:7030';"
+  printItalics "Joining 'person-channel' on  mecanicaK/peer0" "U1F638"
+  docker exec -i cli.mecanica-k.car-lifes-cicle.com bash -c "source scripts/channel_fns.sh; fetchChannelAndJoin 'person-channel' 'mecanicaKMSP' 'peer0.mecanica-k.car-lifes-cicle.com:7141' 'crypto/users/Admin@mecanica-k.car-lifes-cicle.com/msp' 'orderer0.orderers-group.detran.car-lifes-cycle.com:7030';"
+  printItalics "Joining 'person-channel' on  mecanicaL/peer0" "U1F638"
+  docker exec -i cli.mecanica-l.car-lifes-cicle.com bash -c "source scripts/channel_fns.sh; fetchChannelAndJoin 'person-channel' 'mecanicaLMSP' 'peer0.mecanica-l.car-lifes-cicle.com:7161' 'crypto/users/Admin@mecanica-l.car-lifes-cicle.com/msp' 'orderer0.orderers-group.detran.car-lifes-cycle.com:7030';"
+  printItalics "Joining 'person-channel' on  financiadoraR/peer0" "U1F638"
+  docker exec -i cli.financiadora-r.car-lifes-cicle.com bash -c "source scripts/channel_fns.sh; fetchChannelAndJoin 'person-channel' 'financiadoraRMSP' 'peer0.financiadora-r.car-lifes-cicle.com:7181' 'crypto/users/Admin@financiadora-r.car-lifes-cicle.com/msp' 'orderer0.orderers-group.detran.car-lifes-cycle.com:7030';"
 }
 
 installChaincodes() {
@@ -83,6 +99,9 @@ installChaincodes() {
     chaincodePackage "cli.detran.car-lifes-cycle.com" "peer0.detran.car-lifes-cycle.com:7021" "car" "$version" "node" printHeadline "Installing 'car' for detran" "U1F60E"
     chaincodeInstall "cli.detran.car-lifes-cycle.com" "peer0.detran.car-lifes-cycle.com:7021" "car" "$version" ""
     chaincodeApprove "cli.detran.car-lifes-cycle.com" "peer0.detran.car-lifes-cycle.com:7021" "car-channel" "car" "$version" "orderer0.orderers-group.detran.car-lifes-cycle.com:7030" "" "false" "" ""
+    printHeadline "Installing 'car' for gov" "U1F60E"
+    chaincodeInstall "cli.gov.car-lifes-cicle.com" "peer0.gov.car-lifes-cicle.com:7041" "car" "$version" ""
+    chaincodeApprove "cli.gov.car-lifes-cicle.com" "peer0.gov.car-lifes-cicle.com:7041" "car-channel" "car" "$version" "orderer0.orderers-group.detran.car-lifes-cycle.com:7030" "" "false" "" ""
     printHeadline "Installing 'car' for montadoraC" "U1F60E"
     chaincodeInstall "cli.montadora-c.car-lifes-cicle.com" "peer0.montadora-c.car-lifes-cicle.com:7061" "car" "$version" ""
     chaincodeApprove "cli.montadora-c.car-lifes-cicle.com" "peer0.montadora-c.car-lifes-cicle.com:7061" "car-channel" "car" "$version" "orderer0.orderers-group.detran.car-lifes-cycle.com:7030" "" "false" "" ""
@@ -105,7 +124,7 @@ installChaincodes() {
     chaincodeInstall "cli.financiadora-r.car-lifes-cicle.com" "peer0.financiadora-r.car-lifes-cicle.com:7181" "car" "$version" ""
     chaincodeApprove "cli.financiadora-r.car-lifes-cicle.com" "peer0.financiadora-r.car-lifes-cicle.com:7181" "car-channel" "car" "$version" "orderer0.orderers-group.detran.car-lifes-cycle.com:7030" "" "false" "" ""
     printItalics "Committing chaincode 'car' on channel 'car-channel' as 'detran'" "U1F618"
-    chaincodeCommit "cli.detran.car-lifes-cycle.com" "peer0.detran.car-lifes-cycle.com:7021" "car-channel" "car" "$version" "orderer0.orderers-group.detran.car-lifes-cycle.com:7030" "" "false" "" "peer0.detran.car-lifes-cycle.com:7021,peer0.montadora-c.car-lifes-cicle.com:7061,peer0.montadora-d.car-lifes-cicle.com:7081,peer0.concessionaria-f.car-lifes-cicle.com:7101,peer0.concessionaria-g.car-lifes-cicle.com:7121,peer0.mecanica-k.car-lifes-cicle.com:7141,peer0.mecanica-l.car-lifes-cicle.com:7161,peer0.financiadora-r.car-lifes-cicle.com:7181" "" ""
+    chaincodeCommit "cli.detran.car-lifes-cycle.com" "peer0.detran.car-lifes-cycle.com:7021" "car-channel" "car" "$version" "orderer0.orderers-group.detran.car-lifes-cycle.com:7030" "" "false" "" "peer0.detran.car-lifes-cycle.com:7021,peer0.gov.car-lifes-cicle.com:7041,peer0.montadora-c.car-lifes-cicle.com:7061,peer0.montadora-d.car-lifes-cicle.com:7081,peer0.concessionaria-f.car-lifes-cicle.com:7101,peer0.concessionaria-g.car-lifes-cicle.com:7121,peer0.mecanica-k.car-lifes-cicle.com:7141,peer0.mecanica-l.car-lifes-cicle.com:7161,peer0.financiadora-r.car-lifes-cicle.com:7181" "" ""
   else
     echo "Warning! Skipping chaincode 'car' installation. Chaincode directory is empty."
     echo "Looked in dir: '$CHAINCODES_BASE_DIR/./chaincodes/car-chaincode'"
@@ -120,8 +139,29 @@ installChaincodes() {
     printHeadline "Installing 'person' for gov" "U1F60E"
     chaincodeInstall "cli.gov.car-lifes-cicle.com" "peer0.gov.car-lifes-cicle.com:7041" "person" "$version" ""
     chaincodeApprove "cli.gov.car-lifes-cicle.com" "peer0.gov.car-lifes-cicle.com:7041" "person-channel" "person" "$version" "orderer0.orderers-group.detran.car-lifes-cycle.com:7030" "" "false" "" ""
+    printHeadline "Installing 'person' for montadoraC" "U1F60E"
+    chaincodeInstall "cli.montadora-c.car-lifes-cicle.com" "peer0.montadora-c.car-lifes-cicle.com:7061" "person" "$version" ""
+    chaincodeApprove "cli.montadora-c.car-lifes-cicle.com" "peer0.montadora-c.car-lifes-cicle.com:7061" "person-channel" "person" "$version" "orderer0.orderers-group.detran.car-lifes-cycle.com:7030" "" "false" "" ""
+    printHeadline "Installing 'person' for montadoraD" "U1F60E"
+    chaincodeInstall "cli.montadora-d.car-lifes-cicle.com" "peer0.montadora-d.car-lifes-cicle.com:7081" "person" "$version" ""
+    chaincodeApprove "cli.montadora-d.car-lifes-cicle.com" "peer0.montadora-d.car-lifes-cicle.com:7081" "person-channel" "person" "$version" "orderer0.orderers-group.detran.car-lifes-cycle.com:7030" "" "false" "" ""
+    printHeadline "Installing 'person' for concessionariF" "U1F60E"
+    chaincodeInstall "cli.concessionaria-f.car-lifes-cicle.com" "peer0.concessionaria-f.car-lifes-cicle.com:7101" "person" "$version" ""
+    chaincodeApprove "cli.concessionaria-f.car-lifes-cicle.com" "peer0.concessionaria-f.car-lifes-cicle.com:7101" "person-channel" "person" "$version" "orderer0.orderers-group.detran.car-lifes-cycle.com:7030" "" "false" "" ""
+    printHeadline "Installing 'person' for concessionariG" "U1F60E"
+    chaincodeInstall "cli.concessionaria-g.car-lifes-cicle.com" "peer0.concessionaria-g.car-lifes-cicle.com:7121" "person" "$version" ""
+    chaincodeApprove "cli.concessionaria-g.car-lifes-cicle.com" "peer0.concessionaria-g.car-lifes-cicle.com:7121" "person-channel" "person" "$version" "orderer0.orderers-group.detran.car-lifes-cycle.com:7030" "" "false" "" ""
+    printHeadline "Installing 'person' for mecanicaK" "U1F60E"
+    chaincodeInstall "cli.mecanica-k.car-lifes-cicle.com" "peer0.mecanica-k.car-lifes-cicle.com:7141" "person" "$version" ""
+    chaincodeApprove "cli.mecanica-k.car-lifes-cicle.com" "peer0.mecanica-k.car-lifes-cicle.com:7141" "person-channel" "person" "$version" "orderer0.orderers-group.detran.car-lifes-cycle.com:7030" "" "false" "" ""
+    printHeadline "Installing 'person' for mecanicaL" "U1F60E"
+    chaincodeInstall "cli.mecanica-l.car-lifes-cicle.com" "peer0.mecanica-l.car-lifes-cicle.com:7161" "person" "$version" ""
+    chaincodeApprove "cli.mecanica-l.car-lifes-cicle.com" "peer0.mecanica-l.car-lifes-cicle.com:7161" "person-channel" "person" "$version" "orderer0.orderers-group.detran.car-lifes-cycle.com:7030" "" "false" "" ""
+    printHeadline "Installing 'person' for financiadoraR" "U1F60E"
+    chaincodeInstall "cli.financiadora-r.car-lifes-cicle.com" "peer0.financiadora-r.car-lifes-cicle.com:7181" "person" "$version" ""
+    chaincodeApprove "cli.financiadora-r.car-lifes-cicle.com" "peer0.financiadora-r.car-lifes-cicle.com:7181" "person-channel" "person" "$version" "orderer0.orderers-group.detran.car-lifes-cycle.com:7030" "" "false" "" ""
     printItalics "Committing chaincode 'person' on channel 'person-channel' as 'detran'" "U1F618"
-    chaincodeCommit "cli.detran.car-lifes-cycle.com" "peer0.detran.car-lifes-cycle.com:7021" "person-channel" "person" "$version" "orderer0.orderers-group.detran.car-lifes-cycle.com:7030" "" "false" "" "peer0.detran.car-lifes-cycle.com:7021,peer0.gov.car-lifes-cicle.com:7041" "" ""
+    chaincodeCommit "cli.detran.car-lifes-cycle.com" "peer0.detran.car-lifes-cycle.com:7021" "person-channel" "person" "$version" "orderer0.orderers-group.detran.car-lifes-cycle.com:7030" "" "false" "" "peer0.detran.car-lifes-cycle.com:7021,peer0.gov.car-lifes-cicle.com:7041,peer0.montadora-c.car-lifes-cicle.com:7061,peer0.montadora-d.car-lifes-cicle.com:7081,peer0.concessionaria-f.car-lifes-cicle.com:7101,peer0.concessionaria-g.car-lifes-cicle.com:7121,peer0.mecanica-k.car-lifes-cicle.com:7141,peer0.mecanica-l.car-lifes-cicle.com:7161,peer0.financiadora-r.car-lifes-cicle.com:7181" "" ""
   else
     echo "Warning! Skipping chaincode 'person' installation. Chaincode directory is empty."
     echo "Looked in dir: '$CHAINCODES_BASE_DIR/./chaincodes/person-chaincode'"
@@ -149,6 +189,9 @@ installChaincode() {
       chaincodePackage "cli.detran.car-lifes-cycle.com" "peer0.detran.car-lifes-cycle.com:7021" "car" "$version" "node" printHeadline "Installing 'car' for detran" "U1F60E"
       chaincodeInstall "cli.detran.car-lifes-cycle.com" "peer0.detran.car-lifes-cycle.com:7021" "car" "$version" ""
       chaincodeApprove "cli.detran.car-lifes-cycle.com" "peer0.detran.car-lifes-cycle.com:7021" "car-channel" "car" "$version" "orderer0.orderers-group.detran.car-lifes-cycle.com:7030" "" "false" "" ""
+      printHeadline "Installing 'car' for gov" "U1F60E"
+      chaincodeInstall "cli.gov.car-lifes-cicle.com" "peer0.gov.car-lifes-cicle.com:7041" "car" "$version" ""
+      chaincodeApprove "cli.gov.car-lifes-cicle.com" "peer0.gov.car-lifes-cicle.com:7041" "car-channel" "car" "$version" "orderer0.orderers-group.detran.car-lifes-cycle.com:7030" "" "false" "" ""
       printHeadline "Installing 'car' for montadoraC" "U1F60E"
       chaincodeInstall "cli.montadora-c.car-lifes-cicle.com" "peer0.montadora-c.car-lifes-cicle.com:7061" "car" "$version" ""
       chaincodeApprove "cli.montadora-c.car-lifes-cicle.com" "peer0.montadora-c.car-lifes-cicle.com:7061" "car-channel" "car" "$version" "orderer0.orderers-group.detran.car-lifes-cycle.com:7030" "" "false" "" ""
@@ -171,7 +214,7 @@ installChaincode() {
       chaincodeInstall "cli.financiadora-r.car-lifes-cicle.com" "peer0.financiadora-r.car-lifes-cicle.com:7181" "car" "$version" ""
       chaincodeApprove "cli.financiadora-r.car-lifes-cicle.com" "peer0.financiadora-r.car-lifes-cicle.com:7181" "car-channel" "car" "$version" "orderer0.orderers-group.detran.car-lifes-cycle.com:7030" "" "false" "" ""
       printItalics "Committing chaincode 'car' on channel 'car-channel' as 'detran'" "U1F618"
-      chaincodeCommit "cli.detran.car-lifes-cycle.com" "peer0.detran.car-lifes-cycle.com:7021" "car-channel" "car" "$version" "orderer0.orderers-group.detran.car-lifes-cycle.com:7030" "" "false" "" "peer0.detran.car-lifes-cycle.com:7021,peer0.montadora-c.car-lifes-cicle.com:7061,peer0.montadora-d.car-lifes-cicle.com:7081,peer0.concessionaria-f.car-lifes-cicle.com:7101,peer0.concessionaria-g.car-lifes-cicle.com:7121,peer0.mecanica-k.car-lifes-cicle.com:7141,peer0.mecanica-l.car-lifes-cicle.com:7161,peer0.financiadora-r.car-lifes-cicle.com:7181" "" ""
+      chaincodeCommit "cli.detran.car-lifes-cycle.com" "peer0.detran.car-lifes-cycle.com:7021" "car-channel" "car" "$version" "orderer0.orderers-group.detran.car-lifes-cycle.com:7030" "" "false" "" "peer0.detran.car-lifes-cycle.com:7021,peer0.gov.car-lifes-cicle.com:7041,peer0.montadora-c.car-lifes-cicle.com:7061,peer0.montadora-d.car-lifes-cicle.com:7081,peer0.concessionaria-f.car-lifes-cicle.com:7101,peer0.concessionaria-g.car-lifes-cicle.com:7121,peer0.mecanica-k.car-lifes-cicle.com:7141,peer0.mecanica-l.car-lifes-cicle.com:7161,peer0.financiadora-r.car-lifes-cicle.com:7181" "" ""
 
     else
       echo "Warning! Skipping chaincode 'car' install. Chaincode directory is empty."
@@ -188,8 +231,29 @@ installChaincode() {
       printHeadline "Installing 'person' for gov" "U1F60E"
       chaincodeInstall "cli.gov.car-lifes-cicle.com" "peer0.gov.car-lifes-cicle.com:7041" "person" "$version" ""
       chaincodeApprove "cli.gov.car-lifes-cicle.com" "peer0.gov.car-lifes-cicle.com:7041" "person-channel" "person" "$version" "orderer0.orderers-group.detran.car-lifes-cycle.com:7030" "" "false" "" ""
+      printHeadline "Installing 'person' for montadoraC" "U1F60E"
+      chaincodeInstall "cli.montadora-c.car-lifes-cicle.com" "peer0.montadora-c.car-lifes-cicle.com:7061" "person" "$version" ""
+      chaincodeApprove "cli.montadora-c.car-lifes-cicle.com" "peer0.montadora-c.car-lifes-cicle.com:7061" "person-channel" "person" "$version" "orderer0.orderers-group.detran.car-lifes-cycle.com:7030" "" "false" "" ""
+      printHeadline "Installing 'person' for montadoraD" "U1F60E"
+      chaincodeInstall "cli.montadora-d.car-lifes-cicle.com" "peer0.montadora-d.car-lifes-cicle.com:7081" "person" "$version" ""
+      chaincodeApprove "cli.montadora-d.car-lifes-cicle.com" "peer0.montadora-d.car-lifes-cicle.com:7081" "person-channel" "person" "$version" "orderer0.orderers-group.detran.car-lifes-cycle.com:7030" "" "false" "" ""
+      printHeadline "Installing 'person' for concessionariF" "U1F60E"
+      chaincodeInstall "cli.concessionaria-f.car-lifes-cicle.com" "peer0.concessionaria-f.car-lifes-cicle.com:7101" "person" "$version" ""
+      chaincodeApprove "cli.concessionaria-f.car-lifes-cicle.com" "peer0.concessionaria-f.car-lifes-cicle.com:7101" "person-channel" "person" "$version" "orderer0.orderers-group.detran.car-lifes-cycle.com:7030" "" "false" "" ""
+      printHeadline "Installing 'person' for concessionariG" "U1F60E"
+      chaincodeInstall "cli.concessionaria-g.car-lifes-cicle.com" "peer0.concessionaria-g.car-lifes-cicle.com:7121" "person" "$version" ""
+      chaincodeApprove "cli.concessionaria-g.car-lifes-cicle.com" "peer0.concessionaria-g.car-lifes-cicle.com:7121" "person-channel" "person" "$version" "orderer0.orderers-group.detran.car-lifes-cycle.com:7030" "" "false" "" ""
+      printHeadline "Installing 'person' for mecanicaK" "U1F60E"
+      chaincodeInstall "cli.mecanica-k.car-lifes-cicle.com" "peer0.mecanica-k.car-lifes-cicle.com:7141" "person" "$version" ""
+      chaincodeApprove "cli.mecanica-k.car-lifes-cicle.com" "peer0.mecanica-k.car-lifes-cicle.com:7141" "person-channel" "person" "$version" "orderer0.orderers-group.detran.car-lifes-cycle.com:7030" "" "false" "" ""
+      printHeadline "Installing 'person' for mecanicaL" "U1F60E"
+      chaincodeInstall "cli.mecanica-l.car-lifes-cicle.com" "peer0.mecanica-l.car-lifes-cicle.com:7161" "person" "$version" ""
+      chaincodeApprove "cli.mecanica-l.car-lifes-cicle.com" "peer0.mecanica-l.car-lifes-cicle.com:7161" "person-channel" "person" "$version" "orderer0.orderers-group.detran.car-lifes-cycle.com:7030" "" "false" "" ""
+      printHeadline "Installing 'person' for financiadoraR" "U1F60E"
+      chaincodeInstall "cli.financiadora-r.car-lifes-cicle.com" "peer0.financiadora-r.car-lifes-cicle.com:7181" "person" "$version" ""
+      chaincodeApprove "cli.financiadora-r.car-lifes-cicle.com" "peer0.financiadora-r.car-lifes-cicle.com:7181" "person-channel" "person" "$version" "orderer0.orderers-group.detran.car-lifes-cycle.com:7030" "" "false" "" ""
       printItalics "Committing chaincode 'person' on channel 'person-channel' as 'detran'" "U1F618"
-      chaincodeCommit "cli.detran.car-lifes-cycle.com" "peer0.detran.car-lifes-cycle.com:7021" "person-channel" "person" "$version" "orderer0.orderers-group.detran.car-lifes-cycle.com:7030" "" "false" "" "peer0.detran.car-lifes-cycle.com:7021,peer0.gov.car-lifes-cicle.com:7041" "" ""
+      chaincodeCommit "cli.detran.car-lifes-cycle.com" "peer0.detran.car-lifes-cycle.com:7021" "person-channel" "person" "$version" "orderer0.orderers-group.detran.car-lifes-cycle.com:7030" "" "false" "" "peer0.detran.car-lifes-cycle.com:7021,peer0.gov.car-lifes-cicle.com:7041,peer0.montadora-c.car-lifes-cicle.com:7061,peer0.montadora-d.car-lifes-cicle.com:7081,peer0.concessionaria-f.car-lifes-cicle.com:7101,peer0.concessionaria-g.car-lifes-cicle.com:7121,peer0.mecanica-k.car-lifes-cicle.com:7141,peer0.mecanica-l.car-lifes-cicle.com:7161,peer0.financiadora-r.car-lifes-cicle.com:7181" "" ""
 
     else
       echo "Warning! Skipping chaincode 'person' install. Chaincode directory is empty."
@@ -209,6 +273,8 @@ runDevModeChaincode() {
     local version="0.0.1"
     printHeadline "Approving 'car' for detran (dev mode)" "U1F60E"
     chaincodeApprove "cli.detran.car-lifes-cycle.com" "peer0.detran.car-lifes-cycle.com:7021" "car-channel" "car" "0.0.1" "orderer0.orderers-group.detran.car-lifes-cycle.com:7030" "" "false" "" ""
+    printHeadline "Approving 'car' for gov (dev mode)" "U1F60E"
+    chaincodeApprove "cli.gov.car-lifes-cicle.com" "peer0.gov.car-lifes-cicle.com:7041" "car-channel" "car" "0.0.1" "orderer0.orderers-group.detran.car-lifes-cycle.com:7030" "" "false" "" ""
     printHeadline "Approving 'car' for montadoraC (dev mode)" "U1F60E"
     chaincodeApprove "cli.montadora-c.car-lifes-cicle.com" "peer0.montadora-c.car-lifes-cicle.com:7061" "car-channel" "car" "0.0.1" "orderer0.orderers-group.detran.car-lifes-cycle.com:7030" "" "false" "" ""
     printHeadline "Approving 'car' for montadoraD (dev mode)" "U1F60E"
@@ -224,7 +290,7 @@ runDevModeChaincode() {
     printHeadline "Approving 'car' for financiadoraR (dev mode)" "U1F60E"
     chaincodeApprove "cli.financiadora-r.car-lifes-cicle.com" "peer0.financiadora-r.car-lifes-cicle.com:7181" "car-channel" "car" "0.0.1" "orderer0.orderers-group.detran.car-lifes-cycle.com:7030" "" "false" "" ""
     printItalics "Committing chaincode 'car' on channel 'car-channel' as 'detran' (dev mode)" "U1F618"
-    chaincodeCommit "cli.detran.car-lifes-cycle.com" "peer0.detran.car-lifes-cycle.com:7021" "car-channel" "car" "0.0.1" "orderer0.orderers-group.detran.car-lifes-cycle.com:7030" "" "false" "" "peer0.detran.car-lifes-cycle.com:7021,peer0.montadora-c.car-lifes-cicle.com:7061,peer0.montadora-d.car-lifes-cicle.com:7081,peer0.concessionaria-f.car-lifes-cicle.com:7101,peer0.concessionaria-g.car-lifes-cicle.com:7121,peer0.mecanica-k.car-lifes-cicle.com:7141,peer0.mecanica-l.car-lifes-cicle.com:7161,peer0.financiadora-r.car-lifes-cicle.com:7181" "" ""
+    chaincodeCommit "cli.detran.car-lifes-cycle.com" "peer0.detran.car-lifes-cycle.com:7021" "car-channel" "car" "0.0.1" "orderer0.orderers-group.detran.car-lifes-cycle.com:7030" "" "false" "" "peer0.detran.car-lifes-cycle.com:7021,peer0.gov.car-lifes-cicle.com:7041,peer0.montadora-c.car-lifes-cicle.com:7061,peer0.montadora-d.car-lifes-cicle.com:7081,peer0.concessionaria-f.car-lifes-cicle.com:7101,peer0.concessionaria-g.car-lifes-cicle.com:7121,peer0.mecanica-k.car-lifes-cicle.com:7141,peer0.mecanica-l.car-lifes-cicle.com:7161,peer0.financiadora-r.car-lifes-cicle.com:7181" "" ""
 
   fi
   if [ "$chaincodeName" = "person" ]; then
@@ -233,8 +299,22 @@ runDevModeChaincode() {
     chaincodeApprove "cli.detran.car-lifes-cycle.com" "peer0.detran.car-lifes-cycle.com:7021" "person-channel" "person" "0.0.1" "orderer0.orderers-group.detran.car-lifes-cycle.com:7030" "" "false" "" ""
     printHeadline "Approving 'person' for gov (dev mode)" "U1F60E"
     chaincodeApprove "cli.gov.car-lifes-cicle.com" "peer0.gov.car-lifes-cicle.com:7041" "person-channel" "person" "0.0.1" "orderer0.orderers-group.detran.car-lifes-cycle.com:7030" "" "false" "" ""
+    printHeadline "Approving 'person' for montadoraC (dev mode)" "U1F60E"
+    chaincodeApprove "cli.montadora-c.car-lifes-cicle.com" "peer0.montadora-c.car-lifes-cicle.com:7061" "person-channel" "person" "0.0.1" "orderer0.orderers-group.detran.car-lifes-cycle.com:7030" "" "false" "" ""
+    printHeadline "Approving 'person' for montadoraD (dev mode)" "U1F60E"
+    chaincodeApprove "cli.montadora-d.car-lifes-cicle.com" "peer0.montadora-d.car-lifes-cicle.com:7081" "person-channel" "person" "0.0.1" "orderer0.orderers-group.detran.car-lifes-cycle.com:7030" "" "false" "" ""
+    printHeadline "Approving 'person' for concessionariF (dev mode)" "U1F60E"
+    chaincodeApprove "cli.concessionaria-f.car-lifes-cicle.com" "peer0.concessionaria-f.car-lifes-cicle.com:7101" "person-channel" "person" "0.0.1" "orderer0.orderers-group.detran.car-lifes-cycle.com:7030" "" "false" "" ""
+    printHeadline "Approving 'person' for concessionariG (dev mode)" "U1F60E"
+    chaincodeApprove "cli.concessionaria-g.car-lifes-cicle.com" "peer0.concessionaria-g.car-lifes-cicle.com:7121" "person-channel" "person" "0.0.1" "orderer0.orderers-group.detran.car-lifes-cycle.com:7030" "" "false" "" ""
+    printHeadline "Approving 'person' for mecanicaK (dev mode)" "U1F60E"
+    chaincodeApprove "cli.mecanica-k.car-lifes-cicle.com" "peer0.mecanica-k.car-lifes-cicle.com:7141" "person-channel" "person" "0.0.1" "orderer0.orderers-group.detran.car-lifes-cycle.com:7030" "" "false" "" ""
+    printHeadline "Approving 'person' for mecanicaL (dev mode)" "U1F60E"
+    chaincodeApprove "cli.mecanica-l.car-lifes-cicle.com" "peer0.mecanica-l.car-lifes-cicle.com:7161" "person-channel" "person" "0.0.1" "orderer0.orderers-group.detran.car-lifes-cycle.com:7030" "" "false" "" ""
+    printHeadline "Approving 'person' for financiadoraR (dev mode)" "U1F60E"
+    chaincodeApprove "cli.financiadora-r.car-lifes-cicle.com" "peer0.financiadora-r.car-lifes-cicle.com:7181" "person-channel" "person" "0.0.1" "orderer0.orderers-group.detran.car-lifes-cycle.com:7030" "" "false" "" ""
     printItalics "Committing chaincode 'person' on channel 'person-channel' as 'detran' (dev mode)" "U1F618"
-    chaincodeCommit "cli.detran.car-lifes-cycle.com" "peer0.detran.car-lifes-cycle.com:7021" "person-channel" "person" "0.0.1" "orderer0.orderers-group.detran.car-lifes-cycle.com:7030" "" "false" "" "peer0.detran.car-lifes-cycle.com:7021,peer0.gov.car-lifes-cicle.com:7041" "" ""
+    chaincodeCommit "cli.detran.car-lifes-cycle.com" "peer0.detran.car-lifes-cycle.com:7021" "person-channel" "person" "0.0.1" "orderer0.orderers-group.detran.car-lifes-cycle.com:7030" "" "false" "" "peer0.detran.car-lifes-cycle.com:7021,peer0.gov.car-lifes-cicle.com:7041,peer0.montadora-c.car-lifes-cicle.com:7061,peer0.montadora-d.car-lifes-cicle.com:7081,peer0.concessionaria-f.car-lifes-cicle.com:7101,peer0.concessionaria-g.car-lifes-cicle.com:7121,peer0.mecanica-k.car-lifes-cicle.com:7141,peer0.mecanica-l.car-lifes-cicle.com:7161,peer0.financiadora-r.car-lifes-cicle.com:7181" "" ""
 
   fi
 }
@@ -259,6 +339,9 @@ upgradeChaincode() {
       chaincodePackage "cli.detran.car-lifes-cycle.com" "peer0.detran.car-lifes-cycle.com:7021" "car" "$version" "node" printHeadline "Installing 'car' for detran" "U1F60E"
       chaincodeInstall "cli.detran.car-lifes-cycle.com" "peer0.detran.car-lifes-cycle.com:7021" "car" "$version" ""
       chaincodeApprove "cli.detran.car-lifes-cycle.com" "peer0.detran.car-lifes-cycle.com:7021" "car-channel" "car" "$version" "orderer0.orderers-group.detran.car-lifes-cycle.com:7030" "" "false" "" ""
+      printHeadline "Installing 'car' for gov" "U1F60E"
+      chaincodeInstall "cli.gov.car-lifes-cicle.com" "peer0.gov.car-lifes-cicle.com:7041" "car" "$version" ""
+      chaincodeApprove "cli.gov.car-lifes-cicle.com" "peer0.gov.car-lifes-cicle.com:7041" "car-channel" "car" "$version" "orderer0.orderers-group.detran.car-lifes-cycle.com:7030" "" "false" "" ""
       printHeadline "Installing 'car' for montadoraC" "U1F60E"
       chaincodeInstall "cli.montadora-c.car-lifes-cicle.com" "peer0.montadora-c.car-lifes-cicle.com:7061" "car" "$version" ""
       chaincodeApprove "cli.montadora-c.car-lifes-cicle.com" "peer0.montadora-c.car-lifes-cicle.com:7061" "car-channel" "car" "$version" "orderer0.orderers-group.detran.car-lifes-cycle.com:7030" "" "false" "" ""
@@ -281,7 +364,7 @@ upgradeChaincode() {
       chaincodeInstall "cli.financiadora-r.car-lifes-cicle.com" "peer0.financiadora-r.car-lifes-cicle.com:7181" "car" "$version" ""
       chaincodeApprove "cli.financiadora-r.car-lifes-cicle.com" "peer0.financiadora-r.car-lifes-cicle.com:7181" "car-channel" "car" "$version" "orderer0.orderers-group.detran.car-lifes-cycle.com:7030" "" "false" "" ""
       printItalics "Committing chaincode 'car' on channel 'car-channel' as 'detran'" "U1F618"
-      chaincodeCommit "cli.detran.car-lifes-cycle.com" "peer0.detran.car-lifes-cycle.com:7021" "car-channel" "car" "$version" "orderer0.orderers-group.detran.car-lifes-cycle.com:7030" "" "false" "" "peer0.detran.car-lifes-cycle.com:7021,peer0.montadora-c.car-lifes-cicle.com:7061,peer0.montadora-d.car-lifes-cicle.com:7081,peer0.concessionaria-f.car-lifes-cicle.com:7101,peer0.concessionaria-g.car-lifes-cicle.com:7121,peer0.mecanica-k.car-lifes-cicle.com:7141,peer0.mecanica-l.car-lifes-cicle.com:7161,peer0.financiadora-r.car-lifes-cicle.com:7181" "" ""
+      chaincodeCommit "cli.detran.car-lifes-cycle.com" "peer0.detran.car-lifes-cycle.com:7021" "car-channel" "car" "$version" "orderer0.orderers-group.detran.car-lifes-cycle.com:7030" "" "false" "" "peer0.detran.car-lifes-cycle.com:7021,peer0.gov.car-lifes-cicle.com:7041,peer0.montadora-c.car-lifes-cicle.com:7061,peer0.montadora-d.car-lifes-cicle.com:7081,peer0.concessionaria-f.car-lifes-cicle.com:7101,peer0.concessionaria-g.car-lifes-cicle.com:7121,peer0.mecanica-k.car-lifes-cicle.com:7141,peer0.mecanica-l.car-lifes-cicle.com:7161,peer0.financiadora-r.car-lifes-cicle.com:7181" "" ""
 
     else
       echo "Warning! Skipping chaincode 'car' upgrade. Chaincode directory is empty."
@@ -298,8 +381,29 @@ upgradeChaincode() {
       printHeadline "Installing 'person' for gov" "U1F60E"
       chaincodeInstall "cli.gov.car-lifes-cicle.com" "peer0.gov.car-lifes-cicle.com:7041" "person" "$version" ""
       chaincodeApprove "cli.gov.car-lifes-cicle.com" "peer0.gov.car-lifes-cicle.com:7041" "person-channel" "person" "$version" "orderer0.orderers-group.detran.car-lifes-cycle.com:7030" "" "false" "" ""
+      printHeadline "Installing 'person' for montadoraC" "U1F60E"
+      chaincodeInstall "cli.montadora-c.car-lifes-cicle.com" "peer0.montadora-c.car-lifes-cicle.com:7061" "person" "$version" ""
+      chaincodeApprove "cli.montadora-c.car-lifes-cicle.com" "peer0.montadora-c.car-lifes-cicle.com:7061" "person-channel" "person" "$version" "orderer0.orderers-group.detran.car-lifes-cycle.com:7030" "" "false" "" ""
+      printHeadline "Installing 'person' for montadoraD" "U1F60E"
+      chaincodeInstall "cli.montadora-d.car-lifes-cicle.com" "peer0.montadora-d.car-lifes-cicle.com:7081" "person" "$version" ""
+      chaincodeApprove "cli.montadora-d.car-lifes-cicle.com" "peer0.montadora-d.car-lifes-cicle.com:7081" "person-channel" "person" "$version" "orderer0.orderers-group.detran.car-lifes-cycle.com:7030" "" "false" "" ""
+      printHeadline "Installing 'person' for concessionariF" "U1F60E"
+      chaincodeInstall "cli.concessionaria-f.car-lifes-cicle.com" "peer0.concessionaria-f.car-lifes-cicle.com:7101" "person" "$version" ""
+      chaincodeApprove "cli.concessionaria-f.car-lifes-cicle.com" "peer0.concessionaria-f.car-lifes-cicle.com:7101" "person-channel" "person" "$version" "orderer0.orderers-group.detran.car-lifes-cycle.com:7030" "" "false" "" ""
+      printHeadline "Installing 'person' for concessionariG" "U1F60E"
+      chaincodeInstall "cli.concessionaria-g.car-lifes-cicle.com" "peer0.concessionaria-g.car-lifes-cicle.com:7121" "person" "$version" ""
+      chaincodeApprove "cli.concessionaria-g.car-lifes-cicle.com" "peer0.concessionaria-g.car-lifes-cicle.com:7121" "person-channel" "person" "$version" "orderer0.orderers-group.detran.car-lifes-cycle.com:7030" "" "false" "" ""
+      printHeadline "Installing 'person' for mecanicaK" "U1F60E"
+      chaincodeInstall "cli.mecanica-k.car-lifes-cicle.com" "peer0.mecanica-k.car-lifes-cicle.com:7141" "person" "$version" ""
+      chaincodeApprove "cli.mecanica-k.car-lifes-cicle.com" "peer0.mecanica-k.car-lifes-cicle.com:7141" "person-channel" "person" "$version" "orderer0.orderers-group.detran.car-lifes-cycle.com:7030" "" "false" "" ""
+      printHeadline "Installing 'person' for mecanicaL" "U1F60E"
+      chaincodeInstall "cli.mecanica-l.car-lifes-cicle.com" "peer0.mecanica-l.car-lifes-cicle.com:7161" "person" "$version" ""
+      chaincodeApprove "cli.mecanica-l.car-lifes-cicle.com" "peer0.mecanica-l.car-lifes-cicle.com:7161" "person-channel" "person" "$version" "orderer0.orderers-group.detran.car-lifes-cycle.com:7030" "" "false" "" ""
+      printHeadline "Installing 'person' for financiadoraR" "U1F60E"
+      chaincodeInstall "cli.financiadora-r.car-lifes-cicle.com" "peer0.financiadora-r.car-lifes-cicle.com:7181" "person" "$version" ""
+      chaincodeApprove "cli.financiadora-r.car-lifes-cicle.com" "peer0.financiadora-r.car-lifes-cicle.com:7181" "person-channel" "person" "$version" "orderer0.orderers-group.detran.car-lifes-cycle.com:7030" "" "false" "" ""
       printItalics "Committing chaincode 'person' on channel 'person-channel' as 'detran'" "U1F618"
-      chaincodeCommit "cli.detran.car-lifes-cycle.com" "peer0.detran.car-lifes-cycle.com:7021" "person-channel" "person" "$version" "orderer0.orderers-group.detran.car-lifes-cycle.com:7030" "" "false" "" "peer0.detran.car-lifes-cycle.com:7021,peer0.gov.car-lifes-cicle.com:7041" "" ""
+      chaincodeCommit "cli.detran.car-lifes-cycle.com" "peer0.detran.car-lifes-cycle.com:7021" "person-channel" "person" "$version" "orderer0.orderers-group.detran.car-lifes-cycle.com:7030" "" "false" "" "peer0.detran.car-lifes-cycle.com:7021,peer0.gov.car-lifes-cicle.com:7041,peer0.montadora-c.car-lifes-cicle.com:7061,peer0.montadora-d.car-lifes-cicle.com:7081,peer0.concessionaria-f.car-lifes-cicle.com:7101,peer0.concessionaria-g.car-lifes-cicle.com:7121,peer0.mecanica-k.car-lifes-cicle.com:7141,peer0.mecanica-l.car-lifes-cicle.com:7161,peer0.financiadora-r.car-lifes-cicle.com:7181" "" ""
 
     else
       echo "Warning! Skipping chaincode 'person' upgrade. Chaincode directory is empty."
@@ -311,6 +415,7 @@ upgradeChaincode() {
 notifyOrgsAboutChannels() {
   printHeadline "Creating new channel config blocks" "U1F537"
   createNewChannelUpdateTx "car-channel" "detranMSP" "CarChannel" "$FABLO_NETWORK_ROOT/fabric-config" "$FABLO_NETWORK_ROOT/fabric-config/config"
+  createNewChannelUpdateTx "car-channel" "govMSP" "CarChannel" "$FABLO_NETWORK_ROOT/fabric-config" "$FABLO_NETWORK_ROOT/fabric-config/config"
   createNewChannelUpdateTx "car-channel" "montadoraCMSP" "CarChannel" "$FABLO_NETWORK_ROOT/fabric-config" "$FABLO_NETWORK_ROOT/fabric-config/config"
   createNewChannelUpdateTx "car-channel" "montadoraDMSP" "CarChannel" "$FABLO_NETWORK_ROOT/fabric-config" "$FABLO_NETWORK_ROOT/fabric-config/config"
   createNewChannelUpdateTx "car-channel" "concessionariFMSP" "CarChannel" "$FABLO_NETWORK_ROOT/fabric-config" "$FABLO_NETWORK_ROOT/fabric-config/config"
@@ -320,9 +425,17 @@ notifyOrgsAboutChannels() {
   createNewChannelUpdateTx "car-channel" "financiadoraRMSP" "CarChannel" "$FABLO_NETWORK_ROOT/fabric-config" "$FABLO_NETWORK_ROOT/fabric-config/config"
   createNewChannelUpdateTx "person-channel" "detranMSP" "PersonChannel" "$FABLO_NETWORK_ROOT/fabric-config" "$FABLO_NETWORK_ROOT/fabric-config/config"
   createNewChannelUpdateTx "person-channel" "govMSP" "PersonChannel" "$FABLO_NETWORK_ROOT/fabric-config" "$FABLO_NETWORK_ROOT/fabric-config/config"
+  createNewChannelUpdateTx "person-channel" "montadoraCMSP" "PersonChannel" "$FABLO_NETWORK_ROOT/fabric-config" "$FABLO_NETWORK_ROOT/fabric-config/config"
+  createNewChannelUpdateTx "person-channel" "montadoraDMSP" "PersonChannel" "$FABLO_NETWORK_ROOT/fabric-config" "$FABLO_NETWORK_ROOT/fabric-config/config"
+  createNewChannelUpdateTx "person-channel" "concessionariFMSP" "PersonChannel" "$FABLO_NETWORK_ROOT/fabric-config" "$FABLO_NETWORK_ROOT/fabric-config/config"
+  createNewChannelUpdateTx "person-channel" "concessionariGMSP" "PersonChannel" "$FABLO_NETWORK_ROOT/fabric-config" "$FABLO_NETWORK_ROOT/fabric-config/config"
+  createNewChannelUpdateTx "person-channel" "mecanicaKMSP" "PersonChannel" "$FABLO_NETWORK_ROOT/fabric-config" "$FABLO_NETWORK_ROOT/fabric-config/config"
+  createNewChannelUpdateTx "person-channel" "mecanicaLMSP" "PersonChannel" "$FABLO_NETWORK_ROOT/fabric-config" "$FABLO_NETWORK_ROOT/fabric-config/config"
+  createNewChannelUpdateTx "person-channel" "financiadoraRMSP" "PersonChannel" "$FABLO_NETWORK_ROOT/fabric-config" "$FABLO_NETWORK_ROOT/fabric-config/config"
 
   printHeadline "Notyfing orgs about channels" "U1F4E2"
   notifyOrgAboutNewChannel "car-channel" "detranMSP" "cli.detran.car-lifes-cycle.com" "peer0.detran.car-lifes-cycle.com" "orderer0.orderers-group.detran.car-lifes-cycle.com:7030"
+  notifyOrgAboutNewChannel "car-channel" "govMSP" "cli.gov.car-lifes-cicle.com" "peer0.gov.car-lifes-cicle.com" "orderer0.orderers-group.detran.car-lifes-cycle.com:7030"
   notifyOrgAboutNewChannel "car-channel" "montadoraCMSP" "cli.montadora-c.car-lifes-cicle.com" "peer0.montadora-c.car-lifes-cicle.com" "orderer0.orderers-group.detran.car-lifes-cycle.com:7030"
   notifyOrgAboutNewChannel "car-channel" "montadoraDMSP" "cli.montadora-d.car-lifes-cicle.com" "peer0.montadora-d.car-lifes-cicle.com" "orderer0.orderers-group.detran.car-lifes-cycle.com:7030"
   notifyOrgAboutNewChannel "car-channel" "concessionariFMSP" "cli.concessionaria-f.car-lifes-cicle.com" "peer0.concessionaria-f.car-lifes-cicle.com" "orderer0.orderers-group.detran.car-lifes-cycle.com:7030"
@@ -332,9 +445,17 @@ notifyOrgsAboutChannels() {
   notifyOrgAboutNewChannel "car-channel" "financiadoraRMSP" "cli.financiadora-r.car-lifes-cicle.com" "peer0.financiadora-r.car-lifes-cicle.com" "orderer0.orderers-group.detran.car-lifes-cycle.com:7030"
   notifyOrgAboutNewChannel "person-channel" "detranMSP" "cli.detran.car-lifes-cycle.com" "peer0.detran.car-lifes-cycle.com" "orderer0.orderers-group.detran.car-lifes-cycle.com:7030"
   notifyOrgAboutNewChannel "person-channel" "govMSP" "cli.gov.car-lifes-cicle.com" "peer0.gov.car-lifes-cicle.com" "orderer0.orderers-group.detran.car-lifes-cycle.com:7030"
+  notifyOrgAboutNewChannel "person-channel" "montadoraCMSP" "cli.montadora-c.car-lifes-cicle.com" "peer0.montadora-c.car-lifes-cicle.com" "orderer0.orderers-group.detran.car-lifes-cycle.com:7030"
+  notifyOrgAboutNewChannel "person-channel" "montadoraDMSP" "cli.montadora-d.car-lifes-cicle.com" "peer0.montadora-d.car-lifes-cicle.com" "orderer0.orderers-group.detran.car-lifes-cycle.com:7030"
+  notifyOrgAboutNewChannel "person-channel" "concessionariFMSP" "cli.concessionaria-f.car-lifes-cicle.com" "peer0.concessionaria-f.car-lifes-cicle.com" "orderer0.orderers-group.detran.car-lifes-cycle.com:7030"
+  notifyOrgAboutNewChannel "person-channel" "concessionariGMSP" "cli.concessionaria-g.car-lifes-cicle.com" "peer0.concessionaria-g.car-lifes-cicle.com" "orderer0.orderers-group.detran.car-lifes-cycle.com:7030"
+  notifyOrgAboutNewChannel "person-channel" "mecanicaKMSP" "cli.mecanica-k.car-lifes-cicle.com" "peer0.mecanica-k.car-lifes-cicle.com" "orderer0.orderers-group.detran.car-lifes-cycle.com:7030"
+  notifyOrgAboutNewChannel "person-channel" "mecanicaLMSP" "cli.mecanica-l.car-lifes-cicle.com" "peer0.mecanica-l.car-lifes-cicle.com" "orderer0.orderers-group.detran.car-lifes-cycle.com:7030"
+  notifyOrgAboutNewChannel "person-channel" "financiadoraRMSP" "cli.financiadora-r.car-lifes-cicle.com" "peer0.financiadora-r.car-lifes-cicle.com" "orderer0.orderers-group.detran.car-lifes-cycle.com:7030"
 
   printHeadline "Deleting new channel config blocks" "U1F52A"
   deleteNewChannelUpdateTx "car-channel" "detranMSP" "cli.detran.car-lifes-cycle.com"
+  deleteNewChannelUpdateTx "car-channel" "govMSP" "cli.gov.car-lifes-cicle.com"
   deleteNewChannelUpdateTx "car-channel" "montadoraCMSP" "cli.montadora-c.car-lifes-cicle.com"
   deleteNewChannelUpdateTx "car-channel" "montadoraDMSP" "cli.montadora-d.car-lifes-cicle.com"
   deleteNewChannelUpdateTx "car-channel" "concessionariFMSP" "cli.concessionaria-f.car-lifes-cicle.com"
@@ -344,6 +465,13 @@ notifyOrgsAboutChannels() {
   deleteNewChannelUpdateTx "car-channel" "financiadoraRMSP" "cli.financiadora-r.car-lifes-cicle.com"
   deleteNewChannelUpdateTx "person-channel" "detranMSP" "cli.detran.car-lifes-cycle.com"
   deleteNewChannelUpdateTx "person-channel" "govMSP" "cli.gov.car-lifes-cicle.com"
+  deleteNewChannelUpdateTx "person-channel" "montadoraCMSP" "cli.montadora-c.car-lifes-cicle.com"
+  deleteNewChannelUpdateTx "person-channel" "montadoraDMSP" "cli.montadora-d.car-lifes-cicle.com"
+  deleteNewChannelUpdateTx "person-channel" "concessionariFMSP" "cli.concessionaria-f.car-lifes-cicle.com"
+  deleteNewChannelUpdateTx "person-channel" "concessionariGMSP" "cli.concessionaria-g.car-lifes-cicle.com"
+  deleteNewChannelUpdateTx "person-channel" "mecanicaKMSP" "cli.mecanica-k.car-lifes-cicle.com"
+  deleteNewChannelUpdateTx "person-channel" "mecanicaLMSP" "cli.mecanica-l.car-lifes-cicle.com"
+  deleteNewChannelUpdateTx "person-channel" "financiadoraRMSP" "cli.financiadora-r.car-lifes-cicle.com"
 }
 
 printStartSuccessInfo() {
@@ -366,6 +494,14 @@ networkDown() {
     docker rm -f "$container" || echo "docker rm of $container failed. Check if all fabric dockers properly was deleted"
   done
   for image in $(docker images "dev-peer0.detran.car-lifes-cycle.com-car*" -q); do
+    echo "Removing image $image..."
+    docker rmi "$image" || echo "docker rmi of $image failed. Check if all fabric dockers properly was deleted"
+  done
+  for container in $(docker ps -a | grep "dev-peer0.gov.car-lifes-cicle.com-car" | awk '{print $1}'); do
+    echo "Removing container $container..."
+    docker rm -f "$container" || echo "docker rm of $container failed. Check if all fabric dockers properly was deleted"
+  done
+  for image in $(docker images "dev-peer0.gov.car-lifes-cicle.com-car*" -q); do
     echo "Removing image $image..."
     docker rmi "$image" || echo "docker rmi of $image failed. Check if all fabric dockers properly was deleted"
   done
@@ -438,6 +574,62 @@ networkDown() {
     docker rm -f "$container" || echo "docker rm of $container failed. Check if all fabric dockers properly was deleted"
   done
   for image in $(docker images "dev-peer0.gov.car-lifes-cicle.com-person*" -q); do
+    echo "Removing image $image..."
+    docker rmi "$image" || echo "docker rmi of $image failed. Check if all fabric dockers properly was deleted"
+  done
+  for container in $(docker ps -a | grep "dev-peer0.montadora-c.car-lifes-cicle.com-person" | awk '{print $1}'); do
+    echo "Removing container $container..."
+    docker rm -f "$container" || echo "docker rm of $container failed. Check if all fabric dockers properly was deleted"
+  done
+  for image in $(docker images "dev-peer0.montadora-c.car-lifes-cicle.com-person*" -q); do
+    echo "Removing image $image..."
+    docker rmi "$image" || echo "docker rmi of $image failed. Check if all fabric dockers properly was deleted"
+  done
+  for container in $(docker ps -a | grep "dev-peer0.montadora-d.car-lifes-cicle.com-person" | awk '{print $1}'); do
+    echo "Removing container $container..."
+    docker rm -f "$container" || echo "docker rm of $container failed. Check if all fabric dockers properly was deleted"
+  done
+  for image in $(docker images "dev-peer0.montadora-d.car-lifes-cicle.com-person*" -q); do
+    echo "Removing image $image..."
+    docker rmi "$image" || echo "docker rmi of $image failed. Check if all fabric dockers properly was deleted"
+  done
+  for container in $(docker ps -a | grep "dev-peer0.concessionaria-f.car-lifes-cicle.com-person" | awk '{print $1}'); do
+    echo "Removing container $container..."
+    docker rm -f "$container" || echo "docker rm of $container failed. Check if all fabric dockers properly was deleted"
+  done
+  for image in $(docker images "dev-peer0.concessionaria-f.car-lifes-cicle.com-person*" -q); do
+    echo "Removing image $image..."
+    docker rmi "$image" || echo "docker rmi of $image failed. Check if all fabric dockers properly was deleted"
+  done
+  for container in $(docker ps -a | grep "dev-peer0.concessionaria-g.car-lifes-cicle.com-person" | awk '{print $1}'); do
+    echo "Removing container $container..."
+    docker rm -f "$container" || echo "docker rm of $container failed. Check if all fabric dockers properly was deleted"
+  done
+  for image in $(docker images "dev-peer0.concessionaria-g.car-lifes-cicle.com-person*" -q); do
+    echo "Removing image $image..."
+    docker rmi "$image" || echo "docker rmi of $image failed. Check if all fabric dockers properly was deleted"
+  done
+  for container in $(docker ps -a | grep "dev-peer0.mecanica-k.car-lifes-cicle.com-person" | awk '{print $1}'); do
+    echo "Removing container $container..."
+    docker rm -f "$container" || echo "docker rm of $container failed. Check if all fabric dockers properly was deleted"
+  done
+  for image in $(docker images "dev-peer0.mecanica-k.car-lifes-cicle.com-person*" -q); do
+    echo "Removing image $image..."
+    docker rmi "$image" || echo "docker rmi of $image failed. Check if all fabric dockers properly was deleted"
+  done
+  for container in $(docker ps -a | grep "dev-peer0.mecanica-l.car-lifes-cicle.com-person" | awk '{print $1}'); do
+    echo "Removing container $container..."
+    docker rm -f "$container" || echo "docker rm of $container failed. Check if all fabric dockers properly was deleted"
+  done
+  for image in $(docker images "dev-peer0.mecanica-l.car-lifes-cicle.com-person*" -q); do
+    echo "Removing image $image..."
+    docker rmi "$image" || echo "docker rmi of $image failed. Check if all fabric dockers properly was deleted"
+  done
+  for container in $(docker ps -a | grep "dev-peer0.financiadora-r.car-lifes-cicle.com-person" | awk '{print $1}'); do
+    echo "Removing container $container..."
+    docker rm -f "$container" || echo "docker rm of $container failed. Check if all fabric dockers properly was deleted"
+  done
+  for image in $(docker images "dev-peer0.financiadora-r.car-lifes-cicle.com-person*" -q); do
     echo "Removing image $image..."
     docker rmi "$image" || echo "docker rmi of $image failed. Check if all fabric dockers properly was deleted"
   done

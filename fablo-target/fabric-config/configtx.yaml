@@ -257,7 +257,7 @@ Application: &ApplicationDefaults
             Rule: "MAJORITY Admins"
         Endorsement:
             Type: ImplicitMeta
-            Rule: "ANY Writers"
+            Rule: "MAJORITY Endorsement"
     Capabilities:
         <<: *ApplicationCapabilities
 
@@ -337,6 +337,7 @@ Profiles:
             SampleConsortium:
                 Organizations:
                     - *detran
+                    - *gov
                     - *montadoraC
                     - *montadoraD
                     - *concessionariF
@@ -348,6 +349,7 @@ Profiles:
             <<: *ApplicationDefaults
             Organizations:
                 - *detran
+                - *gov
                 - *montadoraC
                 - *montadoraD
                 - *concessionariF
@@ -371,8 +373,22 @@ Profiles:
                 Organizations:
                     - *detran
                     - *gov
+                    - *montadoraC
+                    - *montadoraD
+                    - *concessionariF
+                    - *concessionariG
+                    - *mecanicaK
+                    - *mecanicaL
+                    - *financiadoraR
         Application:
             <<: *ApplicationDefaults
             Organizations:
                 - *detran
                 - *gov
+                - *montadoraC
+                - *montadoraD
+                - *concessionariF
+                - *concessionariG
+                - *mecanicaK
+                - *mecanicaL
+                - *financiadoraR
