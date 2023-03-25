@@ -18,16 +18,13 @@ export class Maintenance {
 @Object()
 export class Restriction {
     @Property()
-    public type: string;
+    public code: number;
 
     @Property()
     public date: Date;
 
     @Property()
     public description?: string;
-
-    @Property()
-    public code: number;
 }
 
 @Object()
@@ -37,6 +34,9 @@ export class Car {
 
     @Property()
     public licensePlate?: string;
+
+    @Property()
+    public licensingDueDate?: Date;
 
     @Property()
     public brand: string;

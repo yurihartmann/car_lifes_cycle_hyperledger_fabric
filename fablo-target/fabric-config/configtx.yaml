@@ -257,7 +257,7 @@ Application: &ApplicationDefaults
             Rule: "MAJORITY Admins"
         Endorsement:
             Type: ImplicitMeta
-            Rule: "MAJORITY Endorsement"
+            Rule: "ANY Writers"
     Capabilities:
         <<: *ApplicationCapabilities
 

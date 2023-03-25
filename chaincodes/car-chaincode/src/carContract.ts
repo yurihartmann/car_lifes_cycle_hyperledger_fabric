@@ -64,28 +64,6 @@ export class CarContract extends BaseContract {
             throw new Error(result.message);
         }
 
-        return JSON.parse(result.toString());
-    }
-
-    @Transaction(false)
-    @BuildReturn()
-    public async getPersonDetails(
-        ctx: Context,
-        cpf: string
-    ): Promise<any> {
-        const result = await ctx.stub.invokeChaincode(
-            'person',
-            [
-                "PersonContract:Read",
-                cpf
-            ],
-            "person-channel"
-        )
-
-        if (result.status != 200) {
-            throw new Error(result.message);
-        }
-
         return JSON.parse(result.payload.toString());
     }
 
@@ -122,12 +100,16 @@ export class CarContract extends BaseContract {
 
     @Transaction()
     @BuildReturn()
-    @AllowedOrgs(['concessionariF', 'concessionariF'])
+    @AllowedOrgs(['concessionariF', 'concessionariG'])
     public async GetCarToSell(
         ctx: Context,
         chassisId: string,
     ): Promise<object> {
         const car: Car = await this.GetState(ctx, chassisId);
+
+        if (car.ownerDealershipName || car.ownerCpf) {
+            throw new Error(`The car already have ownerDealershipName or ownerCpf ${car.ownerDealershipName}`);
+        }
 
         car.ownerDealershipName = ctx.clientIdentity.getMSPID();
 
@@ -137,7 +119,7 @@ export class CarContract extends BaseContract {
 
     @Transaction()
     @BuildReturn()
-    @AllowedOrgs(['concessionariF', 'concessionariF'])
+    @AllowedOrgs(['concessionariF', 'concessionariG'])
     public async SellCar(
         ctx: Context,
         chassisId: string,
@@ -145,14 +127,140 @@ export class CarContract extends BaseContract {
     ): Promise<object> {
         const car: Car = await this.GetState(ctx, chassisId);
 
-        // const person = await this.getPerson(ctx, cpf);
+        if (car.ownerDealershipName !== ctx.clientIdentity.getMSPID()) {
+            throw new Error(`The ownerDealershipName is not owner for this car`);
+        }
 
-        // if (person?.birthday ) {
+        const person = await this.getPerson(ctx, cpf);
 
-        // }
+        if ((new Date().getFullYear() - new Date(person?.birthday).getFullYear()) < 18) {
+            throw new Error(`The person not have 18 years old or more`);
+        }
+
+        if (car.restrictions.length > 0) {
+            throw new Error(`The car have restrictions`);
+        }
 
         car.ownerDealershipName = null;
         car.ownerCpf = cpf;
+
+        await this.PutState(ctx, car.chassisId, car);
+        return car;
+    }
+
+    @Transaction()
+    @BuildReturn()
+    @AllowedOrgs(['detran'])
+    public async LicensingCar(
+        ctx: Context,
+        chassisId: string,
+        licensePlate: string
+    ): Promise<object> {
+        const car: Car = await this.GetState(ctx, chassisId);
+
+        if (car.restrictions.length > 1) {
+            throw new Error(`The car have restrictions`);
+        }
+
+        if (licensePlate.length > 0) {
+            car.licensePlate = licensePlate
+        }
+
+        const actualDate = new Date();
+        actualDate.setFullYear(actualDate.getFullYear() + 1);
+        car.licensingDueDate = actualDate;
+
+        if (!car.licensePlate) {
+            throw new Error(`The car do not have licensePlate, please pass one`);
+        }
+
+        await this.PutState(ctx, car.chassisId, car);
+        return car;
+    }
+
+    @Transaction()
+    @BuildReturn()
+    @AllowedOrgs(['detran'])
+    public async AddRestriction(
+        ctx: Context,
+        chassisId: string,
+        code: number,
+        description: string,
+    ): Promise<object> {
+        const car: Car = await this.GetState(ctx, chassisId);
+
+        car.restrictions.push({
+            code: code,
+            description: description,
+            date: new Date()
+        });
+
+        await this.PutState(ctx, car.chassisId, car);
+        return car;
+    }
+
+    @Transaction()
+    @BuildReturn()
+    @AllowedOrgs(['detran'])
+    public async DeleteRestriction(
+        ctx: Context,
+        chassisId: string,
+        code: number,
+    ): Promise<object> {
+        const car: Car = await this.GetState(ctx, chassisId);
+
+        car.restrictions = car.restrictions.filter(restriction => {
+            return restriction.code != code
+        })
+
+        await this.PutState(ctx, car.chassisId, car);
+        return car;
+    }
+
+
+    @Transaction()
+    @BuildReturn()
+    @AllowedOrgs(['detran'])
+    public async ChangeCarWithOtherPerson(
+        ctx: Context,
+        chassisId: string,
+        newOwnercpf: string
+    ): Promise<object> {
+        const car: Car = await this.GetState(ctx, chassisId);
+
+        const person = await this.getPerson(ctx, newOwnercpf);
+
+        if ((new Date().getFullYear() - new Date(person?.birthday).getFullYear()) < 18) {
+            throw new Error(`The new owner person not have 18 years old or more`);
+        }
+
+        if (car.restrictions.length > 0) {
+            throw new Error(`The car have restrictions`);
+        }
+
+        car.ownerCpf = newOwnercpf;
+        car.licensingDueDate = null;
+
+        await this.PutState(ctx, car.chassisId, car);
+        return car;
+    }
+
+    @Transaction()
+    @BuildReturn()
+    @AllowedOrgs(['concessionariF', 'concessionariG'])
+    public async ChangeCarWithConcessionaire(
+        ctx: Context,
+        chassisId: string,
+    ): Promise<object> {
+        const car: Car = await this.GetState(ctx, chassisId);
+
+        if (car.restrictions.length > 0) {
+            throw new Error(`The car have restrictions`);
+        }
+
+        car.ownerCpf = null;
+        car.ownerDealershipName = ctx.clientIdentity.getMSPID();
+        car.licensingDueDate = null;
 
         await this.PutState(ctx, car.chassisId, car);
         return car;
