@@ -26,7 +26,8 @@
         "fabric-shim": "^2.4.0",
         "json-stringify-deterministic": "^1.0.1",
         "sort-keys-recursive": "^2.1.2",
-        "uuid": "8.3"
+        "uuid": "8.3",
+        "logform": "2.4.2"
     },
     "devDependencies": {
         "@types/chai": "^4.1.7",
