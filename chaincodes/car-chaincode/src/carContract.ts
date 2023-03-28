@@ -17,7 +17,7 @@ export class CarContract extends BaseContract {
                 ownerCpf: "123.123.123-12",
                 color: 'blue',
                 year: 2012,
-                financingFlag: false,
+                financingBy: null,
                 maintenance: [],
                 restrictions: []
             },
@@ -28,7 +28,7 @@ export class CarContract extends BaseContract {
                 ownerCpf: "123.123.123-67",
                 color: 'white',
                 year: 2012,
-                financingFlag: false,
+                financingBy: null,
                 maintenance: [],
                 restrictions: []
             },
@@ -39,7 +39,7 @@ export class CarContract extends BaseContract {
                 ownerCpf: "123.123.123-12",
                 color: 'black',
                 year: 2012,
-                financingFlag: false,
+                financingBy: null,
                 maintenance: [],
                 restrictions: []
             }
@@ -89,7 +89,7 @@ export class CarContract extends BaseContract {
             color: color,
             ownerCpf: null,
             ownerDealershipName: null,
-            financingFlag: false,
+            financingBy: null,
             maintenance: [],
             restrictions: []
         };
@@ -238,6 +238,10 @@ export class CarContract extends BaseContract {
             throw new Error(`The car have restrictions`);
         }
 
+        if (car.financingBy !== null) {
+            throw new Error(`The car have financing`);
+        }
+
         car.ownerCpf = newOwnercpf;
         car.licensingDueDate = null;
 
@@ -258,6 +262,10 @@ export class CarContract extends BaseContract {
             throw new Error(`The car have restrictions`);
         }
 
+        if (car.financingBy !== null) {
+            throw new Error(`The car have financing`);
+        }
+
         car.ownerCpf = null;
         car.ownerDealershipName = ctx.clientIdentity.getMSPID();
         car.licensingDueDate = null;
@@ -266,54 +274,72 @@ export class CarContract extends BaseContract {
         return car;
     }
 
-    // @Transaction()
-    // @BuildReturn()
-    // @AllowedOrgs(['montadoraMSP'])
-    // public async CreateCar(ctx: Context, id: string, brand: string, model: string, color: string, appraisedValue: number): Promise<object> {
-    //     const car: Car = {
-    //         id: id,
-    //         brand: brand,
-    //         model: model,
-    //         color: color,
-    //         appraisedValue: appraisedValue,
-    //     };
+    @Transaction()
+    @BuildReturn()
+    @AllowedOrgs(['mecanicaK', 'mecanicaL'])
+    public async AddMaintenance(
+        ctx: Context,
+        chassisId: string,
+        carKm: number,
+        description: string
+    ): Promise<object> {
+        const car: Car = await this.GetState(ctx, chassisId);
 
-    //     await this.PutState(ctx, car.id, car)
-    //     return car;
-    // }
+        if (car.restrictions.length > 0) {
+            throw new Error(`The car have restrictions`);
+        }
 
-    // @Transaction()
-    // @BuildReturn()
-    // public async UpdateCar(ctx: Context, id: string, brand: string, model: string, ownerCpf: string, color: string, appraisedValue: number): Promise<object> {
-    //     const car: Car = await this.GetState(ctx, id);
+        if (car.maintenance[car.maintenance.length - 1]?.carKm > carKm) {
+            throw new Error(`The carKm is lower than last maintenance`);
+        }
 
-    //     if (!car) {
-    //         throw new Error(`The car ${id} does not exist`);
-    //     }
+        car.maintenance.push({
+            mechanicalName: ctx.clientIdentity.getMSPID(),
+            date: new Date(),
+            carKm: carKm,
+            description: description
+        });
 
-    //     car.brand = brand
-    //     car.model = model
-    //     car.ownerCpf = ownerCpf
-    //     car.color = color
-    //     car.appraisedValue = appraisedValue
+        await this.PutState(ctx, car.chassisId, car);
+        return car;
+    }
 
-    //     await this.PutState(ctx, car.id, car)
-    //     return car;
-    // }
+    @Transaction()
+    @BuildReturn()
+    @AllowedOrgs(['financiadoraR', 'financiadoraS'])
+    public async AddFinancing(
+        ctx: Context,
+        chassisId: string,
+    ): Promise<object> {
+        const car: Car = await this.GetState(ctx, chassisId);
 
-    // @Transaction()
-    // @BuildReturn()
-    // @AllowedOrgs(['detranMSP'])
-    // public async TransferCar(ctx: Context, id: string, newOwnerCpf: string): Promise<object> {
-    //     const car: Car = await this.GetState(ctx, id);
-    //     await this.checkIfExistsPerson(ctx, newOwnerCpf);
+        if (car.financingBy !== null) {
+            throw new Error(`The car is already financing`);
+        }
 
-    //     car.ownerCpf = newOwnerCpf;
+        car.financingBy = ctx.clientIdentity.getMSPID();
 
-    //     await this.PutState(ctx, car.id, car);
+        await this.PutState(ctx, car.chassisId, car);
+        return car;
+    }
 
-    //     return car;
-    // }
+    @Transaction()
+    @BuildReturn()
+    @AllowedOrgs(['financiadoraR', 'financiadoraS'])
+    public async RemoveFinancing(
+        ctx: Context,
+        chassisId: string,
+    ): Promise<object> {
+        const car: Car = await this.GetState(ctx, chassisId);
 
+        if (car.financingBy !== ctx.clientIdentity.getMSPID()) {
+            throw new Error(`The car is not financing by this financing org`);
+        }
+
+        car.financingBy = null;
+
+        await this.PutState(ctx, car.chassisId, car);
+        return car;
+    }
 
 }

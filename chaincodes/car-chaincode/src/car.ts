@@ -9,10 +9,10 @@ export class Maintenance {
     public date: Date;
 
     @Property()
-    public description?: string;
+    public carKm: number;
 
     @Property()
-    public carKm?: number;
+    public description?: string;
 }
 
 @Object()
@@ -57,7 +57,7 @@ export class Car {
     public ownerDealershipName?: string;
 
     @Property()
-    public financingFlag: boolean;
+    public financingBy?: string;
 
     @Property()
     public maintenance: Maintenance[];
