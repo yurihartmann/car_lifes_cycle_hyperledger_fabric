@@ -5,12 +5,15 @@ import { Environment } from '../../../environment';
 
 
 const Api = axios.create({
-  baseURL: Environment.URL_BASE
+    baseURL: Environment.URL_BASE,
+    headers: {
+        'X-API-Key': localStorage.getItem('ORG_AUTH') || ''
+    }
 });
 
 Api.interceptors.response.use(
-  (response) => responseInterceptor(response),
-  (error) => errorInterceptor(error),
+    (response) => responseInterceptor(response),
+    (error) => errorInterceptor(error),
 );
 
 export { Api };
