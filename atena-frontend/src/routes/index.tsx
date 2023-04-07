@@ -8,6 +8,7 @@ import {
     ListagemDePessoas,
     DetalheDeCidades,
     ListagemDeCidades,
+    ListCar
 } from '../pages';
 
 export const AppRoutes = () => {
@@ -30,6 +31,26 @@ export const AppRoutes = () => {
                 path: '/pessoas',
                 label: 'Pessoas',
             },
+            {
+                icon: 'directions_car',
+                path: '/cars',
+                label: 'Carros',
+            },
+            {
+                icon: 'car_rental',
+                path: '/get-car-to-sell',
+                label: 'Adquirir carro para venda',
+            },
+            {
+                icon: 'sell',
+                path: '/sell-car',
+                label: 'Vender um carro',
+            },
+            {
+                icon: 'document_scanner',
+                path: '/licensing',
+                label: 'Licenciar',
+            }
         ]);
     }, []);
 
@@ -42,6 +63,8 @@ export const AppRoutes = () => {
 
             <Route path="/cidades" element={<ListagemDeCidades />} />
             <Route path="/cidades/detalhe/:id" element={<DetalheDeCidades />} />
+
+            <Route path="/cars" element={<ListCar />} />
 
             <Route path="*" element={<Navigate to="/pagina-inicial" />} />
         </Routes>

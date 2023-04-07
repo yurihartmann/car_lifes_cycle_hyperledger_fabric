@@ -43,7 +43,7 @@ export const createServer = async (): Promise<Application> => {
 
     app.use(cors());
 
-    app.use('/invoke/', authenticateApiKey, invokeRouter);
+    app.use('/', authenticateApiKey, invokeRouter);
 
     app.get('/ready', (_req, res: Response) =>
         res.status(StatusCodes.OK).json({
