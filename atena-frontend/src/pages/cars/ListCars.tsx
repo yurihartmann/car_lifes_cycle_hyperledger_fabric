@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useState } from 'react';
-import { Box, Button, Icon, IconButton, LinearProgress, Pagination, Paper, Table, TableBody, TableCell, TableContainer, TableFooter, TableHead, TableRow, useTheme } from '@mui/material';
+import { Box, Button, Icon, IconButton, LinearProgress, Pagination, Paper, Table, TableBody, TableCell, TableContainer, TableFooter, TableHead, TableRow, Tooltip, useTheme } from '@mui/material';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 
 import { FerramentasDaListagem } from '../../shared/components';
@@ -7,6 +7,7 @@ import { LayoutBaseDePagina } from '../../shared/layouts';
 import { Environment } from '../../shared/environment';
 import { useDebounce } from '../../shared/hooks';
 import { CarService, IListCar } from '../../shared/services/api/cars/CarService';
+import { useAppThemeContext } from '../../shared/contexts';
 
 
 export const ListCar: React.FC = () => {
@@ -14,6 +15,7 @@ export const ListCar: React.FC = () => {
     const { debounce } = useDebounce();
     const navigate = useNavigate();
     const theme = useTheme();
+    const { snackbarNotify } = useAppThemeContext();
 
     const [rows, setRows] = useState<IListCar[]>([]);
     const [isLoading, setIsLoading] = useState(true);
@@ -34,8 +36,9 @@ export const ListCar: React.FC = () => {
 
                     if (result instanceof Error) {
                         console.log(result.message);
+                        snackbarNotify(result.message, 'error');
                     } else {
-                        console.log(result);
+                        snackbarNotify('Dados carregados com sucesso!', 'success');
                         setRows([...rows, ...result.data]);
                         setSaveBookmark(result.bookmark);
                     }
@@ -77,7 +80,7 @@ export const ListCar: React.FC = () => {
                 <Table>
                     <TableHead>
                         <TableRow>
-                            <TableCell width={100}>Ações</TableCell>
+                            <TableCell></TableCell>
                             <TableCell>ID do chassi</TableCell>
                             <TableCell>Marca</TableCell>
                             <TableCell>Modelo</TableCell>
@@ -91,15 +94,21 @@ export const ListCar: React.FC = () => {
                         {rows.map(row => (
                             <TableRow key={row.chassisId}>
                                 <TableCell>
-                                    <IconButton size="small" onClick={() => alert('Restricoes')}>
-                                        <Icon>car_repair</Icon>
-                                    </IconButton>
-                                    <IconButton size="small" onClick={() => alert('Manutencoes')}>
-                                        <Icon>car_crash</Icon>
-                                    </IconButton>
-                                    <IconButton size="small" onClick={() => alert('Seguro')}>
-                                        <Icon>shield</Icon>
-                                    </IconButton>
+                                    <Tooltip title="Restrições" arrow placement="right">
+                                        <IconButton size="small" onClick={() => navigate(`/cars/${row.chassisId}/restrictions`)}>
+                                            <Icon>car_crash</Icon>
+                                        </IconButton>
+                                    </Tooltip>
+                                    <Tooltip title="Manuteções" arrow placement="right">
+                                        <IconButton size="small" onClick={() => alert('Manutencoes')}>
+                                            <Icon>car_repair</Icon>
+                                        </IconButton>
+                                    </Tooltip>
+                                    <Tooltip title="Financiamento" arrow placement="right">
+                                        <IconButton size="small" onClick={() => alert('Financiamento')}>
+                                            <Icon>account_balance</Icon>
+                                        </IconButton>
+                                    </Tooltip>
                                 </TableCell>
                                 <TableCell>{row.chassisId}</TableCell>
                                 <TableCell>{row.brand}</TableCell>

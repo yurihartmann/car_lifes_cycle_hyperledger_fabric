@@ -17,5 +17,5 @@ export const Environment = {
      */
     URL_BASE: 'https://3000-yurihartman-carlifescyc-iigh3mwpo22.ws-us93.gitpod.io',
 
-    LIST_OF_ORGS: ["detran", "gov", "montadoraC", "montadoraD", "concessionariF", "concessionariG", "mecanicaK", "mecanicaL", "financiadoraR"]
+    LIST_OF_ORGS: ['detran', 'gov', 'montadoraC', 'montadoraD', 'concessionariF', 'concessionariG', 'mecanicaK', 'mecanicaL', 'financiadoraR']
 };

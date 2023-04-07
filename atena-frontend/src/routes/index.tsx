@@ -8,7 +8,8 @@ import {
     ListagemDePessoas,
     DetalheDeCidades,
     ListagemDeCidades,
-    ListCar
+    ListCar,
+    ListRestriction
 } from '../pages';
 
 export const AppRoutes = () => {
@@ -65,6 +66,9 @@ export const AppRoutes = () => {
             <Route path="/cidades/detalhe/:id" element={<DetalheDeCidades />} />
 
             <Route path="/cars" element={<ListCar />} />
+
+            <Route path="/cars/:chassisId/restrictions" element={<ListRestriction />} />
+
 
             <Route path="*" element={<Navigate to="/pagina-inicial" />} />
         </Routes>
