@@ -1,102 +1,116 @@
-import * as yup from 'yup';
+import { useEffect, useState } from 'react';
 import { Box, Grid, LinearProgress, Paper, Typography } from '@mui/material';
-import { FormHandles } from '@unform/core';
-import { Form } from '@unform/web';
-import { useEffect, useRef, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
-import { ToolBarDetails } from '../../shared/components';
-import { VTextField } from '../../shared/forms';
-import { PageBaseLayout } from '../../shared/layouts';
+import * as yup from 'yup';
+
 import { PessoasService } from '../../shared/services/api/pessoas/PessoasService';
+import { VTextField, VForm, useVForm, IVFormErrors } from '../../shared/forms';
+import { AutoCompleteCidade } from './components/AutoCompleteCidade';
+import { FerramentasDeDetalhe } from '../../shared/components';
+import { LayoutBaseDePagina } from '../../shared/layouts';
+
 
 interface IFormData {
     email: string;
     cidadeId: number;
     nomeCompleto: string;
 }
-
 const formValidationSchema: yup.Schema<IFormData> = yup.object().shape({
     cidadeId: yup.number().required(),
     email: yup.string().required().email(),
     nomeCompleto: yup.string().required().min(3),
 });
 
-export const DetailPessoas: React.FC = () => {
-
-    const { id = 'add' } = useParams<'id'>();
+export const DetalheDePessoas: React.FC = () => {
+    const { formRef, save, saveAndClose, isSaveAndClose } = useVForm();
+    const { id = 'nova' } = useParams<'id'>();
     const navigate = useNavigate();
+
+
     const [isLoading, setIsLoading] = useState(false);
     const [nome, setNome] = useState('');
 
-    const formRef = useRef<FormHandles>(null);
-
     useEffect(() => {
-        if (id === 'add') {
+        if (id !== 'nova') {
+            setIsLoading(true);
+
+            PessoasService.getById(Number(id))
+                .then((result) => {
+                    setIsLoading(false);
+
+                    if (result instanceof Error) {
+                        alert(result.message);
+                        navigate('/pessoas');
+                    } else {
+                        setNome(result.nomeCompleto);
+                        formRef.current?.setData(result);
+                    }
+                });
+        } else {
             formRef.current?.setData({
                 email: '',
-                cidadeId: '',
-                nomeCompleto: ''
+                nomeCompleto: '',
+                cidadeId: undefined,
             });
-            return;
         }
-        setIsLoading(true);
-
-        PessoasService.getById(Number(id))
-            .then(result => {
-                setIsLoading(false);
-                if (result instanceof Error) {
-                    alert(result.message);
-                    navigate('/pessoas');
-                } else {
-                    setNome(result.nomeCompleto);
-                    console.log(result);
-                    formRef.current?.setData(result);
-                }
-            });
     }, [id]);
 
-    const handleSave = (data: IFormData) => {
-        formValidationSchema.validate(
-            data, { abortEarly: false }
-        )
+
+    const handleSave = (dados: IFormData) => {
+
+        formValidationSchema.
+            validate(dados, { abortEarly: false })
             .then((dadosValidados) => {
                 setIsLoading(true);
-                if (id === 'add') {
-                    PessoasService.create(dadosValidados)
-                        .then(result => {
+
+                if (id === 'nova') {
+                    PessoasService
+                        .create(dadosValidados)
+                        .then((result) => {
                             setIsLoading(false);
+
                             if (result instanceof Error) {
                                 alert(result.message);
                             } else {
-                                navigate(`/pessoas/${result}`);
+                                if (isSaveAndClose()) {
+                                    navigate('/pessoas');
+                                } else {
+                                    navigate(`/pessoas/detalhe/${result}`);
+                                }
                             }
                         });
                 } else {
-                    PessoasService.updateById(Number(id), { id: Number(id), ...data })
-                        .then(result => {
+                    PessoasService
+                        .updateById(Number(id), { id: Number(id), ...dadosValidados })
+                        .then((result) => {
                             setIsLoading(false);
+
                             if (result instanceof Error) {
                                 alert(result.message);
+                            } else {
+                                if (isSaveAndClose()) {
+                                    navigate('/pessoas');
+                                }
                             }
                         });
                 }
             })
             .catch((errors: yup.ValidationError) => {
-                const validationErros: { [key: string]: string } = {};
+                const validationErrors: IVFormErrors = {};
 
                 errors.inner.forEach(error => {
                     if (!error.path) return;
 
-                    validationErros[error.path] = error.message;
+                    validationErrors[error.path] = error.message;
                 });
 
-                formRef.current?.setErrors(validationErros);
+                formRef.current?.setErrors(validationErrors);
             });
     };
 
-    const handleDelete = () => {
-        if (confirm('Realemnte deseja apagar?')) {
-            PessoasService.deleteById(Number(id))
+    const handleDelete = (id: number) => {
+        if (confirm('Realmente deseja apagar?')) {
+            PessoasService.deleteById(id)
                 .then(result => {
                     if (result instanceof Error) {
                         alert(result.message);
@@ -108,27 +122,26 @@ export const DetailPessoas: React.FC = () => {
         }
     };
 
+
     return (
-        <PageBaseLayout
-            title={id === 'add' ? 'Nova Pessoa' : nome}
-            toolBar={
-                <ToolBarDetails
-                    textButtonAdd='Nova'
-                    showButtonDelete={id !== 'add'}
-                    showButtonAdd={id !== 'add'}
-                    showButtonSaveAndBack={true}
+        <LayoutBaseDePagina
+            titulo={id === 'nova' ? 'Nova pessoa' : nome}
+            barraDeFerramentas={
+                <FerramentasDeDetalhe
+                    textoBotaoNovo='Nova'
+                    mostrarBotaoSalvarEFechar
+                    mostrarBotaoNovo={id !== 'nova'}
+                    mostrarBotaoApagar={id !== 'nova'}
 
-                    onClickButtonAdd={() => navigate('/pessoas/add')}
-                    onClickButtonBack={() => navigate('/pessoas')}
-                    onClickButtonDelete={handleDelete}
-                    onClickButtonSave={() => formRef.current?.submitForm()}
-                    onClickEmSaveAndBack={() => formRef.current?.submitForm()}
-
+                    aoClicarEmSalvar={save}
+                    aoClicarEmSalvarEFechar={saveAndClose}
+                    aoClicarEmVoltar={() => navigate('/pessoas')}
+                    aoClicarEmApagar={() => handleDelete(Number(id))}
+                    aoClicarEmNovo={() => navigate('/pessoas/detalhe/nova')}
                 />
             }
         >
-
-            <Form ref={formRef} onSubmit={handleSave}>
+            <VForm ref={formRef} onSubmit={handleSave}>
                 <Box margin={1} display="flex" flexDirection="column" component={Paper} variant="outlined">
 
                     <Grid container direction="column" padding={2} spacing={2}>
@@ -168,20 +181,14 @@ export const DetailPessoas: React.FC = () => {
 
                         <Grid container item direction="row" spacing={2}>
                             <Grid item xs={12} sm={12} md={6} lg={4} xl={2}>
-                                <VTextField
-                                    fullWidth
-                                    label='Cidade'
-                                    name='cidadeId'
-                                    disabled={isLoading}
-                                />
+                                <AutoCompleteCidade isExternalLoading={isLoading} />
                             </Grid>
                         </Grid>
 
                     </Grid>
 
                 </Box>
-            </Form>
-
-        </PageBaseLayout>
+            </VForm>
+        </LayoutBaseDePagina>
     );
 };

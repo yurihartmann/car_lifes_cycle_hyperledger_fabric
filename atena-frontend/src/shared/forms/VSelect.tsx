@@ -3,10 +3,10 @@ import { TextField, TextFieldProps } from '@mui/material';
 import { useField } from '@unform/core';
 
 
-type TVTextFieldProps = TextFieldProps & {
+type TVSelectProps = TextFieldProps & {
   name: string;
 }
-export const VTextField: React.FC<TVTextFieldProps> = ({ name, ...rest }) => {
+export const VSelect: React.FC<TVSelectProps> = ({ name, ...rest }) => {
   const { fieldName, registerField, defaultValue, error, clearError } = useField(name);
 
   const [value, setValue] = useState(defaultValue || '');
@@ -25,13 +25,14 @@ export const VTextField: React.FC<TVTextFieldProps> = ({ name, ...rest }) => {
     <TextField
       {...rest}
 
+      select
       error={!!error}
       helperText={error}
       defaultValue={defaultValue}
 
       value={value || ''}
+      onKeyDown={e => { error && clearError(); rest.onKeyDown?.(e); }}
       onChange={e => { setValue(e.target.value); rest.onChange?.(e); }}
-      onKeyDown={(e) => { error && clearError(); rest.onKeyDown?.(e); }}
     />
   );
 };
