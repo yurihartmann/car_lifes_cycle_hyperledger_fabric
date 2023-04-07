@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Box, Button, Card, CardActions, CardContent, CircularProgress, TextField, Typography } from '@mui/material';
+import { Box, Button, Card, CardActions, CardContent, CircularProgress, TextField, Typography, Select, MenuItem, SelectChangeEvent } from '@mui/material';
 import * as yup from 'yup';
 
 import { useAuthContext } from '../../contexts';
@@ -40,6 +40,10 @@ export const Login: React.FC<ILoginProps> = ({ children }) => {
             });
     };
 
+    const handleChange = (event: SelectChangeEvent) => {
+        setOrg(event.target.value);
+    };
+
 
     if (isAuthenticated) return (
         <>{children}</>
@@ -51,19 +55,18 @@ export const Login: React.FC<ILoginProps> = ({ children }) => {
             <Card>
                 <CardContent>
                     <Box display='flex' flexDirection='column' gap={2} width={250}>
-                        <Typography variant='h6' align='center'>Identifique-se</Typography>
+                        <Typography variant='h6' align='center'>Selecione a organização</Typography>
 
-                        <TextField
-                            fullWidth
-                            type='email'
-                            label='Email'
-                            value={org}
-                            disabled={isLoading}
-                            error={!!orgError}
-                            helperText={orgError}
-                            onKeyDown={() => setOrgError('')}
-                            onChange={e => setOrg(e.target.value)}
-                        />
+                        <Select
+                            labelId="org"
+                            id="org"
+                            label="Organização"
+                            onChange={handleChange}
+                        >
+                            {Environment.LIST_OF_ORGS.map(org => (
+                                <MenuItem key={org} value={org}>{org}</MenuItem>
+                            ))}
+                        </Select>
                     </Box>
                 </CardContent>
                 <CardActions>
