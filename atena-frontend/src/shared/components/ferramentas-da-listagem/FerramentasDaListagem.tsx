@@ -24,7 +24,7 @@ export const FerramentasDaListagem: React.FC<IFerramentasDaListagemProps> = ({
     return (
         <Box
             gap={1}
-            marginX={1}
+            marginX={4}
             padding={1}
             paddingX={2}
             display="flex"
