@@ -89,7 +89,8 @@ export const ListCar: React.FC = () => {
                 <FerramentasDaListagem
                     mostrarInputBusca
                     textoDaBusca={search}
-                    textoBotaoNovo='Novo'
+                    textoBotaoNovo='Inserir carro'
+                    aoClicarEmNovo={() => navigate('/cars/add')}
                     aoMudarTextoDeBusca={texto => setSearchParams({ search: texto }, { replace: true })}
                 />
             }

@@ -14,6 +14,7 @@ import {
 import { AddRestriction } from '../pages/cars/restriction/AddRestriction';
 import { ListMaintenance } from '../pages/cars/maintenance/ListMaintenance';
 import { AddMaintenance } from '../pages/cars/maintenance/AddMaintenance';
+import { AddCar } from '../pages/cars/AddCar';
 
 export const AppRoutes = () => {
     const { setDrawerOptions } = useDrawerContext();
@@ -69,6 +70,7 @@ export const AppRoutes = () => {
             <Route path="/cidades/detalhe/:id" element={<DetalheDeCidades />} />
 
             <Route path="/cars" element={<ListCar />} />
+            <Route path="/cars/add" element={<AddCar />} />
 
             <Route path="/cars/:chassisId/restrictions" element={<ListRestriction />} />
             <Route path="/cars/:chassisId/restrictions/add" element={<AddRestriction />} />
