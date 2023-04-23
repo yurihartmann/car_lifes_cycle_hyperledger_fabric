@@ -123,11 +123,6 @@ export const ListCar: React.FC = () => {
                                             <Icon>car_repair</Icon>
                                         </IconButton>
                                     </Tooltip>
-                                    <Tooltip title="Financiamento" arrow placement="right">
-                                        <IconButton size="small" onClick={() => alert('Financiamento')}>
-                                            <Icon>account_balance</Icon>
-                                        </IconButton>
-                                    </Tooltip>
                                 </TableCell>
                                 <TableCell>{row.chassisId}</TableCell>
                                 <TableCell>{row.brand}</TableCell>
