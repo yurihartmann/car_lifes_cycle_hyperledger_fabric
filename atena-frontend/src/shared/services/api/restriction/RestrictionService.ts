@@ -54,11 +54,11 @@ const create = async (chassisId: string, dados: Omit<IRestrictionCreate, 'id'>):
             [chassisId, dados.code, dados.description]
         );
 
-        if (data.restrictions) {
+        if (!data.error) {
             return true;
         }
 
-        return new Error('Erro ao criar o registro.');
+        return new Error(data.error);
     } catch (error) {
         console.error(error);
         return new Error((error as { message: string }).message || 'Erro ao criar o registro.');
@@ -76,9 +76,15 @@ const create = async (chassisId: string, dados: Omit<IRestrictionCreate, 'id'>):
 
 const deleteByCode = async (chassisId: string, code: number): Promise<void | Error> => {
     try {
-        await Api.put('/submit/car-channel/car/DeleteRestriction',
+        const { data } = await Api.put('/submit/car-channel/car/DeleteRestriction',
             [chassisId, code]
         );
+
+        if (!data.error) {
+            return;
+        }
+
+        return new Error(data.error);
     } catch (error) {
         console.error(error);
         return new Error((error as { message: string }).message || 'Erro ao apagar o registro.');

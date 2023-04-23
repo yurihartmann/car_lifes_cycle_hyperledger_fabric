@@ -13,7 +13,6 @@ import { IListMaintenance, MaintenanceService } from '../../../shared/services/a
 export const ListMaintenance: React.FC = () => {
     const { debounce } = useDebounce();
     const navigate = useNavigate();
-    const theme = useTheme();
     const { snackbarNotify } = useAppThemeContext();
     const { chassisId = '' } = useParams<'chassisId'>();
 
@@ -39,30 +38,13 @@ export const ListMaintenance: React.FC = () => {
         });
     }, []);
 
-    // const handleDelete = (code: number) => {
-    //     if (confirm('Realmente deseja apagar?')) {
-    //         RestrictionService.deleteByCode(chassisId, code)
-    //             .then(result => {
-    //                 if (result instanceof Error) {
-    //                     snackbarNotify(result.message, 'error');
-    //                 } else {
-    //                     setRows(oldRows => [
-    //                         ...oldRows.filter(oldRow => oldRow.code !== code),
-    //                     ]);
-    //                     snackbarNotify('Restrição apagada com sucesso!', 'success');
-    //                 }
-    //             });
-    //     }
-    // };
-
-
     return (
         <LayoutBaseDePagina
             titulo='Manutenções do carro'
             barraDeFerramentas={
                 <FerramentasDaListagem
                     textoBotaoNovo='Adicionar manutenção'
-                    aoClicarEmNovo={() => navigate(`/cars/${chassisId}/maintenance/add`)}
+                    aoClicarEmNovo={() => navigate(`/cars/${chassisId}/maintenances/add`)}
                 />
             }
         >

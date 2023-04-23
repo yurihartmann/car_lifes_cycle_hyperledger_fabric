@@ -10,7 +10,7 @@ export interface IListMaintenance {
 }
 
 export interface IMaintenanceCreate {
-    code: number;
+    carKm: number;
     description: string;
 }
 
@@ -48,23 +48,23 @@ const getMaintenances = async (chassisId: string): Promise<IListMaintenance[] | 
 //   }
 // };
 
-// const create = async (chassisId: string, dados: Omit<IRestrictionCreate, 'id'>): Promise<boolean | Error> => {
-//     try {
-//         const { data } = await Api.put(
-//             '/submit/car-channel/car/AddRestriction',
-//             [chassisId, dados.code, dados.description]
-//         );
+const create = async (chassisId: string, dados: Omit<IMaintenanceCreate, 'id'>): Promise<boolean | Error> => {
+    try {
+        const { data } = await Api.put(
+            '/submit/car-channel/car/AddMaintenance',
+            [chassisId, dados.carKm, dados.description]
+        );
 
-//         if (data.restrictions) {
-//             return true;
-//         }
+        if (!data.error) {
+            return true;
+        }
 
-//         return new Error('Erro ao criar o registro.');
-//     } catch (error) {
-//         console.error(error);
-//         return new Error((error as { message: string }).message || 'Erro ao criar o registro.');
-//     }
-// };
+        return new Error(data.error);
+    } catch (error) {
+        console.error(error);
+        return new Error((error as { message: string }).message || 'Erro ao criar o registro.');
+    }
+};
 
 // const updateById = async (id: number, dados: IDetalheCidade): Promise<void | Error> => {
 //   try {
@@ -88,5 +88,6 @@ const getMaintenances = async (chassisId: string): Promise<IListMaintenance[] | 
 
 
 export const MaintenanceService = {
-    getMaintenances
+    getMaintenances,
+    create
 };
