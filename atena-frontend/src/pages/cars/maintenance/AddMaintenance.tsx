@@ -19,7 +19,7 @@ const formValidationSchema: yup.Schema<IFormData> = yup.object().shape({
     description: yup.string().required(),
 });
 
-export const AddRestriction: React.FC = () => {
+export const AddMaintenance: React.FC = () => {
     const { formRef, save, saveAndClose, isSaveAndClose } = useVForm();
     const [id, _] = useState<string>('nova');
     const { chassisId = '' } = useParams<'chassisId'>();
@@ -102,7 +102,7 @@ export const AddRestriction: React.FC = () => {
             }
         >
             <VForm ref={formRef} onSubmit={handleSave}>
-                <Box margin={1} display="flex" flexDirection="column" component={Paper} variant="outlined" sx={{ m: 4}}>
+                <Box margin={1} display="flex" flexDirection="column" component={Paper} variant="outlined" sx={{ m: 4 }}>
 
                     <Grid container direction="column" padding={2} spacing={2}>
 

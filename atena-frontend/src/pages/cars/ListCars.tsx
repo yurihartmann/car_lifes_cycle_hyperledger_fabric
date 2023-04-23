@@ -100,7 +100,7 @@ export const ListCar: React.FC = () => {
                                         </IconButton>
                                     </Tooltip>
                                     <Tooltip title="Manuteções" arrow placement="right">
-                                        <IconButton size="small" onClick={() => alert('Manutencoes')}>
+                                        <IconButton size="small" onClick={() => navigate(`/cars/${row.chassisId}/maintenances`)}>
                                             <Icon>car_repair</Icon>
                                         </IconButton>
                                     </Tooltip>

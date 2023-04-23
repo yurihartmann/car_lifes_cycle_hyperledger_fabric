@@ -7,24 +7,24 @@ import { LayoutBaseDePagina } from '../../../shared/layouts';
 import { Environment } from '../../../shared/environment';
 import { useDebounce } from '../../../shared/hooks';
 import { useAppThemeContext } from '../../../shared/contexts';
-import { RestrictionService, IListRestriction } from '../../../shared/services/api/restriction/RestrictionService';
+import { IListMaintenance, MaintenanceService } from '../../../shared/services/api/maintenance/MaintenanceService';
 
 
-export const ListRestriction: React.FC = () => {
+export const ListMaintenance: React.FC = () => {
     const { debounce } = useDebounce();
     const navigate = useNavigate();
     const theme = useTheme();
     const { snackbarNotify } = useAppThemeContext();
     const { chassisId = '' } = useParams<'chassisId'>();
 
-    const [rows, setRows] = useState<IListRestriction[]>([]);
+    const [rows, setRows] = useState<IListMaintenance[]>([]);
     const [isLoading, setIsLoading] = useState(true);
 
     useEffect(() => {
         setIsLoading(true);
 
         debounce(() => {
-            RestrictionService.getRestrictions(chassisId)
+            MaintenanceService.getMaintenances(chassisId)
                 .then((result) => {
                     setIsLoading(false);
 
@@ -39,30 +39,30 @@ export const ListRestriction: React.FC = () => {
         });
     }, []);
 
-    const handleDelete = (code: number) => {
-        if (confirm('Realmente deseja apagar?')) {
-            RestrictionService.deleteByCode(chassisId, code)
-                .then(result => {
-                    if (result instanceof Error) {
-                        snackbarNotify(result.message, 'error');
-                    } else {
-                        setRows(oldRows => [
-                            ...oldRows.filter(oldRow => oldRow.code !== code),
-                        ]);
-                        snackbarNotify('Restrição apagada com sucesso!', 'success');
-                    }
-                });
-        }
-    };
+    // const handleDelete = (code: number) => {
+    //     if (confirm('Realmente deseja apagar?')) {
+    //         RestrictionService.deleteByCode(chassisId, code)
+    //             .then(result => {
+    //                 if (result instanceof Error) {
+    //                     snackbarNotify(result.message, 'error');
+    //                 } else {
+    //                     setRows(oldRows => [
+    //                         ...oldRows.filter(oldRow => oldRow.code !== code),
+    //                     ]);
+    //                     snackbarNotify('Restrição apagada com sucesso!', 'success');
+    //                 }
+    //             });
+    //     }
+    // };
 
 
     return (
         <LayoutBaseDePagina
-            titulo='Restrições do carro'
+            titulo='Manutenções do carro'
             barraDeFerramentas={
                 <FerramentasDaListagem
-                    textoBotaoNovo='Adicionar restrição'
-                    aoClicarEmNovo={() => navigate(`/cars/${chassisId}/restrictions/add`)}
+                    textoBotaoNovo='Adicionar manutenção'
+                    aoClicarEmNovo={() => navigate(`/cars/${chassisId}/maintenance/add`)}
                 />
             }
         >
@@ -70,25 +70,19 @@ export const ListRestriction: React.FC = () => {
                 <Table>
                     <TableHead>
                         <TableRow>
-                            <TableCell>Código</TableCell>
+                            <TableCell>Mecanica</TableCell>
+                            <TableCell>KM do carro</TableCell>
                             <TableCell>Descrição</TableCell>
                             <TableCell>Data</TableCell>
-                            <TableCell></TableCell>
                         </TableRow>
                     </TableHead>
                     <TableBody>
                         {rows.map(row => (
-                            <TableRow key={row.code}>
-                                <TableCell>{row.code}</TableCell>
+                            <TableRow key={row.date}>
+                                <TableCell>{row.mechanicalName}</TableCell>
+                                <TableCell>{row.carKm}</TableCell>
                                 <TableCell>{row.description}</TableCell>
                                 <TableCell>{row.date}</TableCell>
-                                <TableCell>
-                                    <Tooltip title="Deletar" arrow placement="right">
-                                        <IconButton size="small" onClick={() => handleDelete(row.code)}>
-                                            <Icon>delete_icon</Icon>
-                                        </IconButton>
-                                    </Tooltip>
-                                </TableCell>
                             </TableRow>
                         ))}
                     </TableBody>
