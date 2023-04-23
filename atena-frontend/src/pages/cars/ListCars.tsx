@@ -8,6 +8,7 @@ import { Environment } from '../../shared/environment';
 import { useDebounce } from '../../shared/hooks';
 import { CarService, IListCar } from '../../shared/services/api/cars/CarService';
 import { useAppThemeContext } from '../../shared/contexts';
+import { FinancingService } from '../../shared/services/api/financing/FinancingService';
 
 
 export const ListCar: React.FC = () => {
@@ -46,21 +47,39 @@ export const ListCar: React.FC = () => {
         });
     }, [search, bookmark]);
 
-    // const handleDelete = (id: number) => {
-    //     if (confirm('Realmente deseja apagar?')) {
-    //         CidadesService.deleteById(id)
-    //             .then(result => {
-    //                 if (result instanceof Error) {
-    //                     alert(result.message);
-    //                 } else {
-    //                     setRows(oldRows => [
-    //                         ...oldRows.filter(oldRow => oldRow.id !== id),
-    //                     ]);
-    //                     alert('Registro apagado com sucesso!');
-    //                 }
-    //             });
-    //     }
-    // };
+    const handleRemoveFinancingBy = (chassisId: string) => {
+        if (confirm('Realmente deseja remover o financiamento')) {
+            snackbarNotify('Carregando....', 'info');
+            FinancingService.removeFinancingBy(chassisId)
+                .then(result => {
+                    if (result instanceof Error) {
+                        snackbarNotify(result.message, 'error');
+                    } else {
+                        snackbarNotify('Financiamento removido com sucesso!', 'success');
+                        setTimeout(() => {
+                            window.location.reload();
+                        }, 2000);
+                    }
+                });
+        }
+    };
+
+    const handleAddFinancingBy = (chassisId: string) => {
+        if (confirm('Realmente deseja adicionar o financiamento')) {
+            snackbarNotify('Carregando....', 'info');
+            FinancingService.addFinancingBy(chassisId)
+                .then(result => {
+                    if (result instanceof Error) {
+                        snackbarNotify(result.message, 'error');
+                    } else {
+                        snackbarNotify('Financiamento adicionado com sucesso!', 'success');
+                        setTimeout(() => {
+                            window.location.reload();
+                        }, 2000);
+                    }
+                });
+        }
+    };
 
 
     return (
@@ -71,7 +90,6 @@ export const ListCar: React.FC = () => {
                     mostrarInputBusca
                     textoDaBusca={search}
                     textoBotaoNovo='Novo'
-                    // aoClicarEmNovo={() => navigate('/cidades/detalhe/nova')}
                     aoMudarTextoDeBusca={texto => setSearchParams({ search: texto }, { replace: true })}
                 />
             }
@@ -88,6 +106,7 @@ export const ListCar: React.FC = () => {
                             <TableCell>CPF do dono</TableCell>
                             <TableCell>Concessionaria</TableCell>
                             <TableCell>Ano</TableCell>
+                            <TableCell>Financiado por</TableCell>
                         </TableRow>
                     </TableHead>
                     <TableBody>
@@ -117,6 +136,29 @@ export const ListCar: React.FC = () => {
                                 <TableCell>{row.ownerCpf || '-'}</TableCell>
                                 <TableCell>{row.ownerDealershipName || '-'}</TableCell>
                                 <TableCell>{row.year}</TableCell>
+                                <TableCell>
+                                    {row.financingBy}
+                                    {
+                                        !row.financingBy && (
+                                            <IconButton size="small" onClick={() => handleAddFinancingBy(row.chassisId)}>
+                                                <Icon>add_cicle</Icon>
+                                            </IconButton>
+                                        )
+                                    }
+                                    {
+                                        row.financingBy && (
+                                            <IconButton size="small" onClick={() => handleRemoveFinancingBy(row.chassisId)}>
+                                                <Icon>delete_icon</Icon>
+                                            </IconButton>
+                                        )
+                                    }
+                                    {/* <IconButton size="small" onClick={() => alert('Financiamento')}>
+                                        <Icon>add_cicle</Icon>
+                                    </IconButton>
+                                    <IconButton size="small" onClick={() => alert('Financiamento')}>
+                                        <Icon>delete_icon</Icon>
+                                    </IconButton> */}
+                                </TableCell>
                             </TableRow>
                         ))}
                     </TableBody>

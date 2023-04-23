@@ -10,6 +10,7 @@ export interface IListCar {
     ownerCpf: string;
     ownerDealershipName: string;
     year: string;
+    financingBy: string;
 }
 
 export interface ICarDetail {

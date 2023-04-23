@@ -22,8 +22,8 @@ interface IAppThemeProviderProps {
 export const AppThemeProvider: React.FC<IAppThemeProviderProps> = ({ children }) => {
     const [themeName, setThemeName] = useState<'light' | 'dark'>('dark');
     const [snackbarOpen, setSnackbarOpen] = useState(true);
-    const [snackbarMessage, setSnackbarMessage] = useState('Olá');
-    const [snackbarType, setSnackbarType] = useState<AlertColor>('success');
+    const [snackbarMessage, setSnackbarMessage] = useState('');
+    const [snackbarType, setSnackbarType] = useState<AlertColor>('info');
 
 
     const handleSnackbarClose = (event?: React.SyntheticEvent | Event, reason?: string) => {
@@ -55,16 +55,18 @@ export const AppThemeProvider: React.FC<IAppThemeProviderProps> = ({ children })
             <ThemeProvider theme={theme}>
                 <Box width="100vw" height="100vh" bgcolor={theme.palette.background.default}>
 
-                    <Snackbar
-                        open={snackbarOpen}
-                        autoHideDuration={20000}
-                        onClose={handleSnackbarClose}
-                        anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}
-                    >
-                        <Alert onClose={handleSnackbarClose} severity={snackbarType} sx={{ width: '100%' }}>
-                            {snackbarMessage}
-                        </Alert>
-                    </Snackbar>
+                    {snackbarMessage && (
+                        <Snackbar
+                            open={snackbarOpen}
+                            autoHideDuration={20000}
+                            onClose={handleSnackbarClose}
+                            anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}
+                        >
+                            <Alert onClose={handleSnackbarClose} severity={snackbarType} sx={{ width: '100%' }}>
+                                {snackbarMessage}
+                            </Alert>
+                        </Snackbar>
+                    )}
 
                     {children}
                 </Box>
