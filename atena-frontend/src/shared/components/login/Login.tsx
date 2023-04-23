@@ -60,7 +60,7 @@ export const Login: React.FC<ILoginProps> = ({ children }) => {
                         <Select
                             labelId="org"
                             id="org"
-                            label="Organização"
+                            // label="ALO"
                             onChange={handleChange}
                         >
                             {Environment.LIST_OF_ORGS.map(org => (

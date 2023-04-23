@@ -113,8 +113,8 @@ export class BaseContract extends Contract {
         return {
             data: await this.buildListByIterator(pagination.iterator),
             metadata: {
-                bookmark: pagination.metadata.bookmark,
-                fetchedRecordsCount: pagination.metadata.fetchedRecordsCount
+                bookmark: pagination.metadata?.bookmark || '',
+                fetchedRecordsCount: pagination.metadata?.fetchedRecordsCount || 0
             }
         };
     }

@@ -39,34 +39,34 @@ export const ListRestriction: React.FC = () => {
         });
     }, []);
 
-    // const handleDelete = (id: number) => {
-    //     if (confirm('Realmente deseja apagar?')) {
-    //         CidadesService.deleteById(id)
-    //             .then(result => {
-    //                 if (result instanceof Error) {
-    //                     alert(result.message);
-    //                 } else {
-    //                     setRows(oldRows => [
-    //                         ...oldRows.filter(oldRow => oldRow.id !== id),
-    //                     ]);
-    //                     alert('Registro apagado com sucesso!');
-    //                 }
-    //             });
-    //     }
-    // };
+    const handleDelete = (code: number) => {
+        if (confirm('Realmente deseja apagar?')) {
+            RestrictionService.deleteByCode(chassisId, code)
+                .then(result => {
+                    if (result instanceof Error) {
+                        snackbarNotify(result.message, 'error');
+                    } else {
+                        setRows(oldRows => [
+                            ...oldRows.filter(oldRow => oldRow.code !== code),
+                        ]);
+                        snackbarNotify('Restrição apagada com sucesso!', 'success');
+                    }
+                });
+        }
+    };
 
 
     return (
         <LayoutBaseDePagina
-            titulo='Listagem de carros'
+            titulo='Restrições do carro'
             barraDeFerramentas={
                 <FerramentasDaListagem
                     textoBotaoNovo='Nova'
-                // aoClicarEmNovo={() => navigate('/cidades/detalhe/nova')}
+                    aoClicarEmNovo={() => navigate(`/cars/${chassisId}/restrictions/add`)}
                 />
             }
         >
-            <TableContainer component={Paper} variant="outlined" sx={{ m: 1, width: 'auto' }}>
+            <TableContainer component={Paper} variant="outlined" sx={{ m: 4, width: 'auto' }}>
                 <Table>
                     <TableHead>
                         <TableRow>
@@ -81,11 +81,11 @@ export const ListRestriction: React.FC = () => {
                             <TableRow key={row.code}>
                                 <TableCell>{row.code}</TableCell>
                                 <TableCell>{row.description}</TableCell>
-                                <TableCell>{row.date.toDateString()}</TableCell>
+                                <TableCell>{row.date}</TableCell>
                                 <TableCell>
                                     <Tooltip title="Deletar" arrow placement="right">
-                                        <IconButton size="small" onClick={() => alert('Delete')}>
-                                            <Icon>trash</Icon>
+                                        <IconButton size="small" onClick={() => handleDelete(row.code)}>
+                                            <Icon>delete_icon</Icon>
                                         </IconButton>
                                     </Tooltip>
                                 </TableCell>

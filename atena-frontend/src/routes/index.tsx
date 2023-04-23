@@ -11,6 +11,7 @@ import {
     ListCar,
     ListRestriction
 } from '../pages';
+import { AddRestriction } from '../pages/cars/restriction/AddRestriction';
 
 export const AppRoutes = () => {
     const { setDrawerOptions } = useDrawerContext();
@@ -68,6 +69,7 @@ export const AppRoutes = () => {
             <Route path="/cars" element={<ListCar />} />
 
             <Route path="/cars/:chassisId/restrictions" element={<ListRestriction />} />
+            <Route path="/cars/:chassisId/restrictions/add" element={<AddRestriction />} />
 
 
             <Route path="*" element={<Navigate to="/pagina-inicial" />} />

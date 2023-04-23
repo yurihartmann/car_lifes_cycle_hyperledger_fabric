@@ -5,13 +5,12 @@ import { Api } from '../axios-config';
 export interface IListRestriction {
     code: number;
     description: string;
-    date: Date;
+    date: string;
 }
 
-export interface IRestrictionDetail {
+export interface IRestrictionCreate {
     code: number;
     description: string;
-    date: Date;
 }
 
 const getRestrictions = async (chassisId: string): Promise<IListRestriction[] | Error> => {
@@ -48,20 +47,23 @@ const getRestrictions = async (chassisId: string): Promise<IListRestriction[] | 
 //   }
 // };
 
-// const create = async (dados: Omit<IDetalheCidade, 'id'>): Promise<number | Error> => {
-//   try {
-//     const { data } = await Api.post<IDetalheCidade>('/cidades', dados);
+const create = async (chassisId: string, dados: Omit<IRestrictionCreate, 'id'>): Promise<boolean | Error> => {
+    try {
+        const { data } = await Api.put(
+            '/submit/car-channel/car/AddRestriction',
+            [chassisId, dados.code, dados.description]
+        );
 
-//     if (data) {
-//       return data.id;
-//     }
+        if (data.restrictions) {
+            return true;
+        }
 
-//     return new Error('Erro ao criar o registro.');
-//   } catch (error) {
-//     console.error(error);
-//     return new Error((error as { message: string }).message || 'Erro ao criar o registro.');
-//   }
-// };
+        return new Error('Erro ao criar o registro.');
+    } catch (error) {
+        console.error(error);
+        return new Error((error as { message: string }).message || 'Erro ao criar o registro.');
+    }
+};
 
 // const updateById = async (id: number, dados: IDetalheCidade): Promise<void | Error> => {
 //   try {
@@ -72,16 +74,20 @@ const getRestrictions = async (chassisId: string): Promise<IListRestriction[] | 
 //   }
 // };
 
-// const deleteById = async (id: number): Promise<void | Error> => {
-//   try {
-//     await Api.delete(`/cidades/${id}`);
-//   } catch (error) {
-//     console.error(error);
-//     return new Error((error as { message: string }).message || 'Erro ao apagar o registro.');
-//   }
-// };
+const deleteByCode = async (chassisId: string, code: number): Promise<void | Error> => {
+    try {
+        await Api.put('/submit/car-channel/car/DeleteRestriction',
+            [chassisId, code]
+        );
+    } catch (error) {
+        console.error(error);
+        return new Error((error as { message: string }).message || 'Erro ao apagar o registro.');
+    }
+};
 
 
 export const RestrictionService = {
-    getRestrictions
+    getRestrictions,
+    create,
+    deleteByCode
 };
