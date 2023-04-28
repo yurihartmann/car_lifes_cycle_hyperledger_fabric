@@ -40,8 +40,20 @@ export const ListCar: React.FC = () => {
                         snackbarNotify(result.message, 'error');
                     } else {
                         snackbarNotify('Dados carregados com sucesso!', 'success');
-                        setRows([...rows, ...result.data]);
-                        setSaveBookmark(result.bookmark);
+
+                        if (search === '') {
+                            setSaveBookmark(result.bookmark);
+
+                            if (saveBookmark !== '') {
+                                setRows([...rows, ...result.data]);
+                            } else {
+                                setRows([...result.data]);
+                            }
+                        } else {
+                            console.log('search');
+                            setRows(result.data);
+                            setSaveBookmark('');
+                        }
                     }
                 });
         });

@@ -6,6 +6,7 @@ import { IVFormErrors, VForm, VTextField, useVForm } from '../../shared/forms';
 import { useAppThemeContext } from '../../shared/contexts';
 import { LayoutBaseDePagina } from '../../shared/layouts';
 import { FerramentasDeDetalhe } from '../../shared/components';
+import { CarService } from '../../shared/services/api/cars/CarService';
 
 
 interface IFormData {
@@ -44,18 +45,18 @@ export const AddCar: React.FC = () => {
             .then((dadosValidados) => {
                 setIsLoading(true);
 
-                // RestrictionService
-                //     .create(chassisId, dadosValidados)
-                //     .then((result) => {
-                //         setIsLoading(false);
+                CarService
+                    .create(dadosValidados)
+                    .then((result) => {
+                        setIsLoading(false);
 
-                //         if (result instanceof Error) {
-                //             snackbarNotify(result.message, 'error');
-                //         } else {
-                //             snackbarNotify('Restrição salva com sucesso!', 'success');
-                //             navigate(`/cars/${chassisId}/restrictions`);
-                //         }
-                //     });
+                        if (result instanceof Error) {
+                            snackbarNotify(result.message, 'error');
+                        } else {
+                            snackbarNotify('Carro salvo com sucesso!', 'success');
+                            navigate(`/cars?search=${result}`);
+                        }
+                    });
             })
             .catch((errors: yup.ValidationError) => {
                 const validationErrors: IVFormErrors = {};

@@ -1,5 +1,6 @@
 import { Environment } from '../../../environment';
 import { Api } from '../axios-config';
+import { v4 as uuidv4 } from 'uuid';
 
 
 export interface IListCar {
@@ -16,6 +17,12 @@ export interface IListCar {
 export interface ICarDetail {
     id: number;
     nome: string;
+}
+
+export interface ICarCreate {
+    model: string;
+    year: number;
+    color: string;
 }
 
 type TCarPagination = {
@@ -74,20 +81,24 @@ const getPaginated = async (chassisId = '', bookmark = ''): Promise<TCarPaginati
 //   }
 // };
 
-// const create = async (dados: Omit<IDetalheCidade, 'id'>): Promise<number | Error> => {
-//   try {
-//     const { data } = await Api.post<IDetalheCidade>('/cidades', dados);
+const create = async (dados: ICarCreate): Promise<null | Error> => {
+    try {
+        const urlRelativa = '/submit/car-channel/car/AddCar';
 
-//     if (data) {
-//       return data.id;
-//     }
+        const { data } = await Api.put(urlRelativa, [
+            uuidv4(), dados.model, dados.year.toString(), dados.color
+        ]);
 
-//     return new Error('Erro ao criar o registro.');
-//   } catch (error) {
-//     console.error(error);
-//     return new Error((error as { message: string }).message || 'Erro ao criar o registro.');
-//   }
-// };
+        if (data.chassisId) {
+            return data.chassisId;
+        }
+
+        return new Error(data.error || 'Erro ao criar o registro.');
+    } catch (error) {
+        console.error(error);
+        return new Error((error as { message: string }).message || 'Erro ao criar o registro.');
+    }
+};
 
 // const updateById = async (id: number, dados: IDetalheCidade): Promise<void | Error> => {
 //   try {
@@ -109,5 +120,6 @@ const getPaginated = async (chassisId = '', bookmark = ''): Promise<TCarPaginati
 
 
 export const CarService = {
-    getPaginated
+    getPaginated,
+    create
 };
