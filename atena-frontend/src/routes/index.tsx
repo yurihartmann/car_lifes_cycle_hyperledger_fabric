@@ -15,6 +15,7 @@ import { AddRestriction } from '../pages/cars/restriction/AddRestriction';
 import { ListMaintenance } from '../pages/cars/maintenance/ListMaintenance';
 import { AddMaintenance } from '../pages/cars/maintenance/AddMaintenance';
 import { AddCar } from '../pages/cars/AddCar';
+import { ListPerson } from '../pages/person/ListPerson';
 
 export const AppRoutes = () => {
     const { setDrawerOptions } = useDrawerContext();
@@ -34,6 +35,11 @@ export const AppRoutes = () => {
             {
                 icon: 'people',
                 path: '/pessoas',
+                label: 'Pessoas old',
+            },
+            {
+                icon: 'people',
+                path: '/people',
                 label: 'Pessoas',
             },
             {
@@ -69,6 +75,9 @@ export const AppRoutes = () => {
             <Route path="/cidades" element={<ListagemDeCidades />} />
             <Route path="/cidades/detalhe/:id" element={<DetalheDeCidades />} />
 
+            <Route path="/people" element={<ListPerson />} />
+            <Route path="/people/add" element={<ListPerson />} />
+
             <Route path="/cars" element={<ListCar />} />
             <Route path="/cars/add" element={<AddCar />} />
 
@@ -77,6 +86,8 @@ export const AppRoutes = () => {
 
             <Route path="/cars/:chassisId/maintenances" element={<ListMaintenance />} />
             <Route path="/cars/:chassisId/maintenances/add" element={<AddMaintenance />} />
+
+
 
 
             <Route path="*" element={<Navigate to="/pagina-inicial" />} />
