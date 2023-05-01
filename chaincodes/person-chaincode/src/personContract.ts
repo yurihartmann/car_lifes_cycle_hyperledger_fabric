@@ -74,20 +74,36 @@ export class PersonContract extends BaseContract {
 
     @Transaction()
     @BuildReturn()
+    @AllowedOrgs(["govMSP"])
+    public async DeclareDeathPerson(ctx: Context, cpf: string): Promise<object> {
+        const person = await this.GetState(ctx, cpf);
+
+        person.alive = false;
+
+        await this.PutState(ctx, person.cpf, person);
+        return person;
+    }
+
+    @Transaction()
+    @BuildReturn()
     @AllowedOrgs(["detranMSP"])
-    public async UpdateDriverLicense(ctx: Context, cpf: string, cnhNumber: number, dueDate: string): Promise<object> {
+    public async UpdateDriverLicense(ctx: Context, cpf: string, cnhNumber: number): Promise<object> {
         const person = await this.GetState(ctx, cpf);
 
         if (!person.alive) {
             throw new Error(`The person ${cpf} is not alive`);
         }
 
-        const driverLicense: DriverLicense = {
-            cnhNumber: cnhNumber,
-            dueDate: new Date(dueDate)
-        };
+        if (person.driverLicense) {
+            person.driverLicense.dueDate = new Date()
+        } else {
+            const driverLicense: DriverLicense = {
+                cnhNumber: cnhNumber,
+                dueDate: new Date()
+            };
 
-        person.driverLicense = driverLicense;
+            person.driverLicense = driverLicense;
+        }
 
         await this.PutState(ctx, person.cpf, person);
         return person;

@@ -6,6 +6,13 @@ type DriverLicense = {
     dueDate: string;
 }
 
+export interface IPersonCreate {
+    cpf: string;
+    name: string;
+    birthday: string;
+    motherName: string;
+}
+
 export interface IPersonList {
     name: string;
     motherName: string;
@@ -30,7 +37,7 @@ const getPaginated = async (chassisId = '', bookmark = ''): Promise<TPersonPagin
                 Environment.LIMITE_DE_LINHAS.toString(), bookmark
             ]);
 
-            if (data) {
+            if (data.metadata) {
                 return {
                     data: data.data,
                     bookmark: data.metadata.bookmark,
@@ -72,24 +79,24 @@ const getPaginated = async (chassisId = '', bookmark = ''): Promise<TPersonPagin
 //   }
 // };
 
-// const create = async (dados: ICarCreate): Promise<null | Error> => {
-//     try {
-//         const urlRelativa = '/submit/car-channel/car/AddCar';
+const create = async (dados: IPersonCreate): Promise<string | Error> => {
+    try {
+        const urlRelativa = '/submit/person-channel/person/CreatePerson';
 
-//         const { data } = await Api.put(urlRelativa, [
-//             uuidv4(), dados.model, dados.year.toString(), dados.color
-//         ]);
+        const { data } = await Api.put(urlRelativa, [
+            dados.cpf, dados.name, dados.birthday, dados.motherName
+        ]);
 
-//         if (data.chassisId) {
-//             return data.chassisId;
-//         }
+        if (data.cpf) {
+            return data.cpf;
+        }
 
-//         return new Error(data.error || 'Erro ao criar o registro.');
-//     } catch (error) {
-//         console.error(error);
-//         return new Error((error as { message: string }).message || 'Erro ao criar o registro.');
-//     }
-// };
+        return new Error(data.error || 'Erro ao criar o registro.');
+    } catch (error) {
+        console.error(error);
+        return new Error((error as { message: string }).message || 'Erro ao criar o registro.');
+    }
+};
 
 // const updateById = async (id: number, dados: IDetalheCidade): Promise<void | Error> => {
 //   try {
@@ -100,16 +107,28 @@ const getPaginated = async (chassisId = '', bookmark = ''): Promise<TPersonPagin
 //   }
 // };
 
-// const deleteById = async (id: number): Promise<void | Error> => {
-//   try {
-//     await Api.delete(`/cidades/${id}`);
-//   } catch (error) {
-//     console.error(error);
-//     return new Error((error as { message: string }).message || 'Erro ao apagar o registro.');
-//   }
-// };
+const declareDeathPerson = async (cpf: string): Promise<void | Error> => {
+    try {
+        const urlRelativa = '/submit/person-channel/person/DeclareDeathPerson';
+
+        const { data } = await Api.put(urlRelativa, [
+            cpf
+        ]);
+
+        if (data.cpf) {
+            return data.cpf;
+        }
+
+        return new Error(data.error || 'Erro ao salvar o registro.');
+    } catch (error) {
+        console.error(error);
+        return new Error((error as { message: string }).message || 'Erro ao salvar o registro.');
+    }
+};
 
 
 export const PersonService = {
-    getPaginated
+    getPaginated,
+    create,
+    declareDeathPerson
 };

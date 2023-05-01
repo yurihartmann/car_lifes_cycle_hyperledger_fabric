@@ -2,20 +2,15 @@ import { useEffect } from 'react';
 import { Routes, Route, Navigate } from 'react-router-dom';
 
 import { useDrawerContext } from '../shared/contexts';
-import {
-    Dashboard,
-    DetalheDePessoas,
-    ListagemDePessoas,
-    DetalheDeCidades,
-    ListagemDeCidades,
-    ListCar,
-    ListRestriction
-} from '../pages';
 import { AddRestriction } from '../pages/cars/restriction/AddRestriction';
 import { ListMaintenance } from '../pages/cars/maintenance/ListMaintenance';
 import { AddMaintenance } from '../pages/cars/maintenance/AddMaintenance';
 import { AddCar } from '../pages/cars/AddCar';
 import { ListPerson } from '../pages/person/ListPerson';
+import { AddPerson } from '../pages/person/AddPerson';
+import { ListCar } from '../pages/cars/ListCars';
+import { ListRestriction } from '../pages/cars/restriction/ListRestriction';
+import { Dashboard } from '../pages/dashboard/Dashboard';
 
 export const AppRoutes = () => {
     const { setDrawerOptions } = useDrawerContext();
@@ -24,22 +19,12 @@ export const AppRoutes = () => {
         setDrawerOptions([
             {
                 icon: 'home',
-                path: '/pagina-inicial',
+                path: '/dashboard',
                 label: 'Página inicial',
             },
             {
-                icon: 'location_city',
-                path: '/cidades',
-                label: 'Cidades',
-            },
-            {
                 icon: 'people',
-                path: '/pessoas',
-                label: 'Pessoas old',
-            },
-            {
-                icon: 'people',
-                path: '/people',
+                path: '/persons',
                 label: 'Pessoas',
             },
             {
@@ -67,16 +52,10 @@ export const AppRoutes = () => {
 
     return (
         <Routes>
-            <Route path="/pagina-inicial" element={<Dashboard />} />
+            <Route path="/dashboard" element={<Dashboard />} />
 
-            <Route path="/pessoas" element={<ListagemDePessoas />} />
-            <Route path="/pessoas/detalhe/:id" element={<DetalheDePessoas />} />
-
-            <Route path="/cidades" element={<ListagemDeCidades />} />
-            <Route path="/cidades/detalhe/:id" element={<DetalheDeCidades />} />
-
-            <Route path="/people" element={<ListPerson />} />
-            <Route path="/people/add" element={<ListPerson />} />
+            <Route path="/persons" element={<ListPerson />} />
+            <Route path="/persons/add" element={<AddPerson />} />
 
             <Route path="/cars" element={<ListCar />} />
             <Route path="/cars/add" element={<AddCar />} />
@@ -88,9 +67,7 @@ export const AppRoutes = () => {
             <Route path="/cars/:chassisId/maintenances/add" element={<AddMaintenance />} />
 
 
-
-
-            <Route path="*" element={<Navigate to="/pagina-inicial" />} />
+            <Route path="*" element={<Navigate to="/dashboard" />} />
         </Routes>
     );
 };

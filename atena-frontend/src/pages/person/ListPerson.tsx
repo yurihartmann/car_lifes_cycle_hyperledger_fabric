@@ -58,6 +58,22 @@ export const ListPerson: React.FC = () => {
         });
     }, [search, bookmark]);
 
+    const handleDeclareDeathPerson = (cpf: string) => {
+        if (confirm('Realmente deseja declarar morte?')) {
+            snackbarNotify('Carregando....', 'info');
+            PersonService.declareDeathPerson(cpf)
+                .then(result => {
+                    if (result instanceof Error) {
+                        snackbarNotify(result.message, 'error');
+                    } else {
+                        snackbarNotify('Salvo com sucesso!', 'success');
+                        setTimeout(() => {
+                            window.location.reload();
+                        }, 2000);
+                    }
+                });
+        }
+    };
 
     return (
         <LayoutBaseDePagina
@@ -67,7 +83,7 @@ export const ListPerson: React.FC = () => {
                     mostrarInputBusca
                     textoDaBusca={search}
                     textoBotaoNovo='Adicionar pessoa'
-                    aoClicarEmNovo={() => navigate('/people/add')}
+                    aoClicarEmNovo={() => navigate('/persons/add')}
                     aoMudarTextoDeBusca={texto => setSearchParams({ search: texto }, { replace: true })}
                 />
             }
@@ -79,11 +95,12 @@ export const ListPerson: React.FC = () => {
                             <TableCell>CPF</TableCell>
                             <TableCell>Nome</TableCell>
                             <TableCell>Data de nascimento</TableCell>
+                            <TableCell>Viva?</TableCell>
                             <TableCell>Nome da mãe</TableCell>
-                            <TableCell>CNH</TableCell>
-                            <TableCell>Vencimento CNH</TableCell>
+                            {/* <TableCell>CNH</TableCell> */}
+                            {/* <TableCell>Vencimento CNH</TableCell>
                             <TableCell>Situação CNH</TableCell>
-                            <TableCell></TableCell>
+                            <TableCell></TableCell> */}
                         </TableRow>
                     </TableHead>
                     <TableBody>
@@ -92,8 +109,22 @@ export const ListPerson: React.FC = () => {
                                 <TableCell>{row.cpf}</TableCell>
                                 <TableCell>{row.name}</TableCell>
                                 <TableCell>{row.birthday}</TableCell>
+                                {row.alive && (
+                                    <TableCell>
+                                        Viva
+                                        <Tooltip title="Declarar morte" arrow placement="right">
+                                            <IconButton size="small" onClick={() => handleDeclareDeathPerson(row.cpf)}>
+                                                <Icon>person_off</Icon>
+                                            </IconButton>
+                                        </Tooltip>
+                                    </TableCell>
+                                )}
+                                {!row.alive && (
+                                    <TableCell>Morta</TableCell>
+                                )}
+
                                 <TableCell>{row.motherName}</TableCell>
-                                <TableCell>{row.driverLicense?.cnhNumber || '-'}</TableCell>
+                                {/* <TableCell>{row.driverLicense?.cnhNumber || '-'}</TableCell>
                                 <TableCell>{row.driverLicense?.dueDate || '-'}</TableCell>
                                 <TableCell>{'Normal'}</TableCell>
                                 <TableCell>
@@ -111,7 +142,7 @@ export const ListPerson: React.FC = () => {
                                             </IconButton>
                                         )
                                     }
-                                </TableCell>
+                                </TableCell> */}
                             </TableRow>
                         ))}
                     </TableBody>

@@ -3,10 +3,10 @@ import { Box, Grid, LinearProgress, Paper, Typography } from '@mui/material';
 import { useNavigate, useParams } from 'react-router-dom';
 import * as yup from 'yup';
 
-import { CidadesService } from '../../shared/services/api/cidades/CidadesService';
-import { VTextField, VForm, useVForm, IVFormErrors } from '../../shared/forms';
-import { FerramentasDeDetalhe } from '../../shared/components';
-import { LayoutBaseDePagina } from '../../shared/layouts';
+import { CidadesService } from '../../../shared/services/api/cidades/CidadesService';
+import { VTextField, VForm, useVForm, IVFormErrors } from '../../../shared/forms';
+import { FerramentasDeDetalhe } from '../../../shared/components';
+import { LayoutBaseDePagina } from '../../../shared/layouts';
 
 
 interface IFormData {
