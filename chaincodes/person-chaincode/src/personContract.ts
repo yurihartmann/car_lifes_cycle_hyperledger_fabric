@@ -44,6 +44,8 @@ export class PersonContract extends BaseContract {
             throw new Error(`The person ${cpf} already exists`);
         }
 
+        // TODO: validar birthday - nao pode ser depois de hoje
+
         const person: Person = {
             cpf: cpf,
             name: name,

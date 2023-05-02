@@ -133,9 +133,9 @@ export class CarContract extends BaseContract {
 
         const person = await this.getPerson(ctx, cpf);
 
-        if ((new Date().getFullYear() - new Date(person?.birthday).getFullYear()) < 18) {
-            throw new Error(`The person not have 18 years old or more`);
-        }
+        // if ((new Date().getFullYear() - new Date(person?.birthday).getFullYear()) < 18) {
+        //     throw new Error(`The person not have 18 years old or more`);
+        // }
 
         if (car.restrictions.length > 0) {
             throw new Error(`The car have restrictions`);
