@@ -29,6 +29,7 @@ export const Login: React.FC<ILoginProps> = ({ children }) => {
                 login(dadosValidados.org)
                     .then(() => {
                         setIsLoading(false);
+                        window.location.reload();
                     });
             })
             .catch((errors: yup.ValidationError) => {
