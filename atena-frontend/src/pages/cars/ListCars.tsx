@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useState } from 'react';
-import { Box, Button, Icon, IconButton, LinearProgress, Pagination, Paper, Table, TableBody, TableCell, TableContainer, TableFooter, TableHead, TableRow, Tooltip, useTheme } from '@mui/material';
+import { Box, Button, Icon, IconButton, LinearProgress, Modal, Pagination, Paper, Table, TableBody, TableCell, TableContainer, TableFooter, TableHead, TableRow, Tooltip, Typography, useTheme } from '@mui/material';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 
 import { FerramentasDaListagem } from '../../shared/components';
@@ -9,6 +9,9 @@ import { useDebounce } from '../../shared/hooks';
 import { CarService, IListCar } from '../../shared/services/api/cars/CarService';
 import { useAppThemeContext } from '../../shared/contexts';
 import { FinancingService } from '../../shared/services/api/financing/FinancingService';
+import { SellCarSelectorModal } from './sellCar/SellCarSelectorModal';
+
+
 
 
 export const ListCar: React.FC = () => {
@@ -93,6 +96,22 @@ export const ListCar: React.FC = () => {
         }
     };
 
+    const handleGetCarToSell = (chassisId: string) => {
+        if (confirm('Realmente deseja adquirir o carro?')) {
+            snackbarNotify('Carregando....', 'info');
+            CarService.getCarToSell(chassisId)
+                .then(result => {
+                    if (result instanceof Error) {
+                        snackbarNotify(result.message, 'error');
+                    } else {
+                        snackbarNotify('Carro adquirido com sucesso!', 'success');
+                        setTimeout(() => {
+                            window.location.reload();
+                        }, 2000);
+                    }
+                });
+        }
+    };
 
     return (
         <LayoutBaseDePagina
@@ -124,50 +143,69 @@ export const ListCar: React.FC = () => {
                     </TableHead>
                     <TableBody>
                         {rows.map(row => (
-                            <TableRow key={row.chassisId}>
-                                <TableCell>
-                                    <Tooltip title="Restrições" arrow placement="right">
-                                        <IconButton size="small" onClick={() => navigate(`/cars/${row.chassisId}/restrictions`)}>
-                                            <Icon>car_crash</Icon>
-                                        </IconButton>
-                                    </Tooltip>
-                                    <Tooltip title="Manuteções" arrow placement="right">
-                                        <IconButton size="small" onClick={() => navigate(`/cars/${row.chassisId}/maintenances`)}>
-                                            <Icon>car_repair</Icon>
-                                        </IconButton>
-                                    </Tooltip>
-                                </TableCell>
-                                <TableCell>{row.chassisId}</TableCell>
-                                <TableCell>{row.brand}</TableCell>
-                                <TableCell>{row.model}</TableCell>
-                                <TableCell>{row.color}</TableCell>
-                                <TableCell>{row.ownerCpf || '-'}</TableCell>
-                                <TableCell>{row.ownerDealershipName || '-'}</TableCell>
-                                <TableCell>{row.year}</TableCell>
-                                <TableCell>
-                                    {row.financingBy}
-                                    {
-                                        !row.financingBy && (
-                                            <IconButton size="small" onClick={() => handleAddFinancingBy(row.chassisId)}>
-                                                <Icon>add_cicle</Icon>
+                            <>
+                                <TableRow key={row.chassisId}>
+                                    <TableCell>
+                                        <Tooltip title="Restrições" arrow placement="right">
+                                            <IconButton size="small" onClick={() => navigate(`/cars/${row.chassisId}/restrictions`)}>
+                                                <Icon>car_crash</Icon>
                                             </IconButton>
-                                        )
-                                    }
-                                    {
-                                        row.financingBy && (
-                                            <IconButton size="small" onClick={() => handleRemoveFinancingBy(row.chassisId)}>
-                                                <Icon>delete_icon</Icon>
+                                        </Tooltip>
+                                        <Tooltip title="Manuteções" arrow placement="right">
+                                            <IconButton size="small" onClick={() => navigate(`/cars/${row.chassisId}/maintenances`)}>
+                                                <Icon>car_repair</Icon>
                                             </IconButton>
-                                        )
-                                    }
-                                    {/* <IconButton size="small" onClick={() => alert('Financiamento')}>
+                                        </Tooltip>
+                                        <SellCarSelectorModal
+                                            chassisId={row.chassisId}
+                                        />
+                                    </TableCell>
+                                    <TableCell>{row.chassisId}</TableCell>
+                                    <TableCell>{row.brand}</TableCell>
+                                    <TableCell>{row.model}</TableCell>
+                                    <TableCell>{row.color}</TableCell>
+                                    <TableCell>{row.ownerCpf || '-'}</TableCell>
+                                    <TableCell>
+                                        {row.ownerDealershipName && (
+                                            row.ownerDealershipName
+                                        )}
+                                        {row.ownerCpf && (
+                                            <span>Já possue um dono!</span>
+                                        )}
+                                        {!row.ownerDealershipName && !row.ownerCpf && (
+                                            <Tooltip title="Adquirir carro para venda" arrow placement="right">
+                                                <IconButton size="small" onClick={() => handleGetCarToSell(row.chassisId)}>
+                                                    <Icon>car_rental</Icon>
+                                                </IconButton>
+                                            </Tooltip>
+                                        )}
+                                    </TableCell>
+                                    <TableCell>{row.year}</TableCell>
+                                    <TableCell>
+                                        {row.financingBy}
+                                        {
+                                            !row.financingBy && (
+                                                <IconButton size="small" onClick={() => handleAddFinancingBy(row.chassisId)}>
+                                                    <Icon>add_cicle</Icon>
+                                                </IconButton>
+                                            )
+                                        }
+                                        {
+                                            row.financingBy && (
+                                                <IconButton size="small" onClick={() => handleRemoveFinancingBy(row.chassisId)}>
+                                                    <Icon>delete_icon</Icon>
+                                                </IconButton>
+                                            )
+                                        }
+                                        {/* <IconButton size="small" onClick={() => alert('Financiamento')}>
                                         <Icon>add_cicle</Icon>
                                     </IconButton>
                                     <IconButton size="small" onClick={() => alert('Financiamento')}>
                                         <Icon>delete_icon</Icon>
                                     </IconButton> */}
-                                </TableCell>
-                            </TableRow>
+                                    </TableCell>
+                                </TableRow>
+                            </>
                         ))}
                     </TableBody>
 

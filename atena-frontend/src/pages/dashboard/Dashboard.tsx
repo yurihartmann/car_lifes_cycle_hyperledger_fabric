@@ -8,13 +8,15 @@ export const Dashboard = () => {
 
 
     return (
-        <Box>
-            <Box width='100%' display="flex" height="100px" alignItems='center' justifyContent='center'>
-                <Typography variant="h3">Bem vindo {org} !!!</Typography>
+        <Box width='100%' height="100%" display="flex" flexDirection="column">
+            <Box display="flex" height="100px" alignItems='center' justifyContent='center'>
+                <Typography variant="h3">
+                    Bem vindo {org} !!!
+                </Typography>
             </Box>
-            <Box width='100%' display="flex" height="200px" alignItems='center' justifyContent='center'>
+            <Box display="flex" height="512px" alignItems='center' justifyContent='center'>
                 <img
-                    src={'logo512.png'}
+                    src={'car.png'}
                     alt={'logo'}
                     loading="lazy"
                 />

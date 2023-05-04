@@ -32,21 +32,11 @@ export const AppRoutes = () => {
                 path: '/cars',
                 label: 'Carros',
             },
-            {
-                icon: 'car_rental',
-                path: '/get-car-to-sell',
-                label: 'Adquirir carro para venda',
-            },
-            {
-                icon: 'sell',
-                path: '/sell-car',
-                label: 'Vender um carro',
-            },
-            {
-                icon: 'document_scanner',
-                path: '/licensing',
-                label: 'Licenciar',
-            }
+            // {
+            //     icon: 'document_scanner',
+            //     path: '/licensing',
+            //     label: 'Licenciar',
+            // }
         ]);
     }, []);
 
@@ -65,7 +55,6 @@ export const AppRoutes = () => {
 
             <Route path="/cars/:chassisId/maintenances" element={<ListMaintenance />} />
             <Route path="/cars/:chassisId/maintenances/add" element={<AddMaintenance />} />
-
 
             <Route path="*" element={<Navigate to="/dashboard" />} />
         </Routes>

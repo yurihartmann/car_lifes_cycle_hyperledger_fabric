@@ -100,6 +100,44 @@ const create = async (dados: ICarCreate): Promise<null | Error> => {
     }
 };
 
+const getCarToSell = async (chassisId: string): Promise<null | Error> => {
+    try {
+        const urlRelativa = '/submit/car-channel/car/GetCarToSell';
+
+        const { data } = await Api.put(urlRelativa, [
+            chassisId
+        ]);
+
+        if (data.chassisId) {
+            return data.chassisId;
+        }
+
+        return new Error(data.error || 'Erro ao criar o registro.');
+    } catch (error) {
+        console.error(error);
+        return new Error((error as { message: string }).message || 'Erro ao criar o registro.');
+    }
+};
+
+const sellCar = async (chassisId: string, cpf: string): Promise<null | Error> => {
+    try {
+        const urlRelativa = '/submit/car-channel/car/SellCar';
+
+        const { data } = await Api.put(urlRelativa, [
+            chassisId, cpf
+        ]);
+
+        if (data.chassisId) {
+            return data.chassisId;
+        }
+
+        return new Error(data.error || 'Erro ao criar o registro.');
+    } catch (error) {
+        console.error(error);
+        return new Error((error as { message: string }).message || 'Erro ao criar o registro.');
+    }
+};
+
 // const updateById = async (id: number, dados: IDetalheCidade): Promise<void | Error> => {
 //   try {
 //     await Api.put(`/cidades/${id}`, dados);
@@ -121,5 +159,7 @@ const create = async (dados: ICarCreate): Promise<null | Error> => {
 
 export const CarService = {
     getPaginated,
-    create
+    create,
+    getCarToSell,
+    sellCar
 };
