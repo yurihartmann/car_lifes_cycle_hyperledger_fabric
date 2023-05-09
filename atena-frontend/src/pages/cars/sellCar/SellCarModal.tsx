@@ -58,6 +58,9 @@ export const SellCarModal: React.FC<ISellCarModal> = ({ chassisId }) => {
                         } else {
                             snackbarNotify('Salva com sucesso!', 'success');
                             navigate(`/cars?search=${chassisId}`);
+                            setTimeout(() => {
+                                window.location.reload();
+                            }, 800);
                         }
                     });
             })
@@ -91,7 +94,7 @@ export const SellCarModal: React.FC<ISellCarModal> = ({ chassisId }) => {
                     </Typography>
                     <VForm ref={formRef} onSubmit={handleSave}>
                         <Grid container item direction="row" spacing={2}>
-                            <Grid item xs={12} sm={12} md={6} lg={4} xl={2}>
+                            <Grid item xs={12} sm={12} md={6} marginY={2}>
                                 <VTextField
                                     fullWidth
                                     name='cpf'

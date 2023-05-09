@@ -14,7 +14,7 @@ export class CarContract extends BaseContract {
                 chassisId: '8faf4111-723c-40c1-aa5f-070ad40edfaa',
                 brand: 'Ford',
                 model: 'Focus',
-                ownerCpf: "123.123.123-12",
+                ownerCpf: null,
                 color: 'blue',
                 year: 2012,
                 financingBy: null,
@@ -25,7 +25,7 @@ export class CarContract extends BaseContract {
                 chassisId: 'c747dc9e-e736-40b2-83bc-6ecd2f6356e9',
                 brand: 'Honda',
                 model: 'Civic',
-                ownerCpf: "123.123.123-67",
+                ownerCpf: null,
                 color: 'white',
                 year: 2012,
                 financingBy: null,
@@ -106,6 +106,8 @@ export class CarContract extends BaseContract {
         chassisId: string,
     ): Promise<object> {
         const car: Car = await this.GetState(ctx, chassisId);
+
+        // TODO: verificar se tem restricoes
 
         if (car.ownerDealershipName || car.ownerCpf) {
             throw new Error(`The car already have ownerDealershipName or ownerCpf ${car.ownerDealershipName}`);
@@ -188,6 +190,8 @@ export class CarContract extends BaseContract {
         description: string,
     ): Promise<object> {
         const car: Car = await this.GetState(ctx, chassisId);
+
+        // TODO: verificar se ja tem placa no carro
 
         car.restrictions.push({
             code: code,

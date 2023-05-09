@@ -25,6 +25,9 @@ export class Restriction {
 
     @Property()
     public description?: string;
+
+    @Property()
+    public deletedAt?: Date;
 }
 
 @Object()

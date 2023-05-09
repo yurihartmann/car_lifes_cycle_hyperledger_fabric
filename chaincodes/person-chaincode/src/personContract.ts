@@ -1,6 +1,6 @@
 import { Context, Info, Transaction } from 'fabric-contract-api';
 import { BaseContract, AllowedOrgs, BuildReturn } from './baseContract';
-import { DriverLicense, Person } from './person';
+import { Person } from './person';
 
 @Info({ title: 'Person', description: 'Smart contract for person' })
 export class PersonContract extends BaseContract {
@@ -12,20 +12,15 @@ export class PersonContract extends BaseContract {
                 cpf: '123.123.123-67',
                 name: "Yuri",
                 birthday: new Date("06/07/2001"),
-                motherName: "Maria",
-                driverLicense: {
-                    cnhNumber: 98762198,
-                    dueDate: new Date("09/08/2018")
-                },
+                motherName: "Marilda",
                 alive: true
             },
             {
                 cpf: '456.456.456-67',
-                name: "Yasmin",
-                birthday: new Date("09/08/2001"),
-                motherName: "Maria",
+                name: "Isadora",
+                birthday: new Date("05/05/2005"),
+                motherName: "Marilda",
                 alive: true,
-                driverLicense: null
             }
         ];
 
@@ -51,8 +46,7 @@ export class PersonContract extends BaseContract {
             name: name,
             birthday: new Date(birthday),
             motherName: motherName,
-            alive: true,
-            driverLicense: null
+            alive: true
         };
 
         await this.PutState(ctx, person.cpf, person)
@@ -85,46 +79,4 @@ export class PersonContract extends BaseContract {
         await this.PutState(ctx, person.cpf, person);
         return person;
     }
-
-    @Transaction()
-    @BuildReturn()
-    @AllowedOrgs(["detranMSP"])
-    public async UpdateDriverLicense(ctx: Context, cpf: string, cnhNumber: number): Promise<object> {
-        const person = await this.GetState(ctx, cpf);
-
-        if (!person.alive) {
-            throw new Error(`The person ${cpf} is not alive`);
-        }
-
-        if (person.driverLicense) {
-            person.driverLicense.dueDate = new Date()
-        } else {
-            const driverLicense: DriverLicense = {
-                cnhNumber: cnhNumber,
-                dueDate: new Date()
-            };
-
-            person.driverLicense = driverLicense;
-        }
-
-        await this.PutState(ctx, person.cpf, person);
-        return person;
-    }
-
-    @Transaction()
-    @BuildReturn()
-    @AllowedOrgs(["detranMSP"])
-    public async DeleteLicense(ctx: Context, cpf: string): Promise<object> {
-        const person = await this.GetState(ctx, cpf);
-
-        if (!person.alive) {
-            throw new Error(`The person ${cpf} is not alive`);
-        }
-
-        person.driverLicense = null;
-
-        await this.PutState(ctx, person.cpf, person);
-        return person;
-    }
-
 }
