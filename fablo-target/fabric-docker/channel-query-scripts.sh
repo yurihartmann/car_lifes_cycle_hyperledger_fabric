@@ -33,13 +33,13 @@ channelQuery() {
     peerChannelList "cli.montadora-d.car-lifes-cicle.com" "peer0.montadora-d.car-lifes-cicle.com:7081"
 
   elif
-    [ "$1" = "list" ] && [ "$2" = "concessionarif" ] && [ "$3" = "peer0" ]
+    [ "$1" = "list" ] && [ "$2" = "concessionariaf" ] && [ "$3" = "peer0" ]
   then
 
     peerChannelList "cli.concessionaria-f.car-lifes-cicle.com" "peer0.concessionaria-f.car-lifes-cicle.com:7101"
 
   elif
-    [ "$1" = "list" ] && [ "$2" = "concessionarig" ] && [ "$3" = "peer0" ]
+    [ "$1" = "list" ] && [ "$2" = "concessionariag" ] && [ "$3" = "peer0" ]
   then
 
     peerChannelList "cli.concessionaria-g.car-lifes-cicle.com" "peer0.concessionaria-g.car-lifes-cicle.com:7121"
@@ -132,34 +132,34 @@ channelQuery() {
     peerChannelFetchBlock "car-channel" "cli.montadora-d.car-lifes-cicle.com" "${BLOCK_NAME}" "peer0.montadora-d.car-lifes-cicle.com:7081" "$TARGET_FILE"
 
   elif
-    [ "$1" = "getinfo" ] && [ "$2" = "car-channel" ] && [ "$3" = "concessionarif" ] && [ "$4" = "peer0" ]
+    [ "$1" = "getinfo" ] && [ "$2" = "car-channel" ] && [ "$3" = "concessionariaf" ] && [ "$4" = "peer0" ]
   then
 
     peerChannelGetInfo "car-channel" "cli.concessionaria-f.car-lifes-cicle.com" "peer0.concessionaria-f.car-lifes-cicle.com:7101"
 
-  elif [ "$1" = "fetch" ] && [ "$2" = "config" ] && [ "$3" = "car-channel" ] && [ "$4" = "concessionarif" ] && [ "$5" = "peer0" ]; then
+  elif [ "$1" = "fetch" ] && [ "$2" = "config" ] && [ "$3" = "car-channel" ] && [ "$4" = "concessionariaf" ] && [ "$5" = "peer0" ]; then
     TARGET_FILE=${6:-"$channel-config.json"}
 
     peerChannelFetchConfig "car-channel" "cli.concessionaria-f.car-lifes-cicle.com" "$TARGET_FILE" "peer0.concessionaria-f.car-lifes-cicle.com:7101"
 
-  elif [ "$1" = "fetch" ] && [ "$3" = "car-channel" ] && [ "$4" = "concessionarif" ] && [ "$5" = "peer0" ]; then
+  elif [ "$1" = "fetch" ] && [ "$3" = "car-channel" ] && [ "$4" = "concessionariaf" ] && [ "$5" = "peer0" ]; then
     BLOCK_NAME=$2
     TARGET_FILE=${6:-"$BLOCK_NAME.block"}
 
     peerChannelFetchBlock "car-channel" "cli.concessionaria-f.car-lifes-cicle.com" "${BLOCK_NAME}" "peer0.concessionaria-f.car-lifes-cicle.com:7101" "$TARGET_FILE"
 
   elif
-    [ "$1" = "getinfo" ] && [ "$2" = "car-channel" ] && [ "$3" = "concessionarig" ] && [ "$4" = "peer0" ]
+    [ "$1" = "getinfo" ] && [ "$2" = "car-channel" ] && [ "$3" = "concessionariag" ] && [ "$4" = "peer0" ]
   then
 
     peerChannelGetInfo "car-channel" "cli.concessionaria-g.car-lifes-cicle.com" "peer0.concessionaria-g.car-lifes-cicle.com:7121"
 
-  elif [ "$1" = "fetch" ] && [ "$2" = "config" ] && [ "$3" = "car-channel" ] && [ "$4" = "concessionarig" ] && [ "$5" = "peer0" ]; then
+  elif [ "$1" = "fetch" ] && [ "$2" = "config" ] && [ "$3" = "car-channel" ] && [ "$4" = "concessionariag" ] && [ "$5" = "peer0" ]; then
     TARGET_FILE=${6:-"$channel-config.json"}
 
     peerChannelFetchConfig "car-channel" "cli.concessionaria-g.car-lifes-cicle.com" "$TARGET_FILE" "peer0.concessionaria-g.car-lifes-cicle.com:7121"
 
-  elif [ "$1" = "fetch" ] && [ "$3" = "car-channel" ] && [ "$4" = "concessionarig" ] && [ "$5" = "peer0" ]; then
+  elif [ "$1" = "fetch" ] && [ "$3" = "car-channel" ] && [ "$4" = "concessionariag" ] && [ "$5" = "peer0" ]; then
     BLOCK_NAME=$2
     TARGET_FILE=${6:-"$BLOCK_NAME.block"}
 
@@ -285,34 +285,34 @@ channelQuery() {
     peerChannelFetchBlock "person-channel" "cli.montadora-d.car-lifes-cicle.com" "${BLOCK_NAME}" "peer0.montadora-d.car-lifes-cicle.com:7081" "$TARGET_FILE"
 
   elif
-    [ "$1" = "getinfo" ] && [ "$2" = "person-channel" ] && [ "$3" = "concessionarif" ] && [ "$4" = "peer0" ]
+    [ "$1" = "getinfo" ] && [ "$2" = "person-channel" ] && [ "$3" = "concessionariaf" ] && [ "$4" = "peer0" ]
   then
 
     peerChannelGetInfo "person-channel" "cli.concessionaria-f.car-lifes-cicle.com" "peer0.concessionaria-f.car-lifes-cicle.com:7101"
 
-  elif [ "$1" = "fetch" ] && [ "$2" = "config" ] && [ "$3" = "person-channel" ] && [ "$4" = "concessionarif" ] && [ "$5" = "peer0" ]; then
+  elif [ "$1" = "fetch" ] && [ "$2" = "config" ] && [ "$3" = "person-channel" ] && [ "$4" = "concessionariaf" ] && [ "$5" = "peer0" ]; then
     TARGET_FILE=${6:-"$channel-config.json"}
 
     peerChannelFetchConfig "person-channel" "cli.concessionaria-f.car-lifes-cicle.com" "$TARGET_FILE" "peer0.concessionaria-f.car-lifes-cicle.com:7101"
 
-  elif [ "$1" = "fetch" ] && [ "$3" = "person-channel" ] && [ "$4" = "concessionarif" ] && [ "$5" = "peer0" ]; then
+  elif [ "$1" = "fetch" ] && [ "$3" = "person-channel" ] && [ "$4" = "concessionariaf" ] && [ "$5" = "peer0" ]; then
     BLOCK_NAME=$2
     TARGET_FILE=${6:-"$BLOCK_NAME.block"}
 
     peerChannelFetchBlock "person-channel" "cli.concessionaria-f.car-lifes-cicle.com" "${BLOCK_NAME}" "peer0.concessionaria-f.car-lifes-cicle.com:7101" "$TARGET_FILE"
 
   elif
-    [ "$1" = "getinfo" ] && [ "$2" = "person-channel" ] && [ "$3" = "concessionarig" ] && [ "$4" = "peer0" ]
+    [ "$1" = "getinfo" ] && [ "$2" = "person-channel" ] && [ "$3" = "concessionariag" ] && [ "$4" = "peer0" ]
   then
 
     peerChannelGetInfo "person-channel" "cli.concessionaria-g.car-lifes-cicle.com" "peer0.concessionaria-g.car-lifes-cicle.com:7121"
 
-  elif [ "$1" = "fetch" ] && [ "$2" = "config" ] && [ "$3" = "person-channel" ] && [ "$4" = "concessionarig" ] && [ "$5" = "peer0" ]; then
+  elif [ "$1" = "fetch" ] && [ "$2" = "config" ] && [ "$3" = "person-channel" ] && [ "$4" = "concessionariag" ] && [ "$5" = "peer0" ]; then
     TARGET_FILE=${6:-"$channel-config.json"}
 
     peerChannelFetchConfig "person-channel" "cli.concessionaria-g.car-lifes-cicle.com" "$TARGET_FILE" "peer0.concessionaria-g.car-lifes-cicle.com:7121"
 
-  elif [ "$1" = "fetch" ] && [ "$3" = "person-channel" ] && [ "$4" = "concessionarig" ] && [ "$5" = "peer0" ]; then
+  elif [ "$1" = "fetch" ] && [ "$3" = "person-channel" ] && [ "$4" = "concessionariag" ] && [ "$5" = "peer0" ]; then
     BLOCK_NAME=$2
     TARGET_FILE=${6:-"$BLOCK_NAME.block"}
 
@@ -398,12 +398,12 @@ printChannelsHelp() {
   echo -e "\t List channels on 'peer0' of 'montadoraD'".
   echo ""
 
-  echo "fablo channel list concessionarif peer0"
-  echo -e "\t List channels on 'peer0' of 'concessionariF'".
+  echo "fablo channel list concessionariaf peer0"
+  echo -e "\t List channels on 'peer0' of 'concessionariaF'".
   echo ""
 
-  echo "fablo channel list concessionarig peer0"
-  echo -e "\t List channels on 'peer0' of 'concessionariG'".
+  echo "fablo channel list concessionariag peer0"
+  echo -e "\t List channels on 'peer0' of 'concessionariaG'".
   echo ""
 
   echo "fablo channel list mecanicak peer0"
@@ -458,24 +458,24 @@ printChannelsHelp() {
   echo -e "\t Fetch a block with given number and save it. Uses first peer 'peer0' of 'montadoraD'".
   echo ""
 
-  echo "fablo channel getinfo car-channel concessionarif peer0"
-  echo -e "\t Get channel info on 'peer0' of 'concessionariF'".
+  echo "fablo channel getinfo car-channel concessionariaf peer0"
+  echo -e "\t Get channel info on 'peer0' of 'concessionariaF'".
   echo ""
-  echo "fablo channel fetch config car-channel concessionarif peer0 [file-name.json]"
-  echo -e "\t Download latest config block and save it. Uses first peer 'peer0' of 'concessionariF'".
+  echo "fablo channel fetch config car-channel concessionariaf peer0 [file-name.json]"
+  echo -e "\t Download latest config block and save it. Uses first peer 'peer0' of 'concessionariaF'".
   echo ""
-  echo "fablo channel fetch <newest|oldest|block-number> car-channel concessionarif peer0 [file name]"
-  echo -e "\t Fetch a block with given number and save it. Uses first peer 'peer0' of 'concessionariF'".
+  echo "fablo channel fetch <newest|oldest|block-number> car-channel concessionariaf peer0 [file name]"
+  echo -e "\t Fetch a block with given number and save it. Uses first peer 'peer0' of 'concessionariaF'".
   echo ""
 
-  echo "fablo channel getinfo car-channel concessionarig peer0"
-  echo -e "\t Get channel info on 'peer0' of 'concessionariG'".
+  echo "fablo channel getinfo car-channel concessionariag peer0"
+  echo -e "\t Get channel info on 'peer0' of 'concessionariaG'".
   echo ""
-  echo "fablo channel fetch config car-channel concessionarig peer0 [file-name.json]"
-  echo -e "\t Download latest config block and save it. Uses first peer 'peer0' of 'concessionariG'".
+  echo "fablo channel fetch config car-channel concessionariag peer0 [file-name.json]"
+  echo -e "\t Download latest config block and save it. Uses first peer 'peer0' of 'concessionariaG'".
   echo ""
-  echo "fablo channel fetch <newest|oldest|block-number> car-channel concessionarig peer0 [file name]"
-  echo -e "\t Fetch a block with given number and save it. Uses first peer 'peer0' of 'concessionariG'".
+  echo "fablo channel fetch <newest|oldest|block-number> car-channel concessionariag peer0 [file name]"
+  echo -e "\t Fetch a block with given number and save it. Uses first peer 'peer0' of 'concessionariaG'".
   echo ""
 
   echo "fablo channel getinfo car-channel mecanicak peer0"
@@ -548,24 +548,24 @@ printChannelsHelp() {
   echo -e "\t Fetch a block with given number and save it. Uses first peer 'peer0' of 'montadoraD'".
   echo ""
 
-  echo "fablo channel getinfo person-channel concessionarif peer0"
-  echo -e "\t Get channel info on 'peer0' of 'concessionariF'".
+  echo "fablo channel getinfo person-channel concessionariaf peer0"
+  echo -e "\t Get channel info on 'peer0' of 'concessionariaF'".
   echo ""
-  echo "fablo channel fetch config person-channel concessionarif peer0 [file-name.json]"
-  echo -e "\t Download latest config block and save it. Uses first peer 'peer0' of 'concessionariF'".
+  echo "fablo channel fetch config person-channel concessionariaf peer0 [file-name.json]"
+  echo -e "\t Download latest config block and save it. Uses first peer 'peer0' of 'concessionariaF'".
   echo ""
-  echo "fablo channel fetch <newest|oldest|block-number> person-channel concessionarif peer0 [file name]"
-  echo -e "\t Fetch a block with given number and save it. Uses first peer 'peer0' of 'concessionariF'".
+  echo "fablo channel fetch <newest|oldest|block-number> person-channel concessionariaf peer0 [file name]"
+  echo -e "\t Fetch a block with given number and save it. Uses first peer 'peer0' of 'concessionariaF'".
   echo ""
 
-  echo "fablo channel getinfo person-channel concessionarig peer0"
-  echo -e "\t Get channel info on 'peer0' of 'concessionariG'".
+  echo "fablo channel getinfo person-channel concessionariag peer0"
+  echo -e "\t Get channel info on 'peer0' of 'concessionariaG'".
   echo ""
-  echo "fablo channel fetch config person-channel concessionarig peer0 [file-name.json]"
-  echo -e "\t Download latest config block and save it. Uses first peer 'peer0' of 'concessionariG'".
+  echo "fablo channel fetch config person-channel concessionariag peer0 [file-name.json]"
+  echo -e "\t Download latest config block and save it. Uses first peer 'peer0' of 'concessionariaG'".
   echo ""
-  echo "fablo channel fetch <newest|oldest|block-number> person-channel concessionarig peer0 [file name]"
-  echo -e "\t Fetch a block with given number and save it. Uses first peer 'peer0' of 'concessionariG'".
+  echo "fablo channel fetch <newest|oldest|block-number> person-channel concessionariag peer0 [file name]"
+  echo -e "\t Fetch a block with given number and save it. Uses first peer 'peer0' of 'concessionariaG'".
   echo ""
 
   echo "fablo channel getinfo person-channel mecanicak peer0"

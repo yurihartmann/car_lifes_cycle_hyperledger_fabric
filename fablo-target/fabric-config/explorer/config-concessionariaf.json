@@ -1,0 +1,9 @@
+{
+  "network-configs": {
+    "network-concessionariaf": {
+      "name": "Network of concessionariaF",
+      "profile": "/opt/explorer/app/platform/fabric/connection-profile/connection-profile-concessionariaf.json"
+    }
+  },
+  "license": "Apache-2.0"
+}

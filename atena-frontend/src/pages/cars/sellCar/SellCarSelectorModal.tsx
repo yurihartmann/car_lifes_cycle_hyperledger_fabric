@@ -2,8 +2,10 @@ import * as React from 'react';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
-import { Icon, IconButton, Tooltip } from '@mui/material';
+import { Button, Icon, IconButton, Tooltip } from '@mui/material';
 import { SellCarModal } from './SellCarModal';
+import { useAppThemeContext } from '../../../shared/contexts';
+import { CarService } from '../../../shared/services/api/cars/CarService';
 
 const style = {
     position: 'absolute',
@@ -25,6 +27,24 @@ export const SellCarSelectorModal: React.FC<ISellCarSelectorModal> = ({ chassisI
     const [open, setOpen] = React.useState(false);
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
+    const { snackbarNotify } = useAppThemeContext();
+
+    const handleProposeChangeCarWithConcessionaire = (chassisId: string) => {
+        if (confirm('Realmente deseja fazer pedido de transferência?')) {
+            snackbarNotify('Carregando...', 'info');
+            CarService.proposeChangeCarWithConcessionaire(chassisId)
+                .then(result => {
+                    if (result instanceof Error) {
+                        snackbarNotify(result.message, 'error');
+                    } else {
+                        snackbarNotify('Pedido de transferencia efetuado!', 'success');
+                        setTimeout(() => {
+                            window.location.reload();
+                        }, 2000);
+                    }
+                });
+        }
+    };
 
     return (
         <>
@@ -44,9 +64,18 @@ export const SellCarSelectorModal: React.FC<ISellCarSelectorModal> = ({ chassisI
                         <Typography id="modal-modal-title" variant="h6" component="h2" marginBottom={2}>
                             Vendendendo o carro: {chassisId}
                         </Typography>
+
                         <Box marginBottom={2}>
                             <SellCarModal chassisId={chassisId} />
                         </Box>
+
+                        <Box marginBottom={2}>
+                            <Button size="large" variant='contained' onClick={() => handleProposeChangeCarWithConcessionaire(chassisId)}>
+                                Pessoa Física {'->'} Concessionária
+                            </Button>
+                        </Box>
+
+
                     </Box>
                 </Box>
             </Modal>

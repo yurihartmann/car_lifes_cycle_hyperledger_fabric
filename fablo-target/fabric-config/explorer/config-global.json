@@ -16,13 +16,13 @@
       "name": "Network of montadoraD",
       "profile": "/opt/explorer/app/platform/fabric/connection-profile/connection-profile-montadorad.json"
     },
-    "network-concessionarif": {
-      "name": "Network of concessionariF",
-      "profile": "/opt/explorer/app/platform/fabric/connection-profile/connection-profile-concessionarif.json"
+    "network-concessionariaf": {
+      "name": "Network of concessionariaF",
+      "profile": "/opt/explorer/app/platform/fabric/connection-profile/connection-profile-concessionariaf.json"
     },
-    "network-concessionarig": {
-      "name": "Network of concessionariG",
-      "profile": "/opt/explorer/app/platform/fabric/connection-profile/connection-profile-concessionarig.json"
+    "network-concessionariag": {
+      "name": "Network of concessionariaG",
+      "profile": "/opt/explorer/app/platform/fabric/connection-profile/connection-profile-concessionariag.json"
     },
     "network-mecanicak": {
       "name": "Network of mecanicaK",

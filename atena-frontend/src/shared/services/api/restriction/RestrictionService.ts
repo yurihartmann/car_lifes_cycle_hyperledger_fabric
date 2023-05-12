@@ -6,6 +6,7 @@ export interface IListRestriction {
     code: number;
     description: string;
     date: string;
+    deletedAt?: string;
 }
 
 export interface IRestrictionCreate {

@@ -58,7 +58,7 @@
     },
     {
       "organization": {
-        "name": "concessionariF",
+        "name": "concessionariaF",
         "domain": "concessionaria-f.car-lifes-cicle.com"
       },
       "peer": {
@@ -68,7 +68,7 @@
     },
     {
       "organization": {
-        "name": "concessionariG",
+        "name": "concessionariaG",
         "domain": "concessionaria-g.car-lifes-cicle.com"
       },
       "peer": {
@@ -136,13 +136,13 @@
           ]
         },
         {
-          "name": "concessionariF",
+          "name": "concessionariaF",
           "peers": [
             "peer0"
           ]
         },
         {
-          "name": "concessionariG",
+          "name": "concessionariaG",
           "peers": [
             "peer0"
           ]
@@ -195,13 +195,13 @@
           ]
         },
         {
-          "name": "concessionariF",
+          "name": "concessionariaF",
           "peers": [
             "peer0"
           ]
         },
         {
-          "name": "concessionariG",
+          "name": "concessionariaG",
           "peers": [
             "peer0"
           ]

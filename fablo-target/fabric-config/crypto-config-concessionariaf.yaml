@@ -1,6 +1,6 @@
 PeerOrgs:
-  - Name: concessionariG
-    Domain: concessionaria-g.car-lifes-cicle.com
+  - Name: concessionariaF
+    Domain: concessionaria-f.car-lifes-cicle.com
     Specs:
     Template:
       Count: 1

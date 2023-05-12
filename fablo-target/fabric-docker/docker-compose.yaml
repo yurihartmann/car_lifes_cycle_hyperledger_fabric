@@ -393,7 +393,7 @@ services:
     ports:
       - 7100:7054
     working_dir: /etc/hyperledger/fabric-ca-server
-    command: sh -c 'fabric-ca-server start -b ${CONCESSIONARIF_CA_ADMIN_NAME}:${CONCESSIONARIF_CA_ADMIN_PASSWORD} -d'
+    command: sh -c 'fabric-ca-server start -b ${CONCESSIONARIAF_CA_ADMIN_NAME}:${CONCESSIONARIAF_CA_ADMIN_PASSWORD} -d'
     volumes:
       - ../fabric-config/crypto-config/peerOrganizations/concessionaria-f.car-lifes-cicle.com/ca/:/etc/hyperledger/fabric-ca-server/crypto
       - ../fabric-config/fabric-ca-server-config/concessionaria-f.car-lifes-cicle.com/fabric-ca-server-config.yaml:/etc/hyperledger/fabric-ca-server/fabric-ca-server-config.yaml
@@ -411,7 +411,7 @@ services:
       - CORE_PEER_ID=cli.concessionaria-f.car-lifes-cicle.com
       - CORE_CHAINCODE_KEEPALIVE=10
       #
-      - CORE_PEER_LOCALMSPID=concessionariFMSP
+      - CORE_PEER_LOCALMSPID=concessionariaFMSP
       - CORE_PEER_MSPCONFIGPATH=/var/hyperledger/cli/crypto/users/Admin@concessionaria-f.car-lifes-cicle.com/msp
       - CORE_PEER_ADDRESS=peer0.concessionaria-f.car-lifes-cicle.com:7101
     working_dir: /var/hyperledger/cli/
@@ -431,7 +431,7 @@ services:
     container_name: peer0.concessionaria-f.car-lifes-cicle.com
     image: hyperledger/fabric-peer:${FABRIC_VERSION}
     environment:
-      - CORE_PEER_LOCALMSPID=concessionariFMSP
+      - CORE_PEER_LOCALMSPID=concessionariaFMSP
       - CORE_PEER_ID=peer0.concessionaria-f.car-lifes-cicle.com
       - CORE_PEER_ADDRESS=peer0.concessionaria-f.car-lifes-cicle.com:7101
       - CORE_PEER_LISTENADDRESS=peer0.concessionaria-f.car-lifes-cicle.com:7101
@@ -481,7 +481,7 @@ services:
     ports:
       - 7120:7054
     working_dir: /etc/hyperledger/fabric-ca-server
-    command: sh -c 'fabric-ca-server start -b ${CONCESSIONARIG_CA_ADMIN_NAME}:${CONCESSIONARIG_CA_ADMIN_PASSWORD} -d'
+    command: sh -c 'fabric-ca-server start -b ${CONCESSIONARIAG_CA_ADMIN_NAME}:${CONCESSIONARIAG_CA_ADMIN_PASSWORD} -d'
     volumes:
       - ../fabric-config/crypto-config/peerOrganizations/concessionaria-g.car-lifes-cicle.com/ca/:/etc/hyperledger/fabric-ca-server/crypto
       - ../fabric-config/fabric-ca-server-config/concessionaria-g.car-lifes-cicle.com/fabric-ca-server-config.yaml:/etc/hyperledger/fabric-ca-server/fabric-ca-server-config.yaml
@@ -499,7 +499,7 @@ services:
       - CORE_PEER_ID=cli.concessionaria-g.car-lifes-cicle.com
       - CORE_CHAINCODE_KEEPALIVE=10
       #
-      - CORE_PEER_LOCALMSPID=concessionariGMSP
+      - CORE_PEER_LOCALMSPID=concessionariaGMSP
       - CORE_PEER_MSPCONFIGPATH=/var/hyperledger/cli/crypto/users/Admin@concessionaria-g.car-lifes-cicle.com/msp
       - CORE_PEER_ADDRESS=peer0.concessionaria-g.car-lifes-cicle.com:7121
     working_dir: /var/hyperledger/cli/
@@ -519,7 +519,7 @@ services:
     container_name: peer0.concessionaria-g.car-lifes-cicle.com
     image: hyperledger/fabric-peer:${FABRIC_VERSION}
     environment:
-      - CORE_PEER_LOCALMSPID=concessionariGMSP
+      - CORE_PEER_LOCALMSPID=concessionariaGMSP
       - CORE_PEER_ID=peer0.concessionaria-g.car-lifes-cicle.com
       - CORE_PEER_ADDRESS=peer0.concessionaria-g.car-lifes-cicle.com:7121
       - CORE_PEER_LISTENADDRESS=peer0.concessionaria-g.car-lifes-cicle.com:7121

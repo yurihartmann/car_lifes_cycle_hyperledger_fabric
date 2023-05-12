@@ -1,6 +1,12 @@
 import { Object, Property } from 'fabric-contract-api';
 
 @Object()
+export class Pendencies {
+    @Property()
+    public GetCarToOwnerCpfFromDealershipName: string;
+}
+
+@Object()
 export class Maintenance {
     @Property()
     public mechanicalName: string;
@@ -67,5 +73,8 @@ export class Car {
 
     @Property()
     public restrictions: Restriction[];
+
+    @Property()
+    public pendencies?: Pendencies;
 
 }

@@ -10,6 +10,7 @@ import { CarService, IListCar } from '../../shared/services/api/cars/CarService'
 import { useAppThemeContext } from '../../shared/contexts';
 import { FinancingService } from '../../shared/services/api/financing/FinancingService';
 import { SellCarSelectorModal } from './sellCar/SellCarSelectorModal';
+import { PendenciesModal } from './pendencies/PendenciesModal';
 
 
 
@@ -113,6 +114,18 @@ export const ListCar: React.FC = () => {
         }
     };
 
+    const copyTextToClipboard = (text: string) => {
+        if ('clipboard' in navigator) {
+            return navigator.clipboard.writeText(text).then(
+                result => {
+                    snackbarNotify('Copiado!', 'success');
+                }
+            );
+        } else {
+            return document.execCommand('copy', true, text);
+        }
+    };
+
     return (
         <LayoutBaseDePagina
             titulo='Listagem de carros'
@@ -159,8 +172,21 @@ export const ListCar: React.FC = () => {
                                         <SellCarSelectorModal
                                             chassisId={row.chassisId}
                                         />
+                                        {row.pendencies?.GetCarToOwnerCpfFromDealershipName && (
+                                            <PendenciesModal
+                                                GetCarToOwnerCpfFromDealershipName={row.pendencies?.GetCarToOwnerCpfFromDealershipName}
+                                                chassisId={row.chassisId}
+                                            />
+                                        )}
                                     </TableCell>
-                                    <TableCell>{row.chassisId}</TableCell>
+                                    <TableCell>
+                                        {row.chassisId.slice(0, 12)}...
+                                        <Tooltip title="Copiar" arrow placement="right">
+                                            <IconButton size="small" onClick={() => copyTextToClipboard(row.chassisId)}>
+                                                <Icon>copy_all</Icon>
+                                            </IconButton>
+                                        </Tooltip>
+                                    </TableCell>
                                     <TableCell>{row.brand}</TableCell>
                                     <TableCell>{row.model}</TableCell>
                                     <TableCell>{row.color}</TableCell>

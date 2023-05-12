@@ -1,4 +1,3 @@
-
 export const Environment = {
     /**
      * Define a quantidade de linhas a ser carregada por padrão nas listagens
@@ -15,7 +14,7 @@ export const Environment = {
     /**
      * Url base de consultado dos dados dessa aplicação
      */
-    URL_BASE: 'https://3000-yurihartman-carlifescyc-wojldgsa6gp.ws-us96b.gitpod.io',
+    URL_BASE: 'https://3000-yurihartman-carlifescyc-dmqrulzsvr0.ws-us97.gitpod.io',
 
-    LIST_OF_ORGS: ['detran', 'gov', 'montadoraC', 'montadoraD', 'concessionariF', 'concessionariG', 'mecanicaK', 'mecanicaL', 'financiadoraR']
+    LIST_OF_ORGS: ['detran', 'gov', 'montadoraC', 'montadoraD', 'concessionariaF', 'concessionariaG', 'mecanicaK', 'mecanicaL', 'financiadoraR']
 };

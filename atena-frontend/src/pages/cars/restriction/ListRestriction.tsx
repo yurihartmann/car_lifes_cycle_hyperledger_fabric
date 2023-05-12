@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useState } from 'react';
-import { Box, Button, Icon, IconButton, LinearProgress, Pagination, Paper, Table, TableBody, TableCell, TableContainer, TableFooter, TableHead, TableRow, Tooltip, useTheme } from '@mui/material';
+import { Box, Button, Icon, IconButton, LinearProgress, Pagination, Paper, Table, TableBody, TableCell, TableContainer, TableFooter, TableHead, TableRow, Tooltip, Typography, useTheme } from '@mui/material';
 import { useNavigate, useParams, useSearchParams } from 'react-router-dom';
 
 import { FerramentasDaListagem } from '../../../shared/components';
@@ -40,16 +40,16 @@ export const ListRestriction: React.FC = () => {
     }, []);
 
     const handleDelete = (code: number) => {
-        if (confirm('Realmente deseja apagar?')) {
+        if (confirm('Realmente deseja remover?')) {
             RestrictionService.deleteByCode(chassisId, code)
                 .then(result => {
                     if (result instanceof Error) {
                         snackbarNotify(result.message, 'error');
                     } else {
-                        setRows(oldRows => [
-                            ...oldRows.filter(oldRow => oldRow.code !== code),
-                        ]);
-                        snackbarNotify('Restrição apagada com sucesso!', 'success');
+                        snackbarNotify('Restrição removida com sucesso!', 'success');
+                        setTimeout(() => {
+                            window.location.reload();
+                        }, 2000);
                     }
                 });
         }
@@ -70,20 +70,31 @@ export const ListRestriction: React.FC = () => {
                 <Table>
                     <TableHead>
                         <TableRow>
+                            <TableCell>Situação</TableCell>
                             <TableCell>Código</TableCell>
                             <TableCell>Descrição</TableCell>
                             <TableCell>Data</TableCell>
+                            <TableCell>Data de remoção da restrição</TableCell>
                             <TableCell></TableCell>
                         </TableRow>
                     </TableHead>
                     <TableBody>
                         {rows.map(row => (
                             <TableRow key={row.code}>
+                                <TableCell>
+                                    {!row.deletedAt && (
+                                        <Typography color='green' variant='body2'>Restriçao ativa</Typography>
+                                    )}
+                                    {row.deletedAt && (
+                                        <Typography color='red' variant='body2'>Restriçao removida</Typography>
+                                    )}
+                                </TableCell>
                                 <TableCell>{row.code}</TableCell>
                                 <TableCell>{row.description}</TableCell>
                                 <TableCell>{row.date}</TableCell>
+                                <TableCell>{row.deletedAt}</TableCell>
                                 <TableCell>
-                                    <Tooltip title="Deletar" arrow placement="right">
+                                    <Tooltip title="Remover" arrow placement="right">
                                         <IconButton size="small" onClick={() => handleDelete(row.code)}>
                                             <Icon>delete_icon</Icon>
                                         </IconButton>

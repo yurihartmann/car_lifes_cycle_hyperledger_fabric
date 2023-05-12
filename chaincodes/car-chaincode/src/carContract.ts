@@ -1,4 +1,4 @@
-import { Context, Info, Returns, Transaction } from 'fabric-contract-api';
+import { Context, Info, Transaction } from 'fabric-contract-api';
 import { AllowedOrgs, BaseContract, BuildReturn } from './baseContract';
 import { Car } from './car';
 
@@ -67,6 +67,14 @@ export class CarContract extends BaseContract {
         return JSON.parse(result.payload.toString());
     }
 
+    public checkRestrictions(car: Car) {
+        car.restrictions.forEach(restriction => {
+            if (!restriction.deletedAt) {
+                throw new Error(`The car have restrictions`);
+            }
+        });
+    }
+
     @Transaction()
     @BuildReturn()
     @AllowedOrgs(['montadoraC', 'montadoraD'])
@@ -100,14 +108,12 @@ export class CarContract extends BaseContract {
 
     @Transaction()
     @BuildReturn()
-    @AllowedOrgs(['concessionariF', 'concessionariG'])
+    @AllowedOrgs(['concessionariaF', 'concessionariaG'])
     public async GetCarToSell(
         ctx: Context,
         chassisId: string,
     ): Promise<object> {
         const car: Car = await this.GetState(ctx, chassisId);
-
-        // TODO: verificar se tem restricoes
 
         if (car.ownerDealershipName || car.ownerCpf) {
             throw new Error(`The car already have ownerDealershipName or ownerCpf ${car.ownerDealershipName}`);
@@ -121,7 +127,7 @@ export class CarContract extends BaseContract {
 
     @Transaction()
     @BuildReturn()
-    @AllowedOrgs(['concessionariF', 'concessionariG'])
+    @AllowedOrgs(['concessionariaF', 'concessionariaG'])
     public async SellCar(
         ctx: Context,
         chassisId: string,
@@ -135,13 +141,7 @@ export class CarContract extends BaseContract {
 
         const person = await this.getPerson(ctx, cpf);
 
-        // if ((new Date().getFullYear() - new Date(person?.birthday).getFullYear()) < 18) {
-        //     throw new Error(`The person not have 18 years old or more`);
-        // }
-
-        if (car.restrictions.length > 0) {
-            throw new Error(`The car have restrictions`);
-        }
+        this.checkRestrictions(car);
 
         car.ownerDealershipName = null;
         car.ownerCpf = cpf;
@@ -160,9 +160,7 @@ export class CarContract extends BaseContract {
     ): Promise<object> {
         const car: Car = await this.GetState(ctx, chassisId);
 
-        if (car.restrictions.length > 1) {
-            throw new Error(`The car have restrictions`);
-        }
+        this.checkRestrictions(car);
 
         if (licensePlate.length > 0) {
             car.licensePlate = licensePlate
@@ -191,7 +189,9 @@ export class CarContract extends BaseContract {
     ): Promise<object> {
         const car: Car = await this.GetState(ctx, chassisId);
 
-        // TODO: verificar se ja tem placa no carro
+        if (!car.licensePlate) {
+            throw new Error(`The car do not have licensePlate yet`);
+        }
 
         car.restrictions.push({
             code: code,
@@ -213,9 +213,11 @@ export class CarContract extends BaseContract {
     ): Promise<object> {
         const car: Car = await this.GetState(ctx, chassisId);
 
-        car.restrictions = car.restrictions.filter(restriction => {
-            return restriction.code != code
-        })
+        car.restrictions.forEach(restriction => {
+            if (restriction.code === code) {
+                restriction.deletedAt = new Date();
+            }
+        });
 
         await this.PutState(ctx, car.chassisId, car);
         return car;
@@ -234,13 +236,7 @@ export class CarContract extends BaseContract {
 
         const person = await this.getPerson(ctx, newOwnercpf);
 
-        if ((new Date().getFullYear() - new Date(person?.birthday).getFullYear()) < 18) {
-            throw new Error(`The new owner person not have 18 years old or more`);
-        }
-
-        if (car.restrictions.length > 0) {
-            throw new Error(`The car have restrictions`);
-        }
+        this.checkRestrictions(car);
 
         if (car.financingBy !== null) {
             throw new Error(`The car have financing`);
@@ -255,24 +251,52 @@ export class CarContract extends BaseContract {
 
     @Transaction()
     @BuildReturn()
-    @AllowedOrgs(['concessionariF', 'concessionariG'])
-    public async ChangeCarWithConcessionaire(
+    @AllowedOrgs(['concessionariaF', 'concessionariaG'])
+    public async ProposeChangeCarWithConcessionaire(
         ctx: Context,
         chassisId: string,
     ): Promise<object> {
         const car: Car = await this.GetState(ctx, chassisId);
 
-        if (car.restrictions.length > 0) {
-            throw new Error(`The car have restrictions`);
-        }
+        this.checkRestrictions(car);
 
         if (car.financingBy !== null) {
             throw new Error(`The car have financing`);
         }
 
-        car.ownerCpf = null;
-        car.ownerDealershipName = ctx.clientIdentity.getMSPID();
-        car.licensingDueDate = null;
+        if (!car.ownerCpf) {
+            throw new Error(`The car do not have owner`);
+        }
+
+        if (car.ownerDealershipName) {
+            throw new Error(`The car already have ownerDealership`);
+        }
+
+        car.pendencies = {
+            GetCarToOwnerCpfFromDealershipName: ctx.clientIdentity.getMSPID()
+        }
+
+        // car.ownerCpf = null;
+        // car.ownerDealershipName = ctx.clientIdentity.getMSPID();
+        // car.licensingDueDate = null;
+
+        await this.PutState(ctx, car.chassisId, car);
+        return car;
+    }
+
+    @Transaction()
+    @BuildReturn()
+    @AllowedOrgs(['detran'])
+    public async DeniedChangeCarWithConcessionaire(
+        ctx: Context,
+        chassisId: string,
+    ): Promise<object> {
+        const car: Car = await this.GetState(ctx, chassisId);
+
+        if (!car.pendencies?.GetCarToOwnerCpfFromDealershipName) {
+            throw new Error(`Do not have any car pendencies`);
+        }
+        car.pendencies.GetCarToOwnerCpfFromDealershipName = null;
 
         await this.PutState(ctx, car.chassisId, car);
         return car;
@@ -289,9 +313,7 @@ export class CarContract extends BaseContract {
     ): Promise<object> {
         const car: Car = await this.GetState(ctx, chassisId);
 
-        if (car.restrictions.length > 0) {
-            throw new Error(`The car have restrictions`);
-        }
+        this.checkRestrictions(car);
 
         if (car.maintenance[car.maintenance.length - 1]?.carKm > carKm) {
             throw new Error(`The carKm is lower than last maintenance`);

@@ -2,6 +2,9 @@ import { Environment } from '../../../environment';
 import { Api } from '../axios-config';
 import { v4 as uuidv4 } from 'uuid';
 
+interface IPendencies {
+    GetCarToOwnerCpfFromDealershipName?: string;
+}
 
 export interface IListCar {
     brand: string;
@@ -12,6 +15,7 @@ export interface IListCar {
     ownerDealershipName: string;
     year: string;
     financingBy: string;
+    pendencies?: IPendencies;
 }
 
 export interface ICarDetail {
@@ -65,21 +69,6 @@ const getPaginated = async (chassisId = '', bookmark = ''): Promise<TCarPaginati
         return new Error((error as { message: string }).message || 'Erro ao listar os registros.');
     }
 };
-
-// const getById = async (id: number): Promise<IDetalheCidade | Error> => {
-//   try {
-//     const { data } = await Api.get(`/cidades/${id}`);
-
-//     if (data) {
-//       return data;
-//     }
-
-//     return new Error('Erro ao consultar o registro.');
-//   } catch (error) {
-//     console.error(error);
-//     return new Error((error as { message: string }).message || 'Erro ao consultar o registro.');
-//   }
-// };
 
 const create = async (dados: ICarCreate): Promise<null | Error> => {
     try {
@@ -138,28 +127,70 @@ const sellCar = async (chassisId: string, cpf: string): Promise<null | Error> =>
     }
 };
 
-// const updateById = async (id: number, dados: IDetalheCidade): Promise<void | Error> => {
-//   try {
-//     await Api.put(`/cidades/${id}`, dados);
-//   } catch (error) {
-//     console.error(error);
-//     return new Error((error as { message: string }).message || 'Erro ao atualizar o registro.');
-//   }
-// };
+const proposeChangeCarWithConcessionaire = async (chassisId: string): Promise<null | Error> => {
+    try {
+        const urlRelativa = '/submit/car-channel/car/ProposeChangeCarWithConcessionaire';
 
-// const deleteById = async (id: number): Promise<void | Error> => {
-//   try {
-//     await Api.delete(`/cidades/${id}`);
-//   } catch (error) {
-//     console.error(error);
-//     return new Error((error as { message: string }).message || 'Erro ao apagar o registro.');
-//   }
-// };
+        const { data } = await Api.put(urlRelativa, [
+            chassisId
+        ]);
+
+        if (data.chassisId) {
+            return data.chassisId;
+        }
+
+        return new Error(data.error || 'Erro ao criar o registro.');
+    } catch (error) {
+        console.error(error);
+        return new Error((error as { message: string }).message || 'Erro ao criar o registro.');
+    }
+};
+
+const confirmChangeCarWithConcessionaire = async (chassisId: string): Promise<null | Error> => {
+    try {
+        const urlRelativa = '/submit/car-channel/car/ConfirmChangeCarWithConcessionaire';
+
+        const { data } = await Api.put(urlRelativa, [
+            chassisId
+        ]);
+
+        if (data.chassisId) {
+            return data.chassisId;
+        }
+
+        return new Error(data.error || 'Erro ao criar o registro.');
+    } catch (error) {
+        console.error(error);
+        return new Error((error as { message: string }).message || 'Erro ao criar o registro.');
+    }
+};
+
+const deniedChangeCarWithConcessionaire = async (chassisId: string): Promise<null | Error> => {
+    try {
+        const urlRelativa = '/submit/car-channel/car/DeniedChangeCarWithConcessionaire';
+
+        const { data } = await Api.put(urlRelativa, [
+            chassisId
+        ]);
+
+        if (data.chassisId) {
+            return data.chassisId;
+        }
+
+        return new Error(data.error || 'Erro ao criar o registro.');
+    } catch (error) {
+        console.error(error);
+        return new Error((error as { message: string }).message || 'Erro ao criar o registro.');
+    }
+};
 
 
 export const CarService = {
     getPaginated,
     create,
     getCarToSell,
-    sellCar
+    sellCar,
+    proposeChangeCarWithConcessionaire,
+    confirmChangeCarWithConcessionaire,
+    deniedChangeCarWithConcessionaire,
 };

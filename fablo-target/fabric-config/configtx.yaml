@@ -122,47 +122,47 @@ Organizations:
           - Host: peer0.montadora-d.car-lifes-cicle.com
             Port: 7081
 
-    - &concessionariF
-      Name: concessionariFMSP
-      ID: concessionariFMSP
+    - &concessionariaF
+      Name: concessionariaFMSP
+      ID: concessionariaFMSP
       MSPDir: crypto-config/peerOrganizations/concessionaria-f.car-lifes-cicle.com/msp
 
       Policies:
           Readers:
               Type: Signature
-              Rule: "OR('concessionariFMSP.member')"
+              Rule: "OR('concessionariaFMSP.member')"
           Writers:
               Type: Signature
-              Rule: "OR('concessionariFMSP.member')"
+              Rule: "OR('concessionariaFMSP.member')"
           Admins:
               Type: Signature
-              Rule: "OR('concessionariFMSP.admin')"
+              Rule: "OR('concessionariaFMSP.admin')"
           Endorsement:
               Type: Signature
-              Rule: "OR('concessionariFMSP.member')"
+              Rule: "OR('concessionariaFMSP.member')"
 
       AnchorPeers:
           - Host: peer0.concessionaria-f.car-lifes-cicle.com
             Port: 7101
 
-    - &concessionariG
-      Name: concessionariGMSP
-      ID: concessionariGMSP
+    - &concessionariaG
+      Name: concessionariaGMSP
+      ID: concessionariaGMSP
       MSPDir: crypto-config/peerOrganizations/concessionaria-g.car-lifes-cicle.com/msp
 
       Policies:
           Readers:
               Type: Signature
-              Rule: "OR('concessionariGMSP.member')"
+              Rule: "OR('concessionariaGMSP.member')"
           Writers:
               Type: Signature
-              Rule: "OR('concessionariGMSP.member')"
+              Rule: "OR('concessionariaGMSP.member')"
           Admins:
               Type: Signature
-              Rule: "OR('concessionariGMSP.admin')"
+              Rule: "OR('concessionariaGMSP.admin')"
           Endorsement:
               Type: Signature
-              Rule: "OR('concessionariGMSP.member')"
+              Rule: "OR('concessionariaGMSP.member')"
 
       AnchorPeers:
           - Host: peer0.concessionaria-g.car-lifes-cicle.com
@@ -317,8 +317,8 @@ Profiles:
                     - *gov
                     - *montadoraC
                     - *montadoraD
-                    - *concessionariF
-                    - *concessionariG
+                    - *concessionariaF
+                    - *concessionariaG
                     - *mecanicaK
                     - *mecanicaL
                     - *financiadoraR
@@ -340,8 +340,8 @@ Profiles:
                     - *gov
                     - *montadoraC
                     - *montadoraD
-                    - *concessionariF
-                    - *concessionariG
+                    - *concessionariaF
+                    - *concessionariaG
                     - *mecanicaK
                     - *mecanicaL
                     - *financiadoraR
@@ -352,8 +352,8 @@ Profiles:
                 - *gov
                 - *montadoraC
                 - *montadoraD
-                - *concessionariF
-                - *concessionariG
+                - *concessionariaF
+                - *concessionariaG
                 - *mecanicaK
                 - *mecanicaL
                 - *financiadoraR
@@ -375,8 +375,8 @@ Profiles:
                     - *gov
                     - *montadoraC
                     - *montadoraD
-                    - *concessionariF
-                    - *concessionariG
+                    - *concessionariaF
+                    - *concessionariaG
                     - *mecanicaK
                     - *mecanicaL
                     - *financiadoraR
@@ -387,8 +387,8 @@ Profiles:
                 - *gov
                 - *montadoraC
                 - *montadoraD
-                - *concessionariF
-                - *concessionariG
+                - *concessionariaF
+                - *concessionariaG
                 - *mecanicaK
                 - *mecanicaL
                 - *financiadoraR
