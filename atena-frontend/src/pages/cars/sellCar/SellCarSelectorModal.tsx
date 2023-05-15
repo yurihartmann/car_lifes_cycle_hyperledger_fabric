@@ -6,6 +6,7 @@ import { Button, Icon, IconButton, Tooltip } from '@mui/material';
 import { SellCarModal } from './SellCarModal';
 import { useAppThemeContext } from '../../../shared/contexts';
 import { CarService } from '../../../shared/services/api/cars/CarService';
+import { ChangeCarWithOtherPersonModal } from './ChangeCarWithOtherPersonModal';
 
 const style = {
     position: 'absolute',
@@ -75,6 +76,9 @@ export const SellCarSelectorModal: React.FC<ISellCarSelectorModal> = ({ chassisI
                             </Button>
                         </Box>
 
+                        <Box marginBottom={2}>
+                            <ChangeCarWithOtherPersonModal chassisId={chassisId} />
+                        </Box>
 
                     </Box>
                 </Box>

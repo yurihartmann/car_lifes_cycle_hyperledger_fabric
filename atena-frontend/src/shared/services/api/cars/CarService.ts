@@ -188,6 +188,25 @@ const deniedChangeCarWithConcessionaire = async (chassisId: string): Promise<nul
     }
 };
 
+const changeCarWithOtherPerson = async (chassisId: string, newOwnercpf: string): Promise<null | Error> => {
+    try {
+        const urlRelativa = '/submit/car-channel/car/ChangeCarWithOtherPerson';
+
+        const { data } = await Api.put(urlRelativa, [
+            chassisId, newOwnercpf
+        ]);
+
+        if (data.chassisId) {
+            return data.chassisId;
+        }
+
+        return new Error(data.error || 'Erro ao salvar o registro.');
+    } catch (error) {
+        console.error(error);
+        return new Error((error as { message: string }).message || 'Erro ao criar o registro.');
+    }
+};
+
 
 export const CarService = {
     getPaginated,
@@ -197,4 +216,5 @@ export const CarService = {
     proposeChangeCarWithConcessionaire,
     confirmChangeCarWithConcessionaire,
     deniedChangeCarWithConcessionaire,
+    changeCarWithOtherPerson
 };

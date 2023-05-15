@@ -75,6 +75,18 @@ export const ListPerson: React.FC = () => {
         }
     };
 
+    const copyTextToClipboard = (text: string) => {
+        if ('clipboard' in navigator) {
+            return navigator.clipboard.writeText(text).then(
+                () => {
+                    snackbarNotify('Copiado!', 'success');
+                }
+            );
+        } else {
+            return document.execCommand('copy', true, text);
+        }
+    };
+
     return (
         <LayoutBaseDePagina
             titulo='Listagem de pessoas'
@@ -106,7 +118,14 @@ export const ListPerson: React.FC = () => {
                     <TableBody>
                         {rows.map(row => (
                             <TableRow key={row.cpf}>
-                                <TableCell>{row.cpf}</TableCell>
+                                <TableCell>
+                                    {row.cpf}
+                                    <Tooltip title="Copiar" arrow placement="right">
+                                        <IconButton size="small" onClick={() => copyTextToClipboard(row.cpf)}>
+                                            <Icon>copy_all</Icon>
+                                        </IconButton>
+                                    </Tooltip>
+                                </TableCell>
                                 <TableCell>{row.name}</TableCell>
                                 <TableCell>{row.birthday}</TableCell>
                                 {row.alive && (
