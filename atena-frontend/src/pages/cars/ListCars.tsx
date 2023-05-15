@@ -43,7 +43,7 @@ export const ListCar: React.FC = () => {
                         console.log(result.message);
                         snackbarNotify(result.message, 'error');
                     } else {
-                        snackbarNotify('Dados carregados com sucesso!', 'success');
+                        // snackbarNotify('Dados carregados com sucesso!', 'success');
 
                         if (search === '') {
                             setSaveBookmark(result.bookmark);
@@ -117,7 +117,7 @@ export const ListCar: React.FC = () => {
     const copyTextToClipboard = (text: string) => {
         if ('clipboard' in navigator) {
             return navigator.clipboard.writeText(text).then(
-                result => {
+                () => {
                     snackbarNotify('Copiado!', 'success');
                 }
             );

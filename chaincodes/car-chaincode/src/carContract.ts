@@ -276,9 +276,26 @@ export class CarContract extends BaseContract {
             GetCarToOwnerCpfFromDealershipName: ctx.clientIdentity.getMSPID()
         }
 
-        // car.ownerCpf = null;
-        // car.ownerDealershipName = ctx.clientIdentity.getMSPID();
-        // car.licensingDueDate = null;
+        await this.PutState(ctx, car.chassisId, car);
+        return car;
+    }
+
+    @Transaction()
+    @BuildReturn()
+    @AllowedOrgs(['detran'])
+    public async ConfirmChangeCarWithConcessionaire(
+        ctx: Context,
+        chassisId: string,
+    ): Promise<object> {
+        const car: Car = await this.GetState(ctx, chassisId);
+
+        if (!car.pendencies?.GetCarToOwnerCpfFromDealershipName) {
+            throw new Error(`Do not have any car pendencies`);
+        }
+        car.ownerCpf = null;
+        car.ownerDealershipName = car.pendencies?.GetCarToOwnerCpfFromDealershipName;
+        car.licensingDueDate = null;
+        car.pendencies.GetCarToOwnerCpfFromDealershipName = null;
 
         await this.PutState(ctx, car.chassisId, car);
         return car;

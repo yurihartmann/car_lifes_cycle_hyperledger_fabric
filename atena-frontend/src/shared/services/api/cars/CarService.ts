@@ -56,14 +56,18 @@ const getPaginated = async (chassisId = '', bookmark = ''): Promise<TCarPaginati
             chassisId
         ]);
 
-        if (data) {
+        if (data.error) {
             return {
-                data: [data],
+                data: [],
                 bookmark: '',
             };
         }
 
-        return new Error('Erro ao listar os registros.');
+        return {
+            data: [data],
+            bookmark: '',
+        };
+
     } catch (error) {
         console.error(error);
         return new Error((error as { message: string }).message || 'Erro ao listar os registros.');

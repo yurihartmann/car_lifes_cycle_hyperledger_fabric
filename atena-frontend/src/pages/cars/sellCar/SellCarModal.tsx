@@ -47,7 +47,7 @@ export const SellCarModal: React.FC<ISellCarModal> = ({ chassisId }) => {
             validate(dados, { abortEarly: false })
             .then((dadosValidados) => {
                 setIsLoading(true);
-
+                snackbarNotify('Carregando...', 'info');
                 CarService
                     .sellCar(chassisId, dadosValidados.cpf)
                     .then((result) => {
@@ -60,7 +60,7 @@ export const SellCarModal: React.FC<ISellCarModal> = ({ chassisId }) => {
                             navigate(`/cars?search=${chassisId}`);
                             setTimeout(() => {
                                 window.location.reload();
-                            }, 800);
+                            }, 1000);
                         }
                     });
             })
@@ -110,6 +110,7 @@ export const SellCarModal: React.FC<ISellCarModal> = ({ chassisId }) => {
                         variant='contained'
                         onClick={save}
                         startIcon={<Icon>save</Icon>}
+                        disabled={isLoading}
                     >
                         <Typography variant='button' whiteSpace="nowrap" textOverflow="ellipsis" overflow="hidden">
                             Efetuar venda!
