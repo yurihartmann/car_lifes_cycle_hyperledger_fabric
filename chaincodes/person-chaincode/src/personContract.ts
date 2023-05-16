@@ -45,7 +45,7 @@ export class PersonContract extends BaseContract {
 
     @Transaction()
     @BuildReturn()
-    @AllowedOrgs(["govMSP"])
+    @AllowedOrgs(["gov"])
     public async CreatePerson(ctx: Context, cpf: string, name: string, birthday: string, motherName: string): Promise<object> {
         if (await this.HasState(ctx, cpf)) {
             throw new Error(`The person ${cpf} already exists`);
@@ -74,24 +74,24 @@ export class PersonContract extends BaseContract {
         return person;
     }
 
+    // @Transaction()
+    // @BuildReturn()
+    // @AllowedOrgs(["govMSP"])
+    // public async UpdatePerson(ctx: Context, cpf: string, name: string, birthday: string, motherName: string, alive: boolean): Promise<object> {
+    //     const person = await this.GetState(ctx, cpf);
+
+    //     person.name = name
+    //     person.birthday = new Date(birthday)
+    //     person.motherName = motherName
+    //     person.alive = alive
+
+    //     await this.PutState(ctx, person.cpf, person);
+    //     return person;
+    // }
+
     @Transaction()
     @BuildReturn()
-    @AllowedOrgs(["govMSP"])
-    public async UpdatePerson(ctx: Context, cpf: string, name: string, birthday: string, motherName: string, alive: boolean): Promise<object> {
-        const person = await this.GetState(ctx, cpf);
-
-        person.name = name
-        person.birthday = new Date(birthday)
-        person.motherName = motherName
-        person.alive = alive
-
-        await this.PutState(ctx, person.cpf, person);
-        return person;
-    }
-
-    @Transaction()
-    @BuildReturn()
-    @AllowedOrgs(["govMSP"])
+    @AllowedOrgs(["gov"])
     public async DeclareDeathPerson(ctx: Context, cpf: string): Promise<object> {
         const person = await this.GetState(ctx, cpf);
 

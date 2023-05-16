@@ -3,7 +3,11 @@ import { Iterators } from "fabric-shim";
 import sortKeysRecursive from 'sort-keys-recursive';
 import stringify from 'json-stringify-deterministic';
 
-export function GetOrgName(ctx: Context): string {
+export function isCorrectDate(date: Date) {
+    return date instanceof Date && isFinite(+date);
+};
+
+export function GetOrgName(ctx: Context) {
     return ctx.clientIdentity.getMSPID().replace('MSP', '');
 }
 

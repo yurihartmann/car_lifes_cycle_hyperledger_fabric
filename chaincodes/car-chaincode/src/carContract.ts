@@ -1,12 +1,12 @@
 import { Context, Info, Transaction } from 'fabric-contract-api';
-import { AllowedOrgs, BaseContract, BuildReturn } from './baseContract';
+import { AllowedOrgs, BaseContract, BuildReturn, GetOrgName } from './baseContract';
 import { Car } from './car';
 
 
 @Info({ title: 'Car', description: 'Smart contract for car' })
 export class CarContract extends BaseContract {
 
-    
+
     private async getPerson(ctx: Context, cpf: string): Promise<any> {
         const result = await ctx.stub.invokeChaincode(
             'person',
@@ -27,9 +27,15 @@ export class CarContract extends BaseContract {
     public checkRestrictions(car: Car) {
         car.restrictions.forEach(restriction => {
             if (!restriction.deletedAt) {
-                throw new Error(`The car have restrictions`);
+                throw new Error(`The car has restrictions`);
             }
         });
+    }
+
+    public checkFinancing(car: Car) {
+        if (car.financingBy !== null) {
+            throw new Error(`The car has financing`);
+        }
     }
 
     @Transaction()
@@ -46,19 +52,22 @@ export class CarContract extends BaseContract {
             throw new Error(`The Car ${chassisId} already exists`);
         }
 
-        // TODO: igual ou menos que o ano atual
+        if (year > new Date().getFullYear()) {
+            throw new Error(`The year is bigger than actually year`);
+        }
 
         const car: Car = {
             chassisId: chassisId,
-            brand: ctx.clientIdentity.getMSPID(),
+            brand: GetOrgName(ctx),
             model: model,
             year: year,
             color: color,
             ownerCpf: null,
             ownerDealershipName: null,
             financingBy: null,
-            maintenance: [],
-            restrictions: []
+            maintenances: [],
+            restrictions: [],
+            transfers: []
         };
 
         await this.PutState(ctx, car.chassisId, car)
@@ -78,32 +87,7 @@ export class CarContract extends BaseContract {
             throw new Error(`The car already have ownerDealershipName or ownerCpf ${car.ownerDealershipName}`);
         }
 
-        car.ownerDealershipName = ctx.clientIdentity.getMSPID();
-
-        await this.PutState(ctx, car.chassisId, car);
-        return car;
-    }
-
-    @Transaction()
-    @BuildReturn()
-    @AllowedOrgs(['concessionariaF', 'concessionariaG'])
-    public async SellCar(
-        ctx: Context,
-        chassisId: string,
-        cpf: string
-    ): Promise<object> {
-        const car: Car = await this.GetState(ctx, chassisId);
-
-        if (car.ownerDealershipName !== ctx.clientIdentity.getMSPID()) {
-            throw new Error(`The ownerDealershipName is not owner for this car`);
-        }
-
-        const person = await this.getPerson(ctx, cpf);
-
-        this.checkRestrictions(car);
-
-        car.ownerDealershipName = null;
-        car.ownerCpf = cpf;
+        car.ownerDealershipName = GetOrgName(ctx);
 
         await this.PutState(ctx, car.chassisId, car);
         return car;
@@ -182,6 +166,44 @@ export class CarContract extends BaseContract {
         return car;
     }
 
+    @Transaction()
+    @BuildReturn()
+    @AllowedOrgs(['concessionariaF', 'concessionariaG'])
+    public async SellCar(
+        ctx: Context,
+        chassisId: string,
+        cpf: string,
+        amount: number,
+    ): Promise<object> {
+        const car: Car = await this.GetState(ctx, chassisId);
+
+        if (car.ownerDealershipName !== GetOrgName(ctx)) {
+            throw new Error(`The ownerDealershipName is not owner for this car`);
+        }
+
+        if (amount < 0) {
+            throw new Error(`The amount is less than 0 (zero)`);
+        }
+
+        await this.getPerson(ctx, cpf);
+
+        this.checkRestrictions(car);
+        this.checkFinancing(car);
+
+        car.ownerDealershipName = null;
+        car.ownerCpf = cpf;
+
+        car.transfers.push({
+            ownerDealershipName: GetOrgName(ctx),
+            ownerCpf: cpf,
+            date: new Date(),
+            amount: amount,
+            type: "SellCar"
+        });
+
+        await this.PutState(ctx, car.chassisId, car);
+        return car;
+    }
 
     @Transaction()
     @BuildReturn()
@@ -189,16 +211,18 @@ export class CarContract extends BaseContract {
     public async ChangeCarWithOtherPerson(
         ctx: Context,
         chassisId: string,
-        newOwnercpf: string
+        newOwnercpf: string,
+        amount: number
     ): Promise<object> {
         const car: Car = await this.GetState(ctx, chassisId);
 
-        const person = await this.getPerson(ctx, newOwnercpf);
+        await this.getPerson(ctx, newOwnercpf);
 
         this.checkRestrictions(car);
+        this.checkFinancing(car);
 
-        if (car.financingBy !== null) {
-            throw new Error(`The car have financing`);
+        if (amount < 0) {
+            throw new Error(`The amount is less than 0 (zero)`);
         }
 
         if (car.ownerDealershipName !== null) {
@@ -212,6 +236,14 @@ export class CarContract extends BaseContract {
         car.ownerCpf = newOwnercpf;
         car.licensingDueDate = null;
 
+        car.transfers.push({
+            ownerDealershipName: null,
+            ownerCpf: newOwnercpf,
+            date: new Date(),
+            amount: amount,
+            type: "ChangeCarWithOtherPerson"
+        });
+
         await this.PutState(ctx, car.chassisId, car);
         return car;
     }
@@ -222,13 +254,15 @@ export class CarContract extends BaseContract {
     public async ProposeChangeCarWithConcessionaire(
         ctx: Context,
         chassisId: string,
+        amount: number
     ): Promise<object> {
         const car: Car = await this.GetState(ctx, chassisId);
 
         this.checkRestrictions(car);
+        this.checkFinancing(car);
 
-        if (car.financingBy !== null) {
-            throw new Error(`The car have financing`);
+        if (amount < 0) {
+            throw new Error(`The amount is less than 0 (zero)`);
         }
 
         if (!car.ownerCpf) {
@@ -240,7 +274,8 @@ export class CarContract extends BaseContract {
         }
 
         car.pendencies = {
-            GetCarToOwnerCpfFromDealershipName: ctx.clientIdentity.getMSPID()
+            getCarToOwnerCpfFromDealershipName: GetOrgName(ctx),
+            getCarToOwnerCpfFromAmount: amount
         }
 
         await this.PutState(ctx, car.chassisId, car);
@@ -256,13 +291,22 @@ export class CarContract extends BaseContract {
     ): Promise<object> {
         const car: Car = await this.GetState(ctx, chassisId);
 
-        if (!car.pendencies?.GetCarToOwnerCpfFromDealershipName) {
+        if (!car.pendencies?.getCarToOwnerCpfFromDealershipName) {
             throw new Error(`Do not have any car pendencies`);
         }
+        car.ownerDealershipName = car.pendencies?.getCarToOwnerCpfFromDealershipName;
+
+        car.transfers.push({
+            ownerDealershipName: car.ownerDealershipName,
+            ownerCpf: car.ownerCpf,
+            date: new Date(),
+            amount: car.pendencies?.getCarToOwnerCpfFromAmount,
+            type: "ChangeCarWithConcessionaire"
+        });
+
         car.ownerCpf = null;
-        car.ownerDealershipName = car.pendencies?.GetCarToOwnerCpfFromDealershipName;
         car.licensingDueDate = null;
-        car.pendencies.GetCarToOwnerCpfFromDealershipName = null;
+        car.pendencies = null;
 
         await this.PutState(ctx, car.chassisId, car);
         return car;
@@ -277,10 +321,10 @@ export class CarContract extends BaseContract {
     ): Promise<object> {
         const car: Car = await this.GetState(ctx, chassisId);
 
-        if (!car.pendencies?.GetCarToOwnerCpfFromDealershipName) {
+        if (!car.pendencies?.getCarToOwnerCpfFromDealershipName) {
             throw new Error(`Do not have any car pendencies`);
         }
-        car.pendencies.GetCarToOwnerCpfFromDealershipName = null;
+        car.pendencies = null;
 
         await this.PutState(ctx, car.chassisId, car);
         return car;
@@ -299,12 +343,12 @@ export class CarContract extends BaseContract {
 
         this.checkRestrictions(car);
 
-        if (car.maintenance[car.maintenance.length - 1]?.carKm > carKm) {
+        if (car.maintenances[car.maintenances.length - 1]?.carKm > carKm) {
             throw new Error(`The carKm is lower than last maintenance`);
         }
 
-        car.maintenance.push({
-            mechanicalName: ctx.clientIdentity.getMSPID(),
+        car.maintenances.push({
+            mechanicalName: GetOrgName(ctx),
             date: new Date(),
             carKm: carKm,
             description: description
@@ -327,7 +371,7 @@ export class CarContract extends BaseContract {
             throw new Error(`The car is already financing`);
         }
 
-        car.financingBy = ctx.clientIdentity.getMSPID();
+        car.financingBy = GetOrgName(ctx);
 
         await this.PutState(ctx, car.chassisId, car);
         return car;
@@ -342,7 +386,7 @@ export class CarContract extends BaseContract {
     ): Promise<object> {
         const car: Car = await this.GetState(ctx, chassisId);
 
-        if (car.financingBy !== ctx.clientIdentity.getMSPID()) {
+        if (car.financingBy !== GetOrgName(ctx)) {
             throw new Error(`The car is not financing by this financing org`);
         }
 
@@ -352,4 +396,29 @@ export class CarContract extends BaseContract {
         return car;
     }
 
+    @Transaction()
+    @BuildReturn()
+    public async GetTransfersHistory(
+        ctx: Context,
+        chassisId: string,
+    ): Promise<object> {
+        const car: Car = await this.GetState(ctx, chassisId);
+
+        if (GetOrgName(ctx) === 'detran') {
+            return car.transfers;
+        }
+
+        const transfersResult = []
+
+        car.transfers.forEach(transfer => {
+            if (GetOrgName(ctx) === transfer.ownerDealershipName) {
+                transfersResult.push(transfer)
+            } else {
+                transfer.amount = -1;
+                transfersResult.push(transfer)
+            }
+        });
+
+        return transfersResult;
+    }
 }

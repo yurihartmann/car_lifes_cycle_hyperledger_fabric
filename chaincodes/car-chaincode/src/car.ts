@@ -3,7 +3,10 @@ import { Object, Property } from 'fabric-contract-api';
 @Object()
 export class Pendencies {
     @Property()
-    public GetCarToOwnerCpfFromDealershipName: string;
+    public getCarToOwnerCpfFromDealershipName: string;
+
+    @Property()
+    public getCarToOwnerCpfFromAmount: number;
 }
 
 @Object()
@@ -34,6 +37,24 @@ export class Restriction {
 
     @Property()
     public deletedAt?: Date;
+}
+
+@Object()
+export class Transfer {
+    @Property()
+    public ownerCpf?: string;
+
+    @Property()
+    public ownerDealershipName?: string;
+
+    @Property()
+    public date: Date;
+
+    @Property()
+    public type: string;
+
+    @Property()
+    public amount: number;
 }
 
 @Object()
@@ -69,12 +90,15 @@ export class Car {
     public financingBy?: string;
 
     @Property()
-    public maintenance: Maintenance[];
+    public maintenances: Maintenance[];
 
     @Property()
     public restrictions: Restriction[];
 
     @Property()
     public pendencies?: Pendencies;
+
+    @Property()
+    public transfers: Transfer[];
 
 }
