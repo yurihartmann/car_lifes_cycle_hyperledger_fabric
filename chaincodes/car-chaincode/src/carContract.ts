@@ -89,6 +89,8 @@ export class CarContract extends BaseContract {
             throw new Error(`The Car ${chassisId} already exists`);
         }
 
+        // TODO: igual ou menos que o ano atual
+
         const car: Car = {
             chassisId: chassisId,
             brand: ctx.clientIdentity.getMSPID(),
@@ -240,6 +242,14 @@ export class CarContract extends BaseContract {
 
         if (car.financingBy !== null) {
             throw new Error(`The car have financing`);
+        }
+
+        if (car.ownerDealershipName !== null) {
+            throw new Error(`The car has ownerDealershipName`);
+        }
+
+        if (!car.ownerCpf) {
+            throw new Error(`The car not have ownerCpf`);
         }
 
         car.ownerCpf = newOwnercpf;
