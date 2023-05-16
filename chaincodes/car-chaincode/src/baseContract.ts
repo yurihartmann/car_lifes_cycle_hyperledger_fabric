@@ -35,6 +35,14 @@ export function AllowedOrgs(MSPIDs: string[]) {
     };
 }
 
+function replacer(key, value) {
+    if (key == "transfers") {
+        return null;
+    }   
+ 
+    return value;
+}
+
 export function BuildReturn() {
     return function (target: any, propertyKey: string, descriptor: PropertyDescriptor) {
         const childFunction = descriptor.value;
@@ -42,7 +50,7 @@ export function BuildReturn() {
             const returnValue = await childFunction.apply(this, args);
 
             if (typeof returnValue === 'object' || Array.isArray(returnValue)) {
-                return JSON.stringify(returnValue);
+                return JSON.stringify(returnValue, replacer);
             }
 
             return null;
