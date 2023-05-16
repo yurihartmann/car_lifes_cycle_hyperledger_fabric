@@ -3,7 +3,8 @@ import { Api } from '../axios-config';
 import { v4 as uuidv4 } from 'uuid';
 
 interface IPendencies {
-    GetCarToOwnerCpfFromDealershipName?: string;
+    getCarToOwnerCpfFromDealershipName?: string;
+    getCarToOwnerCpfFromAmount?: string;
 }
 
 export interface IListCar {
@@ -112,12 +113,12 @@ const getCarToSell = async (chassisId: string): Promise<null | Error> => {
     }
 };
 
-const sellCar = async (chassisId: string, cpf: string): Promise<null | Error> => {
+const sellCar = async (chassisId: string, cpf: string, amount: number): Promise<null | Error> => {
     try {
         const urlRelativa = '/submit/car-channel/car/SellCar';
 
         const { data } = await Api.put(urlRelativa, [
-            chassisId, cpf
+            chassisId, cpf, amount
         ]);
 
         if (data.chassisId) {
@@ -131,12 +132,12 @@ const sellCar = async (chassisId: string, cpf: string): Promise<null | Error> =>
     }
 };
 
-const proposeChangeCarWithConcessionaire = async (chassisId: string): Promise<null | Error> => {
+const proposeChangeCarWithConcessionaire = async (chassisId: string, amount: number): Promise<null | Error> => {
     try {
         const urlRelativa = '/submit/car-channel/car/ProposeChangeCarWithConcessionaire';
 
         const { data } = await Api.put(urlRelativa, [
-            chassisId
+            chassisId, amount
         ]);
 
         if (data.chassisId) {
@@ -188,12 +189,12 @@ const deniedChangeCarWithConcessionaire = async (chassisId: string): Promise<nul
     }
 };
 
-const changeCarWithOtherPerson = async (chassisId: string, newOwnercpf: string): Promise<null | Error> => {
+const changeCarWithOtherPerson = async (chassisId: string, newOwnercpf: string, amount: number): Promise<null | Error> => {
     try {
         const urlRelativa = '/submit/car-channel/car/ChangeCarWithOtherPerson';
 
         const { data } = await Api.put(urlRelativa, [
-            chassisId, newOwnercpf
+            chassisId, newOwnercpf, amount
         ]);
 
         if (data.chassisId) {

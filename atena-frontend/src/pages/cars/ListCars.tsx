@@ -143,7 +143,7 @@ export const ListCar: React.FC = () => {
                 <Table>
                     <TableHead>
                         <TableRow>
-                            <TableCell></TableCell>
+                            <TableCell>Ações</TableCell>
                             <TableCell>ID do chassi</TableCell>
                             <TableCell>Marca</TableCell>
                             <TableCell>Modelo</TableCell>
@@ -172,9 +172,10 @@ export const ListCar: React.FC = () => {
                                         <SellCarSelectorModal
                                             chassisId={row.chassisId}
                                         />
-                                        {row.pendencies?.GetCarToOwnerCpfFromDealershipName && (
+                                        {row.pendencies?.getCarToOwnerCpfFromDealershipName && (
                                             <PendenciesModal
-                                                GetCarToOwnerCpfFromDealershipName={row.pendencies?.GetCarToOwnerCpfFromDealershipName}
+                                                getCarToOwnerCpfFromDealershipName={row.pendencies?.getCarToOwnerCpfFromDealershipName}
+                                                getCarToOwnerCpfFromAmount={row.pendencies?.getCarToOwnerCpfFromAmount}
                                                 chassisId={row.chassisId}
                                             />
                                         )}
@@ -251,7 +252,7 @@ export const ListCar: React.FC = () => {
                     <TableFooter>
                         {isLoading && (
                             <TableRow>
-                                <TableCell colSpan={8}>
+                                <TableCell colSpan={9}>
                                     <LinearProgress variant='indeterminate' />
                                 </TableCell>
                             </TableRow>

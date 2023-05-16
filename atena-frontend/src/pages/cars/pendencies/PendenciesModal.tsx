@@ -19,11 +19,12 @@ const style = {
 };
 
 interface IPendenciesModal {
-    GetCarToOwnerCpfFromDealershipName: string;
-    chassisId: string
+    getCarToOwnerCpfFromDealershipName?: string;
+    getCarToOwnerCpfFromAmount?: string;
+    chassisId: string;
 }
 
-export const PendenciesModal: React.FC<IPendenciesModal> = ({ GetCarToOwnerCpfFromDealershipName, chassisId }) => {
+export const PendenciesModal: React.FC<IPendenciesModal> = ({ getCarToOwnerCpfFromDealershipName, chassisId, getCarToOwnerCpfFromAmount }) => {
     const [open, setOpen] = React.useState(false);
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
@@ -74,8 +75,14 @@ export const PendenciesModal: React.FC<IPendenciesModal> = ({ GetCarToOwnerCpfFr
             >
                 <Box sx={style}>
                     <Box display="flex" flexDirection="column" alignItems="center" justifyContent="center">
+                        <Typography id="modal-modal-title" variant="h5" component="h2" marginBottom={2}>
+                            Pedido de transferência
+                        </Typography>
                         <Typography id="modal-modal-title" variant="h6" component="h2" marginBottom={2}>
-                            A Concessionaria {GetCarToOwnerCpfFromDealershipName} fez o pedido para transferir o carro para ela?
+                            Concessionária: {getCarToOwnerCpfFromDealershipName}
+                        </Typography>
+                        <Typography id="modal-modal-title" variant="h6" component="h2" marginBottom={2}>
+                            Valor: R$ {getCarToOwnerCpfFromAmount}
                         </Typography>
                         <Box marginBottom={2}>
                             <Button

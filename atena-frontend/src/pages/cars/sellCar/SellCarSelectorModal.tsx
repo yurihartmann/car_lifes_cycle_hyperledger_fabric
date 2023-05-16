@@ -7,6 +7,7 @@ import { SellCarModal } from './SellCarModal';
 import { useAppThemeContext } from '../../../shared/contexts';
 import { CarService } from '../../../shared/services/api/cars/CarService';
 import { ChangeCarWithOtherPersonModal } from './ChangeCarWithOtherPersonModal';
+import { ProposeChangeCarWithConcessionaireModal } from './ProposeChangeCarWithConcessionaireModal';
 
 const style = {
     position: 'absolute',
@@ -30,23 +31,6 @@ export const SellCarSelectorModal: React.FC<ISellCarSelectorModal> = ({ chassisI
     const handleClose = () => setOpen(false);
     const { snackbarNotify } = useAppThemeContext();
 
-    const handleProposeChangeCarWithConcessionaire = (chassisId: string) => {
-        if (confirm('Realmente deseja fazer pedido de transferência?')) {
-            snackbarNotify('Carregando...', 'info');
-            CarService.proposeChangeCarWithConcessionaire(chassisId)
-                .then(result => {
-                    if (result instanceof Error) {
-                        snackbarNotify(result.message, 'error');
-                    } else {
-                        snackbarNotify('Pedido de transferencia efetuado!', 'success');
-                        setTimeout(() => {
-                            window.location.reload();
-                        }, 2000);
-                    }
-                });
-        }
-    };
-
     return (
         <>
             <Tooltip title="Vender carro" arrow placement="right">
@@ -63,7 +47,7 @@ export const SellCarSelectorModal: React.FC<ISellCarSelectorModal> = ({ chassisI
                 <Box sx={style}>
                     <Box display="flex" flexDirection="column" alignItems="center" justifyContent="center">
                         <Typography id="modal-modal-title" variant="h6" component="h2" marginBottom={2}>
-                            Vendendendo o carro: {chassisId}
+                            Menu de venda do carro: {chassisId}
                         </Typography>
 
                         <Box marginBottom={2}>
@@ -71,9 +55,7 @@ export const SellCarSelectorModal: React.FC<ISellCarSelectorModal> = ({ chassisI
                         </Box>
 
                         <Box marginBottom={2}>
-                            <Button size="large" variant='contained' onClick={() => handleProposeChangeCarWithConcessionaire(chassisId)}>
-                                Pessoa Física {'->'} Concessionária
-                            </Button>
+                            <ProposeChangeCarWithConcessionaireModal chassisId={chassisId} />
                         </Box>
 
                         <Box marginBottom={2}>

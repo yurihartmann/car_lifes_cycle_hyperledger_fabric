@@ -25,7 +25,7 @@ export function AllowedOrgs(MSPIDs: string[]) {
             });
 
             if (!allowed) {
-                throw new Error(`The organization ${MSPID} not allowed for this method`);
+                throw new Error(`The organization ${MSPID.replace('MSP', '')} not allowed for this method`);
             }
 
             return childFunction.apply(this, args);

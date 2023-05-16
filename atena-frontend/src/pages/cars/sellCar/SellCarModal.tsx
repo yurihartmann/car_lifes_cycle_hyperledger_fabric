@@ -27,9 +27,11 @@ interface ISellCarModal {
 
 interface IFormData {
     cpf: string;
+    amount: number;
 }
 const formValidationSchema: yup.Schema<IFormData> = yup.object().shape({
     cpf: yup.string().required(),
+    amount: yup.number().required().moreThan(0),
 });
 
 export const SellCarModal: React.FC<ISellCarModal> = ({ chassisId }) => {
@@ -49,7 +51,7 @@ export const SellCarModal: React.FC<ISellCarModal> = ({ chassisId }) => {
                 setIsLoading(true);
                 snackbarNotify('Carregando...', 'info');
                 CarService
-                    .sellCar(chassisId, dadosValidados.cpf)
+                    .sellCar(chassisId, dadosValidados.cpf, dadosValidados.amount)
                     .then((result) => {
                         setIsLoading(false);
 
@@ -99,6 +101,14 @@ export const SellCarModal: React.FC<ISellCarModal> = ({ chassisId }) => {
                                     fullWidth
                                     name='cpf'
                                     label='CPF da pessoa que está comprando'
+                                    disabled={isLoading}
+                                />
+                            </Grid>
+                            <Grid item xs={12} sm={12} md={6} marginY={2}>
+                                <VTextField
+                                    fullWidth
+                                    name='amount'
+                                    label='Valor da venda'
                                     disabled={isLoading}
                                 />
                             </Grid>

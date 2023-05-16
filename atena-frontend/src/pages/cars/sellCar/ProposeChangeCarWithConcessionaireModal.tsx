@@ -21,20 +21,18 @@ const style = {
     p: 4,
 };
 
-interface IChangeCarWithOtherPersonModal {
+interface IProposeChangeCarWithConcessionaireModal {
     chassisId: string;
 }
 
 interface IFormData {
-    cpf: string;
     amount: number;
 }
 const formValidationSchema: yup.Schema<IFormData> = yup.object().shape({
-    cpf: yup.string().required(),
     amount: yup.number().required().moreThan(0),
 });
 
-export const ChangeCarWithOtherPersonModal: React.FC<IChangeCarWithOtherPersonModal> = ({ chassisId }) => {
+export const ProposeChangeCarWithConcessionaireModal: React.FC<IProposeChangeCarWithConcessionaireModal> = ({ chassisId }) => {
     const [open, setOpen] = useState(false);
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
@@ -51,14 +49,14 @@ export const ChangeCarWithOtherPersonModal: React.FC<IChangeCarWithOtherPersonMo
                 setIsLoading(true);
                 snackbarNotify('Carregando...', 'info');
                 CarService
-                    .changeCarWithOtherPerson(chassisId, dadosValidados.cpf, dadosValidados.amount)
+                    .proposeChangeCarWithConcessionaire(chassisId, dadosValidados.amount)
                     .then((result) => {
                         setIsLoading(false);
 
                         if (result instanceof Error) {
                             snackbarNotify(result.message, 'error');
                         } else {
-                            snackbarNotify('Salva com sucesso!', 'success');
+                            snackbarNotify('Pedido de transferencia efetuado!', 'success');
                             navigate(`/cars?search=${chassisId}`);
                             setTimeout(() => {
                                 window.location.reload();
@@ -82,7 +80,7 @@ export const ChangeCarWithOtherPersonModal: React.FC<IChangeCarWithOtherPersonMo
     return (
         <>
             <Button size="large" variant='contained' onClick={() => handleOpen()}>
-                Pessoa Física {'->'} Pessoa Física
+                Pessoa Física {'->'} Concessionária
             </Button>
             <Modal
                 open={open}
@@ -92,18 +90,10 @@ export const ChangeCarWithOtherPersonModal: React.FC<IChangeCarWithOtherPersonMo
             >
                 <Box sx={style}>
                     <Typography id="modal-modal-title" variant="h6" component="h2">
-                        Trocando de carro de pessoa física para outra pessoa física
+                        Fazendo pedido de tranferência de uma pessoa física para uma concessionária
                     </Typography>
                     <VForm ref={formRef} onSubmit={handleSave}>
                         <Grid container item direction="row" spacing={2}>
-                            <Grid item xs={12} sm={12} md={6} marginY={2}>
-                                <VTextField
-                                    fullWidth
-                                    name='cpf'
-                                    label='CPF da pessoa que está comprando'
-                                    disabled={isLoading}
-                                />
-                            </Grid>
                             <Grid item xs={12} sm={12} md={6} marginY={2}>
                                 <VTextField
                                     fullWidth

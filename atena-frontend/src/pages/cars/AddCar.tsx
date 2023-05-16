@@ -15,7 +15,7 @@ interface IFormData {
     color: string;
 }
 const formValidationSchema: yup.Schema<IFormData> = yup.object().shape({
-    year: yup.number().required().lessThan(new Date().getFullYear() + 2).moreThan(new Date().getFullYear()),
+    year: yup.number().required().lessThan(new Date().getFullYear() + 1),
     model: yup.string().required(),
     color: yup.string().required(),
 });
