@@ -3,14 +3,29 @@ import { Iterators } from "fabric-shim";
 import sortKeysRecursive from 'sort-keys-recursive';
 import stringify from 'json-stringify-deterministic';
 
+export function isCorrectDate(date: Date) {
+    return date instanceof Date && isFinite(+date);
+};
+
+export function GetOrgName(ctx: Context) {
+    return ctx.clientIdentity.getMSPID().replace('MSP', '');
+}
+
 export function AllowedOrgs(MSPIDs: string[]) {
     return function (target: any, propertyKey: string, descriptor: PropertyDescriptor) {
         const childFunction = descriptor.value;
         descriptor.value = function (this: any, ...args: any[]) {
             const MSPID = args[0].clientIdentity.getMSPID();
+            var allowed: boolean = false;
 
-            if (!MSPIDs.includes(MSPID)) {
-                throw new Error(`The MSPID ${MSPID} not allowed for this method`);
+            MSPIDs.forEach(MspidAllowed => {
+                if (MSPID === MspidAllowed + "MSP") {
+                    allowed = true;
+                }
+            });
+
+            if (!allowed) {
+                throw new Error(`The organization ${MSPID} not allowed for this method`);
             }
 
             return childFunction.apply(this, args);
@@ -86,7 +101,8 @@ export class BaseContract extends Contract {
     @BuildReturn()
     public async GetDetails(ctx: Context): Promise<object> {
         return {
-            getMSPID: ctx.clientIdentity.getMSPID()
+            getMSPID: ctx.clientIdentity.getMSPID(),
+            getID: ctx.clientIdentity.getID()
         };
     }
 

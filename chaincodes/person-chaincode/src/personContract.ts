@@ -1,5 +1,5 @@
 import { Context, Info, Transaction } from 'fabric-contract-api';
-import { BaseContract, AllowedOrgs, BuildReturn } from './baseContract';
+import { BaseContract, AllowedOrgs, BuildReturn, isCorrectDate } from './baseContract';
 import { Person } from './person';
 
 @Info({ title: 'Person', description: 'Smart contract for person' })
@@ -31,6 +31,18 @@ export class PersonContract extends BaseContract {
         return this.GetAll(ctx);
     }
 
+    @Transaction(false)
+    @BuildReturn()
+    public async ReadPersonAlive(ctx: Context, cpf: string): Promise<object> {
+        const person: Person = await this.GetState(ctx, cpf);
+        
+        if (!person.alive) {
+            throw new Error(`The person ${cpf} is not alive`);
+        }
+        
+        return person;
+    }
+
     @Transaction()
     @BuildReturn()
     @AllowedOrgs(["govMSP"])
@@ -38,8 +50,17 @@ export class PersonContract extends BaseContract {
         if (await this.HasState(ctx, cpf)) {
             throw new Error(`The person ${cpf} already exists`);
         }
-
-        // TODO: validar birthday - nao pode ser depois de hoje
+        
+        // FORMAT MM/DD/YYYY
+        const birthday_date = new Date(birthday)
+        
+        if (!isCorrectDate(birthday_date)) {
+            throw new Error(`The birthday is a invalid date`);
+        }
+        
+        if (birthday_date > new Date()) {
+            throw new Error(`The birthday is bigger than today`);
+        }
 
         const person: Person = {
             cpf: cpf,

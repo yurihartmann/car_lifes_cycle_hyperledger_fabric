@@ -6,55 +6,12 @@ import { Car } from './car';
 @Info({ title: 'Car', description: 'Smart contract for car' })
 export class CarContract extends BaseContract {
 
-    @Transaction()
-    @BuildReturn()
-    public async InitLedger(ctx: Context): Promise<void> {
-        const cars: Car[] = [
-            {
-                chassisId: '8faf4111-723c-40c1-aa5f-070ad40edfaa',
-                brand: 'Ford',
-                model: 'Focus',
-                ownerCpf: null,
-                color: 'blue',
-                year: 2012,
-                financingBy: null,
-                maintenance: [],
-                restrictions: []
-            },
-            {
-                chassisId: 'c747dc9e-e736-40b2-83bc-6ecd2f6356e9',
-                brand: 'Honda',
-                model: 'Civic',
-                ownerCpf: null,
-                color: 'white',
-                year: 2012,
-                financingBy: null,
-                maintenance: [],
-                restrictions: []
-            },
-            {
-                chassisId: '3039d00b-943e-43e3-8322-bb1d165b6e82',
-                brand: 'Toyota',
-                model: 'Corola',
-                ownerCpf: "123.123.123-12",
-                color: 'black',
-                year: 2012,
-                financingBy: null,
-                maintenance: [],
-                restrictions: []
-            }
-        ];
-
-        for (const car of cars) {
-            await this.PutState(ctx, car.chassisId, car)
-        }
-    }
-
+    
     private async getPerson(ctx: Context, cpf: string): Promise<any> {
         const result = await ctx.stub.invokeChaincode(
             'person',
             [
-                "PersonContract:Read",
+                "PersonContract:ReadPersonAlive",
                 cpf
             ],
             "person-channel"

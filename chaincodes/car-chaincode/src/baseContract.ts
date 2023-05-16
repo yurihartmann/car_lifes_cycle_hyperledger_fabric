@@ -3,6 +3,10 @@ import { Iterators } from "fabric-shim";
 import sortKeysRecursive from 'sort-keys-recursive';
 import stringify from 'json-stringify-deterministic';
 
+export function GetOrgName(ctx: Context): string {
+    return ctx.clientIdentity.getMSPID().replace('MSP', '');
+}
+
 export function AllowedOrgs(MSPIDs: string[]) {
     return function (target: any, propertyKey: string, descriptor: PropertyDescriptor) {
         const childFunction = descriptor.value;
@@ -17,7 +21,7 @@ export function AllowedOrgs(MSPIDs: string[]) {
             });
 
             if (!allowed) {
-                throw new Error(`The MSPID ${MSPID} not allowed for this method`);
+                throw new Error(`The organization ${MSPID} not allowed for this method`);
             }
 
             return childFunction.apply(this, args);
