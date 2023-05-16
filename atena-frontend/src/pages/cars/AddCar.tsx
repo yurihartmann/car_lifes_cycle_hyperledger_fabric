@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
-import { Box, Grid, LinearProgress, Paper, Typography } from '@mui/material';
-import { useNavigate, useParams } from 'react-router-dom';
+import { Box, Grid, LinearProgress, Paper } from '@mui/material';
+import { useNavigate} from 'react-router-dom';
 import * as yup from 'yup';
 import { IVFormErrors, VForm, VTextField, useVForm } from '../../shared/forms';
 import { useAppThemeContext } from '../../shared/contexts';
@@ -23,7 +23,6 @@ const formValidationSchema: yup.Schema<IFormData> = yup.object().shape({
 export const AddCar: React.FC = () => {
     const { formRef, save, saveAndClose } = useVForm();
     const [id, _] = useState<string>('nova');
-    const { chassisId = '' } = useParams<'chassisId'>();
     const navigate = useNavigate();
     const { snackbarNotify } = useAppThemeContext();
 

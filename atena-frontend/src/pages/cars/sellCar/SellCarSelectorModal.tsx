@@ -2,10 +2,9 @@ import * as React from 'react';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
-import { Button, Icon, IconButton, Tooltip } from '@mui/material';
+import { Icon, IconButton, Tooltip } from '@mui/material';
 import { SellCarModal } from './SellCarModal';
 import { useAppThemeContext } from '../../../shared/contexts';
-import { CarService } from '../../../shared/services/api/cars/CarService';
 import { ChangeCarWithOtherPersonModal } from './ChangeCarWithOtherPersonModal';
 import { ProposeChangeCarWithConcessionaireModal } from './ProposeChangeCarWithConcessionaireModal';
 
@@ -29,7 +28,6 @@ export const SellCarSelectorModal: React.FC<ISellCarSelectorModal> = ({ chassisI
     const [open, setOpen] = React.useState(false);
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
-    const { snackbarNotify } = useAppThemeContext();
 
     return (
         <>

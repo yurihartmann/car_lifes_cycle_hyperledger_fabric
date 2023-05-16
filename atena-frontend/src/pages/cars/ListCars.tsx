@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useState } from 'react';
-import { Box, Button, Icon, IconButton, LinearProgress, Link, Modal, Pagination, Paper, Table, TableBody, TableCell, TableContainer, TableFooter, TableHead, TableRow, Tooltip, Typography, useTheme } from '@mui/material';
+import { Box, Button, Icon, IconButton, LinearProgress, Link, Paper, Table, TableBody, TableCell, TableContainer, TableFooter, TableHead, TableRow, Tooltip, useTheme } from '@mui/material';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 
 import { FerramentasDaListagem } from '../../shared/components';
