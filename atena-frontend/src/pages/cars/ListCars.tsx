@@ -159,14 +159,19 @@ export const ListCar: React.FC = () => {
                             <>
                                 <TableRow key={row.chassisId}>
                                     <TableCell>
-                                        <Tooltip title="Restrições" arrow placement="right">
+                                        <Tooltip title="Restrições" arrow placement="top">
                                             <IconButton size="small" onClick={() => navigate(`/cars/${row.chassisId}/restrictions`)}>
                                                 <Icon>car_crash</Icon>
                                             </IconButton>
                                         </Tooltip>
-                                        <Tooltip title="Manuteções" arrow placement="right">
+                                        <Tooltip title="Manuteções" arrow placement="top">
                                             <IconButton size="small" onClick={() => navigate(`/cars/${row.chassisId}/maintenances`)}>
                                                 <Icon>car_repair</Icon>
+                                            </IconButton>
+                                        </Tooltip>
+                                        <Tooltip title="Histórico de tranferências" arrow placement="top">
+                                            <IconButton size="small" onClick={() => navigate(`/cars/${row.chassisId}/transfers-history`)}>
+                                                <Icon>notes</Icon>
                                             </IconButton>
                                         </Tooltip>
                                         <SellCarSelectorModal

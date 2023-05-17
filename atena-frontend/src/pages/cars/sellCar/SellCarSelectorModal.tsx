@@ -31,7 +31,7 @@ export const SellCarSelectorModal: React.FC<ISellCarSelectorModal> = ({ chassisI
 
     return (
         <>
-            <Tooltip title="Vender carro" arrow placement="right">
+            <Tooltip title="Vender carro" arrow placement="top">
                 <IconButton size="small" onClick={() => handleOpen()}>
                     <Icon>sell</Icon>
                 </IconButton>

@@ -19,6 +19,14 @@ export interface IListCar {
     pendencies?: IPendencies;
 }
 
+export interface ITransfersHistory {
+    amount: number;
+    date: string;
+    ownerCpf: string;
+    ownerDealershipName: string;
+    type: string;
+}
+
 export interface ICarDetail {
     id: number;
     nome: string;
@@ -72,6 +80,25 @@ const getPaginated = async (chassisId = '', bookmark = ''): Promise<TCarPaginati
     } catch (error) {
         console.error(error);
         return new Error((error as { message: string }).message || 'Erro ao listar os registros.');
+    }
+};
+
+const getTransfersHistory = async (chassisId: string): Promise<ITransfersHistory[] | Error> => {
+    try {
+        const urlRelativa = '/submit/car-channel/car/GetTransfersHistory';
+
+        const { data } = await Api.put(urlRelativa, [
+            chassisId
+        ]);
+
+        if (!data.error) {
+            return data;
+        }
+
+        return new Error(data.error || 'Erro ao criar o registro.');
+    } catch (error) {
+        console.error(error);
+        return new Error((error as { message: string }).message || 'Erro ao criar o registro.');
     }
 };
 
@@ -217,5 +244,6 @@ export const CarService = {
     proposeChangeCarWithConcessionaire,
     confirmChangeCarWithConcessionaire,
     deniedChangeCarWithConcessionaire,
-    changeCarWithOtherPerson
+    changeCarWithOtherPerson,
+    getTransfersHistory,
 };
