@@ -8,6 +8,8 @@ import { useAppThemeContext } from '../../shared/contexts';
 import { LayoutBaseDePagina } from '../../shared/layouts';
 import { FerramentasDeDetalhe } from '../../shared/components';
 import { PersonService } from '../../shared/services/api/person/PersonService';
+import { VCPFField } from '../../shared/forms/VCPFField';
+import { VDateField } from '../../shared/forms/VDateField';
 
 
 interface IFormData {
@@ -17,10 +19,10 @@ interface IFormData {
     motherName: string;
 }
 const formValidationSchema: yup.Schema<IFormData> = yup.object().shape({
-    cpf: yup.string().required(),
-    name: yup.string().required(),
+    cpf: yup.string().required().min(14),
+    name: yup.string().required().min(4),
     birthday: yup.string().required(),
-    motherName: yup.string().required(),
+    motherName: yup.string().required().min(4),
 });
 
 export const AddPerson: React.FC = () => {
@@ -103,11 +105,12 @@ export const AddPerson: React.FC = () => {
 
                         <Grid container item direction="row" spacing={2}>
                             <Grid item xs={12} sm={12} md={6} lg={4} xl={2}>
-                                <VTextField
+                                <VCPFField
                                     fullWidth
                                     name='cpf'
                                     disabled={isLoading}
                                     label='CPF'
+
                                 />
                             </Grid>
                         </Grid>
@@ -125,7 +128,7 @@ export const AddPerson: React.FC = () => {
 
                         <Grid container item direction="row" spacing={2}>
                             <Grid item xs={12} sm={12} md={6} lg={4} xl={2}>
-                                <VTextField
+                                <VDateField
                                     fullWidth
                                     name='birthday'
                                     label='Data de nascimento'

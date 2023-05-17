@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react';
 import { Box, Grid, LinearProgress, Paper } from '@mui/material';
-import { useNavigate} from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import * as yup from 'yup';
-import { IVFormErrors, VForm, VTextField, useVForm } from '../../shared/forms';
+import { IVFormErrors, VForm, VNumericFormat, VTextField, useVForm } from '../../shared/forms';
 import { useAppThemeContext } from '../../shared/contexts';
 import { LayoutBaseDePagina } from '../../shared/layouts';
 import { FerramentasDeDetalhe } from '../../shared/components';
@@ -15,9 +15,9 @@ interface IFormData {
     color: string;
 }
 const formValidationSchema: yup.Schema<IFormData> = yup.object().shape({
-    year: yup.number().required().lessThan(new Date().getFullYear() + 1),
-    model: yup.string().required(),
-    color: yup.string().required(),
+    year: yup.number().required().lessThan(new Date().getFullYear() + 1).moreThan(1900),
+    model: yup.string().required().min(4),
+    color: yup.string().required().min(4),
 });
 
 export const AddCar: React.FC = () => {
@@ -120,7 +120,7 @@ export const AddCar: React.FC = () => {
 
                         <Grid container item direction="row" spacing={2}>
                             <Grid item xs={12} sm={12} md={6} lg={4} xl={2}>
-                                <VTextField
+                                <VNumericFormat
                                     fullWidth
                                     name='year'
                                     label='Ano de fabricação'
