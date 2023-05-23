@@ -38,8 +38,8 @@ export function AllowedOrgs(MSPIDs: string[]) {
 function replacer(key, value) {
     if (key == "transfers") {
         return null;
-    }   
- 
+    }
+
     return value;
 }
 
@@ -149,6 +149,17 @@ export class BaseContract extends Contract {
     public async History(ctx: Context, key: string): Promise<object> {
         const history = await ctx.stub.getHistoryForKey(key);
         return await this.buildListByIterator(history);
+    }
+
+    @Transaction(false)
+    @Returns('string')
+    @BuildReturn()
+    public async Count(ctx: Context, SI: string): Promise<object> {
+        const pagination = await ctx.stub.getStateByRangeWithPagination('', '', 1_000_000);
+
+        return {
+            count: pagination.metadata?.fetchedRecordsCount || 0
+        };
     }
 
     @Transaction()
