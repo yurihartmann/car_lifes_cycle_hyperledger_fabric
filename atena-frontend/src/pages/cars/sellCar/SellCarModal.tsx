@@ -8,6 +8,7 @@ import { CarService } from '../../../shared/services/api/cars/CarService';
 import { useAppThemeContext } from '../../../shared/contexts';
 import { IVFormErrors, VForm, VTextField, useVForm } from '../../../shared/forms';
 import { useNavigate } from 'react-router-dom';
+import { VCPFField } from '../../../shared/forms/VCPFField';
 
 const style = {
     position: 'absolute',
@@ -97,7 +98,7 @@ export const SellCarModal: React.FC<ISellCarModal> = ({ chassisId }) => {
                     <VForm ref={formRef} onSubmit={handleSave}>
                         <Grid container item direction="row" spacing={2}>
                             <Grid item xs={12} sm={12} md={6} marginY={2}>
-                                <VTextField
+                                <VCPFField
                                     fullWidth
                                     name='cpf'
                                     label='CPF da pessoa que está comprando'

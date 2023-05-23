@@ -233,6 +233,10 @@ export class CarContract extends BaseContract {
             throw new Error(`The car not have ownerCpf`);
         }
 
+        if (newOwnercpf === car.ownerCpf) {
+            throw new Error(`The car is already for this CPF!`);
+        }
+
         car.ownerCpf = newOwnercpf;
         car.licensingDueDate = null;
 
