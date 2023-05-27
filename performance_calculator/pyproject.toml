@@ -9,6 +9,7 @@ packages = [{include = "performance_calculator"}]
 [tool.poetry.dependencies]
 python = "^3.11"
 httpx = "^0.24.1"
+asyncer = "^0.0.2"
 
 
 [build-system]

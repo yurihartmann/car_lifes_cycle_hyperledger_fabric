@@ -1,4 +1,3 @@
-import logging
 from http import HTTPStatus
 from typing import Any
 
@@ -10,9 +9,11 @@ from httpx._types import (
 
 class BaseTalker:
 
-    @classmethod
+    def __init__(self, base_url: str):
+        self.base_url = base_url
+
     async def request(
-            cls,
+            self,
             method: str,
             url: str,
             json: Any = None,
@@ -21,10 +22,12 @@ class BaseTalker:
             files: RequestFiles = None,
             cookies: CookieTypes = None
     ) -> Response:
-        logging.debug(f"Request< method={method} url={url}")
+        # print(f"Request< method={method} url={url}")
+
+        client = None
 
         try:
-            client = AsyncClient()
+            client = AsyncClient(base_url=self.base_url)
             response = await client.request(
                 method=method,
                 url=url,
@@ -36,12 +39,12 @@ class BaseTalker:
                 cookies=cookies
             )
 
-            try:
-                logging.debug(
-                    f"Response [{response.status_code}] - "
-                    "Content: {response.content}")
-            except Exception:
-                pass
+            # try:
+            #     print(
+            #         f"Response [{response.status_code}] - "
+            #         "Content: {response.content}")
+            # except Exception:
+            #     pass
 
             if response.status_code == HTTPStatus.OK:
                 return response
