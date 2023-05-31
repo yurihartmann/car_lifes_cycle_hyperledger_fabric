@@ -1,0 +1,16 @@
+{
+  "name": "mechanic_cli_typescript",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "tsc && node dist/src/index.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "enquirer": "^2.3.6",
+    "fabric-network": "^2.2.18"
+  }
+}
