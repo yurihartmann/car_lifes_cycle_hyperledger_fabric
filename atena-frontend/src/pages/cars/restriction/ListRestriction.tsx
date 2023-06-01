@@ -91,8 +91,10 @@ export const ListRestriction: React.FC = () => {
                                 </TableCell>
                                 <TableCell>{row.code}</TableCell>
                                 <TableCell>{row.description}</TableCell>
-                                <TableCell>{row.date}</TableCell>
-                                <TableCell>{row.deletedAt}</TableCell>
+                                <TableCell>{new Date(row.date).toLocaleString('pt-BR')}</TableCell>
+                                <TableCell>{row.deletedAt && (
+                                    new Date(row.date).toLocaleString('pt-BR')
+                                )}</TableCell>
                                 <TableCell>
                                     <Tooltip title="Remover" arrow placement="right">
                                         <IconButton size="small" onClick={() => handleDelete(row.code)}>

@@ -58,7 +58,7 @@ export const ListTransfersHistory: React.FC = () => {
                     <TableBody>
                         {rows.map(row => (
                             <TableRow key={row.date}>
-                                <TableCell>{row.date}</TableCell>
+                                <TableCell>{new Date(row.date).toLocaleString('pt-BR')}</TableCell>
                                 <TableCell>{row.ownerDealershipName}</TableCell>
                                 <TableCell>{row.ownerCpf}</TableCell>
                                 <TableCell>{row.type}</TableCell>

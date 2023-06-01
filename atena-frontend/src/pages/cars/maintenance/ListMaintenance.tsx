@@ -64,7 +64,9 @@ export const ListMaintenance: React.FC = () => {
                                 <TableCell>{row.mechanicalName}</TableCell>
                                 <TableCell>{row.carKm}</TableCell>
                                 <TableCell>{row.description}</TableCell>
-                                <TableCell>{row.date}</TableCell>
+                                <TableCell>{
+                                    new Date(row.date).toLocaleString('pt-BR')
+                                }</TableCell>
                             </TableRow>
                         ))}
                     </TableBody>

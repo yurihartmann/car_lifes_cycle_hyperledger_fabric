@@ -128,7 +128,9 @@ export const ListPerson: React.FC = () => {
                                 </TableCell>
                                 <TableCell>{row.name}</TableCell>
                                 <TableCell>
-                                    {row.birthday}
+                                    {
+                                        new Date(row.birthday).toLocaleDateString('pt-BR')
+                                    }
                                 </TableCell>
                                 {row.alive && (
                                     <TableCell>
