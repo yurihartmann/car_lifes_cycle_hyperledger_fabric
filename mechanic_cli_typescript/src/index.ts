@@ -1,5 +1,5 @@
 import { Contract, Wallet } from 'fabric-network';
-import { createWallets, getContract, submitTransaction } from './fabric';
+import { createWallets, getContract, submitTransaction, evaluateTransaction } from './fabric';
 import { prompt } from 'enquirer';
 
 interface IPromptData {
@@ -27,7 +27,7 @@ async function getMaintenances(wallet: Wallet, orgName: string) {
     console.log('Chassi do carro informado: ', chassisId.answer)
     try {
         const contract: Contract = await getContract(wallet, orgName, "car-channel", "car");
-        const data = await submitTransaction(contract, "Read", [chassisId.answer]);
+        const data = await evaluateTransaction(contract, "Read", [chassisId.answer]);
         const car: ICar = JSON.parse(data.toString());
 
         car.maintenances.forEach(element => {

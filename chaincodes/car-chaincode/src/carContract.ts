@@ -6,7 +6,6 @@ import { Car } from './car';
 @Info({ title: 'Car', description: 'Smart contract for car' })
 export class CarContract extends BaseContract {
 
-
     private async getPerson(ctx: Context, cpf: string): Promise<any> {
         const result = await ctx.stub.invokeChaincode(
             'person',
