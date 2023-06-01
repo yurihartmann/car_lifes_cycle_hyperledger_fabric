@@ -23,7 +23,7 @@ const getMaintenances = async (chassisId: string): Promise<IListMaintenance[] | 
         ]);
 
         if (data) {
-            return data.maintenance || [];
+            return data.maintenances || [];
         }
 
         return new Error('Erro ao listar os registros.');

@@ -11,6 +11,7 @@ import { useAppThemeContext } from '../../shared/contexts';
 import { FinancingService } from '../../shared/services/api/financing/FinancingService';
 import { SellCarSelectorModal } from './sellCar/SellCarSelectorModal';
 import { PendenciesModal } from './pendencies/PendenciesModal';
+import { LicensingCarModal } from './licensing/LicensingCarModal';
 
 
 
@@ -174,6 +175,9 @@ export const ListCar: React.FC = () => {
                                                 <Icon>notes</Icon>
                                             </IconButton>
                                         </Tooltip>
+                                        <LicensingCarModal
+                                            chassisId={row.chassisId}
+                                        />
                                         <SellCarSelectorModal
                                             chassisId={row.chassisId}
                                         />

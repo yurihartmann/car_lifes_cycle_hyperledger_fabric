@@ -11,6 +11,7 @@ export interface IListCar {
     brand: string;
     chassisId: string;
     color: string;
+    licensePlate?: string;
     model: string;
     ownerCpf: string;
     ownerDealershipName: string;
@@ -235,6 +236,25 @@ const changeCarWithOtherPerson = async (chassisId: string, newOwnercpf: string, 
     }
 };
 
+const LicensingCar = async (chassisId: string, licensePlate: string): Promise<null | Error> => {
+    try {
+        const urlRelativa = '/submit/car-channel/car/LicensingCar';
+
+        const { data } = await Api.put(urlRelativa, [
+            chassisId, licensePlate
+        ]);
+
+        if (data.chassisId) {
+            return data.chassisId;
+        }
+
+        return new Error(data.error || 'Erro ao salvar o registro.');
+    } catch (error) {
+        console.error(error);
+        return new Error((error as { message: string }).message || 'Erro ao criar o registro.');
+    }
+};
+
 
 export const CarService = {
     getPaginated,
@@ -246,4 +266,5 @@ export const CarService = {
     deniedChangeCarWithConcessionaire,
     changeCarWithOtherPerson,
     getTransfersHistory,
+    LicensingCar
 };

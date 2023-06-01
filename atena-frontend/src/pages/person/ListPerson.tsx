@@ -127,7 +127,9 @@ export const ListPerson: React.FC = () => {
                                     </Tooltip>
                                 </TableCell>
                                 <TableCell>{row.name}</TableCell>
-                                <TableCell>{row.birthday}</TableCell>
+                                <TableCell>
+                                    {row.birthday}
+                                </TableCell>
                                 {row.alive && (
                                     <TableCell>
                                         Viva
