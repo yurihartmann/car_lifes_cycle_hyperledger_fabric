@@ -5,6 +5,13 @@
 default:
 	@echo "Nada para fazer"
 
+run-dockers:
+	@cd zeus-middleware-api
+	@docker build -t zeus-middleware-api . && docker run -it -d --network host zeus-middleware-api
+	@cd ..
+	@cd atena-frontend
+	@docker build -t atena-frontend . && docker run -it -d -p 3006:3006 atena-frontend
+
 configure-all:
 	@make configure-fablo
 	@make configure-car-chaincodes
