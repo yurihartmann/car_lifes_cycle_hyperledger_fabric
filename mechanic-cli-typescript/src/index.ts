@@ -32,7 +32,7 @@ async function getMaintenances(wallet: Wallet, orgName: string) {
 
         car.maintenances.forEach(element => {
             console.log('==========================');
-            console.log('Data: ', element.date);
+            console.log('Data: ', new Date(element.date).toLocaleDateString('pt-BR'));
             console.log('KM do carro: ', element.carKm);
             console.log('Descrição: ', element.description);
             console.log('Mecânica: ', element.mechanicalName);

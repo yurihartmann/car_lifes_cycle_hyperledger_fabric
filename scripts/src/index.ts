@@ -64,7 +64,7 @@ async function PopulateBase(wallet: Wallet) {
         const count = await GetCount(wallet);
         console.log("Numero de entidades: ", count);
 
-        if (N < count) {
+        if (N <= count) {
             console.log("Numero de entidades atingido!")
             return;
         }
