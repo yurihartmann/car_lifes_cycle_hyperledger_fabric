@@ -58,7 +58,21 @@ async function AddMaintenance(wallet: Wallet, chassisId: string) {
         console.log(JSON.parse(data.toString()));
     }
     catch {
-        console.log('Erro createCar!')
+        console.log('Erro AddMaintenance!')
+    }
+}
+
+
+async function Read(wallet: Wallet, chassisId: string) {
+    try {
+        const contract: Contract = await getContract(wallet, "gov", "car-channel", "car");
+        const data = await submitTransaction(contract, "Read", [
+            `${chassisId}`
+        ]);
+        // console.log(JSON.parse(data.toString()));
+    }
+    catch {
+        console.log('Erro Read!')
     }
 }
 
@@ -146,8 +160,9 @@ async function ExecutePerformance(wallet: Wallet) {
 
     // await ExecutePerformanceByFunc(wallet, CreateCar);
 
-    await ExecutePerformanceByFunc(wallet, AddMaintenance);
-    
+    // await ExecutePerformanceByFunc(wallet, AddMaintenance);
+
+    await ExecutePerformanceByFunc(wallet, Read);
 
     console.log(`Finalizou!`)
 }
