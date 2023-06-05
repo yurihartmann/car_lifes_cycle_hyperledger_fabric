@@ -22,6 +22,20 @@ interface ICount {
     count: number
 }
 
+async function GetLastCarChassisId(wallet: Wallet) {
+    try {
+        const contract: Contract = await getContract(wallet, "gov", "car-channel", "car");
+        const data = await submitTransaction(contract, "GetPaginated", [
+            "1", ""
+        ]);
+        const jsonData = JSON.parse(data.toString())
+        return jsonData['data'][0]['chassisId'];
+    }
+    catch {
+        console.log('Erro createCar!')
+    }
+}
+
 async function CreateCar(wallet: Wallet) {
     try {
         const contract: Contract = await getContract(wallet, "montadoraC", "car-channel", "car");
@@ -29,6 +43,19 @@ async function CreateCar(wallet: Wallet) {
             `${uuidv4()}`, "model 1", "2023", "blue"
         ]);
         // console.log(JSON.parse(data.toString()));
+    }
+    catch {
+        console.log('Erro createCar!')
+    }
+}
+
+async function AddMaintenance(wallet: Wallet, chassisId: string) {
+    try {
+        const contract: Contract = await getContract(wallet, "mecanicaK", "car-channel", "car");
+        const data = await submitTransaction(contract, "AddMaintenance", [
+            `${chassisId}`, "10000", "Teste performance"
+        ]);
+        console.log(JSON.parse(data.toString()));
     }
     catch {
         console.log('Erro createCar!')
@@ -81,29 +108,27 @@ async function PopulateBase(wallet: Wallet) {
 
 }
 
-async function CreateCarPerformance(wallet: Wallet): Promise<number> {
+async function ExecuteFuncPerformance(wallet: Wallet, func: CallableFunction): Promise<number> {
+    const chassisId = await GetLastCarChassisId(wallet);
     var startTime = performance.now()
 
-    await CreateCar(wallet);
+    await func(wallet, chassisId);
 
     var endTime = performance.now()
 
     return endTime - startTime
 }
 
+async function ExecutePerformanceByFunc(wallet: Wallet, func: CallableFunction) {
+    console.log(`Executando função: ${func.name}`)
 
-async function ExecutePerformance(wallet: Wallet) {
-    const count = await GetCount(wallet);
-    console.log("Numero de entidades: ", count);
-
-    // One requests to create car
-    var time = await CreateCarPerformance(wallet);
-    console.log(`CreateCar(1): ${time} milliseconds`)
+    var time = await ExecuteFuncPerformance(wallet, func);
+    console.log(`${func.name}(1): ${time} milliseconds`)
 
     let calls = []
 
     for (let index = 0; index < 30; index++) {
-        calls.push(CreateCarPerformance(wallet))
+        calls.push(ExecuteFuncPerformance(wallet, func));
     }
 
     const times = await Promise.all(calls);
@@ -111,7 +136,20 @@ async function ExecutePerformance(wallet: Wallet) {
     const sum = times.reduce((a, b) => a + b, 0);
     const avg = (sum / times.length) || 0;
 
-    console.log(`CreateCar(30): ${avg} milliseconds average`)
+    console.log(`${func.name}(30): ${avg} milliseconds average`)
+}
+
+
+async function ExecutePerformance(wallet: Wallet) {
+    const count = await GetCount(wallet);
+    console.log("Numero de entidades: ", count);
+
+    // await ExecutePerformanceByFunc(wallet, CreateCar);
+
+    await ExecutePerformanceByFunc(wallet, AddMaintenance);
+    
+
+    console.log(`Finalizou!`)
 }
 
 async function main() {
