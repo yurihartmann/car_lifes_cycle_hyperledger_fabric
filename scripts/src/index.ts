@@ -49,23 +49,23 @@ async function CreateCar(wallet: Wallet) {
     }
 }
 
-async function AddMaintenance(wallet: Wallet, chassisId: string) {
-    try {
-        const contract: Contract = await getContract(wallet, "mecanicaK", "car-channel", "car");
-        const data = await submitTransaction(contract, "AddMaintenance", [
-            `${chassisId}`, "10000", "Teste performance"
-        ]);
-        console.log(JSON.parse(data.toString()));
-    }
-    catch {
-        console.log('Erro AddMaintenance!')
-    }
-}
+// async function AddMaintenance(wallet: Wallet, chassisId: string) {
+//     try {
+//         const contract: Contract = await getContract(wallet, "mecanicaK", "car-channel", "car");
+//         const data = await submitTransaction(contract, "AddMaintenance", [
+//             `${chassisId}`, "10000", "Teste performance"
+//         ]);
+//         console.log(JSON.parse(data.toString()));
+//     }
+//     catch {
+//         console.log('Erro AddMaintenance!')
+//     }
+// }
 
 
 async function Read(wallet: Wallet, chassisId: string) {
     try {
-        const contract: Contract = await getContract(wallet, "gov", "car-channel", "car");
+        const contract: Contract = await getContract(wallet, "montadoraC", "car-channel", "car");
         const data = await submitTransaction(contract, "Read", [
             `${chassisId}`
         ]);
@@ -124,6 +124,8 @@ async function PopulateBase(wallet: Wallet) {
 
 async function ExecuteFuncPerformance(wallet: Wallet, func: CallableFunction): Promise<number> {
     const chassisId = await GetLastCarChassisId(wallet);
+
+
     var startTime = performance.now()
 
     await func(wallet, chassisId);
@@ -131,26 +133,46 @@ async function ExecuteFuncPerformance(wallet: Wallet, func: CallableFunction): P
     var endTime = performance.now()
 
     return endTime - startTime
+
+
+}
+
+function average(times: number[]): number {
+    const sum = times.reduce((a, b) => a + b, 0);
+    const avg = (sum / times.length) || 0;
+    return avg;
 }
 
 async function ExecutePerformanceByFunc(wallet: Wallet, func: CallableFunction) {
-    console.log(`Executando função: ${func.name}`)
+    console.log(`\n\nExecutando função: ${func.name}\n`)
 
-    var time = await ExecuteFuncPerformance(wallet, func);
-    console.log(`${func.name}(1): ${time} milliseconds`)
+    let times_1: number[] = [];
 
-    let calls = []
-
-    for (let index = 0; index < 30; index++) {
-        calls.push(ExecuteFuncPerformance(wallet, func));
+    for (let index = 0; index < 3; index++) {
+        var time = await ExecuteFuncPerformance(wallet, func);
+        console.log(`Rodado ${func.name}(1): ${time} milliseconds`)
+        times_1.push(time);
     }
 
-    const times = await Promise.all(calls);
+    console.log(`\nMédia de 3 rodadas ${func.name}(1): ${average(times_1)} milliseconds average \n`)
 
-    const sum = times.reduce((a, b) => a + b, 0);
-    const avg = (sum / times.length) || 0;
+    let times_30: number[] = [];
 
-    console.log(`${func.name}(30): ${avg} milliseconds average`)
+    for (let index = 0; index < 3; index++) {
+        let calls = []
+
+        for (let index = 0; index < 30; index++) {
+            calls.push(ExecuteFuncPerformance(wallet, func));
+        }
+
+        const times = await Promise.all(calls);
+
+        console.log(`Rodado ${func.name}(30): ${average(times) } milliseconds`)
+
+        times_30.push(average(times));
+    }
+
+    console.log(`\nMédia de 3 rodadas ${func.name}(30): ${average(times_30)} milliseconds average \n`)
 }
 
 
@@ -158,11 +180,8 @@ async function ExecutePerformance(wallet: Wallet) {
     const count = await GetCount(wallet);
     console.log("Numero de entidades: ", count);
 
-    // await ExecutePerformanceByFunc(wallet, CreateCar);
-
-    // await ExecutePerformanceByFunc(wallet, AddMaintenance);
-
     await ExecutePerformanceByFunc(wallet, Read);
+    await ExecutePerformanceByFunc(wallet, CreateCar);
 
     console.log(`Finalizou!`)
 }
