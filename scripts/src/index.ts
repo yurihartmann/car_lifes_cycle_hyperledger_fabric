@@ -100,7 +100,7 @@ async function GetCount(wallet: Wallet): Promise<number> {
         const data = await evaluateTransaction(contract, "Count", []);
 
         const json_data: ICount = JSON.parse(data.toString());
-        console.log(json_data);
+        // console.log(json_data);
         return json_data.count;
     }
     catch {
