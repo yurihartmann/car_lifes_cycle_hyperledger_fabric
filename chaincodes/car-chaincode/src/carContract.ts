@@ -75,6 +75,42 @@ export class CarContract extends BaseContract {
 
     @Transaction()
     @BuildReturn()
+    @AllowedOrgs(['montadoraC', 'montadoraD'])
+    public async AddBulkCar(
+        ctx: Context,
+        listChassisIds: string,
+    ): Promise<object> {
+        
+        let cars: Car[] = []
+        const brand: string = GetOrgName(ctx);
+
+        listChassisIds.split(";").forEach(chassisId => {
+            cars.push(
+                {
+                    chassisId: chassisId,
+                    brand: brand,
+                    model: "Model 1",
+                    year: 2023,
+                    color: "white",
+                    ownerCpf: null,
+                    ownerDealershipName: null,
+                    financingBy: null,
+                    maintenances: [],
+                    restrictions: [],
+                    transfers: []
+                }
+            )
+        });
+        
+        for (let index = 0; index < cars.length; index++) {
+            await this.PutState(ctx, cars[index].chassisId, cars[index]);
+        }
+
+        return { message: "Added" };
+    }
+
+    @Transaction()
+    @BuildReturn()
     @AllowedOrgs(['concessionariaF', 'concessionariaG'])
     public async GetCarToSell(
         ctx: Context,

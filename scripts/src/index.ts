@@ -49,6 +49,24 @@ async function CreateCar(wallet: Wallet) {
     }
 }
 
+async function CreateBulkCar(wallet: Wallet) {
+    try {
+        let cars: string[] = [];
+        for (let index = 0; index < 100; index++) {
+            cars.push(`${uuidv4()}`);
+        }
+
+        const contract: Contract = await getContract(wallet, "montadoraC", "car-channel", "car");
+        const data = await submitTransaction(contract, "AddBulkCar", [
+            cars.join(";")
+        ]);
+        console.log(JSON.parse(data.toString()));
+    }
+    catch {
+        console.log('Erro createCar!')
+    }
+}
+
 // async function AddMaintenance(wallet: Wallet, chassisId: string) {
 //     try {
 //         const contract: Contract = await getContract(wallet, "mecanicaK", "car-channel", "car");
@@ -110,10 +128,12 @@ async function PopulateBase(wallet: Wallet) {
             return;
         }
 
+        // await CreateBulkCar(wallet);
+
         let calls = []
 
-        for (let index = 0; index < 30; index++) {
-            calls.push(CreateCar(wallet))
+        for (let index = 0; index < 10; index++) {
+            calls.push(CreateBulkCar(wallet))
         }
 
         await Promise.all(calls)
