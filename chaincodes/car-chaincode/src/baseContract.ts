@@ -163,13 +163,18 @@ export class BaseContract extends Contract {
 
             let fetchedRecordsCount = pagination.metadata?.fetchedRecordsCount || 0;
 
+            bookmark = pagination.metadata?.bookmark || ''
             count += fetchedRecordsCount;
-
-            if (fetchedRecordsCount === 100_000) {
-                bookmark = pagination.metadata.bookmark;
-            } else {
+            
+            if (fetchedRecordsCount < 100_000) {
                 break;
             }
+
+            if (fetchedRecordsCount === 100_000 && bookmark === '') {
+                break
+            }
+
+            bookmark = pagination.metadata.bookmark;
         }
 
         return { count };
