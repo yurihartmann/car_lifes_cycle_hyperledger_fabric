@@ -12,6 +12,7 @@ export interface IListCar {
     chassisId: string;
     color: string;
     licensePlate?: string;
+    licensingDueDate?: string;
     model: string;
     ownerCpf: string;
     ownerDealershipName: string;

@@ -146,6 +146,8 @@ export const ListCar: React.FC = () => {
                         <TableRow>
                             <TableCell>Ações</TableCell>
                             <TableCell>ID do chassi</TableCell>
+                            <TableCell>Placa</TableCell>
+                            <TableCell>Data de expiração do licenciamento</TableCell>
                             <TableCell>Marca</TableCell>
                             <TableCell>Modelo</TableCell>
                             <TableCell>Cor</TableCell>
@@ -177,6 +179,7 @@ export const ListCar: React.FC = () => {
                                         </Tooltip>
                                         <LicensingCarModal
                                             chassisId={row.chassisId}
+                                            licensePlate={row.licensePlate || ''}
                                         />
                                         <SellCarSelectorModal
                                             chassisId={row.chassisId}
@@ -196,6 +199,22 @@ export const ListCar: React.FC = () => {
                                                 <Icon>copy_all</Icon>
                                             </IconButton>
                                         </Tooltip>
+                                    </TableCell>
+                                    <TableCell>
+                                        {row.licensePlate && (
+                                            <span>{row.licensePlate}</span>
+                                        )}
+                                        {!row.licensePlate && (
+                                            <span>-</span>
+                                        )}
+                                    </TableCell>
+                                    <TableCell>
+                                        {row.licensingDueDate && (
+                                            <span>{new Date(row.licensingDueDate).toLocaleDateString('pt-BR')}</span>
+                                        )}
+                                        {!row.licensingDueDate && (
+                                            <span>-</span>
+                                        )}
                                     </TableCell>
                                     <TableCell>{row.brand}</TableCell>
                                     <TableCell>{row.model}</TableCell>
@@ -261,7 +280,7 @@ export const ListCar: React.FC = () => {
                     <TableFooter>
                         {isLoading && (
                             <TableRow>
-                                <TableCell colSpan={9}>
+                                <TableCell colSpan={20}>
                                     <LinearProgress variant='indeterminate' />
                                 </TableCell>
                             </TableRow>

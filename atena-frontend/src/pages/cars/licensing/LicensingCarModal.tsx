@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import * as yup from 'yup';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
@@ -9,6 +9,7 @@ import { useAppThemeContext } from '../../../shared/contexts';
 import { IVFormErrors, VForm, VTextField, useVForm } from '../../../shared/forms';
 import { useNavigate } from 'react-router-dom';
 import { VCPFField } from '../../../shared/forms/VCPFField';
+import { VCarPlateField } from '../../../shared/forms/VCarPlateField';
 
 const style = {
     position: 'absolute',
@@ -24,6 +25,7 @@ const style = {
 
 interface ILicensingCarModal {
     chassisId: string;
+    licensePlate?: string;
 }
 
 interface IFormData {
@@ -33,7 +35,7 @@ const formValidationSchema: yup.Schema<IFormData> = yup.object().shape({
     licensePlate: yup.string().required(),
 });
 
-export const LicensingCarModal: React.FC<ILicensingCarModal> = ({ chassisId }) => {
+export const LicensingCarModal: React.FC<ILicensingCarModal> = ({ chassisId, licensePlate }) => {
     const [open, setOpen] = useState(false);
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
@@ -78,6 +80,13 @@ export const LicensingCarModal: React.FC<ILicensingCarModal> = ({ chassisId }) =
             });
     };
 
+    useEffect(() => {
+        // console.log('LicensingCarModal.licensePlate: ', licensePlate);
+        formRef.current?.setData({
+            licensePlate: licensePlate,
+        });
+    }, []);
+
     return (
         <>
             <Tooltip title="Fazer licenciamento" arrow placement="top">
@@ -98,7 +107,7 @@ export const LicensingCarModal: React.FC<ILicensingCarModal> = ({ chassisId }) =
                     <VForm ref={formRef} onSubmit={handleSave}>
                         <Grid container item direction="row" spacing={2}>
                             <Grid item xs={12} sm={12} md={6} marginY={2}>
-                                <VTextField
+                                <VCarPlateField
                                     fullWidth
                                     name='licensePlate'
                                     label='Número da placa'
