@@ -45,7 +45,7 @@ const createGateway = async (
             strategy: DefaultEventHandlerStrategies.PREFER_MSPID_SCOPE_ANYFORTX,
         },
         queryHandlerOptions: {
-            timeout: 4,
+            timeout: 10,
             strategy: DefaultQueryHandlerStrategies.PREFER_MSPID_SCOPE_ROUND_ROBIN,
         },
     };
