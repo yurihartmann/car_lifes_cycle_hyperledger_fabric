@@ -60,7 +60,7 @@ async function CreateBulkCar(wallet: Wallet) {
         const data = await submitTransaction(contract, "AddBulkCar", [
             cars.join(";")
         ]);
-        console.log(JSON.parse(data.toString()));
+        //console.log(JSON.parse(data.toString()));
     }
     catch {
         console.log('Erro createCar!')
