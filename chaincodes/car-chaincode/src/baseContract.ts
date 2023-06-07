@@ -154,12 +154,25 @@ export class BaseContract extends Contract {
     @Transaction(false)
     @Returns('string')
     @BuildReturn()
-    public async Count(ctx: Context, SI: string): Promise<object> {
-        const pagination = await ctx.stub.getStateByRangeWithPagination('', '', 1_000_000);
+    public async Count(ctx: Context): Promise<object> {
+        let count: number = 0;
+        let bookmark: string = '';
 
-        return {
-            count: pagination.metadata?.fetchedRecordsCount || 0
-        };
+        while (true) {
+            let pagination = await ctx.stub.getStateByRangeWithPagination('', '', 100_000, bookmark);
+
+            let fetchedRecordsCount = pagination.metadata?.fetchedRecordsCount || 0;
+
+            count += fetchedRecordsCount;
+
+            if (fetchedRecordsCount === 100_000) {
+                bookmark = pagination.metadata.bookmark;
+            } else {
+                break;
+            }
+        }
+
+        return { count };
     }
 
     @Transaction()

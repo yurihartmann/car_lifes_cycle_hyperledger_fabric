@@ -97,9 +97,10 @@ async function Read(wallet: Wallet, chassisId: string) {
 async function GetCount(wallet: Wallet): Promise<number> {
     try {
         const contract: Contract = await getContract(wallet, "detran", "car-channel", "car");
-        const data = await evaluateTransaction(contract, "Count", [""]);
+        const data = await evaluateTransaction(contract, "Count", []);
 
         const json_data: ICount = JSON.parse(data.toString());
+        // console.log(json_data);
         return json_data.count;
     }
     catch {
@@ -187,7 +188,7 @@ async function ExecutePerformanceByFunc(wallet: Wallet, func: CallableFunction) 
 
         const times = await Promise.all(calls);
 
-        console.log(`Rodado ${func.name}(30): ${average(times) } milliseconds`)
+        console.log(`Rodado ${func.name}(30): ${average(times)} milliseconds`)
 
         times_30.push(average(times));
     }
