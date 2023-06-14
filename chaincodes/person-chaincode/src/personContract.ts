@@ -46,18 +46,23 @@ export class PersonContract extends BaseContract {
     @Transaction()
     @BuildReturn()
     @AllowedOrgs(["gov"])
-    public async CreatePerson(ctx: Context, cpf: string, name: string, birthday: string, motherName: string): Promise<object> {
+    public async CreatePerson(
+        ctx: Context, 
+        cpf: string, 
+        name: string, 
+        birthday: string, 
+        motherName: string
+    ): Promise<object> {
         if (await this.HasState(ctx, cpf)) {
             throw new Error(`The person ${cpf} already exists`);
         }
-        
-        // FORMAT MM/DD/YYYY
+
         const birthday_date = new Date(birthday)
         
         if (!isCorrectDate(birthday_date)) {
             throw new Error(`The birthday is a invalid date`);
         }
-        
+
         if (birthday_date > new Date()) {
             throw new Error(`The birthday is bigger than today`);
         }
