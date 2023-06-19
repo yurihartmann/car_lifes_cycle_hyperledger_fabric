@@ -22,8 +22,8 @@
         "start:server": "set -x && fabric-chaincode-node server --chaincode-address=$CHAINCODE_SERVER_ADDRESS --chaincode-id=$CHAINCODE_ID --chaincode-tls-key-file=/hyperledger/privatekey.pem --chaincode-tls-client-cacert-file=/hyperledger/rootcert.pem --chaincode-tls-cert-file=/hyperledger/cert.pem"
     },
     "dependencies": {
-        "fabric-contract-api": "^2.4.0",
-        "fabric-shim": "^2.4.0",
+        "fabric-contract-api": "2.5.3",
+        "fabric-shim": "2.5.3",
         "json-stringify-deterministic": "^1.0.1",
         "sort-keys-recursive": "^2.1.2",
         "uuid": "8.3",
