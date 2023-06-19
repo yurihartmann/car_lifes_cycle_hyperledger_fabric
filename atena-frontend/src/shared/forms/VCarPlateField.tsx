@@ -31,7 +31,14 @@ export const VCarPlateField: React.FC<VCarPlateFieldProps> = ({ name, ...rest })
 
             value={value || ''}
             onChange={e => {
-                setValue(e.target.value.replace(/(\d{3})(\d)/g, '$1-$2'));
+                let value = e.target.value.toUpperCase().replace('-', '').substr(0, 7);
+                const letters = value.substr(0, 3).replace(/[^A-Z]/g, '');
+                const numbers = value.substr(3).replace(/\D/g, '');
+
+                value = letters + (numbers ? '-' + numbers : numbers);
+                e.target.value = value;
+                
+                setValue(value);
                 rest.onChange?.(e);
             }}
             onKeyDown={(e) => { error && clearError(); rest.onKeyDown?.(e); }}
