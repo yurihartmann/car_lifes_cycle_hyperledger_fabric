@@ -1,7 +1,7 @@
 
 # 🚗 Car lifes cicle network
 <p align="center">
-<img src="docs/images/logos/car_logo_without_bg.png" height="300">
+<img src="docs/images/logos/car.png" height="300">
 </p>
 
 <p align="center">
@@ -21,7 +21,7 @@ Vehicle Management System using <a href="https://hyperledger-fabric.readthedocs.
 
 <hr />
 
-## Arquiteture
+## 🩻 Arquiteture
 
 <img src="docs/diagrams/arquiteture/prototype_arquiteture.drawio.svg" height="300">
 
