@@ -5,16 +5,25 @@
 default:
 	@echo "Nada para fazer"
 
-run-dockers:
+run-api-docker:
 	@cd zeus-middleware-api
 	@docker build -t zeus-middleware-api . && docker run --name zeus-middleware-api -it -d --network host zeus-middleware-api
 	@cd ..
+
+run-frontend-docker:
 	@cd atena-frontend
 	@docker build -t atena-frontend . && docker run --name atena-frontend -it -d -p 3006:3006 atena-frontend
+	@cd ..
+
+stop-api-docker:
+	@docker stop zeus-middleware-api atena-frontend
+
+stop-frontend-docker:
+	@docker rm zeus-middleware-api atena-frontend
 
 stop-dockers:
-	@docker stop zeus-middleware-api atena-frontend
-	@docker rm zeus-middleware-api atena-frontend
+	@make stop-api-docker
+	@make stop-frontend-docker
 
 configure-all:
 	@make configure-fablo

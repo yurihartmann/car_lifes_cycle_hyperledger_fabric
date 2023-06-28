@@ -1,22 +1,97 @@
 
 # Car lifes cicle network
-
-### Vehicle Management System using Hyperledger Fabric
-
+<p align="center">
 <img src="docs/images/logos/car_logo_without_bg.png">
+</p>
 
-## Structure of channel and chaincode
+<p align="center">
+Vehicle Management System using <a href="https://hyperledger-fabric.readthedocs.io/en/latest/">Hyperledger Fabric</a>
+</p>
 
-<img src="docs/diagrams/channel-chaincode.drawio.svg">
+- Blockchain: Hyperledger Fabric
+- API: Typescript Express
+- Frontend: React with MaterialUI
 
-## UML of chaincodes
+## Structure of project
 
-<img src="docs/diagrams/uml-chaincodes.drawio.svg">
+**Hyperledger**: `fablo-config.json` and `/fablo-target`that will be generated
+<br/>
+**Chaincodes**: `/zeus-middleware-api`
+**API**: `/zeus-middleware-api`
+<br/>
+**Frontend**: `/atena-frontend`
 
-## Entities
+## How to run:
 
-<img src="docs/diagrams/entities.drawio.svg">
+### Requirements
 
-## How to run?
+- Docker and docker-compose
+- +Python3.7 
+- Node 12.x
 
-1 - Run the Hyperledger network: `fablo up`
+### Run blockchain Hyperledger Fabric
+
+- Configure fablo enviroment `make configure-fablo`
+
+- Generate the fablo-target with `fablo generate`
+
+- Edit file `fablo-target/fabric-config/configtx.yaml` in `Application: &ApplicationDefaults` (use `ctrl+f` to localize) and replace Policies->Endorsement->Rule to `MAJORITY Endorsement` to `ANY Writers`
+
+In this section:
+```
+    Policies:
+    ...
+        Endorsement:
+            Type: ImplicitMeta
+            Rule: "MAJORITY Endorsement"
+```
+Replace for this:
+```
+        Endorsement:
+            Type: ImplicitMeta
+            Rule: "ANY Writers"
+```
+
+- Run blockchain `fablo up`, the chaincodes will be installed automatically
+
+- For help: `fablo help`
+
+### Generate env file for API
+
+- Run: `python build_env_files.py`
+
+### Run API Typescript Express
+
+**Run in docker**
+
+- Only run `run-api-docker` and if can stop `stop-api-docker`
+
+- API will be exposed in port 3000
+
+**Run in machine**
+
+- Entry is foldes `cd zeus-middleware-api/`
+
+- Run: `npm i` to install dependencies
+
+- Run: `npm run dev` to start API in development mode
+
+- API will be exposed in port 3000
+
+### Run Frontend React with MaterialUI
+
+**Run in docker**
+
+- Only run `run-frontend-docker` and if can stop `stop-frontend-docker`
+
+- Frontend will be exposed in port 3006
+
+**Run in machine**
+
+- Entry is foldes `cd atena-frontend/`
+
+- Run: `yarn` to install dependencies
+
+- Run: `npm run start` to start frontend
+
+- Frontend will be exposed in port 3006

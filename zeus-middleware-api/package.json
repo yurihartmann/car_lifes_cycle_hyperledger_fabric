@@ -44,7 +44,7 @@
   },
   "scripts": {
     "build": "tsc",
-    "start": "node dist/src/index.js",
+    "start": "JSON_CONFIG=$(cat env.json) node dist/src/index.js",
     "compile": "tsc && node dist/src/index.js",
     "dev": "JSON_CONFIG=$(cat env.json) ./node_modules/nodemon/bin/nodemon.js -e ts  --exec \"npm run compile\""
   },
