@@ -1,7 +1,7 @@
 
-# Car lifes cicle network
+# 🚗 Car lifes cicle network
 <p align="center">
-<img src="docs/images/logos/car_logo_without_bg.png">
+<img src="docs/images/logos/car_logo_without_bg.png" height="300">
 </p>
 
 <p align="center">
@@ -12,24 +12,26 @@ Vehicle Management System using <a href="https://hyperledger-fabric.readthedocs.
 - API: Typescript Express
 - Frontend: React with MaterialUI
 
-## Structure of project
+## 🗂️ Structure of project
 
 **Hyperledger**: `fablo-config.json` and `/fablo-target`that will be generated
-<br/>
-**Chaincodes**: `/zeus-middleware-api`
+
+**Chaincodes**: `/chaincodes`
+
 **API**: `/zeus-middleware-api`
-<br/>
+
 **Frontend**: `/atena-frontend`
 
-## How to run:
+<hr />
+## 🥇 How to run:
 
-### Requirements
+### 🔖 Requirements
 
 - Docker and docker-compose
 - +Python3.7 
 - Node 12.x
 
-### Run blockchain Hyperledger Fabric
+### 🛠 Run blockchain Hyperledger Fabric
 
 - Configure fablo enviroment `make configure-fablo`
 
@@ -56,19 +58,19 @@ Replace for this:
 
 - For help: `fablo help`
 
-### Generate env file for API
+### 🛠 Generate env file for API
 
 - Run: `python build_env_files.py`
 
-### Run API Typescript Express
+### 🛠 Run API Typescript Express
 
-**Run in docker**
+**🐳 Run in docker**
 
-- Only run `run-api-docker` and if can stop `stop-api-docker`
+- Only run `make run-api-docker` and if can stop `make stop-api-docker`
 
 - API will be exposed in port 3000
 
-**Run in machine**
+**💻 Run in machine**
 
 - Entry is foldes `cd zeus-middleware-api/`
 
@@ -78,15 +80,15 @@ Replace for this:
 
 - API will be exposed in port 3000
 
-### Run Frontend React with MaterialUI
+### 🛠 Run Frontend React with MaterialUI
 
-**Run in docker**
+**🐳 Run in docker**
 
-- Only run `run-frontend-docker` and if can stop `stop-frontend-docker`
+- Only run `make run-frontend-docker` and if can stop `make stop-frontend-docker`
 
 - Frontend will be exposed in port 3006
 
-**Run in machine**
+**💻 Run in machine**
 
 - Entry is foldes `cd atena-frontend/`
 
