@@ -12,6 +12,21 @@ Vehicle Management System using <a href="https://hyperledger-fabric.readthedocs.
 - API: Typescript Express
 - Frontend: React with MaterialUI
 
+<hr />
+
+## 🗄️ Docs
+
+- [Hyperledger configuration](/docs/HYPERLEDGER-CONFIG.md)
+- [Performance Results](/docs/PERFORMANCE-RESULT.md)
+
+<hr />
+
+## Arquiteture
+
+<img src="docs/diagrams/arquiteture/prototype_arquiteture.drawio.svg" height="300">
+
+<hr />
+
 ## 🗂️ Structure of project
 
 **Hyperledger**: `fablo-config.json` and `/fablo-target`that will be generated
@@ -30,7 +45,7 @@ Vehicle Management System using <a href="https://hyperledger-fabric.readthedocs.
 
 - Docker and docker-compose
 - +Python3.7 
-- Node 12.x
+- Node 12.x and npm
 
 ### 🛠 Run blockchain Hyperledger Fabric
 
@@ -98,3 +113,11 @@ Replace for this:
 - Run: `npm run start` to start frontend
 
 - Frontend will be exposed in port 3006
+
+### 🛠 Run Mechanic CLI
+
+`TODO`
+
+### 🛠 Run Scripts
+
+`TODO`

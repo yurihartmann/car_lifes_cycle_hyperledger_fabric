@@ -1,5 +1,7 @@
+# 🟦 Hyperledger Config
 
-Orgs:
+
+### 🏢 Orgs:
 
 - Gov
 - detran
@@ -12,12 +14,13 @@ Orgs:
 - financiadoraR
 - financiadoraS
 
-Channels:
 
-- car-channel
+### 📞 Channels:
+
+- **car-channel**
     - Accepted Orgs: ALL less gov
     - Chaincodes: car
 
-- person-channel:
+- **person-channel**:
     - Accepted Orgs: gov and detran
     - Chaincodes: person
