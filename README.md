@@ -1,5 +1,5 @@
 
-# 🚗 Car lifes cicle network
+# Car lifes cicle network
 <p align="center">
 <img src="docs/images/logos/car.png" height="300">
 </p>
@@ -18,6 +18,7 @@ Vehicle Management System using <a href="https://hyperledger-fabric.readthedocs.
 
 - [Hyperledger configuration](/docs/HYPERLEDGER-CONFIG.md)
 - [Performance Results](/docs/PERFORMANCE-RESULT.md)
+- [Commands Makefile](/docs/COMMANDS_MAKEFILE.md)
 
 <hr />
 
@@ -30,12 +31,22 @@ Vehicle Management System using <a href="https://hyperledger-fabric.readthedocs.
 ## 🗂️ Structure of project
 
 **Hyperledger**: `fablo-config.json` and `/fablo-target`that will be generated
+- This is blockchain
 
 **Chaincodes**: `/chaincodes`
+- This is smart contracts that will be installed in blockchain
 
 **API**: `/zeus-middleware-api`
+- This is API that used to communicate in between Frontend and smart contracts inside blockchain
 
 **Frontend**: `/atena-frontend`
+- This is interface used to interact with blockchain
+
+**Mechanic-CLI**: `/mechanic-cli`
+- This is CLI to simulate a different system using blockchain (Not use API to run transactions)
+
+**Scripts**: `/scripts`
+- This is scripts used to populate base and run performance tests
 
 <hr />
 
@@ -74,11 +85,14 @@ Replace for this:
 
 - For help: `fablo help`
 
-### 🛠 Generate env file for API
+### 🛠 Generate env files for API, Mechanic CLI and Scripts
 
-- Run: `python build_env_files.py`
+- Run `python build_env_files.py`
 
 ### 🛠 Run API Typescript Express
+
+✏️ Notes:
+- You need generate env files before run API
 
 **🐳 Run in docker**
 
@@ -88,15 +102,18 @@ Replace for this:
 
 **💻 Run in machine**
 
-- Entry is foldes `cd zeus-middleware-api/`
+- Entry is folder `cd zeus-middleware-api/`
 
-- Run: `npm i` to install dependencies
+- Run `npm i` to install dependencies
 
-- Run: `npm run dev` to start API in development mode
+- Run `npm run dev` to start API in development mode
 
 - API will be exposed in port 3000
 
 ### 🛠 Run Frontend React with MaterialUI
+
+✏️ Notes:
+- The `URL_BASE` configure in file `/atena-frontend/src/shared/environment/index.ts`, default is `https://localhost:3000`
 
 **🐳 Run in docker**
 
@@ -106,18 +123,34 @@ Replace for this:
 
 **💻 Run in machine**
 
-- Entry is foldes `cd atena-frontend/`
+- Entry is folder `cd atena-frontend/`
 
-- Run: `yarn` to install dependencies
+- Run `yarn` to install dependencies
 
-- Run: `npm run start` to start frontend
+- Run `npm run start` to start frontend
 
 - Frontend will be exposed in port 3006
 
 ### 🛠 Run Mechanic CLI
 
-`TODO`
+✏️ Notes:
+- You need generate env files before run API
+
+**💻 Run CLI**
+- Entry is folder `cd mechanic-cli-typescript/`
+
+- Run `npm i` to install dependencies
+
+- To start run `npm run start`
 
 ### 🛠 Run Scripts
 
-`TODO`
+✏️ Notes:
+- You need generate env files before run API
+
+**💻 Run Scripts CLI**
+- Entry is folder `cd scripts/`
+
+- Run `npm i` to install dependencies
+
+- To start run `npm run start`
