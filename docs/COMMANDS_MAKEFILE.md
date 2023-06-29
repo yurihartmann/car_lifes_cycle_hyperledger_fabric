@@ -1,9 +1,9 @@
-# Commands Makefile
+# 🌟 Commands Makefile
 
-### `configure-fablo`
+### ℹ️ `configure-fablo`
 - Used to give permission to fablo
 
-## Runs
+## 🟢 Runs
 
 ### `make run-dockers`
 - Run API and Frontend docker
@@ -14,7 +14,7 @@
 ### `make run-frontend-docker`
 - Run Frontend docker
 
-## Stop
+## 🟥 Stop
 
 ### `make stop-dockers`
 - Stop API and Frontend docker

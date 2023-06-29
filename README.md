@@ -85,6 +85,8 @@ Replace for this:
 
 - For help: `fablo help`
 
+- For access Hyperledger Explorer, find the docker with name `explorer.example.com` and go to url, nomally is `http://localhost:7010` and user is `admin` and password is `adminpw` for all orgs
+
 ### 🛠 Generate env files for API, Mechanic CLI and Scripts
 
 - Run `python build_env_files.py`
