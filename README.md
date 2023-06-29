@@ -30,22 +30,22 @@ Vehicle Management System using <a href="https://hyperledger-fabric.readthedocs.
 
 ## 🗂️ Structure of project
 
-**Hyperledger**: `fablo-config.json` and `/fablo-target`that will be generated
+🔹 **Hyperledger**: `fablo-config.json` and `/fablo-target`that will be generated
 - This is blockchain
 
-**Chaincodes**: `/chaincodes`
+🔹 **Chaincodes**: `/chaincodes`
 - This is smart contracts that will be installed in blockchain
 
-**API**: `/zeus-middleware-api`
+🔹 **API**: `/zeus-middleware-api`
 - This is API that used to communicate in between Frontend and smart contracts inside blockchain
 
-**Frontend**: `/atena-frontend`
+🔹 **Frontend**: `/atena-frontend`
 - This is interface used to interact with blockchain
 
-**Mechanic-CLI**: `/mechanic-cli`
+🔹 **Mechanic-CLI**: `/mechanic-cli`
 - This is CLI to simulate a different system using blockchain (Not use API to run transactions)
 
-**Scripts**: `/scripts`
+🔹 **Scripts**: `/scripts`
 - This is scripts used to populate base and run performance tests
 
 <hr />
