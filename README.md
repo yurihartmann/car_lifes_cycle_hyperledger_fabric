@@ -19,6 +19,7 @@ Vehicle Management System using <a href="https://hyperledger-fabric.readthedocs.
 - [Hyperledger configuration](/docs/HYPERLEDGER-CONFIG.md)
 - [Performance Results](/docs/PERFORMANCE-RESULT.md)
 - [Commands Makefile](/docs/COMMANDS_MAKEFILE.md)
+- [Frontend Prints](/docs/FRONTEND_PRINTS.md)
 
 <hr />
 
