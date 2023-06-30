@@ -16,7 +16,7 @@ Vehicle Management System using <a href="https://hyperledger-fabric.readthedocs.
 
 ## 🗄️ Docs
 
-- [Hyperledger configuration](/docs/HYPERLEDGER-CONFIG.md)
+- [Hyperledger Configuration](/docs/HYPERLEDGER-CONFIG.md)
 - [Performance Results](/docs/PERFORMANCE-RESULT.md)
 - [Commands Makefile](/docs/COMMANDS_MAKEFILE.md)
 - [Frontend Prints](/docs/FRONTEND_PRINTS.md)
@@ -63,7 +63,7 @@ Vehicle Management System using <a href="https://hyperledger-fabric.readthedocs.
 
 - Configure fablo enviroment `make configure-fablo`
 
-- Generate the fablo-target with `fablo generate`
+- Generate the fablo-target with `./fablo generate`
 
 - Edit file `fablo-target/fabric-config/configtx.yaml` in `Application: &ApplicationDefaults` (use `ctrl+f` to localize) and replace Policies->Endorsement->Rule to `MAJORITY Endorsement` to `ANY Writers`
 
@@ -82,9 +82,13 @@ Replace for this:
             Rule: "ANY Writers"
 ```
 
-- Run blockchain `fablo up`, the chaincodes will be installed automatically
+- Run blockchain `./fablo up`, the chaincodes will be installed automatically 
 
-- For help: `fablo help`
+- To stop `./fablo down`
+
+- To delete `fablo-target` run `./fablo prune`
+
+- For help: `./fablo help`
 
 - For access Hyperledger Explorer, find the docker with name `explorer.example.com` and go to url, nomally is `http://localhost:7010` and user is `admin` and password is `adminpw` for all orgs
 

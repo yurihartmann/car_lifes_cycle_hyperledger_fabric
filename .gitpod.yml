@@ -1,4 +1,4 @@
 tasks:
   - name: Configure environment
     command: |
-      make configure-all
+      make configure-fablo
