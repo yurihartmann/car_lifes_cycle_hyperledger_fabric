@@ -214,7 +214,7 @@ async function main() {
     const answer: IPromptData = await prompt({
         type: 'select',
         name: 'answer',
-        message: 'Qual mecânica quer fazer login?',
+        message: 'Selecione oque deseja fazer!',
         choices: ['Numero de entidades', 'Popular base', 'Executar teste de performance']
     });
 
