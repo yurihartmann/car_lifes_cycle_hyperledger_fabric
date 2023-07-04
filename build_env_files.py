@@ -49,7 +49,7 @@ for i in fablo_dict['channels']:
 
 LOCALS_TO_SAVE = [
     "./zeus-middleware-api/env.json",
-    "./mechanic-cli-typescript/env.json",
+    "./mechanic-cli/env.json",
     "./scripts/env.json",
 ]
 
