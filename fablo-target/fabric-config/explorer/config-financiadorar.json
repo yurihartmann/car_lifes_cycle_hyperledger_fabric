@@ -1,9 +1,0 @@
-{
-  "network-configs": {
-    "network-financiadorar": {
-      "name": "Network of financiadoraR",
-      "profile": "/opt/explorer/app/platform/fabric/connection-profile/connection-profile-financiadorar.json"
-    }
-  },
-  "license": "Apache-2.0"
-}

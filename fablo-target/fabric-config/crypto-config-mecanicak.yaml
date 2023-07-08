@@ -1,8 +1,0 @@
-PeerOrgs:
-  - Name: mecanicaK
-    Domain: mecanica-k.car-lifes-cicle.com
-    Specs:
-    Template:
-      Count: 1
-    Users:
-      Count: 1

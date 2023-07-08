@@ -144,7 +144,7 @@ Replace for this:
 - You need generate env files before run API
 
 **💻 Run CLI**
-- Entry is folder `cd mechanic-cli-typescript/`
+- Entry is folder `cd mechanic-cli/`
 
 - Run `npm i` to install dependencies
 

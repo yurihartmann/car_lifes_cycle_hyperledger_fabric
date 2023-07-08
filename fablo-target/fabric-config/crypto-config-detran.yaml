@@ -1,9 +1,0 @@
-PeerOrgs:
-  - Name: detran
-    Domain: detran.car-lifes-cycle.com
-    Specs:
-      - Hostname: orderer0.orderers-group
-    Template:
-      Count: 1
-    Users:
-      Count: 1

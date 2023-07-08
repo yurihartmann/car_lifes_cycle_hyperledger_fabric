@@ -1,9 +1,0 @@
-{
-  "network-configs": {
-    "network-detran": {
-      "name": "Network of detran",
-      "profile": "/opt/explorer/app/platform/fabric/connection-profile/connection-profile-detran.json"
-    }
-  },
-  "license": "Apache-2.0"
-}

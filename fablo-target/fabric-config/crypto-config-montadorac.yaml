@@ -1,8 +1,0 @@
-PeerOrgs:
-  - Name: montadoraC
-    Domain: montadora-c.car-lifes-cicle.com
-    Specs:
-    Template:
-      Count: 1
-    Users:
-      Count: 1
