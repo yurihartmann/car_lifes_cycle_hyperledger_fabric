@@ -1,0 +1,28 @@
+{
+    "brand": "montadoraC",
+    "chassisId": "774d7ed1-2a45-4eb1-bc04-d955fc67d651",
+    "color": "Blue",
+    "financingBy": "financiadoraR",
+    "maintenances": [
+        {
+            "carKm": 1000,
+            "date": "2023-07-12T02:43:43.740Z",
+            "description": "foo boo",
+            "mechanicalName": "mecanicaK"
+        }
+    ],
+    "model": "Model 1",
+    "ownerCpf": "111.111.111",
+    "ownerDealershipName": null,
+    "restrictions": [],
+    "transfers": [
+        {
+            "amount": 20000,
+            "date": "2023-07-12T02:44:13.921Z",
+            "ownerCpf": "111.111.111",
+            "ownerDealershipName": "concessionariaF",
+            "type": "SellCar"
+        }
+    ],
+    "year": 2020
+}
